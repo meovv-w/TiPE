@@ -1,0 +1,27 @@
+# CMake build output
+/build/
+/build-*/
+/CMakeFiles/
+/CMakeCache.txt
+/CTestTestfile.cmake
+/Makefile
+/Testing/
+/cmake_install.cmake
+/compile_commands.json
+/install_manifest.txt
+
+# Python and editor caches
+__pycache__/
+*.py[cod]
+*.swp
+*~
+.DS_Store
+
+# Runtime/debug output and local model data
+/.cache/
+*.log
+/personal-reranker.json
+/supervision-*.tsv
+
+# Full-size source images are kept locally; only reviewed support assets ship.
+/support-source/

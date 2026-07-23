@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=TiPE
+Name[zh_CN]=TiPE
+Comment=Review input learning and configure models
+Comment[zh_CN]=查看输入学习并配置模型
+Exec=tipe-supervision-window
+Icon=tipe
+Terminal=false
+StartupNotify=true
+StartupWMClass=dev.tipe.LearningPanel
+Categories=Settings;

@@ -1,0 +1,42 @@
+# Replay a long composition one prefix candidate at a time.
+type nihao
+expect-candidate 0 你好
+select 你
+expect-preedit hao
+expect-candidate 0 好
+select 好
+expect-preedit
+expect-context 0 你
+expect-context 1 好
+
+# Start a new phrase after the previous composition committed.
+type guangbiaogensuishibai
+expect-candidate 0 光标跟随失败
+select 光标跟随
+expect-preedit shibai
+expect-candidate 0 失败
+select 失败
+expect-preedit
+expect-context 2 光标跟随
+expect-context 3 失败
+
+# Replay engine-style keys instead of the shorthand type command.
+key d
+key g
+key i
+key t
+key h
+key u
+key b
+key d
+key e
+key s
+key h
+key i
+key h
+key o
+key u
+expect-candidate 0 打github的时候
+key space
+expect-preedit
+expect-context 4 打github的时候

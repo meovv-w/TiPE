@@ -1,0 +1,8 @@
+# TiPE user dictionary example.
+# Format: lowercase-pinyin<TAB>candidate1<TAB>candidate2...
+nihao	你好	你号	你好啊
+github	github
+docker	docker
+guangbiaogensui	光标跟随
+houxuanchuang	候选窗	候选窗口
+zidingyi	自定义
