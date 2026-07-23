@@ -1,17 +1,12 @@
-# Third-Party Sources
+# 第三方源码
 
-## fcitx-wayland 5.1.19 subset
+## fcitx-wayland 5.1.19 子集
 
-`fcitx-wayland-5.1.19/` contains the small generated Wayland wrapper subset
-needed by TiPE's input-method-v2 popup implementation. It was taken from the
-fcitx5 5.1.19 source release:
+`fcitx-wayland-5.1.19/` 保存 TiPE 实现 input-method-v2 popup 所需的一小部分 Wayland 生成封装，来源是 fcitx5 5.1.19 源码发布版：
 
-- Upstream: https://github.com/fcitx/fcitx5
-- Version: 5.1.19
-- Wrapper license: LGPL-2.1-or-later; see
-  `fcitx-wayland-5.1.19/LGPL-2.1-or-later.txt`
-- `input-method-unstable-v2.xml`: its MIT-style copyright and permission text
-  is embedded directly in that file.
+- 上游：https://github.com/fcitx/fcitx5
+- 版本：5.1.19
+- 封装许可证：LGPL-2.1-or-later，见 `fcitx-wayland-5.1.19/LGPL-2.1-or-later.txt`
+- `input-method-unstable-v2.xml`：MIT 风格的版权和授权文字已保留在文件内部
 
-Only the files listed under this directory are vendored. The rest of fcitx5
-is consumed through the installed development libraries and headers.
+项目只内置此目录中列出的文件。fcitx5 其余部分通过系统安装的开发库和头文件使用。

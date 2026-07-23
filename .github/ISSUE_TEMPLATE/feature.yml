@@ -1,0 +1,41 @@
+name: 功能建议
+description: 说明一个真实输入场景和希望达到的行为
+title: "[功能] "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: scenario
+    attributes:
+      label: 使用场景
+      description: 先说明用户正在输入什么、为什么当前流程不够用。
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 希望的行为
+      description: 尽量用输入和输出示例描述，不需要设计内部代码。
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: 主要范围
+      options:
+        - 拼音与词库
+        - 候选窗口
+        - 光标跟随与应用兼容
+        - 中文 / 英文模式
+        - TiP 学习
+        - 本地或云端模型
+        - 学习窗口
+        - 安装和文档
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: tradeoff
+    attributes:
+      label: 性能或隐私要求
+      description: 是否允许联网、后台进程、额外数据或更高延迟。
