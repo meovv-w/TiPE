@@ -144,6 +144,11 @@ add_test(NAME pass-through-pipeline
             ${CMAKE_CURRENT_SOURCE_DIR}/scripts/model-adapter.sh
             ${CMAKE_CURRENT_SOURCE_DIR}/scripts/training-export.py)
 
+add_executable(tipe-nonblocking-pipe-test tests/nonblocking_pipe_test.cpp)
+target_include_directories(tipe-nonblocking-pipe-test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_compile_options(tipe-nonblocking-pipe-test PRIVATE -Wall -Wextra -Wpedantic)
+add_test(NAME nonblocking-pipe COMMAND tipe-nonblocking-pipe-test)
+
 add_executable(tipe-state-probe tools/state_probe.cpp)
 target_link_libraries(tipe-state-probe PRIVATE tipe_state)
 target_compile_options(tipe-state-probe PRIVATE -Wall -Wextra -Wpedantic)
@@ -193,11 +198,11 @@ install(TARGETS tipe-learning-panel-window RUNTIME DESTINATION ${CMAKE_INSTALL_B
 
 if(TIPE_ENABLE_SANITIZERS)
     set(TIPE_SANITIZER_FLAGS -fsanitize=address,undefined -fno-omit-frame-pointer)
-    foreach(target tipe_state tipe tipeui tipe-state-test tipe-state-probe tipe-candidate-window
+    foreach(target tipe_state tipe tipeui tipe-state-test tipe-state-probe tipe-nonblocking-pipe-test tipe-candidate-window
                    tipe-learning-panel-window)
         target_compile_options(${target} PRIVATE ${TIPE_SANITIZER_FLAGS})
     endforeach()
-    foreach(target tipe tipeui tipe-state-test tipe-state-probe tipe-candidate-window
+    foreach(target tipe tipeui tipe-state-test tipe-state-probe tipe-nonblocking-pipe-test tipe-candidate-window
                    tipe-learning-panel-window)
         target_link_options(${target} PRIVATE -fsanitize=address,undefined)
     endforeach()

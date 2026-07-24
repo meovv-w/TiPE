@@ -254,7 +254,7 @@ tipeui update frontend=dbus
 
 只有第一行表示引擎选择了直连路径，但 UI addon 没有收到更新。
 
-浏览器中的 preedit 由客户端渲染，候选由 TiPE UI 渲染；二者不要重复绘制。
+中文组合状态下，浏览器中的 preedit 通常由客户端渲染，候选由 TiPE UI 渲染。内部切到英文后，部分 D-Bus 客户端不会响应外部触发的 preedit 刷新；TiPE 因此会在自己的面板中继续显示暂存拼音和 `Eng`，但不生成可选择的伪候选。
 
 ### XIM
 
@@ -341,6 +341,21 @@ tipe-personal-model inspect
 “保留现有模型”不等于训练进程失败。验证收益不足、通用排序不安全或新模型会失去已经激活的能力时，训练会成功结束但拒绝替换现有模型。
 
 运行时蒸馏失败会重试三次。即使蒸馏暂时失败，新 TiP 文件仍可有效发布，旧运行时规则会保留到下次重试。
+
+## 输入卡顿或暂时无响应
+
+先不要立即重启，依次确认：
+
+```bash
+fcitx5-remote
+fcitx5-remote -n
+tipe-doctor
+tail -n 20 ~/.cache/tipe/slow-key-events.log
+```
+
+fcitx5 仍响应且没有 coredump 时，通常是单个应用的输入上下文失联，或某次候选/UI 更新耗时过长，并不等于 fcitx5 崩溃。TiPE 只在一次按键处理达到 50 ms 时创建 `slow-key-events.log`；普通输入不会写这个日志，日志只记录总耗时、候选计算/UI 分段耗时、前端、应用名和按键名，不记录预编辑文字或周边正文。
+
+GTK 后备候选窗使用非阻塞快照管道。窗口不读取数据时会重建后备通道，不会等待它恢复；因此 `tipe-doctor` 中存在 `tipe-candidate-window` 进程本身不能证明主输入线程被卡住。
 
 ## 崩溃
 

@@ -4,6 +4,7 @@
 #include "candidate_layout.h"
 #include "candidate_render.h"
 #include "candidate_snapshot.h"
+#include "nonblocking_pipe.h"
 #include "tipe_ui_public.h"
 
 #include <fcitx/addonfactory.h>
@@ -555,9 +556,13 @@ private:
             closeCandidateFallbackWindow(popup, "clear-incomplete-channel");
             return;
         }
-        if (popup.lastFallbackCandidateSnapshot != clearSnapshot &&
-            !writeCandidateFallbackSnapshot(popup, clearSnapshot)) {
-            return;
+        if (popup.lastFallbackCandidateSnapshot != clearSnapshot) {
+            const auto result = writeCandidateFallbackSnapshot(popup, clearSnapshot);
+            if (result != NonblockingWriteResult::Complete) {
+                closeCandidateFallbackWindow(
+                    popup, result == NonblockingWriteResult::WouldBlock ? "clear-backpressure" : "clear-write-failed");
+                return;
+            }
         }
         popup.lastFallbackCandidateSnapshot = clearSnapshot;
         logLine("popup\t" + std::string(candidateFallbackLogName(popup)) + "-clear\treason=" +
@@ -632,6 +637,14 @@ private:
         if (flags >= 0) {
             fcntl(eventFds[0], F_SETFL, flags | O_NONBLOCK);
         }
+        if (!setFileDescriptorNonblocking(pipeFds[1])) {
+            close(pipeFds[1]);
+            close(eventFds[0]);
+            kill(child, SIGTERM);
+            waitpid(child, nullptr, WNOHANG);
+            logLine("popup\t" + std::string(candidateFallbackLogName(popup)) + "-nonblocking-failed");
+            return false;
+        }
         popup.fallbackCandidateFd = pipeFds[1];
         popup.fallbackEventFd = eventFds[0];
         popup.fallbackCandidatePid = child;
@@ -651,23 +664,9 @@ private:
         return true;
     }
 
-    bool writeCandidateFallbackSnapshot(PopupState &popup, const std::string &snapshot) {
+    NonblockingWriteResult writeCandidateFallbackSnapshot(PopupState &popup, const std::string &snapshot) {
         const std::string line = !snapshot.empty() && snapshot.back() == '\n' ? snapshot : snapshot + '\n';
-        const char *data = line.data();
-        std::size_t remaining = line.size();
-        while (remaining > 0) {
-            const auto written = write(popup.fallbackCandidateFd, data, remaining);
-            if (written < 0) {
-                if (errno == EINTR) {
-                    continue;
-                }
-                closeCandidateFallbackWindow(popup, "write-failed");
-                return false;
-            }
-            data += written;
-            remaining -= static_cast<std::size_t>(written);
-        }
-        return true;
+        return writeNonblockingMessage(popup.fallbackCandidateFd, line);
     }
 
     void showCandidateFallbackWindow(PopupState &popup, const std::string &snapshot) {
@@ -678,8 +677,13 @@ private:
         if (!ensureCandidateFallbackWindow(popup)) {
             return;
         }
-        if (!writeCandidateFallbackSnapshot(popup, snapshot)) {
-            if (!ensureCandidateFallbackWindow(popup) || !writeCandidateFallbackSnapshot(popup, snapshot)) {
+        auto result = writeCandidateFallbackSnapshot(popup, snapshot);
+        if (result != NonblockingWriteResult::Complete) {
+            closeCandidateFallbackWindow(
+                popup, result == NonblockingWriteResult::WouldBlock ? "write-backpressure" : "write-failed");
+            if (!ensureCandidateFallbackWindow(popup) ||
+                writeCandidateFallbackSnapshot(popup, snapshot) != NonblockingWriteResult::Complete) {
+                closeCandidateFallbackWindow(popup, "write-retry-failed");
                 return;
             }
         }
@@ -817,8 +821,12 @@ private:
         auto &popup = genericFallbackPopup_;
         const auto &panel = inputContext.inputPanel();
         const auto auxUp = outputText(inputContext, panel.auxUp()).toString();
+        const auto preeditText = outputText(inputContext, panel.preedit());
+        const auto preedit = preeditText.toString();
+        const auto preeditCursor = std::clamp(preeditText.cursor(), 0, static_cast<int>(preedit.size()));
         auto candidates = panel.candidateList();
-        if (!candidates || candidates->size() == 0) {
+        const bool hasCandidates = candidates && candidates->size() > 0;
+        if (!hasCandidates && preedit.empty()) {
             clearCandidateFallbackWindow(popup, "generic-status");
             if (!statusFromAux(auxUp)) {
                 closeStatusFallbackWindow(popup, "generic-empty");
@@ -832,17 +840,18 @@ private:
             return;
         }
 
-        closeStatusFallbackWindow(popup, "generic-candidate");
-        const auto preeditText = outputText(inputContext, panel.preedit());
-        const auto preedit = preeditText.toString();
-        const auto preeditCursor = std::clamp(preeditText.cursor(), 0, static_cast<int>(preedit.size()));
+        closeStatusFallbackWindow(popup, hasCandidates ? "generic-candidate" : "generic-preedit");
         std::vector<std::string> candidateTexts;
-        candidateTexts.reserve(candidates->size());
-        for (int index = 0; index < candidates->size(); ++index) {
-            candidateTexts.push_back(outputText(inputContext, candidates->candidate(index).text()).toString());
+        if (hasCandidates) {
+            candidateTexts.reserve(candidates->size());
+            for (int index = 0; index < candidates->size(); ++index) {
+                candidateTexts.push_back(outputText(inputContext, candidates->candidate(index).text()).toString());
+            }
         }
-        const auto selectedIndex = static_cast<std::size_t>(
-            std::clamp(candidates->cursorIndex(), 0, std::max(0, candidates->size() - 1)));
+        const auto selectedIndex = hasCandidates
+                                       ? static_cast<std::size_t>(std::clamp(candidates->cursorIndex(), 0,
+                                                                            candidates->size() - 1))
+                                       : std::size_t{0};
         const auto rawRect = CandidateSnapshotRect{inputContext.cursorRect().left(), inputContext.cursorRect().top(),
                                                    inputContext.cursorRect().width(),
                                                    inputContext.cursorRect().height()};
@@ -871,7 +880,8 @@ private:
                               std::to_string(tipeUIStateValue(auxUp, "keys")) + ",selects=" +
                               std::to_string(tipeUIStateValue(auxUp, "selects")) + ",reranks=" +
                               std::to_string(tipeUIStateValue(auxUp, "reranks")) + ",continuous=" +
-                              std::to_string(tipeUIStateValue(auxUp, "continuous")) + ",preedit_cursor=" +
+                              std::to_string(tipeUIStateValue(auxUp, "continuous")) + ",english=" +
+                              std::to_string(auxUp == "Eng" ? 1 : 0) + ",preedit_cursor=" +
                               std::to_string(preeditCursor) + ",cursor_static=" +
                               std::to_string(staticCursorRect ? 1 : 0) + ",snapshot=" +
                               std::to_string(popup.fallbackSnapshotSerial) + ",pointer_fallback=" +
@@ -1373,8 +1383,9 @@ private:
         if (!insertedIter->second.lastTextRect) {
             const auto &panel = inputContext.inputPanel();
             const auto auxUp = outputText(inputContext, panel.auxUp()).toString();
+            const bool hasPreedit = !outputText(inputContext, panel.preedit()).toString().empty();
             auto candidates = panel.candidateList();
-            if ((!candidates || candidates->size() == 0) && statusFromAux(auxUp)) {
+            if ((!candidates || candidates->size() == 0) && !hasPreedit && statusFromAux(auxUp)) {
                 renderStatusPopup(displayIter->second, insertedIter->second, auxUp, inputContext.scaleFactor());
                 logLine("popup\tstatus-first-render\ttext=" + auxUp + "\tdisplay=" + key);
             } else {
@@ -1540,7 +1551,11 @@ private:
         const auto &panel = inputContext.inputPanel();
         auto candidates = panel.candidateList();
         const auto auxUp = outputText(inputContext, panel.auxUp()).toString();
-        if (!candidates || candidates->size() == 0) {
+        const auto preeditText = outputText(inputContext, panel.preedit());
+        const auto preedit = preeditText.toString();
+        const int preeditCursor = std::clamp(preeditText.cursor(), 0, static_cast<int>(preedit.size()));
+        const bool hasCandidates = candidates && candidates->size() > 0;
+        if (!hasCandidates && preedit.empty()) {
             popup.candidateRenderLogged = false;
             popup.candidateHitRegions.clear();
             popup.hoveredCandidateIndex.reset();
@@ -1576,18 +1591,18 @@ private:
             return;
         }
 
-        closeStatusFallbackWindow(popup, "candidate-popup");
-        const auto preeditText = outputText(inputContext, panel.preedit());
-        const auto preedit = preeditText.toString();
-        const int preeditCursor = std::clamp(preeditText.cursor(), 0, static_cast<int>(preedit.size()));
+        popup.pendingStatusText.clear();
+        closeStatusFallbackWindow(popup, hasCandidates ? "candidate-popup" : "preedit-popup");
         const bool expanded = expandedFromAux(auxUp);
         const bool continuous = continuousFromAux(auxUp);
         std::vector<std::string> candidateTexts;
-        candidateTexts.reserve(candidates->size());
-        for (int index = 0; index < candidates->size(); ++index) {
-            candidateTexts.push_back(outputText(inputContext, candidates->candidate(index).text()).toString());
+        if (hasCandidates) {
+            candidateTexts.reserve(candidates->size());
+            for (int index = 0; index < candidates->size(); ++index) {
+                candidateTexts.push_back(outputText(inputContext, candidates->candidate(index).text()).toString());
+            }
         }
-        const int cursor = std::clamp(candidates->cursorIndex(), 0, std::max(0, candidates->size() - 1));
+        const int cursor = hasCandidates ? std::clamp(candidates->cursorIndex(), 0, candidates->size() - 1) : 0;
         const auto cells = visibleVisualCellsFor(candidateTexts, static_cast<std::size_t>(cursor), expanded,
                                                  tipeUIPanelMaxExpandedRows);
         const auto metrics = tipeUIPanelMetricsFor(cells, candidateTexts, expanded, !preedit.empty());
@@ -1622,6 +1637,7 @@ private:
                 preedit, expanded, static_cast<std::size_t>(cursor),
                 {(*fallbackRect)[0], (*fallbackRect)[1], (*fallbackRect)[2], (*fallbackRect)[3]}, candidateTexts,
                 std::string("continuous=") + (continuous ? "1" : "0") +
+                    ",english=" + (auxUp == "Eng" ? "1" : "0") +
                     ",preedit_cursor=" + std::to_string(preeditCursor) +
                     ",snapshot=" + std::to_string(popup.fallbackSnapshotSerial));
             showCandidateFallbackWindow(popup, snapshot);
@@ -1648,7 +1664,7 @@ private:
         const int visualColumnWidth = tipeUIVisualColumnWidthFor(width);
         auto renderResult = renderCandidatePanel(cr, width, height, preedit, preeditCursor, candidateTexts,
                                                  static_cast<std::size_t>(cursor), expanded, continuous,
-                                                 popup.hoveredCandidateIndex);
+                                                 popup.hoveredCandidateIndex, auxUp == "Eng" ? "Eng" : "");
         popup.candidateHitRegions = std::move(renderResult.hitRegions);
 
         cairo_destroy(cr);
@@ -1663,7 +1679,7 @@ private:
             logLine("popup\trendered\tw=" + std::to_string(width) + "\th=" + std::to_string(height) +
                     "\tscale=" + std::to_string(scale) + "\tpixelW=" + std::to_string(popup.bufferWidth) +
                     "\tpixelH=" + std::to_string(popup.bufferHeight) +
-                    "\tcandidates=" + std::to_string(candidates->size()) + "\tcursor=" + std::to_string(cursor) +
+                    "\tcandidates=" + std::to_string(candidateTexts.size()) + "\tcursor=" + std::to_string(cursor) +
                     "\tpreeditCursor=" + std::to_string(preeditCursor) +
                     "\texpanded=" + std::to_string(expanded ? 1 : 0) +
                     "\trows=" + std::to_string(metrics.visibleRows) +

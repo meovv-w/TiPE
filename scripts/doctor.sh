@@ -713,6 +713,7 @@ fcitx_log="$cache_home/tipe/fcitx5.log"
 tipeui_log="$cache_home/tipe/tipeui.log"
 candidate_window_log="$cache_home/tipe/candidate-window.log"
 engine_trace_log="$cache_home/tipe/engine-trace.log"
+slow_key_events_log="$cache_home/tipe/slow-key-events.log"
 supervision_snapshot="$cache_home/tipe/supervision-current.tsv"
 supervision_history="$cache_home/tipe/supervision-history.tsv"
 supervision_training_history="$cache_home/tipe/supervision-training-history.tsv"
@@ -1087,12 +1088,24 @@ optional_path_status direct-fcitx5-log "$fcitx_log" "created only by the direct 
 optional_path_status tipeui-log "$tipeui_log" "created only by an explicit TiPE debug run"
 optional_path_status candidate-window-log "$candidate_window_log" "created after GTK fallback candidate/status windows"
 optional_path_status engine-trace "$engine_trace_log" "created after TiPE engine activity"
+optional_path_status slow-key-events "$slow_key_events_log" "created only when one key event takes at least 50 ms"
 optional_path_status live-supervision "$supervision_snapshot" "no active TiPE composition"
 optional_path_status supervision-history "$supervision_history" "created after supervised TiPE input"
 optional_path_status supervision-training-history "$supervision_training_history" "created after terminal TiPE choices"
 emit_diagnostic_log_summary tipeui-log "$tipeui_log"
 emit_diagnostic_log_summary engine-trace "$engine_trace_log"
 emit_diagnostic_log_summary candidate-window-log "$candidate_window_log"
+emit_diagnostic_log_summary slow-key-events "$slow_key_events_log"
+if [[ -r "$slow_key_events_log" ]]; then
+    slow_key_event_count=$(grep -c '^slow-key-event' "$slow_key_events_log" || true)
+    if (( slow_key_event_count > 0 )); then
+        status warn slow-key-events "$slow_key_event_count slow key event(s) recorded"
+        latest_slow_key_event=$(tail -n 1 "$slow_key_events_log")
+        status info slow-key-events "$(one_line "$latest_slow_key_event")"
+    else
+        status ok slow-key-events "no slow key event recorded"
+    fi
+fi
 emit_supervision_history_summary "$supervision_history" supervision-history 262144
 emit_supervision_history_summary "$supervision_training_history" supervision-training-history 1048576
 if [[ -e "$fcitx_log" && "$fcitx_service_active" == "0" ]]; then

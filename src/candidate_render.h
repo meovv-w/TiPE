@@ -98,7 +98,8 @@ candidatePanelHitRegions(const std::vector<VisualCandidateCell> &cells,
 inline CandidatePanelRenderResult
 renderCandidatePanel(cairo_t *cr, int width, int height, std::string_view preedit, int preeditCursor,
                      const std::vector<std::string> &candidateTexts, std::size_t selectedIndex, bool expanded,
-                     bool continuous, std::optional<std::size_t> hoveredCandidate = std::nullopt) {
+                     bool continuous, std::optional<std::size_t> hoveredCandidate = std::nullopt,
+                     std::string_view modeLabel = {}) {
     cairo_save(cr);
     cairo_set_operator(cr, CAIRO_OPERATOR_SOURCE);
     cairo_set_source_rgba(cr, 0, 0, 0, 0);
@@ -119,16 +120,24 @@ renderCandidatePanel(cairo_t *cr, int width, int height, std::string_view preedi
 
     int y = tipeUIPanelTopPadding;
     if (!preedit.empty()) {
-        const int preeditTextWidth = std::max(20, tipeUIPreeditTextWidthFor(width) - (continuous ? 20 : 0));
+        constexpr int modeLabelFontSize = 11;
+        const int modeLabelWidth = modeLabel.empty() ? 0 : candidateTextWidth(modeLabel, modeLabelFontSize, true);
+        const int rightReserve = (continuous ? 20 : 0) + (modeLabel.empty() ? 0 : modeLabelWidth + 12);
+        const int preeditTextWidth = std::max(20, tipeUIPreeditTextWidthFor(width) - rightReserve);
         drawCandidateText(cr, preedit, 12, y + 1, preeditTextWidth, 15, true, 0.90, 0.90, 0.93);
         const auto cursor = std::clamp(preeditCursor, 0, static_cast<int>(preedit.size()));
         const auto prefix = preedit.substr(0, static_cast<std::size_t>(cursor));
-        const int cursorX = std::min(12 + candidateTextWidth(prefix, 15, true), width - 13);
+        const int cursorX = std::min(12 + candidateTextWidth(prefix, 15, true), 12 + preeditTextWidth);
         cairo_set_source_rgba(cr, 0.92, 0.93, 0.96, 0.92);
         cairo_set_line_width(cr, 1.5);
         cairo_move_to(cr, cursorX + 0.5, y + 3);
         cairo_line_to(cr, cursorX + 0.5, y + 20);
         cairo_stroke(cr);
+        if (!modeLabel.empty()) {
+            const int labelX = width - 10 - (continuous ? 18 : 0) - modeLabelWidth;
+            drawCandidateText(cr, modeLabel, labelX, y + 4, modeLabelWidth + 1, modeLabelFontSize, true,
+                              0.38, 0.70, 1.0);
+        }
         y += tipeUIPanelPreeditHeight;
         cairo_set_source_rgba(cr, 1, 1, 1, 0.10);
         cairo_set_line_width(cr, 1);

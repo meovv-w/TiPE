@@ -4,6 +4,7 @@
 #include "candidate_layout.h"
 #include "candidate_snapshot.h"
 #include "input_privacy.h"
+#include "nonblocking_pipe.h"
 #include "pass_through_supervisor.h"
 #include "supervision_snapshot.h"
 #include "tipe_ui_public.h"
@@ -28,7 +29,6 @@
 #include <csignal>
 #include <cctype>
 #include <cstdint>
-#include <cstdio>
 #include <cstdlib>
 #include <filesystem>
 #include <fcntl.h>
@@ -66,6 +66,7 @@ constexpr std::uintmax_t supervisionTrainingHistoryMaxBytes = 1024 * 1024;
 constexpr uint64_t supervisionSnapshotFlushIntervalUsec = 250000;
 constexpr uint64_t supervisionSnapshotFlushAccuracyUsec = 25000;
 constexpr uint64_t supervisionHistoryIntervalUsec = 2 * 1000000;
+constexpr uint64_t slowKeyEventThresholdUsec = 50000;
 static_assert(static_cast<std::uint64_t>(fcitx::CapabilityFlag::Password) == passwordInputCapability);
 static_assert(static_cast<std::uint64_t>(fcitx::CapabilityFlag::Sensitive) == sensitiveInputCapability);
 static_assert(static_cast<std::uint64_t>(fcitx::CapabilityFlag::Disable) == disabledInputMethodCapability);
@@ -415,6 +416,53 @@ bool hasSupervisionContent(const State &state) {
 uint64_t monotonicUsec() {
     return fcitx::now(CLOCK_MONOTONIC);
 }
+
+class KeyEventLatencyGuard {
+public:
+    KeyEventLatencyGuard(const fcitx::InputContext &inputContext, const fcitx::Key &key)
+        : frontend_(inputContext.frontendName()), program_(inputContext.program()), key_(key.toString()),
+          startedUsec_(monotonicUsec()) {}
+
+    ~KeyEventLatencyGuard() {
+        const auto finishedUsec = monotonicUsec();
+        if (finishedUsec < startedUsec_ || finishedUsec - startedUsec_ < slowKeyEventThresholdUsec) {
+            return;
+        }
+        const auto computationUsec = computationCompleteUsec_ >= startedUsec_
+                                         ? computationCompleteUsec_ - startedUsec_
+                                         : uint64_t{0};
+        const auto uiUsec = uiCompleteUsec_ >= computationCompleteUsec_ && computationCompleteUsec_ != 0
+                                ? uiCompleteUsec_ - computationCompleteUsec_
+                                : uint64_t{0};
+        const auto tailStart = uiCompleteUsec_ != 0 ? uiCompleteUsec_
+                                                    : (computationCompleteUsec_ != 0 ? computationCompleteUsec_
+                                                                                   : startedUsec_);
+        const auto tailUsec = finishedUsec >= tailStart ? finishedUsec - tailStart : uint64_t{0};
+        std::ostringstream line;
+        line << "slow-key-event\ttotal_us=" << (finishedUsec - startedUsec_)
+             << "\tcompute_us=" << computationUsec << "\tui_us=" << uiUsec << "\ttail_us=" << tailUsec
+             << "\tfrontend=" << historyField(frontend_) << "\tprogram=" << historyField(program_)
+             << "\tkey=" << historyField(key_);
+        FCITX_WARN() << line.str();
+        const auto cacheDir = tipeCacheDir();
+        if (!cacheDir.empty()) {
+            std::error_code error;
+            std::filesystem::create_directories(cacheDir, error);
+            appendBoundedDiagnosticLog(cacheDir / "slow-key-events.log", line.str());
+        }
+    }
+
+    void markComputationComplete() { computationCompleteUsec_ = monotonicUsec(); }
+    void markUIComplete() { uiCompleteUsec_ = monotonicUsec(); }
+
+private:
+    std::string frontend_;
+    std::string program_;
+    std::string key_;
+    uint64_t startedUsec_ = 0;
+    uint64_t computationCompleteUsec_ = 0;
+    uint64_t uiCompleteUsec_ = 0;
+};
 
 std::size_t utf8ByteOffsetForCodepoints(std::string_view text, std::size_t codepoints) {
     if (codepoints == 0) {
@@ -1076,6 +1124,7 @@ void Engine::keyEvent(const fcitx::InputMethodEntry &entry, fcitx::KeyEvent &eve
         discardBlockedInputContext(ic);
         return;
     }
+    KeyEventLatencyGuard latencyGuard(*ic, event.key());
     if (englishMode_) {
         if (auto iter = states_.find(ic); iter != states_.end() && !iter->second.empty() &&
             startsEnglishText(event.key())) {
@@ -1084,6 +1133,8 @@ void Engine::keyEvent(const fcitx::InputMethodEntry &entry, fcitx::KeyEvent &eve
             applyAction(ic, nullptr, iter->second.commitRawPreedit("InputModeEnglish"));
         }
         passThroughKeyEvent(event);
+        latencyGuard.markComputationComplete();
+        latencyGuard.markUIComplete();
         return;
     }
 
@@ -1269,7 +1320,9 @@ void Engine::keyEvent(const fcitx::InputMethodEntry &entry, fcitx::KeyEvent &eve
     if (!skipContinuousRerank && action.type == ActionType::Update) {
         maybeContinuousRerank(ic, state);
     }
+    latencyGuard.markComputationComplete();
     applyAction(ic, &event, action);
+    latencyGuard.markUIComplete();
     if (action.type == ActionType::None) {
         const auto current = states_.find(ic);
         if (current != states_.end() && hasSupervisionContent(current->second)) {
@@ -2343,7 +2396,7 @@ void Engine::scheduleDeferredCandidateWindowUpdate(fcitx::InputContext *ic) {
 }
 
 bool Engine::ensureCandidateWindow() {
-    if (candidateWindow_) {
+    if (candidateWindowFd_ >= 0) {
         return true;
     }
 
@@ -2390,22 +2443,21 @@ bool Engine::ensureCandidateWindow() {
     }
 
     close(pipeFds[0]);
-    candidateWindow_ = fdopen(pipeFds[1], "w");
-    if (!candidateWindow_) {
+    candidateWindowPid_ = pid;
+    if (!setFileDescriptorNonblocking(pipeFds[1])) {
         close(pipeFds[1]);
-        candidateWindowPid_ = pid;
         closeCandidateWindow();
         FCITX_WARN() << "Failed to start tipe-candidate-window";
         return false;
     }
-    candidateWindowPid_ = pid;
+    candidateWindowFd_ = pipeFds[1];
     return true;
 }
 
 void Engine::closeCandidateWindow() {
-    if (candidateWindow_) {
-        fclose(candidateWindow_);
-        candidateWindow_ = nullptr;
+    if (candidateWindowFd_ >= 0) {
+        close(candidateWindowFd_);
+        candidateWindowFd_ = -1;
     }
     if (candidateWindowPid_ > 0) {
         for (int attempt = 0; attempt < 10 && !reapProcess(candidateWindowPid_); ++attempt) {
@@ -2549,7 +2601,7 @@ void Engine::updateCandidateWindow(fcitx::InputContext &ic, const State &state) 
 }
 
 void Engine::clearCandidateWindow() {
-    if (!candidateWindow_) {
+    if (candidateWindowFd_ < 0) {
         return;
     }
     const auto clearMessage = clearCandidateSnapshotLine();
@@ -2564,9 +2616,12 @@ bool Engine::sendCandidateWindowMessage(std::string_view payload, bool retryAfte
         if (!ensureCandidateWindow()) {
             return false;
         }
-        const bool wroteAll = std::fwrite(payload.data(), 1, payload.size(), candidateWindow_) == payload.size();
-        const bool flushed = wroteAll && std::fflush(candidateWindow_) == 0;
-        if (flushed) {
+        const auto result = writeNonblockingMessage(candidateWindowFd_, payload);
+        if (result == NonblockingWriteResult::Complete) {
+            return true;
+        }
+        if (result == NonblockingWriteResult::WouldBlock) {
+            traceEngineDebug("candidate-window-backpressure dropped-latest-snapshot");
             return true;
         }
         traceEngineDebug("candidate-window-pipe-failed attempt=" + std::to_string(attempt + 1));

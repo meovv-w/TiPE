@@ -1448,8 +1448,8 @@ if [[ "$source_model_current_output" == *stale-installed-helper* ||
 fi
 
 ctest_list=$(ctest --test-dir "$ROOT/build" -N)
-for registered_test in state training-export personal-model restart-helper candidate-window learning-panel-window; do
-    if [[ "$ctest_list" != *"Test #"*": $registered_test"* ]]; then
+for registered_test in state training-export personal-model restart-helper nonblocking-pipe candidate-window learning-panel-window; do
+    if ! grep -Eq "Test[[:space:]]+#[0-9]+:[[:space:]]+$registered_test$" <<<"$ctest_list"; then
         echo "CTest registration is missing: $registered_test" >&2
         exit 1
     fi

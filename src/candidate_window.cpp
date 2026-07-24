@@ -53,6 +53,7 @@ struct CandidateWindowData {
     bool fixedStatus = false;
     bool supervision = false;
     bool continuous = false;
+    bool englishPending = false;
     bool staticCursorRect = false;
     bool pointerFallback = false;
     bool cursorRectResolved = false;
@@ -252,6 +253,7 @@ bool applySnapshotLine(CandidateWindowData &data, std::string_view line) {
     }
     bool parsedSupervision = false;
     bool parsedContinuous = false;
+    bool parsedEnglishPending = false;
     bool parsedStaticCursorRect = false;
     bool parsedPointerFallback = false;
     int parsedSupervisedKeys = 0;
@@ -276,6 +278,9 @@ bool applySnapshotLine(CandidateWindowData &data, std::string_view line) {
                 parsedMetadata = true;
             } else if (key == "continuous") {
                 parsedContinuous = *value != 0;
+                parsedMetadata = true;
+            } else if (key == "english") {
+                parsedEnglishPending = *value != 0;
                 parsedMetadata = true;
             } else if (key == "keys") {
                 parsedSupervisedKeys = std::max(0, *value);
@@ -316,6 +321,7 @@ bool applySnapshotLine(CandidateWindowData &data, std::string_view line) {
     data.candidates = std::move(parsedCandidates);
     data.supervision = parsedSupervision;
     data.continuous = parsedContinuous;
+    data.englishPending = parsedEnglishPending;
     data.staticCursorRect = parsedStaticCursorRect;
     data.pointerFallback = parsedPointerFallback;
     if (parsedPreedit.empty() || !parsedPointerFallback) {
@@ -1345,7 +1351,7 @@ void drawPanel(GtkDrawingArea *, cairo_t *cr, int width, int height, gpointer us
     }
     tipe::renderCandidatePanel(cr, width, height, data->preedit, static_cast<int>(data->preeditCursor),
                                data->candidates, data->selectedIndex, data->expanded, data->continuous,
-                               data->hoveredCandidateIndex);
+                               data->hoveredCandidateIndex, data->englishPending ? "Eng" : "");
 }
 
 void drawWineInlinePreedit(GtkDrawingArea *, cairo_t *cr, int width, int height, gpointer userData) {
@@ -1641,11 +1647,11 @@ bool selfTest() {
         return false;
     }
     if (!applySnapshotLine(data,
-                           "nihao\t0\t0\t100\t200\t3\t18\t你好|你号\tsupervision=1,keys=12,selects=2,reranks=1,continuous=1,preedit_cursor=2,cursor_static=1,snapshot=17,pointer_fallback=1\n")) {
+                           "nihao\t0\t0\t100\t200\t3\t18\t你好|你号\tsupervision=1,keys=12,selects=2,reranks=1,continuous=1,english=1,preedit_cursor=2,cursor_static=1,snapshot=17,pointer_fallback=1\n")) {
         std::cerr << "failed to parse supervision snapshot metadata\n";
         return false;
     }
-    if (!data.supervision || !data.continuous || data.supervisedKeys != 12 || data.selections != 2 ||
+    if (!data.supervision || !data.continuous || !data.englishPending || data.supervisedKeys != 12 || data.selections != 2 ||
         data.reranks != 1 || data.preeditCursor != 2 || !data.staticCursorRect || data.snapshotSerial != 17 ||
         !data.pointerFallback ||
         estimatedWindowHeight(data) != 68) {
@@ -1713,9 +1719,21 @@ bool selfTest() {
     }
     if (!data.preedit.empty() || !data.candidates.empty() || data.expanded || data.selectedIndex != 0 ||
         data.preeditCursor != 0 || data.cursorX != 0 || data.cursorY != 0 || data.cursorWidth != 0 ||
-        data.cursorHeight != 0 || data.supervision || data.continuous || data.supervisedKeys != 0 ||
+        data.cursorHeight != 0 || data.supervision || data.continuous || data.englishPending || data.supervisedKeys != 0 ||
         data.selections != 0 || data.reranks != 0 || data.staticCursorRect) {
         std::cerr << "clear snapshot did not clear all reusable-window state\n";
+        return false;
+    }
+
+    if (!applySnapshotLine(data,
+                           "nihao\t0\t0\t100\t200\t3\t18\t\tenglish=1,preedit_cursor=5,snapshot=18\n")) {
+        std::cerr << "failed to parse English pending-preedit snapshot\n";
+        return false;
+    }
+    if (data.preedit != "nihao" || !data.candidates.empty() || !data.englishPending ||
+        data.preeditCursor != 5 || estimatedWindowWidth(data) != tipe::tipeUIPanelMinWidth ||
+        estimatedWindowHeight(data) != 40) {
+        std::cerr << "English pending preedit must remain visible without synthetic candidates\n";
         return false;
     }
 
@@ -1724,7 +1742,7 @@ bool selfTest() {
         return false;
     }
     if (data.preedit != "pipe" || data.cursorX != 1 || data.cursorY != 2 || data.cursorWidth != 3 ||
-        data.cursorHeight != 4 || data.candidates.size() != 3 || data.candidates[0] != "A|B" ||
+        data.cursorHeight != 4 || data.englishPending || data.candidates.size() != 3 || data.candidates[0] != "A|B" ||
         data.candidates[1] != "slash\\value" || data.candidates[2] != "tab\tvalue") {
         std::cerr << "snapshot after clear retained stale state or failed to round-trip\n";
         return false;

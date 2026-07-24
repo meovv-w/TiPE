@@ -12,7 +12,6 @@
 #include <fcitx/inputmethodengine.h>
 #include <fcitx-utils/rect.h>
 
-#include <cstdio>
 #include <atomic>
 #include <cstdint>
 #include <memory>
@@ -203,7 +202,7 @@ private:
     std::unique_ptr<fcitx::EventSource> deferredCandidateWindowUpdate_;
     int inputModeWatchFd_ = -1;
     int asyncModelResultFd_ = -1;
-    FILE *candidateWindow_ = nullptr;
+    int candidateWindowFd_ = -1;
     pid_t candidateWindowPid_ = -1;
     pid_t statusWindowPid_ = -1;
 };
