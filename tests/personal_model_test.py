@@ -1635,6 +1635,67 @@ def main():
             + component_upgrade_inspect.stdout,
         )
 
+        ready_incremental_model = temporary_path / "ready-incremental-model.json"
+        ready_incremental_model.write_bytes(stratified_model.read_bytes())
+        ready_incremental_before = json.loads(
+            ready_incremental_model.read_text(encoding="utf-8")
+        )
+        ready_incremental = run(
+            [
+                str(personal_trainer),
+                "--history",
+                str(component_upgrade_history),
+                "--output",
+                str(ready_incremental_model),
+                "--dimension",
+                "4096",
+                "--pinyin-dictionary",
+                str(pinyin_dictionary),
+            ],
+            env=wrapper_env,
+        )
+        ready_incremental_after = json.loads(
+            ready_incremental_model.read_text(encoding="utf-8")
+        )
+        require(
+            "recommendation\tcollect-more-data" in ready_incremental.stdout
+            and "model-updated\t1" in ready_incremental.stdout
+            and "model-update-kind\tsafe-evidence-upgrade" in ready_incremental.stdout
+            and "merge-base\texisting-ranking" in ready_incremental.stdout
+            and "component-changed\t1" in ready_incremental.stdout
+            and ready_incremental_after["weights"] == ready_incremental_before["weights"]
+            and ready_incremental_after["training"]["generic_ranking_safe"] is True
+            and ready_incremental_after["training"]["recommendation"] == "ready"
+            and ready_incremental_after["training"]["keyboard_correction_safe"] is True
+            and ready_incremental_after["training"]["last_update_kind"]
+                == "safe-evidence-upgrade",
+            "new bounded-history evidence is merged without replacing a stronger ready ranker\n"
+            + ready_incremental.stdout,
+        )
+        ready_incremental_bytes = ready_incremental_model.read_bytes()
+        ready_incremental_unchanged = run(
+            [
+                str(personal_trainer),
+                "--history",
+                str(component_upgrade_history),
+                "--output",
+                str(ready_incremental_model),
+                "--dimension",
+                "4096",
+                "--pinyin-dictionary",
+                str(pinyin_dictionary),
+            ],
+            env=wrapper_env,
+        )
+        require(
+            ready_incremental_model.read_bytes() == ready_incremental_bytes
+            and "model-updated\t0" in ready_incremental_unchanged.stdout
+            and "model-update-kind\tpreserved" in ready_incremental_unchanged.stdout
+            and "component-changed\t0" in ready_incremental_unchanged.stdout,
+            "retraining the same bounded evidence does not rewrite or over-count the model\n"
+            + ready_incremental_unchanged.stdout,
+        )
+
         component_regression_samples = []
         for index in range(5):
             item = sample(
@@ -1849,7 +1910,7 @@ def main():
         )
         generic_safe_model = temporary_path / "generic-safe-wrapper-model.json"
         generic_safe_model.write_bytes(stratified_model.read_bytes())
-        generic_safe_bytes = generic_safe_model.read_bytes()
+        generic_safe_before = json.loads(generic_safe_model.read_text(encoding="utf-8"))
         generic_downgrade_history = temporary_path / "generic-downgrade-history.tsv"
         generic_downgrade_history.write_text(
             "".join(history_record(item) for item in seen_preedit_samples), encoding="utf-8"
@@ -1868,13 +1929,17 @@ def main():
             ],
             env=wrapper_env,
         )
+        generic_safe_after = json.loads(generic_safe_model.read_text(encoding="utf-8"))
         require(
-            generic_safe_model.read_bytes() == generic_safe_bytes
-            and "recommendation\tready" in generic_safe_preserved.stdout
+            "recommendation\tready" in generic_safe_preserved.stdout
             and "generic-ranking-safe\t0" in generic_safe_preserved.stdout
-            and "model-updated\t0" in generic_safe_preserved.stdout
-            and "model-update-kind\tpreserved-safe-capability" in generic_safe_preserved.stdout,
-            "a ready candidate cannot replace an existing model when it would relock generic ranking",
+            and "model-updated\t1" in generic_safe_preserved.stdout
+            and "model-update-kind\tsafe-evidence-upgrade" in generic_safe_preserved.stdout
+            and "merge-base\texisting-ranking" in generic_safe_preserved.stdout
+            and generic_safe_after["weights"] == generic_safe_before["weights"]
+            and generic_safe_after["training"]["generic_ranking_safe"] is True,
+            "a regressing candidate can add safe evidence without replacing a validated generic ranker\n"
+            + generic_safe_preserved.stdout,
         )
         wrapper_generalized = run(
             [sys.executable, str(personal_model), "predict", "--model", str(wrapper_model)],

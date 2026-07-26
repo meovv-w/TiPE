@@ -297,6 +297,8 @@ fi
 model_updated=1
 model_update_kind="full-model"
 merge_output=""
+publish_full_model=1
+preserved_model_update_kind="preserved"
 safe_component_upgrade=0
 safe_validation_upgrade=0
 safe_capability_upgrade=0
@@ -320,19 +322,15 @@ if [[ "$existing_generic_ranking_safe" == "1" && "$candidate_generic_ranking_saf
     [[ "$existing_keyboard_correction_safe" == "1" && "$candidate_keyboard_correction_safe" != "1" ]]; then
     capability_regression=1
 fi
-if [[ -e "$final_output" && "$force" == "0" && "$capability_regression" == "1" ]]; then
-    model_updated=0
-    model_update_kind="preserved-safe-capability"
-    rm -f "$candidate_model"
-    candidate_model=""
-elif [[ -e "$final_output" && "$force" == "0" && "$recommendation" != "ready" &&
+if [[ "$existing_model_valid" == "1" && "$force" == "0" && "$capability_regression" == "1" ]]; then
+    publish_full_model=0
+    preserved_model_update_kind="preserved-safe-capability"
+elif [[ "$existing_model_valid" == "1" && "$force" == "0" && "$recommendation" != "ready" &&
     "$safe_component_upgrade" != "1" && "$safe_validation_upgrade" != "1" &&
     "$safe_capability_upgrade" != "1" ]]; then
-    model_updated=0
-    model_update_kind="preserved"
-    rm -f "$candidate_model"
-    candidate_model=""
-else
+    publish_full_model=0
+fi
+if [[ "$publish_full_model" == "1" ]]; then
     if [[ -e "$final_output" && "$recommendation" != "ready" && "$force" == "0" ]]; then
         if [[ "$safe_validation_upgrade" == "1" && "$safe_component_upgrade" == "1" ]]; then
             model_update_kind="safe-component-validation-upgrade"
@@ -345,6 +343,8 @@ else
         fi
     elif [[ ! -e "$final_output" ]]; then
         model_update_kind="initial-model"
+    elif [[ "$existing_model_valid" != "1" ]]; then
+        model_update_kind="recovered-model"
     elif [[ "$force" == "1" && "$recommendation" != "ready" ]]; then
         model_update_kind="forced"
     fi
@@ -354,6 +354,24 @@ else
     fi
     mv -f "$candidate_model" "$final_output"
     candidate_model=""
+else
+    merge_output=$("$personal_model" merge-safe --preserve-ranking --existing "$final_output" \
+        --candidate "$candidate_model" --output "$candidate_model")
+    component_changed=$(printf '%s\n' "$merge_output" |
+        sed -n 's/^component-changed\t//p' | sed -n '1p')
+    if [[ "$component_changed" == "1" ]]; then
+        model_update_kind="safe-evidence-upgrade"
+        mv -f "$candidate_model" "$final_output"
+        candidate_model=""
+    elif [[ "$component_changed" == "0" ]]; then
+        model_updated=0
+        model_update_kind="$preserved_model_update_kind"
+        rm -f "$candidate_model"
+        candidate_model=""
+    else
+        echo "TiP safe evidence merge returned an invalid change status" >&2
+        exit 1
+    fi
 fi
 runtime_distill_output=""
 runtime_distill_status="disabled"

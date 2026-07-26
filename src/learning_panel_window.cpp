@@ -3108,6 +3108,8 @@ std::string personalTrainingSuccessMessage(const LearningPanelData &data, std::s
             message += "；安全纠错组件已升级";
         } else if (modelUpdateKind == "safe-capability-upgrade") {
             message += "；已验证能力组件已升级";
+        } else if (modelUpdateKind == "safe-evidence-upgrade") {
+            message += "；新个人证据已安全合并，原有排序能力保持不变";
         } else if (modelUpdateKind == "safe-validation-upgrade") {
             message += "；训练评估协议已升级";
         } else {
@@ -3141,6 +3143,9 @@ std::string personalTrainingSuccessMessage(const LearningPanelData &data, std::s
         } else if (modelUpdateKind == "safe-capability-upgrade") {
             message += personalActive ? "；已验证能力已更新，下次按需分析生效"
                                       : "；已验证能力已更新，可按需启用 TiP";
+        } else if (modelUpdateKind == "safe-evidence-upgrade") {
+            message += personalActive ? "；新选词和纠错证据已保存"
+                                      : "；新个人证据已保存，可按需启用 TiP";
         } else {
             message += personalActive ? "；当前仍在使用 TiP，但样本仍然较少"
                                       : "；样本较少，暂不建议切换";
@@ -3158,11 +3163,15 @@ std::string personalTrainingSuccessMessage(const LearningPanelData &data, std::s
 std::string personalTrainingUserMessage(const LearningPanelData &data, std::string_view output) {
     const bool runtimeSyncFailed = commandOutputValue(output, "runtime-distill") == "failed";
     if (commandOutputValue(output, "model-updated") == "0") {
-        return std::string("检查完成。新记录还不足以改善 TiP，已继续使用当前版本。") +
+        return std::string("检查完成。新记录没有带来可验证的排序提升，也没有新增达到安全阈值的个人证据；"
+                           "已继续使用当前 TiP。") +
                (runtimeSyncFailed ? "即时学习同步暂未完成，下次更新会自动重试。" : "");
     }
     const auto overview = learningOverviewFrom(data);
-    auto message = "TiP 已更新：记住了 " + std::to_string(overview.selectionRules) + " 个选词、" +
+    const bool evidenceOnly = commandOutputValue(output, "model-update-kind") == "safe-evidence-upgrade";
+    auto message = std::string(evidenceOnly ? "TiP 已增量学习：保留了原有排序能力；现在记住了 "
+                                            : "TiP 已更新：记住了 ") +
+                   std::to_string(overview.selectionRules) + " 个选词、" +
                    std::to_string(overview.englishTokens) + " 个英文词和 " +
                    std::to_string(overview.corrections) + " 种按键纠正。";
     if (runtimeSyncFailed) {
@@ -3894,6 +3903,21 @@ bool selfTest() {
         std::cerr << "optional runtime synchronization failure should not hide a successful TiP update\n";
         return false;
     }
+    if (personalTrainingUserMessage(
+            activePersonalModel,
+            "model-updated\t1\nmodel-update-kind\tsafe-evidence-upgrade\nruntime-distill\tok\n") !=
+        "TiP 已增量学习：保留了原有排序能力；现在记住了 0 个选词、0 个英文词和 0 种按键纠正。") {
+        std::cerr << "safe evidence learning should not claim that the full ranker was replaced\n";
+        return false;
+    }
+    if (personalTrainingUserMessage(
+            activePersonalModel,
+            "recommendation\tcollect-more-data\nmodel-updated\t0\nruntime-distill\tok\n") !=
+        "检查完成。新记录没有带来可验证的排序提升，也没有新增达到安全阈值的个人证据；"
+        "已继续使用当前 TiP。") {
+        std::cerr << "unchanged training should explain both validation and safe evidence gates\n";
+        return false;
+    }
     if (personalTrainingSuccessMessage(
             activePersonalModel,
             "samples\t65\nranking-samples\t28\nraw-profile-auxiliary-positive\t14\n"
@@ -3935,6 +3959,20 @@ bool selfTest() {
         "；安全纠错组件已升级；旧模型已生效证据无回退（选词 14，英文词 7，纠错 9，按键习惯 4）"
         "；通用改序仍关闭，下次按需分析使用新纠错组件") {
         std::cerr << "safe component upgrade status should distinguish correction updates from generic ranking\n";
+        return false;
+    }
+    if (personalTrainingSuccessMessage(
+            activePersonalModel,
+            "samples\t65\nvalidation-accuracy\t12/13\nvalidation-baseline-accuracy\t12/13\n"
+            "recommendation\tcollect-more-data\nmodel-updated\t1\n"
+            "model-update-kind\tsafe-evidence-upgrade\nmerge-strategy\tmax-count-monotonic-v1\n"
+            "retained-active-pair-evidence\t14\nretained-active-raw-token-evidence\t7\n"
+            "retained-active-correction-patterns\t9\nretained-active-key-habits\t4\n") !=
+        "TiP 训练完成：65 条监督；分层留出验证 12/13（首项基线 12/13）"
+        "；新个人证据已安全合并，原有排序能力保持不变"
+        "；旧模型已生效证据无回退（选词 14，英文词 7，纠错 9，按键习惯 4）"
+        "；新选词和纠错证据已保存") {
+        std::cerr << "safe evidence upgrade should distinguish incremental learning from ranker replacement\n";
         return false;
     }
     if (personalTrainingSuccessMessage(

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import copy
 import fcntl
 import hashlib
 import json
@@ -1641,6 +1642,20 @@ def merge_counted_rows(existing, candidate, key_function, limit, is_active, labe
     return ranked, len(existing_active), restored_active
 
 
+def correction_pattern_key(row):
+    return (
+        row["kind"], row["typed"], row["replacement"], row["position"], row["relative_to_end"]
+    )
+
+
+def key_habit_key(row):
+    return row["kind"], row["typed"], row["replacement"]
+
+
+def counted_row_counts(rows, key_function):
+    return {key_function(row): row["count"] for row in rows}
+
+
 def merge_pinyin_prior(existing, candidate):
     merged = dict(candidate)
     for pinyin, score in existing.items():
@@ -1895,9 +1910,17 @@ def command_merge_safe(args):
         candidate_training = candidate_model.get("training", {})
         if not isinstance(existing_training, dict) or not isinstance(candidate_training, dict):
             raise ValueError("safe merge requires model training metadata")
-        if generic_ranking_safe(existing_training) and not generic_ranking_safe(candidate_training):
+        if (
+            not args.preserve_ranking
+            and generic_ranking_safe(existing_training)
+            and not generic_ranking_safe(candidate_training)
+        ):
             raise ValueError("candidate model would disable safe generic ranking")
-        if raw_profile_safe(existing_training) and not raw_profile_safe(candidate_training):
+        if (
+            not args.preserve_ranking
+            and raw_profile_safe(existing_training)
+            and not raw_profile_safe(candidate_training)
+        ):
             raise ValueError("candidate model would disable the safe raw-English profile")
 
         existing_evidence = validate_pair_evidence(existing_model.get("pair_evidence"))
@@ -1917,10 +1940,7 @@ def command_merge_safe(args):
         merged_patterns, retained_patterns, restored_patterns = merge_counted_rows(
             existing_patterns,
             candidate_patterns,
-            lambda row: (
-                row["kind"], row["typed"], row["replacement"], row["position"],
-                row["relative_to_end"],
-            ),
+            correction_pattern_key,
             MAX_CORRECTION_PATTERNS,
             active_correction_pattern,
             "correction patterns",
@@ -1928,7 +1948,7 @@ def command_merge_safe(args):
         merged_habits, retained_habits, restored_habits = merge_counted_rows(
             existing_habits,
             candidate_habits,
-            lambda row: (row["kind"], row["typed"], row["replacement"]),
+            key_habit_key,
             MAX_KEY_HABITS,
             active_key_habit,
             "key habits",
@@ -1944,32 +1964,52 @@ def command_merge_safe(args):
         if existing_keyboard_safe and not merged_keyboard_safe:
             raise ValueError("candidate model would disable safe keyboard correction")
 
-        candidate_model["name"] = MODEL_NAME
-        candidate_model["pair_evidence"] = merged_evidence
-        candidate_model["raw_token_evidence"] = merged_raw_token_evidence
-        candidate_model["correction_patterns"] = merged_patterns
-        candidate_model["key_habits"] = merged_habits
-        candidate_model["pinyin_prior"] = merged_prior
-        candidate_training["active_correction_patterns"] = sum(
+        component_changed = bool(
+            merged_evidence != existing_evidence
+            or merged_raw_token_evidence != existing_raw_token_evidence
+            or counted_row_counts(merged_patterns, correction_pattern_key)
+            != counted_row_counts(existing_patterns, correction_pattern_key)
+            or counted_row_counts(merged_habits, key_habit_key)
+            != counted_row_counts(existing_habits, key_habit_key)
+            or merged_prior != existing_prior
+        )
+        output_model = copy.deepcopy(existing_model if args.preserve_ranking else candidate_model)
+        output_training = output_model.get("training", {})
+        if not isinstance(output_training, dict):
+            raise ValueError("safe merge requires output model training metadata")
+        output_model["name"] = MODEL_NAME
+        output_model["pair_evidence"] = merged_evidence
+        output_model["raw_token_evidence"] = merged_raw_token_evidence
+        output_model["correction_patterns"] = merged_patterns
+        output_model["key_habits"] = merged_habits
+        output_model["pinyin_prior"] = merged_prior
+        output_training["active_correction_patterns"] = sum(
             active_correction_pattern(row) for row in merged_patterns
         )
-        candidate_training["active_key_habits"] = sum(
+        output_training["active_key_habits"] = sum(
             active_key_habit(row) for row in merged_habits
         )
-        candidate_training["pinyin_prior_entries"] = len(merged_prior)
-        candidate_training["raw_token_evidence_entries"] = len(merged_raw_token_evidence)
-        candidate_training["active_raw_token_evidence"] = sum(
+        output_training["pinyin_prior_entries"] = len(merged_prior)
+        output_training["raw_token_evidence_entries"] = len(merged_raw_token_evidence)
+        output_training["active_raw_token_evidence"] = sum(
             count >= MIN_RAW_PREFERENCE_COUNT for count in merged_raw_token_evidence.values()
         )
-        candidate_training["keyboard_correction_safe"] = merged_keyboard_safe
-        candidate_training["evidence_merge_strategy"] = "max-count-monotonic-v1"
-        candidate_model["training"] = candidate_training
-        atomic_write_model(args.output, candidate_model)
+        output_training["keyboard_correction_safe"] = merged_keyboard_safe
+        output_training["evidence_merge_strategy"] = "max-count-monotonic-v1"
+        if args.preserve_ranking and component_changed:
+            source_samples = candidate_training.get("samples")
+            if isinstance(source_samples, int) and not isinstance(source_samples, bool) and source_samples >= 0:
+                output_training["component_source_samples"] = source_samples
+            output_training["last_update_kind"] = "safe-evidence-upgrade"
+        output_model["training"] = output_training
+        atomic_write_model(args.output, output_model)
     except (OSError, ValueError) as error:
         print(f"tipe-personal-model: {error}", file=sys.stderr)
         return 1
 
     print("merge-strategy\tmax-count-monotonic-v1")
+    print(f"merge-base\t{'existing-ranking' if args.preserve_ranking else 'candidate-ranking'}")
+    print(f"component-changed\t{int(component_changed)}")
     print(f"retained-active-pair-evidence\t{retained_pairs}")
     print(f"restored-active-pair-evidence\t{restored_pairs}")
     print(f"retained-active-raw-token-evidence\t{retained_raw_tokens}")
@@ -3059,6 +3099,11 @@ def parse_args(argv):
     merge_safe.add_argument("--existing", type=Path, required=True)
     merge_safe.add_argument("--candidate", type=Path, required=True)
     merge_safe.add_argument("--output", type=Path, required=True)
+    merge_safe.add_argument(
+        "--preserve-ranking",
+        action="store_true",
+        help="keep the validated existing ranker while merging bounded exact and keyboard evidence",
+    )
 
     distill_raw = subparsers.add_parser(
         "distill-raw", help="publish repeated English-mode tokens to lightweight runtime preferences"
