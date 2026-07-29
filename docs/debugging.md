@@ -101,6 +101,8 @@ $XDG_RUNTIME_DIR/tipe/input-mode-applied
 $HOME/.local/bin/tipe-toggle
 ```
 
+运行 `tipe-doctor` 并检查 `niri-mode-toggle`、`niri-control-toggle` 和 `fcitx5-toggle-conflicts`。即使桌面的 `Mod+Space` 正确，fcitx5 自己的 `Ctrl+Space` Trigger、单独 Shift 备用 Trigger 或 Super+Space 分组切换仍可能把当前输入法轮换到 `keyboard-us`。这种情况下 TiPE 已被停用，候选窗必然消失；切回来只能恢复之前保存的拼音。
+
 ## 不切换输入法重放问题
 
 ### 查看候选

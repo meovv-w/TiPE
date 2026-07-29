@@ -677,21 +677,72 @@ emit_learning_summary() {
     done <<< "$summary_output"
 }
 
+ini_numbered_values() {
+    local path="$1"
+    local section="$2"
+    awk -v wanted="[$section]" '
+        /^[[:space:]]*\[/ {
+            in_section = ($0 == wanted)
+            next
+        }
+        in_section && /^[[:space:]]*[0-9]+=/ {
+            value = $0
+            sub(/^[[:space:]]*[0-9]+=/, "", value)
+            print tolower(value)
+        }
+    ' "$path"
+}
+
 emit_input_switch_integration() {
     local keybinds_path="${TIPE_NIRI_KEYBINDS:-$HOME/.config/niri/keybinds.kdl}"
+    local fcitx_config_path="${TIPE_FCITX5_CONFIG:-$HOME/.config/fcitx5/config}"
     status section integration ""
     if [[ ! -r "$keybinds_path" ]]; then
         status skip niri-mode-toggle "$keybinds_path is not readable; bind the Chinese/English shortcut to tipe-toggle"
-        return 0
+    else
+        status integration niri-keybinds "$keybinds_path"
+        if grep -Eq '^[[:space:]]*(Mod|Super)\+Space[^\{]*\{[^}]*tipe-toggle([[:space:]";}]|$)' "$keybinds_path"; then
+            status ok niri-mode-toggle "Mod+Space uses tipe-toggle; TiPE remains active for English supervision"
+        elif grep -Eq '^[[:space:]]*(Mod|Super)\+Space[^\{]*\{[^}]*fcitx5-remote[[:space:]]+-(t|c)([[:space:]";}]|$)' "$keybinds_path"; then
+            status warn niri-mode-toggle "Mod+Space deactivates fcitx5 with fcitx5-remote; English supervision cannot run (use tipe-toggle)"
+        else
+            status skip niri-mode-toggle "no supported Mod+Space binding found; bind it to tipe-toggle for supervised English mode"
+        fi
+        if grep -Eq '^[[:space:]]*(Ctrl|Control)\+Space[^\{]*\{[^}]*tipe-toggle([[:space:]";}]|$)' "$keybinds_path"; then
+            status ok niri-control-toggle "Ctrl+Space uses tipe-toggle"
+        else
+            status skip niri-control-toggle "Ctrl+Space is not bound to tipe-toggle"
+        fi
     fi
 
-    status integration niri-keybinds "$keybinds_path"
-    if grep -Eq '^[[:space:]]*(Mod|Super)\+Space[^\{]*\{[^}]*tipe-toggle([[:space:]";}]|$)' "$keybinds_path"; then
-        status ok niri-mode-toggle "Mod+Space uses tipe-toggle; TiPE remains active for English supervision"
-    elif grep -Eq '^[[:space:]]*(Mod|Super)\+Space[^\{]*\{[^}]*fcitx5-remote[[:space:]]+-(t|c)([[:space:]";}]|$)' "$keybinds_path"; then
-        status warn niri-mode-toggle "Mod+Space deactivates fcitx5 with fcitx5-remote; English supervision cannot run (use tipe-toggle)"
+    if [[ ! -r "$fcitx_config_path" ]]; then
+        status skip fcitx5-toggle-conflicts "$fcitx_config_path is not readable"
+        return 0
+    fi
+    status integration fcitx5-config "$fcitx_config_path"
+    local conflicts=()
+    if ini_numbered_values "$fcitx_config_path" "Hotkey/TriggerKeys" |
+        grep -Eq '^(control|ctrl)\+space$'; then
+        conflicts+=("Ctrl+Space trigger")
+    fi
+    if ini_numbered_values "$fcitx_config_path" "Hotkey/AltTriggerKeys" |
+        grep -Eq '^shift_(l|r)$'; then
+        conflicts+=("bare Shift trigger")
+    fi
+    if ini_numbered_values "$fcitx_config_path" "Hotkey/EnumerateGroupForwardKeys" |
+        grep -Eq '^(super|mod)\+space$'; then
+        conflicts+=("Super+Space group switch")
+    fi
+    if ini_numbered_values "$fcitx_config_path" "Hotkey/EnumerateGroupBackwardKeys" |
+        grep -Eq '^shift\+(super|mod)\+space$|^(super|mod)\+shift\+space$'; then
+        conflicts+=("Shift+Super+Space group switch")
+    fi
+    if (( ${#conflicts[@]} > 0 )); then
+        local joined
+        joined=$(IFS=', '; printf '%s' "${conflicts[*]}")
+        status warn fcitx5-toggle-conflicts "$joined can deactivate or rotate away from TiPE"
     else
-        status skip niri-mode-toggle "no supported Mod+Space binding found; bind it to tipe-toggle for supervised English mode"
+        status ok fcitx5-toggle-conflicts "no common fcitx5 shortcut bypasses tipe-toggle"
     fi
 }
 

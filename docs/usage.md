@@ -171,7 +171,7 @@ tipe-toggle --set english
 - 英文模式的普通字符直接进入应用，同时形成有界行为记录。
 - 切换结果由 TiPE 自己显示短暂 `TiPE` 或 `Eng` 标识。
 
-桌面快捷键应调用 `tipe-toggle`，不要直接调用 `fcitx5-remote -t` 或 `-c`。后两者会停用引擎，使英文按键完全绕过 TiPE。
+桌面快捷键应调用 `tipe-toggle`，不要直接调用 `fcitx5-remote -t` 或 `-c`。后两者会停用引擎，使英文按键完全绕过 TiPE。常用的 `Mod+Space`、`Mod+Shift+Space` 和 `Ctrl+Space` 应统一走这条命令；如果 fcitx5 自己仍配置了同名 Trigger、单独 Shift 备用触发键或 Super+Space 分组切换键，同一个物理按键就可能绕过 TiPE。`tipe-doctor` 会在 `integration` 段报告这些冲突，但不会自动修改用户的全局快捷键或 profile。
 
 ## 候选窗口
 

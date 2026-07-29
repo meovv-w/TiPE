@@ -1564,22 +1564,53 @@ if [[ "$doctor_output" != *$'section\tenvironment\t'* ||
 fi
 doctor_niri_bad="$tmp_dir/doctor-niri-bad.kdl"
 printf '%s\n' 'Mod+Space { spawn-sh "fcitx5-remote -t"; }' >"$doctor_niri_bad"
+doctor_fcitx_bad="$tmp_dir/doctor-fcitx-bad.conf"
+printf '%s\n' \
+    '[Hotkey]' \
+    'EnumerateWithTriggerKeys=True' \
+    '[Hotkey/TriggerKeys]' \
+    '0=Control+space' \
+    '[Hotkey/AltTriggerKeys]' \
+    '0=Shift_L' \
+    '[Hotkey/EnumerateGroupForwardKeys]' \
+    '0=Super+space' \
+    '[Hotkey/EnumerateGroupBackwardKeys]' \
+    '0=Shift+Super+space' >"$doctor_fcitx_bad"
 doctor_niri_bad_output=$(XDG_DATA_HOME="$doctor_default_data" XDG_CACHE_HOME="$doctor_default_cache" \
     TIPE_MODEL_CONFIG="$doctor_default_model_config" TIPE_NIRI_KEYBINDS="$doctor_niri_bad" \
+    TIPE_FCITX5_CONFIG="$doctor_fcitx_bad" \
     "$ROOT/scripts/doctor.sh" --no-runtime)
 if [[ "$doctor_niri_bad_output" != *$'section\tintegration\t'* ||
-    "$doctor_niri_bad_output" != *$'warn\tniri-mode-toggle\tMod+Space deactivates fcitx5'* ]]; then
-    echo "doctor helper should reject native fcitx5 toggles that bypass English supervision" >&2
+    "$doctor_niri_bad_output" != *$'warn\tniri-mode-toggle\tMod+Space deactivates fcitx5'* ||
+    "$doctor_niri_bad_output" != *$'warn\tfcitx5-toggle-conflicts\t'*'Ctrl+Space trigger'* ||
+    "$doctor_niri_bad_output" != *'bare Shift trigger'* ||
+    "$doctor_niri_bad_output" != *'Super+Space group switch'* ]]; then
+    echo "doctor helper should reject compositor and fcitx5 toggles that bypass English supervision" >&2
     exit 1
 fi
 doctor_niri_good="$tmp_dir/doctor-niri-good.kdl"
-printf '%s\n' 'Mod+Space { spawn-sh "$HOME/.local/bin/tipe-toggle"; }' >"$doctor_niri_good"
+printf '%s\n' \
+    'Mod+Space { spawn-sh "$HOME/.local/bin/tipe-toggle"; }' \
+    'Mod+Shift+Space { spawn-sh "$HOME/.local/bin/tipe-toggle"; }' \
+    'Ctrl+Space { spawn-sh "$HOME/.local/bin/tipe-toggle"; }' >"$doctor_niri_good"
+doctor_fcitx_good="$tmp_dir/doctor-fcitx-good.conf"
+printf '%s\n' \
+    '[Hotkey]' \
+    'EnumerateWithTriggerKeys=False' \
+    '[Hotkey/TriggerKeys]' \
+    '[Hotkey/AltTriggerKeys]' \
+    '[Hotkey/EnumerateGroupForwardKeys]' \
+    '[Hotkey/EnumerateGroupBackwardKeys]' >"$doctor_fcitx_good"
 doctor_niri_good_output=$(XDG_DATA_HOME="$doctor_default_data" XDG_CACHE_HOME="$doctor_default_cache" \
     TIPE_MODEL_CONFIG="$doctor_default_model_config" TIPE_NIRI_KEYBINDS="$doctor_niri_good" \
+    TIPE_FCITX5_CONFIG="$doctor_fcitx_good" \
     "$ROOT/scripts/doctor.sh" --no-runtime)
 if [[ "$doctor_niri_good_output" != *$'ok\tniri-mode-toggle\tMod+Space uses tipe-toggle'* ||
-    "$doctor_niri_good_output" == *$'warn\tniri-mode-toggle\t'* ]]; then
-    echo "doctor helper should accept a TiPE internal-mode niri binding" >&2
+    "$doctor_niri_good_output" != *$'ok\tniri-control-toggle\tCtrl+Space uses tipe-toggle'* ||
+    "$doctor_niri_good_output" != *$'ok\tfcitx5-toggle-conflicts\tno common fcitx5 shortcut bypasses tipe-toggle'* ||
+    "$doctor_niri_good_output" == *$'warn\tniri-mode-toggle\t'* ||
+    "$doctor_niri_good_output" == *$'warn\tfcitx5-toggle-conflicts\t'* ]]; then
+    echo "doctor helper should accept unified TiPE internal-mode shortcuts" >&2
     exit 1
 fi
 doctor_ui_only_cache="$tmp_dir/doctor-ui-only-cache"
