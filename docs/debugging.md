@@ -262,7 +262,24 @@ tipeui update frontend=dbus
 
 XIM 常见矩形高度和宽度为零，只要 x/y 有效，TiPE 会把它视为插入点。四个值全为零时才进入后备路径。
 
-HiDPI Xwayland 的根窗口坐标可能是物理像素，而 GTK 使用逻辑像素。日志中的 frontend scale 和 monitor geometry 必须一起判断，不能直接比较原始数值。
+HiDPI XWayland 的根窗口坐标可能是物理像素，而 GTK 候选窗使用 Wayland
+逻辑像素。TiPE 会给 XIM、fcitx4 和 X11 display 的快照标记坐标空间，再用
+X11 根窗口尺寸与 GTK 逻辑桌面尺寸做统一转换。fcitx4 兼容客户端还可能提交
+相对活动窗口的坐标：当原始点不在活动窗口的全局矩形内、但能落入其内部矩形
+时，TiPE 会先加活动窗口原点。已经是全局坐标的点不会重复加偏移。完成这一步
+后，即使原始 x/y 数值仍落在逻辑屏幕范围内，也必须按 X11 坐标空间转换；不能
+只用“是否越界”猜测缩放。根窗口本身已是逻辑尺寸或运行在纯 X11 桌面时，比例
+为 1，坐标保持不变。
+
+调试候选窗错位时关注：
+
+```text
+fallback\tcursor-normalized\t...\tx11=1\troot=3120,2080\twindowOrigin=1\tactiveWindow=...
+```
+
+`raw` 是客户端提交的 X11 坐标，`activeWindow` 是活动窗口的根坐标矩形，
+`resolved` 应位于 GTK 报告的 monitor geometry 内。静态光标客户端的拼音
+宽度补偿必须在窗口原点和缩放转换之后执行，不能为某个应用写固定偏移。
 
 ### Wine
 

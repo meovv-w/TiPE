@@ -1,4 +1,5 @@
 #include "state.h"
+#include "shift_tap_tracker.h"
 #include "input_model.h"
 #include "input_privacy.h"
 #include "pass_through_supervisor.h"
@@ -134,6 +135,35 @@ bool hasTemporarySibling(const std::filesystem::path &path) {
 } // namespace
 
 int main() {
+    {
+        tipe::ShiftTapTracker tracker;
+        int firstContext = 0;
+        int secondContext = 0;
+
+        tracker.press(&firstContext, tipe::ShiftKey::Left);
+        require(tracker.release(&firstContext, tipe::ShiftKey::Left),
+                "a standalone left Shift press and release toggles input mode");
+
+        tracker.press(&firstContext, tipe::ShiftKey::Right);
+        tracker.nonShiftPressed();
+        require(!tracker.release(&firstContext, tipe::ShiftKey::Right),
+                "Shift combined with a text or shortcut key does not toggle input mode");
+
+        tracker.press(&firstContext, tipe::ShiftKey::Left);
+        require(!tracker.release(&secondContext, tipe::ShiftKey::Left),
+                "a Shift release in another input context does not toggle input mode");
+
+        tracker.press(&firstContext, tipe::ShiftKey::Left);
+        tracker.press(&firstContext, tipe::ShiftKey::Right);
+        require(!tracker.release(&firstContext, tipe::ShiftKey::Right),
+                "pressing both Shift keys is treated as a chord instead of a tap");
+
+        tracker.press(&firstContext, tipe::ShiftKey::Left);
+        tracker.cancelForContext(&firstContext);
+        require(!tracker.release(&firstContext, tipe::ShiftKey::Left),
+                "focus changes cancel a pending Shift tap");
+    }
+
     require(!tipe::inputCapabilitiesBlockSupervision(0),
             "ordinary input capabilities allow TiPE supervision");
     require(!tipe::inputCapabilitiesBlockSupervision(1ULL << 1),
@@ -640,16 +670,32 @@ int main() {
         require(unscaledRect.x == 582 && unscaledRect.y == 1762 && unscaledRect.width == 4 &&
                     unscaledRect.height == 44,
                 "unit-scale fallback cursor rectangles remain unchanged");
-        const auto ximSpot = tipe::candidateSnapshotAnchorFor("xim", {320, 640, 0, 0}, 1.0);
+        const auto ximSpot = tipe::candidateSnapshotAnchorFor("xim", "x11::0", {320, 640, 0, 0}, 1.0);
         require(ximSpot.rect.x == 320 && ximSpot.rect.y == 640 && ximSpot.rect.width == 1 &&
-                    ximSpot.rect.height == 22 && !ximSpot.pointerFallback,
+                    ximSpot.rect.height == 22 && !ximSpot.pointerFallback && ximSpot.x11Coordinates &&
+                    !ximSpot.resolveX11WindowOrigin && ximSpot.syntheticCursorExtent,
                 "XIM spot locations remain usable when the protocol omits their dimensions");
-        const auto ximMissingSpot = tipe::candidateSnapshotAnchorFor("xim", {0, 0, 0, 0}, 1.0);
-        require(ximMissingSpot.rect.height == 0 && ximMissingSpot.pointerFallback,
+        const auto ximMissingSpot = tipe::candidateSnapshotAnchorFor("xim", "x11::0", {0, 0, 0, 0}, 1.0);
+        require(ximMissingSpot.rect.height == 0 && ximMissingSpot.pointerFallback &&
+                    ximMissingSpot.x11Coordinates && !ximMissingSpot.resolveX11WindowOrigin &&
+                    !ximMissingSpot.syntheticCursorExtent,
                 "XIM contexts without any spot location request the pointer fallback");
-        const auto nonXimSentinel = tipe::candidateSnapshotAnchorFor("dbus", {38, 38, 0, 0}, 1.0);
-        require(nonXimSentinel.rect.height == 0 && !nonXimSentinel.pointerFallback,
+        const auto nonXimSentinel =
+            tipe::candidateSnapshotAnchorFor("dbus", "wayland:", {38, 38, 0, 0}, 1.0);
+        require(nonXimSentinel.rect.height == 0 && !nonXimSentinel.pointerFallback &&
+                    !nonXimSentinel.x11Coordinates && !nonXimSentinel.resolveX11WindowOrigin,
                 "non-XIM position-only startup sentinels remain unusable");
+        const auto fcitx4X11 =
+            tipe::candidateSnapshotAnchorFor("fcitx4", "x11::0", {620, 136, 2, 46}, 1.0);
+        require(fcitx4X11.rect.x == 620 && fcitx4X11.rect.y == 136 && fcitx4X11.rect.height == 46 &&
+                    fcitx4X11.x11Coordinates && fcitx4X11.resolveX11WindowOrigin &&
+                    !fcitx4X11.syntheticCursorExtent,
+                "fcitx4 cursor rectangles retain X11 coordinates and request window-origin resolution");
+        const auto dbusWayland =
+            tipe::candidateSnapshotAnchorFor("dbus", "wayland:", {620, 136, 2, 46}, 2.0);
+        require(dbusWayland.rect.x == 310 && dbusWayland.rect.y == 68 && dbusWayland.rect.height == 23 &&
+                    !dbusWayland.x11Coordinates && !dbusWayland.resolveX11WindowOrigin,
+                "Wayland D-Bus cursor rectangles still use the input context scale directly");
 
         require(tipe::shouldRunFullPinyinDecoder("nihap"),
                 "short incomplete input keeps mature decoder typo completion");
@@ -2050,7 +2096,7 @@ int main() {
         type(englishModeBoundaryState, "nihao");
         action = englishModeBoundaryState.commitRawPreedit("InputModeEnglish");
         require(!action.accepted && action.type == tipe::ActionType::Commit && action.commitText == "nihao",
-                "the first English text key commits pending pinyin as raw text");
+                "entering English mode immediately commits pending pinyin as raw text");
         require(englishModeBoundaryState.empty(), "raw mode-switch commit clears the completed composition");
         require(hasEventText(englishModeBoundaryState, tipe::InputEventType::ObservedKey, "InputModeEnglish"),
                 "raw mode-switch commit records an explicit supervision boundary");

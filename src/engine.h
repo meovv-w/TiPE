@@ -2,6 +2,7 @@
 
 #include "candidate_snapshot.h"
 #include "pass_through_supervisor.h"
+#include "shift_tap_tracker.h"
 #include "state.h"
 
 #include <fcitx/addonfactory.h>
@@ -116,7 +117,6 @@ private:
     void clearActivationStatusIfCurrent(fcitx::InputContext *ic, std::size_t serial);
     bool activationStatusVisible(fcitx::InputContext *ic) const;
     std::string activationStatusText(fcitx::InputContext *ic) const;
-    void updateEnglishPendingPanel(fcitx::InputContext *ic, const State &state);
     void updatePanel(fcitx::InputContext *ic, const State &state);
     void clearPanel(fcitx::InputContext *ic);
     void writeSupervisionSnapshot(fcitx::InputContext *ic, const State &state);
@@ -154,7 +154,8 @@ private:
     void onInputContextCapabilityChanged(fcitx::Event &event);
     void initializeInputModeControl();
     void refreshInputMode(bool announce);
-    void setEnglishMode(bool enabled, bool announce);
+    void setEnglishMode(bool enabled, bool announce, fcitx::InputContext *preferredInputContext = nullptr);
+    void toggleInputModeFromShift(fcitx::InputContext *inputContext);
     bool onInputModeControlEvent(int fd);
     void passThroughKeyEvent(fcitx::KeyEvent &event);
     void finishPassThroughTracking(fcitx::InputContext *ic, std::string_view reason);
@@ -187,6 +188,7 @@ private:
     std::optional<PendingSupervisionSnapshot> pendingSupervisionSnapshot_;
     std::string lastSupervisionHistorySnapshot_;
     uint64_t lastSupervisionHistoryUsec_ = 0;
+    ShiftTapTracker shiftTapTracker_;
     bool continuousMode_ = false;
     bool englishMode_ = false;
     std::filesystem::path inputModePath_;

@@ -17,6 +17,9 @@ struct CandidateSnapshotRect {
 struct CandidateSnapshotAnchor {
     CandidateSnapshotRect rect;
     bool pointerFallback = false;
+    bool x11Coordinates = false;
+    bool resolveX11WindowOrigin = false;
+    bool syntheticCursorExtent = false;
 };
 
 class CandidateCursorFollowTracker {
@@ -40,8 +43,8 @@ private:
 
 std::string escapeCandidateSnapshotField(std::string_view text);
 CandidateSnapshotRect logicalCandidateSnapshotRect(CandidateSnapshotRect rect, double scale);
-CandidateSnapshotAnchor candidateSnapshotAnchorFor(std::string_view frontend, CandidateSnapshotRect rect,
-                                                    double scale);
+CandidateSnapshotAnchor candidateSnapshotAnchorFor(std::string_view frontend, std::string_view display,
+                                                    CandidateSnapshotRect rect, double scale);
 std::string buildCandidateSnapshotLine(std::string_view preedit, bool expanded, std::size_t selectedIndex,
                                        CandidateSnapshotRect rect, const std::vector<std::string> &candidates,
                                        std::string_view metadata = {});

@@ -3,6 +3,7 @@
 #include "bounded_log.h"
 #include "candidate_layout.h"
 #include "candidate_snapshot.h"
+#include "fork_exec.h"
 #include "input_privacy.h"
 #include "nonblocking_pipe.h"
 #include "pass_through_supervisor.h"
@@ -75,8 +76,9 @@ bool isUsableRect(const fcitx::Rect &rect) {
     return rect.height() > 0;
 }
 
-CandidateSnapshotRect fallbackCursorRectFor(const fcitx::InputContext &ic, const fcitx::Rect &rect) {
-    return logicalCandidateSnapshotRect({rect.left(), rect.top(), rect.width(), rect.height()}, ic.scaleFactor());
+CandidateSnapshotAnchor fallbackCursorAnchorFor(const fcitx::InputContext &ic, const fcitx::Rect &rect) {
+    return candidateSnapshotAnchorFor(ic.frontendName(), ic.display(),
+                                      {rect.left(), rect.top(), rect.width(), rect.height()}, ic.scaleFactor());
 }
 
 std::optional<int> envInt(const char *name) {
@@ -209,9 +211,9 @@ std::filesystem::path inputModeAppliedPath(const std::filesystem::path &requestP
     return requestPath.empty() ? std::filesystem::path{} : requestPath.parent_path() / "input-mode-applied";
 }
 
-bool writeInputModeApplied(const std::filesystem::path &path, const InputModeRequest &request) {
-    if (path.empty() || request.token.empty()) {
-        return request.token.empty();
+bool writePrivateFileAtomically(const std::filesystem::path &path, std::string_view contents) {
+    if (path.empty()) {
+        return false;
     }
     static std::atomic<std::uint64_t> serial{0};
     const auto temporary = path.string() + ".tmp." + std::to_string(getpid()) + "." +
@@ -220,7 +222,6 @@ bool writeInputModeApplied(const std::filesystem::path &path, const InputModeReq
     if (fd < 0) {
         return false;
     }
-    const std::string contents = request.mode + "\t" + request.token + "\n";
     const auto removeTemporary = [&temporary] {
         std::error_code error;
         std::filesystem::remove(temporary, error);
@@ -243,6 +244,17 @@ bool writeInputModeApplied(const std::filesystem::path &path, const InputModeReq
         return false;
     }
     return true;
+}
+
+bool writeInputModeApplied(const std::filesystem::path &path, const InputModeRequest &request) {
+    if (request.token.empty()) {
+        return true;
+    }
+    return writePrivateFileAtomically(path, request.mode + "\t" + request.token + "\n");
+}
+
+bool writeInputModeState(const std::filesystem::path &path, bool english) {
+    return writePrivateFileAtomically(path, english ? "english\n" : "chinese\n");
 }
 
 std::string historyField(std::string_view text) {
@@ -640,6 +652,17 @@ bool isShiftTabKey(const fcitx::Key &key) {
     return key.check(FcitxKey_ISO_Left_Tab) || key.check(FcitxKey_Tab, fcitx::KeyStates{fcitx::KeyState::Shift});
 }
 
+std::optional<ShiftKey> shiftKeyFor(const fcitx::Key &key) {
+    switch (key.sym()) {
+    case FcitxKey_Shift_L:
+        return ShiftKey::Left;
+    case FcitxKey_Shift_R:
+        return ShiftKey::Right;
+    default:
+        return std::nullopt;
+    }
+}
+
 bool isTabKey(const fcitx::Key &key) { return key.check(FcitxKey_Tab); }
 
 bool isModelRerankKey(const fcitx::Key &key) { return key.check(FcitxKey_F9); }
@@ -971,7 +994,8 @@ void Engine::refreshInputMode(bool announce) {
     }
 }
 
-void Engine::setEnglishMode(bool enabled, bool announce) {
+void Engine::setEnglishMode(bool enabled, bool announce, fcitx::InputContext *preferredInputContext) {
+    shiftTapTracker_.cancel();
     if (englishMode_ == enabled) {
         return;
     }
@@ -992,7 +1016,8 @@ void Engine::setEnglishMode(bool enabled, bool announce) {
     cursorFollowTrackers_.clear();
     traceEngine(std::string("input-mode changed=") + (englishMode_ ? "english" : "chinese"));
 
-    auto *ic = instance_ ? instance_->mostRecentInputContext() : nullptr;
+    auto *ic = preferredInputContext ? preferredInputContext
+                                     : (instance_ ? instance_->mostRecentInputContext() : nullptr);
     if (!ic) {
         return;
     }
@@ -1005,11 +1030,13 @@ void Engine::setEnglishMode(bool enabled, bool announce) {
     }
     if (englishMode_) {
         if (auto iter = states_.find(ic); iter != states_.end() && !iter->second.empty()) {
-            updateEnglishPendingPanel(ic, iter->second);
+            traceEngine("input-mode english commit-pending-raw preedit=" + traceSafe(iter->second.preedit()) +
+                        " boundary=mode-switch");
+            applyAction(ic, nullptr, iter->second.commitRawPreedit("InputModeEnglish"));
         } else {
             clearPanel(ic);
         }
-        if (announce && (states_.find(ic) == states_.end() || states_.at(ic).empty())) {
+        if (announce) {
             showInputModeStatus(ic, "Eng");
         }
         return;
@@ -1022,6 +1049,15 @@ void Engine::setEnglishMode(bool enabled, bool announce) {
     }
 }
 
+void Engine::toggleInputModeFromShift(fcitx::InputContext *inputContext) {
+    const bool enableEnglish = !englishMode_;
+    setEnglishMode(enableEnglish, true, inputContext);
+    if (!writeInputModeState(inputModePath_, enableEnglish)) {
+        FCITX_WARN() << "Failed to persist TiPE input mode selected with Shift";
+        traceEngine("input-mode keyboard-persist-failed");
+    }
+}
+
 void Engine::passThroughKeyEvent(fcitx::KeyEvent &event) {
     auto *ic = event.inputContext();
     if (!ic) {
@@ -1031,7 +1067,7 @@ void Engine::passThroughKeyEvent(fcitx::KeyEvent &event) {
         discardBlockedInputContext(ic);
         return;
     }
-    if (activationStatusVisible(ic)) {
+    if (activationStatusVisible(ic) || inputPanelHasCompositionContent(ic)) {
         clearPanel(ic);
     }
     auto &supervisor = passThroughSupervisors_.try_emplace(ic).first->second;
@@ -1103,16 +1139,30 @@ void Engine::keyEvent(const fcitx::InputMethodEntry &entry, fcitx::KeyEvent &eve
     if (ic && !blockedContext) {
         blockedInputContexts_.erase(ic);
     }
+    const auto shiftKey = shiftKeyFor(event.rawKey());
     if (event.isRelease()) {
+        const bool toggleInputMode = shiftKey && shiftTapTracker_.release(ic, *shiftKey);
         if (blockedContext) {
             discardBlockedInputContext(ic);
-            return;
-        }
-        if (ic && modelRerankHeld_.erase(ic) > 0) {
+        } else if (ic && modelRerankHeld_.erase(ic) > 0) {
             event.filterAndAccept();
+        }
+        if (toggleInputMode) {
+            toggleInputModeFromShift(ic);
         }
         return;
     }
+
+    if (shiftKey) {
+        shiftTapTracker_.press(ic, *shiftKey);
+        if (englishMode_) {
+            passThroughKeyEvent(event);
+        } else if (blockedContext) {
+            discardBlockedInputContext(ic);
+        }
+        return;
+    }
+    shiftTapTracker_.nonShiftPressed();
 
     if (!ic) {
         return;
@@ -1340,6 +1390,7 @@ void Engine::activate(const fcitx::InputMethodEntry &entry, fcitx::InputContextE
     if (!ic) {
         return;
     }
+    shiftTapTracker_.cancel();
     const bool focusTransfer = focusTransferTimer_ != nullptr;
     focusTransferTimer_.reset();
     closeStatusWindow();
@@ -1352,9 +1403,8 @@ void Engine::activate(const fcitx::InputMethodEntry &entry, fcitx::InputContextE
         return;
     }
     if (englishMode_) {
-        if (auto iter = states_.find(ic); iter != states_.end() && !iter->second.empty()) {
-            updateEnglishPendingPanel(ic, iter->second);
-        } else if (!focusTransfer) {
+        clearPanel(ic);
+        if (!focusTransfer) {
             showInputModeStatus(ic, "Eng");
         }
         return;
@@ -1379,6 +1429,7 @@ void Engine::activate(const fcitx::InputMethodEntry &entry, fcitx::InputContextE
 void Engine::reset(const fcitx::InputMethodEntry &entry, fcitx::InputContextEvent &event) {
     FCITX_UNUSED(entry);
     auto *ic = event.inputContext();
+    shiftTapTracker_.cancelForContext(ic);
     if (ic) {
         ++asyncModelSerials_[ic];
     }
@@ -1392,11 +1443,7 @@ void Engine::reset(const fcitx::InputMethodEntry &entry, fcitx::InputContextEven
     if (englishMode_) {
         finishPassThroughTracking(ic, "InputContextReset");
         if (ic) {
-            if (auto iter = states_.find(ic); iter != states_.end() && !iter->second.empty()) {
-                updateEnglishPendingPanel(ic, iter->second);
-            } else {
-                clearPanel(ic);
-            }
+            clearPanel(ic);
         }
         return;
     }
@@ -1432,6 +1479,7 @@ void Engine::deactivate(const fcitx::InputMethodEntry &entry, fcitx::InputContex
     if (!ic) {
         return;
     }
+    shiftTapTracker_.cancelForContext(ic);
     ++asyncModelSerials_[ic];
     if (!inputContextBlocksSupervision(ic)) {
         blockedInputContexts_.erase(ic);
@@ -1847,37 +1895,6 @@ std::string Engine::activationStatusText(fcitx::InputContext *ic) const {
         return {};
     }
     return activationStatusTexts_.at(ic);
-}
-
-void Engine::updateEnglishPendingPanel(fcitx::InputContext *ic, const State &state) {
-    if (!ic || state.empty() || inputContextBlocksSupervision(ic)) {
-        if (ic) {
-            clearPanel(ic);
-        }
-        return;
-    }
-    clearActivationStatusState(ic);
-    auto preedit = fcitx::Text(state.preedit());
-    preedit.setCursor(static_cast<int>(state.preeditCursorIndex()));
-    auto &panel = ic->inputPanel();
-    panel.reset();
-    panel.setClientPreedit(preedit);
-    panel.setPreedit(preedit);
-    const bool useTipeUI = tipeUIHandlesInputContext(instance_, *ic);
-    configureTipeInputPanelRoute(instance_, ic, useTipeUI);
-    if (useTipeUI) {
-        panel.setAuxUp(fcitx::Text("Eng"));
-    }
-    ic->updatePreedit();
-    ic->updateUserInterface(fcitx::UserInterfaceComponent::InputPanel);
-    clearCandidateWindow();
-    writeSupervisionSnapshot(ic, state);
-    if (useTipeUI) {
-        closeStatusWindow();
-    } else {
-        showStatusWindow(*ic, "Eng");
-    }
-    traceEngineDebug("input-mode english pending-preedit=" + traceSafe(state.preedit()));
 }
 
 void Engine::updatePanel(fcitx::InputContext *ic, const State &state) {
@@ -2308,6 +2325,7 @@ void Engine::onCursorRectChanged(fcitx::Event &event) {
 
 void Engine::onInputContextFocusOut(fcitx::Event &event) {
     auto *ic = static_cast<fcitx::InputContextEvent &>(event).inputContext();
+    shiftTapTracker_.cancelForContext(ic);
     if (ic) {
         ++asyncModelSerials_[ic];
     }
@@ -2325,6 +2343,7 @@ void Engine::onInputContextDestroyed(fcitx::Event &event) {
     if (!ic) {
         return;
     }
+    shiftTapTracker_.cancelForContext(ic);
     if (inputContextBlocksSupervision(ic)) {
         discardBlockedInputContext(ic);
         asyncModelSerials_.erase(ic);
@@ -2421,7 +2440,7 @@ bool Engine::ensureCandidateWindow() {
         return false;
     }
 
-    const pid_t pid = fork();
+    const pid_t pid = forkExecChild();
     if (pid < 0) {
         close(pipeFds[0]);
         close(pipeFds[1]);
@@ -2507,10 +2526,11 @@ void Engine::showStatusWindow(fcitx::InputContext &ic, const char *status) {
     const auto binaryPath = std::filesystem::path(home) / ".local" / "bin" / "tipe-candidate-window";
     const auto logPath = logDir / "candidate-window.log";
     trimDiagnosticLogFile(logPath);
-    const auto fallbackRect = fallbackCursorRectFor(ic, rectSnapshot.rect);
+    const auto fallbackAnchor = fallbackCursorAnchorFor(ic, rectSnapshot.rect);
+    const auto &fallbackRect = fallbackAnchor.rect;
     const auto cursor = std::to_string(fallbackRect.x) + "," + std::to_string(fallbackRect.y) + "," +
                         std::to_string(fallbackRect.width) + "," + std::to_string(fallbackRect.height);
-    const pid_t pid = fork();
+    const pid_t pid = forkExecChild();
     if (pid < 0) {
         traceEngine(std::string("status-window-fork-failed status=") + status);
         return;
@@ -2522,8 +2542,21 @@ void Engine::showStatusWindow(fcitx::InputContext &ic, const char *status) {
             dup2(logFd, STDERR_FILENO);
             close(logFd);
         }
-        execl(binaryPath.c_str(), binaryPath.c_str(), "--status", status, "--cursor", cursor.c_str(),
-              static_cast<char *>(nullptr));
+        if (fallbackAnchor.x11Coordinates) {
+            if (fallbackAnchor.resolveX11WindowOrigin) {
+                execl(binaryPath.c_str(), binaryPath.c_str(), "--status", status, "--cursor", cursor.c_str(),
+                      "--x11-coordinates", "--x11-window-origin", static_cast<char *>(nullptr));
+            } else if (fallbackAnchor.syntheticCursorExtent) {
+                execl(binaryPath.c_str(), binaryPath.c_str(), "--status", status, "--cursor", cursor.c_str(),
+                      "--x11-coordinates", "--synthetic-cursor-extent", static_cast<char *>(nullptr));
+            } else {
+                execl(binaryPath.c_str(), binaryPath.c_str(), "--status", status, "--cursor", cursor.c_str(),
+                      "--x11-coordinates", static_cast<char *>(nullptr));
+            }
+        } else {
+            execl(binaryPath.c_str(), binaryPath.c_str(), "--status", status, "--cursor", cursor.c_str(),
+                  static_cast<char *>(nullptr));
+        }
         _exit(127);
     }
     statusWindowPid_ = pid;
@@ -2579,13 +2612,19 @@ void Engine::updateCandidateWindow(fcitx::InputContext &ic, const State &state) 
     const CandidateSnapshotRect rawFallbackRect{rect.left(), rect.top(), rect.width(), rect.height()};
     const bool staticCursorRect = cursorFollowTrackers_[&ic].observe(
         rawFallbackRect, state.preedit(), state.preeditCursorIndex());
+    const auto fallbackAnchor = fallbackCursorAnchorFor(ic, rect);
     const auto metadata = std::string("supervision=1,keys=") + std::to_string(supervisedKeys) +
                           ",selects=" + std::to_string(counts.candidateSelections) +
                           ",reranks=" + std::to_string(counts.rerankRequests) +
                           ",continuous=" + (continuousMode_ ? "1" : "0") +
                           ",preedit_cursor=" + std::to_string(state.preeditCursorIndex()) +
-                          ",cursor_static=" + (staticCursorRect ? "1" : "0");
-    const auto fallbackRect = fallbackCursorRectFor(ic, rect);
+                          ",cursor_static=" + (staticCursorRect ? "1" : "0") +
+                          ",x11_coordinates=" + (fallbackAnchor.x11Coordinates ? "1" : "0") +
+                          ",x11_window_origin=" +
+                          (fallbackAnchor.resolveX11WindowOrigin ? "1" : "0") +
+                          ",synthetic_cursor_extent=" +
+                          (fallbackAnchor.syntheticCursorExtent ? "1" : "0");
+    const auto &fallbackRect = fallbackAnchor.rect;
     traceEngineDebug(std::string("candidate-fallback-rect raw=") + std::to_string(rect.left()) + "," +
                      std::to_string(rect.top()) + "," + std::to_string(rect.width()) + "," +
                      std::to_string(rect.height()) + " logical=" + std::to_string(fallbackRect.x) + "," +

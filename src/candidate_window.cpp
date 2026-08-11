@@ -41,6 +41,17 @@ struct X11PointerSnapshot {
     int rootHeight = 0;
 };
 
+struct X11WindowSnapshot {
+    xcb_window_t window = XCB_WINDOW_NONE;
+    WindowCursorRect rect;
+};
+
+struct X11DesktopSnapshot {
+    int rootWidth = 0;
+    int rootHeight = 0;
+    std::optional<X11WindowSnapshot> activeWindow;
+};
+
 struct CandidateWindowData {
     std::string preedit = "nihao";
     std::vector<std::string> candidates{"你好", "你号", "拟好", "倪浩", "泥豪"};
@@ -56,6 +67,9 @@ struct CandidateWindowData {
     bool englishPending = false;
     bool staticCursorRect = false;
     bool pointerFallback = false;
+    bool x11Coordinates = false;
+    bool resolveX11WindowOrigin = false;
+    bool syntheticCursorExtent = false;
     bool cursorRectResolved = false;
     int eventsFd = -1;
     int ttlMs = -1;
@@ -86,6 +100,10 @@ struct CandidateWindowData {
     guint wineCaretRenderTimeoutId = 0;
     int wineCaretRootWidth = 0;
     int wineCaretRootHeight = 0;
+    int x11RootWidth = 0;
+    int x11RootHeight = 0;
+    bool x11DesktopQueried = false;
+    std::optional<X11WindowSnapshot> x11ActiveWindow;
     std::vector<tipe::CandidateHitRegion> candidateHitRegions;
     std::optional<std::size_t> hoveredCandidateIndex;
     GtkWidget *window = nullptr;
@@ -256,6 +274,9 @@ bool applySnapshotLine(CandidateWindowData &data, std::string_view line) {
     bool parsedEnglishPending = false;
     bool parsedStaticCursorRect = false;
     bool parsedPointerFallback = false;
+    bool parsedX11Coordinates = false;
+    bool parsedResolveX11WindowOrigin = false;
+    bool parsedSyntheticCursorExtent = false;
     int parsedSupervisedKeys = 0;
     int parsedSelections = 0;
     int parsedReranks = 0;
@@ -304,6 +325,15 @@ bool applySnapshotLine(CandidateWindowData &data, std::string_view line) {
             } else if (key == "pointer_fallback") {
                 parsedPointerFallback = *value != 0;
                 parsedMetadata = true;
+            } else if (key == "x11_coordinates") {
+                parsedX11Coordinates = *value != 0;
+                parsedMetadata = true;
+            } else if (key == "x11_window_origin") {
+                parsedResolveX11WindowOrigin = *value != 0;
+                parsedMetadata = true;
+            } else if (key == "synthetic_cursor_extent") {
+                parsedSyntheticCursorExtent = *value != 0;
+                parsedMetadata = true;
             }
         }
         if (!parsedMetadata) {
@@ -324,6 +354,16 @@ bool applySnapshotLine(CandidateWindowData &data, std::string_view line) {
     data.englishPending = parsedEnglishPending;
     data.staticCursorRect = parsedStaticCursorRect;
     data.pointerFallback = parsedPointerFallback;
+    if (data.x11Coordinates != parsedX11Coordinates ||
+        data.resolveX11WindowOrigin != parsedResolveX11WindowOrigin || parsedPreedit.empty()) {
+        data.x11RootWidth = 0;
+        data.x11RootHeight = 0;
+        data.x11DesktopQueried = false;
+        data.x11ActiveWindow.reset();
+    }
+    data.x11Coordinates = parsedX11Coordinates;
+    data.resolveX11WindowOrigin = parsedResolveX11WindowOrigin;
+    data.syntheticCursorExtent = parsedSyntheticCursorExtent;
     if (parsedPreedit.empty() || !parsedPointerFallback) {
         data.pointerFallbackAnchor.reset();
         data.wineCaretAnchor.reset();
@@ -408,6 +448,12 @@ CandidateWindowData parseArgs(int argc, char **argv) {
             data.candidates.clear();
         } else if (arg == "--fixed-status") {
             data.fixedStatus = true;
+        } else if (arg == "--x11-coordinates") {
+            data.x11Coordinates = true;
+        } else if (arg == "--x11-window-origin") {
+            data.resolveX11WindowOrigin = true;
+        } else if (arg == "--synthetic-cursor-extent") {
+            data.syntheticCursorExtent = true;
         } else if (arg == "--selected") {
             if (index + 1 >= argc) {
                 std::cerr << "--selected requires INDEX\n";
@@ -473,7 +519,9 @@ std::vector<char *> gtkArgs(int argc, char **argv) {
     args.push_back(argv[0]);
     for (int index = 1; index < argc; ++index) {
         const std::string_view arg = argv[index];
-        if (arg == "--stdin" || arg == "--expanded" || arg == "--self-test" || arg == "--fixed-status") {
+        if (arg == "--stdin" || arg == "--expanded" || arg == "--self-test" || arg == "--fixed-status" ||
+            arg == "--x11-coordinates" || arg == "--x11-window-origin" ||
+            arg == "--synthetic-cursor-extent") {
             continue;
         }
         if ((arg == "--preedit" || arg == "--candidates" || arg == "--selected" || arg == "--cursor" ||
@@ -522,6 +570,89 @@ void logFallbackPosition(const char *mode, CandidateWindowData &data, const GdkR
                          const WindowPosition &position, int windowWidth, int windowHeight);
 WindowCursorRect normalizedCursorRect(WindowCursorRect rect, const std::vector<MonitorLayout> &monitors);
 void resolveCursorRect(CandidateWindowData &data, const std::vector<MonitorLayout> &monitors);
+
+std::optional<xcb_atom_t> internX11Atom(xcb_connection_t *connection, const char *name) {
+    const auto cookie = xcb_intern_atom(connection, 0,
+                                        static_cast<std::uint16_t>(std::char_traits<char>::length(name)), name);
+    auto *reply = xcb_intern_atom_reply(connection, cookie, nullptr);
+    if (!reply) {
+        return std::nullopt;
+    }
+    const auto atom = reply->atom;
+    std::free(reply);
+    return atom;
+}
+
+std::optional<xcb_window_t> x11WindowProperty(xcb_connection_t *connection, xcb_window_t window,
+                                              xcb_atom_t property) {
+    const auto cookie = xcb_get_property(connection, 0, window, property, XCB_ATOM_WINDOW, 0, 1);
+    auto *reply = xcb_get_property_reply(connection, cookie, nullptr);
+    if (!reply || reply->type != XCB_ATOM_WINDOW ||
+        xcb_get_property_value_length(reply) < static_cast<int>(sizeof(xcb_window_t))) {
+        std::free(reply);
+        return std::nullopt;
+    }
+    const auto value = *static_cast<const xcb_window_t *>(xcb_get_property_value(reply));
+    std::free(reply);
+    return value;
+}
+
+std::optional<X11DesktopSnapshot> queryX11DesktopSnapshot() {
+    const char *displayName = std::getenv("DISPLAY");
+    if (!displayName || !*displayName) {
+        return std::nullopt;
+    }
+    int screenIndex = 0;
+    xcb_connection_t *connection = xcb_connect(displayName, &screenIndex);
+    if (!connection || xcb_connection_has_error(connection)) {
+        if (connection) {
+            xcb_disconnect(connection);
+        }
+        return std::nullopt;
+    }
+    auto screen = xcb_setup_roots_iterator(xcb_get_setup(connection));
+    for (int index = 0; screen.rem && index < screenIndex; ++index) {
+        xcb_screen_next(&screen);
+    }
+    if (!screen.rem) {
+        xcb_disconnect(connection);
+        return std::nullopt;
+    }
+
+    X11DesktopSnapshot result;
+    result.rootWidth = screen.data->width_in_pixels;
+    result.rootHeight = screen.data->height_in_pixels;
+    const auto root = screen.data->root;
+    std::optional<xcb_window_t> activeWindow;
+    if (const auto activeAtom = internX11Atom(connection, "_NET_ACTIVE_WINDOW")) {
+        activeWindow = x11WindowProperty(connection, root, *activeAtom);
+    }
+    if (!activeWindow || *activeWindow == XCB_WINDOW_NONE) {
+        auto *focus = xcb_get_input_focus_reply(connection, xcb_get_input_focus(connection), nullptr);
+        if (focus) {
+            activeWindow = focus->focus;
+            std::free(focus);
+        }
+    }
+
+    if (activeWindow && *activeWindow != XCB_WINDOW_NONE && *activeWindow != XCB_INPUT_FOCUS_POINTER_ROOT &&
+        *activeWindow != root) {
+        const auto geometryCookie = xcb_get_geometry(connection, *activeWindow);
+        const auto translateCookie = xcb_translate_coordinates(connection, *activeWindow, root, 0, 0);
+        auto *geometry = xcb_get_geometry_reply(connection, geometryCookie, nullptr);
+        auto *translated = xcb_translate_coordinates_reply(connection, translateCookie, nullptr);
+        if (geometry && translated && geometry->width > 0 && geometry->height > 0) {
+            result.activeWindow = X11WindowSnapshot{
+                *activeWindow,
+                {translated->dst_x, translated->dst_y, geometry->width, geometry->height},
+            };
+        }
+        std::free(geometry);
+        std::free(translated);
+    }
+    xcb_disconnect(connection);
+    return result;
+}
 
 std::optional<X11PointerSnapshot> queryX11PointerCursorRect() {
     const char *displayName = std::getenv("DISPLAY");
@@ -819,8 +950,37 @@ WindowCursorRect scaledCursorRect(WindowCursorRect rect, double scale) {
     return {logical(rect.x), logical(rect.y), logicalExtent(rect.width), logicalExtent(rect.height)};
 }
 
-WindowCursorRect logicalX11PointerRect(const X11PointerSnapshot &pointer,
-                                       const std::vector<MonitorLayout> &monitors) {
+bool cursorPointInsideWindow(WindowCursorRect cursor, WindowCursorRect window) {
+    return cursor.x >= window.x && cursor.x < window.x + window.width &&
+           cursor.y >= window.y && cursor.y < window.y + window.height;
+}
+
+bool cursorRectFitsWindowLocalSpace(WindowCursorRect cursor, WindowCursorRect window) {
+    if (cursor.x < 0 || cursor.y < 0 || window.width <= 0 || window.height <= 0) {
+        return false;
+    }
+    const long long right = static_cast<long long>(cursor.x) + std::max(1, cursor.width);
+    const long long bottom = static_cast<long long>(cursor.y) + std::max(1, cursor.height);
+    return right <= window.width && bottom <= window.height;
+}
+
+WindowCursorRect x11RootRectForWindowRelativeCursor(WindowCursorRect cursor,
+                                                    const X11WindowSnapshot &activeWindow) {
+    // Some legacy fcitx4 clients submit coordinates relative to their X11
+    // toplevel, while others already submit root coordinates. Translate only
+    // when the point cannot be global but does fit the active window locally.
+    if (cursorPointInsideWindow(cursor, activeWindow.rect) ||
+        !cursorRectFitsWindowLocalSpace(cursor, activeWindow.rect)) {
+        return cursor;
+    }
+    cursor.x += activeWindow.rect.x;
+    cursor.y += activeWindow.rect.y;
+    return cursor;
+}
+
+WindowCursorRect logicalX11Rect(const X11PointerSnapshot &pointer,
+                                const std::vector<MonitorLayout> &monitors,
+                                bool syntheticExtent) {
     auto result = pointer.rect;
     if (monitors.empty() || pointer.rootWidth <= 0 || pointer.rootHeight <= 0) {
         return result;
@@ -855,11 +1015,25 @@ WindowCursorRect logicalX11PointerRect(const X11PointerSnapshot &pointer,
 
     result.x = logicalLeft + static_cast<int>(std::lround(pointer.rect.x / scaleX));
     result.y = logicalTop + static_cast<int>(std::lround(pointer.rect.y / scaleY));
-    // The X11 query supplies only a point. Keep a logical synthetic caret
-    // instead of shrinking its extent with the physical desktop scale.
-    result.width = 1;
-    result.height = 22;
+    if (syntheticExtent) {
+        // Pointer and XIM spot fallbacks supply only a point. Keep their
+        // logical synthetic caret instead of shrinking it with the root scale.
+        result.width = 1;
+        result.height = 22;
+    } else {
+        result.width = pointer.rect.width > 0
+                           ? std::max(1, static_cast<int>(std::lround(pointer.rect.width / scaleX)))
+                           : pointer.rect.width;
+        result.height = pointer.rect.height > 0
+                            ? std::max(1, static_cast<int>(std::lround(pointer.rect.height / scaleY)))
+                            : pointer.rect.height;
+    }
     return result;
+}
+
+WindowCursorRect logicalX11PointerRect(const X11PointerSnapshot &pointer,
+                                       const std::vector<MonitorLayout> &monitors) {
+    return logicalX11Rect(pointer, monitors, true);
 }
 
 int winePreeditPrefixWidth(const CandidateWindowData &data, int fontSize = 15) {
@@ -944,6 +1118,24 @@ void resolveCursorRect(CandidateWindowData &data, const std::vector<MonitorLayou
     }
     const WindowCursorRect raw{data.cursorX, data.cursorY, data.cursorWidth, data.cursorHeight};
     WindowCursorRect source = raw;
+    if (source.height > 0 && data.x11Coordinates) {
+        if (!data.x11DesktopQueried &&
+            (data.x11RootWidth <= 0 || data.x11RootHeight <= 0 || data.resolveX11WindowOrigin)) {
+            data.x11DesktopQueried = true;
+            if (const auto desktop = queryX11DesktopSnapshot()) {
+                data.x11RootWidth = desktop->rootWidth;
+                data.x11RootHeight = desktop->rootHeight;
+                data.x11ActiveWindow = desktop->activeWindow;
+            }
+        }
+        if (data.resolveX11WindowOrigin && data.x11ActiveWindow) {
+            source = x11RootRectForWindowRelativeCursor(source, *data.x11ActiveWindow);
+        }
+        if (data.x11RootWidth > 0 && data.x11RootHeight > 0) {
+            source = logicalX11Rect({source, data.x11RootWidth, data.x11RootHeight}, monitors,
+                                    data.syntheticCursorExtent);
+        }
+    }
     if (source.height <= 0 && data.pointerFallback) {
         if (data.wineCaretAnchor) {
             source = logicalX11PointerRect(*data.wineCaretAnchor, monitors);
@@ -971,7 +1163,15 @@ void resolveCursorRect(CandidateWindowData &data, const std::vector<MonitorLayou
         std::cerr << "fallback\tcursor-normalized\traw=" << raw.x << ',' << raw.y << ',' << raw.width << ','
                   << raw.height << "\tresolved=" << resolved.x << ',' << resolved.y << ',' << resolved.width
                   << ',' << resolved.height << "\tstatic=" << (data.staticCursorRect ? 1 : 0)
-                  << "\tpointerFallback=" << (data.pointerFallback ? 1 : 0) << '\n';
+                  << "\tpointerFallback=" << (data.pointerFallback ? 1 : 0)
+                  << "\tx11=" << (data.x11Coordinates ? 1 : 0) << "\troot=" << data.x11RootWidth << ','
+                  << data.x11RootHeight << "\twindowOrigin=" << (data.resolveX11WindowOrigin ? 1 : 0);
+        if (data.x11ActiveWindow) {
+            std::cerr << "\tactiveWindow=" << data.x11ActiveWindow->window << ',' << data.x11ActiveWindow->rect.x
+                      << ',' << data.x11ActiveWindow->rect.y << ',' << data.x11ActiveWindow->rect.width << ','
+                      << data.x11ActiveWindow->rect.height;
+        }
+        std::cerr << '\n';
     }
 }
 
@@ -1647,13 +1847,14 @@ bool selfTest() {
         return false;
     }
     if (!applySnapshotLine(data,
-                           "nihao\t0\t0\t100\t200\t3\t18\t你好|你号\tsupervision=1,keys=12,selects=2,reranks=1,continuous=1,english=1,preedit_cursor=2,cursor_static=1,snapshot=17,pointer_fallback=1\n")) {
+                           "nihao\t0\t0\t100\t200\t3\t18\t你好|你号\tsupervision=1,keys=12,selects=2,reranks=1,continuous=1,english=1,preedit_cursor=2,cursor_static=1,snapshot=17,pointer_fallback=1,x11_coordinates=1,x11_window_origin=1,synthetic_cursor_extent=1\n")) {
         std::cerr << "failed to parse supervision snapshot metadata\n";
         return false;
     }
     if (!data.supervision || !data.continuous || !data.englishPending || data.supervisedKeys != 12 || data.selections != 2 ||
         data.reranks != 1 || data.preeditCursor != 2 || !data.staticCursorRect || data.snapshotSerial != 17 ||
-        !data.pointerFallback ||
+        !data.pointerFallback || !data.x11Coordinates || !data.resolveX11WindowOrigin ||
+        !data.syntheticCursorExtent ||
         estimatedWindowHeight(data) != 68) {
         std::cerr << "supervision snapshot metadata should parse without changing panel height\n";
         return false;
@@ -1693,7 +1894,8 @@ bool selfTest() {
         return false;
     }
     if (data.expanded || data.selectedIndex != 0 || data.cursorX != 10 || data.cursorY != 20 ||
-        data.candidates.size() != 2) {
+        data.candidates.size() != 2 || data.x11Coordinates || data.resolveX11WindowOrigin ||
+        data.syntheticCursorExtent) {
         std::cerr << "legacy snapshot fields did not round-trip\n";
         return false;
     }
@@ -1720,7 +1922,8 @@ bool selfTest() {
     if (!data.preedit.empty() || !data.candidates.empty() || data.expanded || data.selectedIndex != 0 ||
         data.preeditCursor != 0 || data.cursorX != 0 || data.cursorY != 0 || data.cursorWidth != 0 ||
         data.cursorHeight != 0 || data.supervision || data.continuous || data.englishPending || data.supervisedKeys != 0 ||
-        data.selections != 0 || data.reranks != 0 || data.staticCursorRect) {
+        data.selections != 0 || data.reranks != 0 || data.staticCursorRect || data.x11Coordinates ||
+        data.resolveX11WindowOrigin || data.syntheticCursorExtent) {
         std::cerr << "clear snapshot did not clear all reusable-window state\n";
         return false;
     }
@@ -1822,6 +2025,113 @@ bool selfTest() {
     if (retainedLogicalCursor.x != 505 || retainedLogicalCursor.y != 899 ||
         retainedLogicalCursor.width != 1 || retainedLogicalCursor.height != 23) {
         std::cerr << "in-bounds logical cursor coordinates should never be scaled twice\n";
+        return false;
+    }
+    const X11WindowSnapshot activeX11Window{68, {1568, 104, 1536, 1960}};
+    const auto translatedLocalCursor =
+        x11RootRectForWindowRelativeCursor({288, 64, 4, 38}, activeX11Window);
+    if (translatedLocalCursor.x != 1856 || translatedLocalCursor.y != 168 ||
+        translatedLocalCursor.width != 4 || translatedLocalCursor.height != 38) {
+        std::cerr << "fcitx4 window-local cursor rectangles should gain the active X11 window origin\n";
+        return false;
+    }
+    const auto retainedRootCursor =
+        x11RootRectForWindowRelativeCursor({1856, 168, 4, 38}, activeX11Window);
+    if (retainedRootCursor.x != 1856 || retainedRootCursor.y != 168) {
+        std::cerr << "fcitx4 root cursor rectangles must not gain the window origin twice\n";
+        return false;
+    }
+    const auto translatedBottomCursor =
+        x11RootRectForWindowRelativeCursor({1300, 1762, 4, 44}, activeX11Window);
+    if (translatedBottomCursor.x != 2868 || translatedBottomCursor.y != 1866) {
+        std::cerr << "large window-local coordinates should remain translatable near the window edge\n";
+        return false;
+    }
+    const X11WindowSnapshot originX11Window{69, {0, 0, 1536, 1960}};
+    const auto retainedOriginCursor =
+        x11RootRectForWindowRelativeCursor({288, 64, 4, 38}, originX11Window);
+    if (retainedOriginCursor.x != 288 || retainedOriginCursor.y != 64) {
+        std::cerr << "window-local and root coordinates coincide for a window at the root origin\n";
+        return false;
+    }
+    CandidateWindowData x11WindowRelativeCursorData;
+    x11WindowRelativeCursorData.cursorX = 288;
+    x11WindowRelativeCursorData.cursorY = 64;
+    x11WindowRelativeCursorData.cursorWidth = 4;
+    x11WindowRelativeCursorData.cursorHeight = 38;
+    x11WindowRelativeCursorData.x11Coordinates = true;
+    x11WindowRelativeCursorData.resolveX11WindowOrigin = true;
+    x11WindowRelativeCursorData.x11DesktopQueried = true;
+    x11WindowRelativeCursorData.x11RootWidth = 3120;
+    x11WindowRelativeCursorData.x11RootHeight = 2080;
+    x11WindowRelativeCursorData.x11ActiveWindow = activeX11Window;
+    resolveCursorRect(x11WindowRelativeCursorData, hidpiMonitor);
+    if (x11WindowRelativeCursorData.cursorX != 928 || x11WindowRelativeCursorData.cursorY != 84 ||
+        x11WindowRelativeCursorData.cursorWidth != 2 || x11WindowRelativeCursorData.cursorHeight != 19) {
+        std::cerr << "window-origin translation must run before X11 physical-to-logical conversion\n";
+        return false;
+    }
+    CandidateWindowData x11PhysicalCursorData;
+    x11PhysicalCursorData.preedit.clear();
+    x11PhysicalCursorData.preeditCursor = 0;
+    x11PhysicalCursorData.cursorX = 620;
+    x11PhysicalCursorData.cursorY = 136;
+    x11PhysicalCursorData.cursorWidth = 2;
+    x11PhysicalCursorData.cursorHeight = 46;
+    x11PhysicalCursorData.x11Coordinates = true;
+    x11PhysicalCursorData.x11RootWidth = 3120;
+    x11PhysicalCursorData.x11RootHeight = 2080;
+    resolveCursorRect(x11PhysicalCursorData, hidpiMonitor);
+    if (x11PhysicalCursorData.cursorX != 310 || x11PhysicalCursorData.cursorY != 68 ||
+        x11PhysicalCursorData.cursorWidth != 1 || x11PhysicalCursorData.cursorHeight != 23) {
+        std::cerr << "in-bounds X11 root coordinates must still convert to the Wayland logical desktop\n";
+        return false;
+    }
+    CandidateWindowData x11LogicalCursorData;
+    x11LogicalCursorData.cursorX = 310;
+    x11LogicalCursorData.cursorY = 68;
+    x11LogicalCursorData.cursorWidth = 1;
+    x11LogicalCursorData.cursorHeight = 23;
+    x11LogicalCursorData.x11Coordinates = true;
+    x11LogicalCursorData.x11RootWidth = 1560;
+    x11LogicalCursorData.x11RootHeight = 1040;
+    resolveCursorRect(x11LogicalCursorData, hidpiMonitor);
+    if (x11LogicalCursorData.cursorX != 310 || x11LogicalCursorData.cursorY != 68 ||
+        x11LogicalCursorData.cursorWidth != 1 || x11LogicalCursorData.cursorHeight != 23) {
+        std::cerr << "logical-sized X11 roots must not be scaled a second time\n";
+        return false;
+    }
+    CandidateWindowData x11StaticCursorData;
+    x11StaticCursorData.preedit = "shenzhenyibao";
+    x11StaticCursorData.preeditCursor = x11StaticCursorData.preedit.size();
+    x11StaticCursorData.cursorX = 224;
+    x11StaticCursorData.cursorY = 84;
+    x11StaticCursorData.cursorWidth = 2;
+    x11StaticCursorData.cursorHeight = 46;
+    x11StaticCursorData.staticCursorRect = true;
+    x11StaticCursorData.x11Coordinates = true;
+    x11StaticCursorData.x11RootWidth = 3120;
+    x11StaticCursorData.x11RootHeight = 2080;
+    resolveCursorRect(x11StaticCursorData, hidpiMonitor);
+    if (x11StaticCursorData.cursorX != 112 + tipe::candidateTextWidth("shenzhenyibao", 15, true) ||
+        x11StaticCursorData.cursorY != 42 || x11StaticCursorData.cursorHeight != 23) {
+        std::cerr << "static X11 caret compensation must run after physical-to-logical conversion\n";
+        return false;
+    }
+    CandidateWindowData x11SyntheticSpotData;
+    x11SyntheticSpotData.preedit.clear();
+    x11SyntheticSpotData.cursorX = 640;
+    x11SyntheticSpotData.cursorY = 136;
+    x11SyntheticSpotData.cursorWidth = 1;
+    x11SyntheticSpotData.cursorHeight = 22;
+    x11SyntheticSpotData.x11Coordinates = true;
+    x11SyntheticSpotData.syntheticCursorExtent = true;
+    x11SyntheticSpotData.x11RootWidth = 3120;
+    x11SyntheticSpotData.x11RootHeight = 2080;
+    resolveCursorRect(x11SyntheticSpotData, hidpiMonitor);
+    if (x11SyntheticSpotData.cursorX != 320 || x11SyntheticSpotData.cursorY != 68 ||
+        x11SyntheticSpotData.cursorWidth != 1 || x11SyntheticSpotData.cursorHeight != 22) {
+        std::cerr << "synthetic XIM caret extents must remain logical while their position is converted\n";
         return false;
     }
     CandidateWindowData staticCursorData;

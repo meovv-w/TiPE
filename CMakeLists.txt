@@ -97,7 +97,7 @@ add_library(tipeui MODULE
     third_party/fcitx-wayland-5.1.19/input-method-v2/zwp_input_popup_surface_v2.cpp
     ${TIPE_INPUT_METHOD_V2_CODE}
 )
-target_link_libraries(tipeui PRIVATE tipe_state Fcitx5::Core Fcitx5::Utils)
+target_link_libraries(tipeui PRIVATE tipe_state Fcitx5::Core Fcitx5::Utils Threads::Threads)
 target_link_libraries(tipeui PRIVATE Fcitx5::Module::Wayland)
 target_include_directories(tipeui PRIVATE
     ${TIPE_GENERATED_DIR}
@@ -148,6 +148,12 @@ add_executable(tipe-nonblocking-pipe-test tests/nonblocking_pipe_test.cpp)
 target_include_directories(tipe-nonblocking-pipe-test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_compile_options(tipe-nonblocking-pipe-test PRIVATE -Wall -Wextra -Wpedantic)
 add_test(NAME nonblocking-pipe COMMAND tipe-nonblocking-pipe-test)
+
+add_executable(tipe-fork-exec-test tests/fork_exec_test.cpp)
+target_include_directories(tipe-fork-exec-test PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+target_link_libraries(tipe-fork-exec-test PRIVATE Threads::Threads)
+target_compile_options(tipe-fork-exec-test PRIVATE -Wall -Wextra -Wpedantic)
+add_test(NAME fork-exec COMMAND tipe-fork-exec-test)
 
 add_executable(tipe-state-probe tools/state_probe.cpp)
 target_link_libraries(tipe-state-probe PRIVATE tipe_state)

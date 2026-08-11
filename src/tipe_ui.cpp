@@ -4,6 +4,7 @@
 #include "candidate_layout.h"
 #include "candidate_render.h"
 #include "candidate_snapshot.h"
+#include "fork_exec.h"
 #include "nonblocking_pipe.h"
 #include "tipe_ui_public.h"
 
@@ -171,7 +172,10 @@ private:
               fallbackCandidatePid(other.fallbackCandidatePid),
               fallbackStatusPid(other.fallbackStatusPid),
               lastFallbackStatusText(std::move(other.lastFallbackStatusText)),
-              lastFallbackStatusRect(other.lastFallbackStatusRect) {
+              lastFallbackStatusRect(other.lastFallbackStatusRect),
+              lastFallbackStatusX11Coordinates(other.lastFallbackStatusX11Coordinates),
+              lastFallbackStatusResolveX11WindowOrigin(other.lastFallbackStatusResolveX11WindowOrigin),
+              lastFallbackStatusSyntheticCursorExtent(other.lastFallbackStatusSyntheticCursorExtent) {
             other.buffer = nullptr;
             other.bufferData = nullptr;
             other.bufferSize = 0;
@@ -202,6 +206,9 @@ private:
             other.fallbackStatusPid = -1;
             other.lastFallbackStatusText.clear();
             other.lastFallbackStatusRect.reset();
+            other.lastFallbackStatusX11Coordinates = false;
+            other.lastFallbackStatusResolveX11WindowOrigin = false;
+            other.lastFallbackStatusSyntheticCursorExtent = false;
         }
         PopupState &operator=(PopupState &&other) noexcept {
             if (this != &other) {
@@ -241,6 +248,9 @@ private:
                 fallbackStatusPid = other.fallbackStatusPid;
                 lastFallbackStatusText = std::move(other.lastFallbackStatusText);
                 lastFallbackStatusRect = other.lastFallbackStatusRect;
+                lastFallbackStatusX11Coordinates = other.lastFallbackStatusX11Coordinates;
+                lastFallbackStatusResolveX11WindowOrigin = other.lastFallbackStatusResolveX11WindowOrigin;
+                lastFallbackStatusSyntheticCursorExtent = other.lastFallbackStatusSyntheticCursorExtent;
                 other.buffer = nullptr;
                 other.bufferData = nullptr;
                 other.bufferSize = 0;
@@ -271,6 +281,9 @@ private:
                 other.fallbackStatusPid = -1;
                 other.lastFallbackStatusText.clear();
                 other.lastFallbackStatusRect.reset();
+                other.lastFallbackStatusX11Coordinates = false;
+                other.lastFallbackStatusResolveX11WindowOrigin = false;
+                other.lastFallbackStatusSyntheticCursorExtent = false;
             }
             return *this;
         }
@@ -328,6 +341,9 @@ private:
             }
             lastFallbackStatusText.clear();
             lastFallbackStatusRect.reset();
+            lastFallbackStatusX11Coordinates = false;
+            lastFallbackStatusResolveX11WindowOrigin = false;
+            lastFallbackStatusSyntheticCursorExtent = false;
         }
 
         std::unique_ptr<fcitx::wayland::WlSurface> surface;
@@ -363,6 +379,9 @@ private:
         pid_t fallbackStatusPid = -1;
         std::string lastFallbackStatusText;
         std::optional<std::array<int32_t, 4>> lastFallbackStatusRect;
+        bool lastFallbackStatusX11Coordinates = false;
+        bool lastFallbackStatusResolveX11WindowOrigin = false;
+        bool lastFallbackStatusSyntheticCursorExtent = false;
     };
 
     std::filesystem::path logPath() const {
@@ -439,6 +458,9 @@ private:
             popup.fallbackStatusPid = -1;
             popup.lastFallbackStatusText.clear();
             popup.lastFallbackStatusRect.reset();
+            popup.lastFallbackStatusX11Coordinates = false;
+            popup.lastFallbackStatusResolveX11WindowOrigin = false;
+            popup.lastFallbackStatusSyntheticCursorExtent = false;
         }
     }
 
@@ -463,13 +485,22 @@ private:
         }
         popup.lastFallbackStatusText.clear();
         popup.lastFallbackStatusRect.reset();
+        popup.lastFallbackStatusX11Coordinates = false;
+        popup.lastFallbackStatusResolveX11WindowOrigin = false;
+        popup.lastFallbackStatusSyntheticCursorExtent = false;
     }
 
     void showStatusFallbackWindow(PopupState &popup, const std::string &statusText,
-                                  const std::array<int32_t, 4> &rect) const {
+                                  const std::array<int32_t, 4> &rect,
+                                  bool x11Coordinates = false,
+                                  bool resolveX11WindowOrigin = false,
+                                  bool syntheticCursorExtent = false) const {
         reapStatusFallbackWindow(popup);
         if (popup.fallbackStatusPid > 0 && popup.lastFallbackStatusText == statusText &&
-            popup.lastFallbackStatusRect == rect) {
+            popup.lastFallbackStatusRect == rect &&
+            popup.lastFallbackStatusX11Coordinates == x11Coordinates &&
+            popup.lastFallbackStatusResolveX11WindowOrigin == resolveX11WindowOrigin &&
+            popup.lastFallbackStatusSyntheticCursorExtent == syntheticCursorExtent) {
             logLine("popup\t" + std::string(statusFallbackLogName(popup)) + "-skip-duplicate");
             return;
         }
@@ -490,7 +521,7 @@ private:
         const auto logPath = logDir / "candidate-window.log";
         const auto cursor = std::to_string(rect[0]) + "," + std::to_string(rect[1]) + "," +
                             std::to_string(rect[2]) + "," + std::to_string(rect[3]);
-        const pid_t child = fork();
+        const pid_t child = forkExecChild();
         if (child < 0) {
             logLine("popup\t" + std::string(statusFallbackLogName(popup)) + "-fork-failed");
             return;
@@ -502,14 +533,35 @@ private:
                 dup2(logFd, STDERR_FILENO);
                 close(logFd);
             }
-            execl(binaryPath.c_str(), binaryPath.c_str(), "--status", statusText.c_str(), "--cursor",
-                  cursor.c_str(), static_cast<char *>(nullptr));
+            if (x11Coordinates) {
+                if (resolveX11WindowOrigin) {
+                    execl(binaryPath.c_str(), binaryPath.c_str(), "--status", statusText.c_str(), "--cursor",
+                          cursor.c_str(), "--x11-coordinates", "--x11-window-origin",
+                          static_cast<char *>(nullptr));
+                } else if (syntheticCursorExtent) {
+                    execl(binaryPath.c_str(), binaryPath.c_str(), "--status", statusText.c_str(), "--cursor",
+                          cursor.c_str(), "--x11-coordinates", "--synthetic-cursor-extent",
+                          static_cast<char *>(nullptr));
+                } else {
+                    execl(binaryPath.c_str(), binaryPath.c_str(), "--status", statusText.c_str(), "--cursor",
+                          cursor.c_str(), "--x11-coordinates", static_cast<char *>(nullptr));
+                }
+            } else {
+                execl(binaryPath.c_str(), binaryPath.c_str(), "--status", statusText.c_str(), "--cursor",
+                      cursor.c_str(), static_cast<char *>(nullptr));
+            }
             _exit(127);
         }
         popup.fallbackStatusPid = child;
         popup.lastFallbackStatusText = statusText;
         popup.lastFallbackStatusRect = rect;
+        popup.lastFallbackStatusX11Coordinates = x11Coordinates;
+        popup.lastFallbackStatusResolveX11WindowOrigin = resolveX11WindowOrigin;
+        popup.lastFallbackStatusSyntheticCursorExtent = syntheticCursorExtent;
         logLine("popup\t" + std::string(statusFallbackLogName(popup)) + "\tstatus=" + statusText + "\trect=" + cursor +
+                "\tx11=" + (x11Coordinates ? "1" : "0") +
+                "\twindowOrigin=" + (resolveX11WindowOrigin ? "1" : "0") +
+                "\tsyntheticExtent=" + (syntheticCursorExtent ? "1" : "0") +
                 "\tpid=" + std::to_string(child));
     }
 
@@ -606,7 +658,7 @@ private:
             logLine("popup\t" + std::string(candidateFallbackLogName(popup)) + "-pipe-failed");
             return false;
         }
-        const pid_t child = fork();
+        const pid_t child = forkExecChild();
         if (child < 0) {
             close(pipeFds[0]);
             close(pipeFds[1]);
@@ -832,11 +884,15 @@ private:
                 closeStatusFallbackWindow(popup, "generic-empty");
                 return;
             }
-            const auto rect = logicalCandidateSnapshotRect(
+            const auto anchor = candidateSnapshotAnchorFor(
+                inputContext.frontendName(), inputContext.display(),
                 {inputContext.cursorRect().left(), inputContext.cursorRect().top(), inputContext.cursorRect().width(),
                  inputContext.cursorRect().height()},
                 inputContext.scaleFactor());
-            showStatusFallbackWindow(popup, auxUp, {rect.x, rect.y, rect.width, rect.height});
+            showStatusFallbackWindow(popup, auxUp,
+                                     {anchor.rect.x, anchor.rect.y, anchor.rect.width, anchor.rect.height},
+                                     anchor.x11Coordinates, anchor.resolveX11WindowOrigin,
+                                     anchor.syntheticCursorExtent);
             return;
         }
 
@@ -855,7 +911,7 @@ private:
         const auto rawRect = CandidateSnapshotRect{inputContext.cursorRect().left(), inputContext.cursorRect().top(),
                                                    inputContext.cursorRect().width(),
                                                    inputContext.cursorRect().height()};
-        const auto anchor = candidateSnapshotAnchorFor(inputContext.frontendName(), rawRect,
+        const auto anchor = candidateSnapshotAnchorFor(inputContext.frontendName(), inputContext.display(), rawRect,
                                                        inputContext.scaleFactor());
         const auto rect = anchor.rect;
         if (verbosePanelLoggingEnabled()) {
@@ -885,7 +941,11 @@ private:
                               std::to_string(preeditCursor) + ",cursor_static=" +
                               std::to_string(staticCursorRect ? 1 : 0) + ",snapshot=" +
                               std::to_string(popup.fallbackSnapshotSerial) + ",pointer_fallback=" +
-                              std::to_string(anchor.pointerFallback ? 1 : 0);
+                              std::to_string(anchor.pointerFallback ? 1 : 0) + ",x11_coordinates=" +
+                              std::to_string(anchor.x11Coordinates ? 1 : 0) + ",x11_window_origin=" +
+                              std::to_string(anchor.resolveX11WindowOrigin ? 1 : 0) +
+                              ",synthetic_cursor_extent=" +
+                              std::to_string(anchor.syntheticCursorExtent ? 1 : 0);
         showCandidateFallbackWindow(
             popup, buildCandidateSnapshotLine(preedit, expandedFromAux(auxUp), selectedIndex, rect, candidateTexts,
                                               metadata));

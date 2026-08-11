@@ -93,18 +93,20 @@ CandidateSnapshotRect logicalCandidateSnapshotRect(CandidateSnapshotRect rect, d
     return {logical(rect.x), logical(rect.y), logical(rect.width), logical(rect.height)};
 }
 
-CandidateSnapshotAnchor candidateSnapshotAnchorFor(std::string_view frontend, CandidateSnapshotRect rect,
-                                                    double scale) {
-    auto logical = logicalCandidateSnapshotRect(rect, scale);
+CandidateSnapshotAnchor candidateSnapshotAnchorFor(std::string_view frontend, std::string_view display,
+                                                    CandidateSnapshotRect rect, double scale) {
+    const bool x11Coordinates = frontend == "xim" || frontend == "fcitx4" || display.starts_with("x11:");
+    const bool resolveX11WindowOrigin = frontend == "fcitx4";
+    auto logical = x11Coordinates ? rect : logicalCandidateSnapshotRect(rect, scale);
     if (frontend != "xim" || logical.height > 0) {
-        return {logical, false};
+        return {logical, false, x11Coordinates, resolveX11WindowOrigin, false};
     }
     if (logical.x != 0 || logical.y != 0) {
         logical.width = 1;
         logical.height = 22;
-        return {logical, false};
+        return {logical, false, x11Coordinates, false, true};
     }
-    return {logical, true};
+    return {logical, true, x11Coordinates, false, false};
 }
 
 std::string buildCandidateSnapshotLine(std::string_view preedit, bool expanded, std::size_t selectedIndex,
