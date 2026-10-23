@@ -1,0 +1,44 @@
+gtk: Partial selection retains suffix: PASS
+gtk: Numeric prefix after first ten candidates: PASS
+gtk: Long phrase preserves remaining syllables: PASS
+gtk: Edit remaining pinyin after partial choice: PASS
+gtk: Cancel remaining pinyin keeps selected prefix: PASS
+gtk: Abbreviation selection chain woc: PASS
+gtk: Three successive phrase segments: PASS
+gtk: Long composition crosses decoder window without losing suffix: PASS
+gtk: Restore prefix after deleting all suffix pinyin: PASS
+qt: Partial selection retains suffix: PASS
+qt: Numeric prefix after first ten candidates: PASS
+qt: Long phrase preserves remaining syllables: PASS
+qt: Edit remaining pinyin after partial choice: PASS
+qt: Cancel remaining pinyin keeps selected prefix: PASS
+qt: Abbreviation selection chain woc: PASS
+qt: Three successive phrase segments: PASS
+qt: Long composition crosses decoder window without losing suffix: PASS
+qt: Restore prefix after deleting all suffix pinyin: PASS
+browser: Partial selection retains suffix: PASS
+browser: Numeric prefix after first ten candidates: PASS
+browser: Long phrase preserves remaining syllables: PASS
+browser: Edit remaining pinyin after partial choice: PASS
+browser: Cancel remaining pinyin keeps selected prefix: PASS
+browser: Abbreviation selection chain woc: PASS
+browser: Three successive phrase segments: PASS
+browser: Long composition crosses decoder window without losing suffix: PASS
+browser: Restore prefix after deleting all suffix pinyin: PASS
+wine: Partial selection retains suffix: PASS
+wine: Numeric prefix after first ten candidates: PASS
+wine: Long phrase preserves remaining syllables: PASS
+wine: Edit remaining pinyin after partial choice: PASS
+wine: Cancel remaining pinyin keeps selected prefix: PASS
+wine: Abbreviation selection chain woc: PASS
+wine: Three successive phrase segments: PASS
+wine: Long composition crosses decoder window without losing suffix: PASS
+foot: Partial selection retains suffix: PASS
+foot: Numeric prefix after first ten candidates: PASS
+foot: Long phrase preserves remaining syllables: PASS
+foot: Edit remaining pinyin after partial choice: PASS
+foot: Cancel remaining pinyin keeps selected prefix: PASS
+foot: Abbreviation selection chain woc: PASS
+foot: Three successive phrase segments: PASS
+foot: Long composition crosses decoder window without losing suffix: PASS
+{"passed": 43, "results": "/home/lin/Documents/ChatGPT/tipe/build/segmented-decoder-navigation/results.json"}

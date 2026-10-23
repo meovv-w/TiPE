@@ -1,0 +1,38 @@
+{
+  "/home/lin/.local/bin/tipe-demo": {
+    "sha256": "7783fffcdc94047ce32d604cba1fa831fb2f9abe69e2c8d4baf3d04ff1f74c79",
+    "size": 707192
+  },
+  "/home/lin/.local/bin/tipe-diagnose": {
+    "sha256": "a0130a1af62467fd5c92216d6d072a99d7c0650e645cfdd9ecfb9589216ee25d",
+    "size": 724512
+  },
+  "/home/lin/.local/bin/tipe-trainer": {
+    "sha256": "3ac46d7523b937488b1143305ac1aee0da2bdf4ce13451a40e9d3daf63554433",
+    "size": 546224
+  },
+  "/home/lin/.local/bin/tipe-control": {
+    "sha256": "3b7f2802dfa35e84174d0f5ebb4da42577434f38b73e6773d390911de496d3a9",
+    "size": 637336
+  },
+  "/home/lin/.config/fcitx5/addon/libtipe.so": {
+    "sha256": "23f11f7b4766efcd5f62ecbeb609e4a68dfcf2835703fda269c38653f30fc431",
+    "size": 832848
+  },
+  "/home/lin/.config/fcitx5/addon/libtipe-ui.so": {
+    "sha256": "ef9d5118478b20383bd6182ab5915cbb347fae7eae6f0d92793cf517784a096f",
+    "size": 139136
+  },
+  "/home/lin/.config/fcitx5/addon/libclassicui.so": {
+    "sha256": "45e8a4bd7ba0b92752becff6397be515bccc0275d0e7c011d9cf28aba548f1dd",
+    "size": 1649504
+  },
+  "/home/lin/.local/lib/fcitx5/libtipe.so": {
+    "sha256": "23f11f7b4766efcd5f62ecbeb609e4a68dfcf2835703fda269c38653f30fc431",
+    "size": 832848
+  },
+  "/home/lin/.local/lib/fcitx5/libtipe-ui.so": {
+    "sha256": "ef9d5118478b20383bd6182ab5915cbb347fae7eae6f0d92793cf517784a096f",
+    "size": 139136
+  }
+}

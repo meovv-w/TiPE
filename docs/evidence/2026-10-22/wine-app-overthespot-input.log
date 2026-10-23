@@ -1,0 +1,21 @@
+{
+  "status": "已启用；关闭并重新打开此 Windows 应用后生效",
+  "prefix": "/home/lin/Documents/ChatGPT/tipe/build/wine-regression/prefix",
+  "app": "input.exe",
+  "key": "HKCU\\Software\\Wine\\AppDefaults\\input.exe\\X11 Driver",
+  "input_style": "overthespot",
+  "global_unchanged": true,
+  "recovery": "/home/lin/.local/state/tipe/wine-input/4be454e14502a8bf05d30d3b91a9d46c4ffe4ab0109a73b44f7bbed10e9096e3.json"
+}
+
+Wine standard EDIT: verified 6 input paths
+{
+  "status": "已恢复原配置",
+  "prefix": "/home/lin/Documents/ChatGPT/tipe/build/wine-regression/prefix",
+  "app": "input.exe",
+  "key": "HKCU\\Software\\Wine\\AppDefaults\\input.exe\\X11 Driver",
+  "input_style": null,
+  "global_unchanged": true,
+  "recovery": "/home/lin/.local/state/tipe/wine-input/4be454e14502a8bf05d30d3b91a9d46c4ffe4ab0109a73b44f7bbed10e9096e3.json"
+}
+ 

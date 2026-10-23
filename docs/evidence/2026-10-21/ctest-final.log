@@ -1,0 +1,109 @@
+Test project /home/lin/Documents/ChatGPT/tipe/build
+      Start  1: tipe-trainer-tests
+ 1/34 Test  #1: tipe-trainer-tests ......................   Passed    0.11 sec
+      Start  2: tipe-quality-tests
+ 2/34 Test  #2: tipe-quality-tests ......................   Passed    0.50 sec
+      Start  3: tipe-quality-isolation-tests
+ 3/34 Test  #3: tipe-quality-isolation-tests ............   Passed    1.66 sec
+      Start  4: tipe-correction-flow-tests
+ 4/34 Test  #4: tipe-correction-flow-tests ..............   Passed    1.79 sec
+      Start  5: tipe-control-single-instance
+ 5/34 Test  #5: tipe-control-single-instance ............   Passed    0.15 sec
+      Start  6: tipe-daemon-mapping
+ 6/34 Test  #6: tipe-daemon-mapping .....................   Passed    0.03 sec
+      Start  7: tipe-activation-readiness
+ 7/34 Test  #7: tipe-activation-readiness ...............***Failed   15.43 sec
+Traceback (most recent call last):
+  File "/home/lin/Documents/ChatGPT/tipe/tests/test_activation_readiness.py", line 62, in <module>
+    check(False)
+    ~~~~~^^^^^^^
+  File "/home/lin/Documents/ChatGPT/tipe/tests/test_activation_readiness.py", line 52, in check
+    result = subprocess.run(["bash", str(scripts / "activate-user.sh")],
+                            env=env, capture_output=True, text=True,
+                            timeout=15, start_new_session=True)
+  File "/usr/lib64/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 2154, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 1268, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['bash', '/tmp/tipe-activation-test-w4in25pu/scripts/activate-user.sh']' timed out after 15 seconds
+
+      Start  8: tipe-qt-surrounding-fallback
+ 8/34 Test  #8: tipe-qt-surrounding-fallback ............   Passed   56.44 sec
+      Start  9: tipe-support-tests
+ 9/34 Test  #9: tipe-support-tests ......................   Passed    0.04 sec
+      Start 10: tipe-control-window-tests
+10/34 Test #10: tipe-control-window-tests ...............   Passed    1.48 sec
+      Start 11: tipe-support-hidpi-tests
+11/34 Test #11: tipe-support-hidpi-tests ................   Passed    0.05 sec
+      Start 12: tipe-grid-tests
+12/34 Test #12: tipe-grid-tests .........................   Passed    0.01 sec
+      Start 13: tipe-painter-tests
+13/34 Test #13: tipe-painter-tests ......................   Passed    0.03 sec
+      Start 14: tipe-client-side-adapter-tests
+14/34 Test #14: tipe-client-side-adapter-tests ..........   Passed    0.02 sec
+      Start 15: tipe-correction-tests
+15/34 Test #15: tipe-correction-tests ...................   Passed    0.01 sec
+      Start 16: tipe-tests
+16/34 Test #16: tipe-tests ..............................   Passed    2.76 sec
+      Start 17: tipe-english-corpus-tests
+17/34 Test #17: tipe-english-corpus-tests ...............   Passed    3.50 sec
+      Start 18: tipe-libime-fallback-tests
+18/34 Test #18: tipe-libime-fallback-tests ..............   Passed    0.05 sec
+      Start 19: tipe-learning-tests
+19/34 Test #19: tipe-learning-tests .....................   Passed    8.80 sec
+      Start 20: tipe-resource-stress-tests
+20/34 Test #20: tipe-resource-stress-tests ..............   Passed    2.67 sec
+      Start 21: tipe-trained-resource-stress-tests
+21/34 Test #21: tipe-trained-resource-stress-tests ......   Passed    1.23 sec
+      Start 22: tipe-model-tests
+22/34 Test #22: tipe-model-tests ........................   Passed    0.01 sec
+      Start 23: tipe-cloud-transport-tests
+23/34 Test #23: tipe-cloud-transport-tests ..............   Passed    0.57 sec
+      Start 24: tipe-cloud-worker-tests
+24/34 Test #24: tipe-cloud-worker-tests .................   Passed    1.47 sec
+      Start 25: tipe-cloud-candidate-tests
+25/34 Test #25: tipe-cloud-candidate-tests ..............   Passed    0.03 sec
+      Start 26: tipe-local-small-tests
+26/34 Test #26: tipe-local-small-tests ..................   Passed    0.24 sec
+      Start 27: tipe-fcitx-tests
+27/34 Test #27: tipe-fcitx-tests ........................   Passed    0.55 sec
+      Start 28: tipe-fcitx-lifecycle-tests
+28/34 Test #28: tipe-fcitx-lifecycle-tests ..............   Passed    0.22 sec
+      Start 29: tipe-ui-x11-smoke
+29/34 Test #29: tipe-ui-x11-smoke .......................   Passed    0.61 sec
+      Start 30: tipe-ui-headless-fallback
+30/34 Test #30: tipe-ui-headless-fallback ...............   Passed    0.55 sec
+      Start 31: tipe-ui-page-offset-smoke
+31/34 Test #31: tipe-ui-page-offset-smoke ...............   Passed    0.61 sec
+      Start 32: tipe-ui-wayland-capability-diagnostic
+32/34 Test #32: tipe-ui-wayland-capability-diagnostic ...   Passed    0.61 sec
+      Start 33: tipe-protocol-tests
+33/34 Test #33: tipe-protocol-tests .....................   Passed    0.12 sec
+      Start 34: tipe-wayland-capability-probe
+34/34 Test #34: tipe-wayland-capability-probe ...........   Passed    0.03 sec
+
+97% tests passed, 1 tests failed out of 34
+
+Total Test time (real) = 102.40 sec
+
+The following tests FAILED:
+	  7 - tipe-activation-readiness (Failed)
+Errors while running CTest
+
+Activation fixture retry after reducing mocked wait count:
+Test project /home/lin/Documents/ChatGPT/tipe/build
+    Start 7: tipe-activation-readiness
+1/1 Test #7: tipe-activation-readiness ........   Passed    0.86 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.86 sec

@@ -1,0 +1,87 @@
+[
+  {
+    "case": "gtk4",
+    "compact_box": [
+      1711,
+      166,
+      2901,
+      242
+    ],
+    "expanded_box": [
+      1710,
+      166,
+      2902,
+      422
+    ],
+    "raster_width_delta": 2,
+    "adds_rows": true
+  },
+  {
+    "case": "qt6",
+    "compact_box": [
+      1629,
+      1084,
+      2819,
+      1160
+    ],
+    "expanded_box": [
+      1628,
+      1084,
+      2820,
+      1340
+    ],
+    "raster_width_delta": 2,
+    "adds_rows": true
+  },
+  {
+    "case": "gtk4-sdfas",
+    "compact_box": [
+      1607,
+      166,
+      3085,
+      242
+    ],
+    "expanded_box": [
+      1606,
+      166,
+      3086,
+      482
+    ],
+    "raster_width_delta": 2,
+    "adds_rows": true
+  },
+  {
+    "case": "qt6-sdfas",
+    "compact_box": [
+      1607,
+      1084,
+      3085,
+      1160
+    ],
+    "expanded_box": [
+      1606,
+      1084,
+      3086,
+      1400
+    ],
+    "raster_width_delta": 2,
+    "adds_rows": true
+  },
+  {
+    "case": "gtk4-long",
+    "compact_box": [
+      1607,
+      166,
+      3085,
+      242
+    ],
+    "expanded_box": [
+      1606,
+      166,
+      3086,
+      482
+    ],
+    "raster_width_delta": 2,
+    "adds_rows": true
+  }
+]

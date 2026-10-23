@@ -1,0 +1,11 @@
+Test project /home/lin/Documents/ChatGPT/tipe/build
+    Start 27: tipe-fcitx-tests
+1/3 Test #27: tipe-fcitx-tests .................   Passed    0.58 sec
+    Start 28: tipe-fcitx-lifecycle-tests
+2/3 Test #28: tipe-fcitx-lifecycle-tests .......   Passed    0.28 sec
+    Start 33: tipe-protocol-tests
+3/3 Test #33: tipe-protocol-tests ..............   Passed    0.08 sec
+
+100% tests passed, 0 tests failed out of 3
+
+Total Test time (real) =   0.94 sec

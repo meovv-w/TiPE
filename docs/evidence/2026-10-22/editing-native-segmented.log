@@ -1,0 +1,38 @@
+browser: Enter preserves pinyin: PASS
+browser: Space selects Chinese: PASS
+browser: Escape cancels without committing: PASS
+browser: Insert inside preedit: PASS
+browser: Delete at preedit beginning: PASS
+browser: Backspace at preedit end: PASS
+browser: Backspace inside preedit: PASS
+browser: Delete at preedit end is harmless: PASS
+browser: Shift roundtrip retains insertion position: PASS
+browser: Shift roundtrip keeps Chinese selection: PASS
+browser: Tab expansion collapses to editable pinyin: PASS
+browser: Expanded arrows do not change Enter spelling: PASS
+browser: Pagination does not change Enter spelling: PASS
+browser: Numeric first candidate selection: PASS
+browser: Long spelling survives expand and collapse: PASS
+browser: Selected client text replaced by Chinese: PASS
+browser: Chinese inserts at client caret: PASS
+browser: Moved client caret invalidates restoration: PASS
+browser: Committed text restores to editable pinyin: PASS
+browser: Consecutive Chinese chunks restore only last: PASS
+browser: New composition after cancellation: PASS
+foot: Enter preserves pinyin: PASS
+foot: Space selects Chinese: PASS
+foot: Escape cancels without committing: PASS
+foot: Insert inside preedit: PASS
+foot: Delete at preedit beginning: PASS
+foot: Backspace at preedit end: PASS
+foot: Backspace inside preedit: PASS
+foot: Delete at preedit end is harmless: PASS
+foot: Shift roundtrip retains insertion position: PASS
+foot: Shift roundtrip keeps Chinese selection: PASS
+foot: Tab expansion collapses to editable pinyin: PASS
+foot: Expanded arrows do not change Enter spelling: PASS
+foot: Pagination does not change Enter spelling: PASS
+foot: Numeric first candidate selection: PASS
+foot: Long spelling survives expand and collapse: PASS
+foot: New composition after cancellation: PASS
+{"passed": 37, "results": "/home/lin/Documents/ChatGPT/tipe/build/editing-native-verified/results.json"}

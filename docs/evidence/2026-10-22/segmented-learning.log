@@ -1,0 +1,3 @@
+gtk: Retained abbreviation chain publishes and loads automatically: PASS
+qt: Retained abbreviation chain publishes and loads automatically: PASS
+{"passed": 2, "results": "/home/lin/Documents/ChatGPT/tipe/build/chain-learning-regression/results.json"}

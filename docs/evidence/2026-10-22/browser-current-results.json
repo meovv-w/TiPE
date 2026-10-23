@@ -1,0 +1,1175 @@
+[
+  {
+    "name": "Enter keeps original spelling",
+    "expected": "nihao",
+    "actual": "nihao",
+    "passed": true,
+    "events": [
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "n",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "n",
+        "value": "n"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "n"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "ni",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "ni",
+        "value": "ni"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "ni"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nih",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nih",
+        "value": "nih"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nih"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "niha",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "niha",
+        "value": "niha"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "niha"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      }
+    ]
+  },
+  {
+    "name": "Space commits Chinese",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true,
+    "events": [
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "n",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "n",
+        "value": "n"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "n"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "ni",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "ni",
+        "value": "ni"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "ni"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nih",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nih",
+        "value": "nih"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nih"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "niha",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "niha",
+        "value": "niha"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "niha"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "你好",
+        "value": "你好"
+      }
+    ]
+  },
+  {
+    "name": "Mode tap roundtrip preserves composition",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true,
+    "events": [
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "n",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "n",
+        "value": "n"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "n"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "ni",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "ni",
+        "value": "ni"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "ni"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nih",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nih",
+        "value": "nih"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nih"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "niha",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "niha",
+        "value": "niha"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "niha"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "你好",
+        "value": "你好"
+      }
+    ]
+  },
+  {
+    "name": "English literal",
+    "expected": "github",
+    "actual": "github",
+    "passed": true,
+    "events": [
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "g",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "g",
+        "value": "g"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "g"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "gi",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "gi",
+        "value": "gi"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "gi"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "git",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "git",
+        "value": "git"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "git"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "gith",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "gith",
+        "value": "gith"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "gith"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "githu",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "githu",
+        "value": "githu"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "githu"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "github",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "github",
+        "value": "github"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "github"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "github",
+        "value": "github"
+      }
+    ]
+  },
+  {
+    "name": "Preedit caret editing",
+    "expected": "ihao",
+    "actual": "ihao",
+    "passed": true,
+    "events": [
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "n",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "n",
+        "value": "n"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "n"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "ni",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "ni",
+        "value": "ni"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "ni"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nih",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nih",
+        "value": "nih"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nih"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "niha",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "niha",
+        "value": "niha"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "niha"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "ihao",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": "ihao",
+        "value": "ihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "ihao",
+        "value": "ihao"
+      },
+      {
+        "type": "input",
+        "data": "ihao",
+        "value": "ihao"
+      },
+      {
+        "type": "compositionend",
+        "data": "ihao",
+        "value": "ihao"
+      }
+    ]
+  },
+  {
+    "name": "Backspace restores editable spelling",
+    "expected": "nihao",
+    "actual": "nihao",
+    "passed": true,
+    "events": [
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "n",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "n",
+        "value": "n"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "n"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "ni",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "ni",
+        "value": "ni"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "ni"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nih",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nih",
+        "value": "nih"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nih"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "niha",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "niha",
+        "value": "niha"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "niha"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "你好",
+        "value": "你好"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionstart",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "compositionupdate",
+        "data": "nihao",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      },
+      {
+        "type": "compositionupdate",
+        "data": "",
+        "value": "nihao"
+      },
+      {
+        "type": "input",
+        "data": null,
+        "value": ""
+      },
+      {
+        "type": "compositionend",
+        "data": "",
+        "value": ""
+      },
+      {
+        "type": "input",
+        "data": "nihao",
+        "value": "nihao"
+      }
+    ]
+  }
+]

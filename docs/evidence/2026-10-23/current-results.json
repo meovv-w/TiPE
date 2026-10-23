@@ -1,0 +1,192 @@
+{
+  "date": "2026-10-23",
+  "goal_complete": true,
+  "automatic_tests": {
+    "passed": 36,
+    "total": 36,
+    "log": "ctest-prefix-linear-final.log",
+    "seconds": 82.36
+  },
+  "runtime": "installed-runtime-decoder-navigation.json",
+  "editing": {
+    "passed": 98,
+    "by_frontend": {
+      "gtk": 21,
+      "qt": 21,
+      "browser": 21,
+      "wine": 19,
+      "foot": 16
+    },
+    "results": "editing-long-shared-results.json"
+  },
+  "long_composition": {
+    "core_lengths": [
+      65,
+      70,
+      100,
+      260
+    ],
+    "desktop_cases": 5,
+    "results": "long-window-desktop-results.json",
+    "scope": "Installed core; 68-byte composition in GTK, Qt, Chromium, Wine overthespot and foot. True 60-byte prefix, exact suffix and Shift roundtrip; no dropped final Chinese."
+  },
+  "performance": "representative-performance.json",
+  "resources": [
+    "decoder-resource-tests.log",
+    "context-cost-before.log",
+    "context-cost-after.log"
+  ],
+  "previous_evidence": "../2026-10-22/current-results.json",
+  "remaining": [],
+  "post_shared_decoder_focus": {
+    "passed": 18,
+    "results": [
+      "focus-gtk-qt-results.json",
+      "focus-native-results.json"
+    ]
+  },
+  "decoder_equivalence": {
+    "spellings": 70,
+    "exact_float_edge_scores": 35664,
+    "log": "ctest-prefix-linear-final.log",
+    "scope": "All native candidates, pinyin and consumed ranges match; exact-score native ties may permute. No reduction of nbest/window/beam/frame."
+  },
+  "post_decoder_navigation_segmented": {
+    "passed": 43,
+    "by_frontend": {
+      "gtk": 9,
+      "qt": 9,
+      "browser": 9,
+      "wine": 8,
+      "foot": 8
+    },
+    "results": "segmented-decoder-navigation-results.json"
+  },
+  "performance_limit": "Nine workloads sampled including 20 distinct long spellings. Trained local and unchanged TiP repeat each have all sampled operation p95 <5ms; first TiP run includes transient overall slowdown and is fully retained. No arbitrary-load latency guarantee.",
+  "post_decoder_navigation_learning": {
+    "passed": 2,
+    "results": "learning-decoder-navigation-results.json"
+  },
+  "post_decoder_navigation_focus": {
+    "passed": 18,
+    "results": [
+      "focus-decoder-navigation-gtk-qt-results.json",
+      "focus-decoder-navigation-native-results.json"
+    ]
+  },
+  "installed_niri_isolated_scaling": {
+    "passed": 64,
+    "by_frontend": {
+      "gtk": 16,
+      "qt": 16,
+      "foot": 16,
+      "browser": 16
+    },
+    "scales": [
+      1,
+      2,
+      1.25,
+      1.5
+    ],
+    "scope": "Installed niri 26.04 Winit inside private headless Sway; one output live scale changes; no physical multioutput",
+    "maximum_logical_width_drift": 0.0,
+    "maximum_scale_width_drift": 2.0,
+    "results": "niri-isolated-results.json",
+    "runtime": "niri-isolated-runtime.json",
+    "log": "niri-isolated-final.log",
+    "investigation": "niri-isolated-investigation.md",
+    "images": [
+      "niri-isolated-gtk-2-23-keyboard-compact.png",
+      "niri-isolated-gtk-2-23-keyboard-expanded.png",
+      "niri-isolated-gtk-1.25-23-keyboard-compact.png",
+      "niri-isolated-gtk-1.25-23-keyboard-expanded.png",
+      "niri-isolated-qt-2-23-keyboard-compact.png",
+      "niri-isolated-qt-2-23-keyboard-expanded.png",
+      "niri-isolated-qt-1.25-23-keyboard-compact.png",
+      "niri-isolated-qt-1.25-23-keyboard-expanded.png",
+      "niri-isolated-foot-2-23-keyboard-compact.png",
+      "niri-isolated-foot-2-23-keyboard-expanded.png",
+      "niri-isolated-foot-1.25-23-keyboard-compact.png",
+      "niri-isolated-foot-1.25-23-keyboard-expanded.png",
+      "niri-isolated-browser-2-23-keyboard-compact.png",
+      "niri-isolated-browser-2-23-keyboard-expanded.png",
+      "niri-isolated-browser-1.25-23-keyboard-compact.png",
+      "niri-isolated-browser-1.25-23-keyboard-expanded.png"
+    ],
+    "browser_protocol_rejections": 0
+  },
+  "discord_real_ui_probe": {
+    "scope": "Unmodified installed Discord 1.0.162 in empty private profile; no input/login/messages",
+    "observations": 18,
+    "real_ui_ready": false,
+    "input_tested": false,
+    "observed_state": "Discord Updater: Checking for updates; zero input fields",
+    "network_exit_code": 7,
+    "results": "discord-native-discord-ui-probe.json",
+    "runtime": "discord-native-runtime.json",
+    "screenshot": "discord-native-visible-discord-ui.png",
+    "connectivity": "discord-native-connectivity.json",
+    "visible_repeat_results": "discord-native-visible-discord-ui-probe.json"
+  },
+  "external_validation_recheck": {
+    "physical_outputs": [
+      "eDP-1"
+    ],
+    "discord_update_connection": {
+      "curl_exit_code": 35,
+      "error": "Recv failure: Connection reset by peer"
+    },
+    "live_daemon_pid": 1482234,
+    "live_selected_input_method": "tipe",
+    "live_module_verification": true,
+    "required_conditions": [
+      "Confirm intended physical multi-monitor usage and provide actual connected outputs if applicable",
+      "Discord actual UI accessible under the normal network; no login data have been copied"
+    ],
+    "optional_cloud": "External production provider remains optional and disabled; no credentials requested",
+    "goal_complete": false,
+    "record_status": "Historical before user scope decision; superseded as a completion gate by completion_scope, original observations retained."
+  },
+  "completion_scope": {
+    "status": "complete_with_user_confirmed_exclusions",
+    "date": "2026-10-23",
+    "user_quote": "这两个不用管",
+    "excluded_completion_gates": [
+      "Physical multi-monitor niri validation",
+      "Discord logged-in chat UI validation"
+    ],
+    "exclusions_are_not_passes": true,
+    "optional_cloud": "In scope, default off; local HTTP(S) contract tested; external production provider not configured or claimed tested."
+  },
+  "known_limitations": [
+    "Physical multi-monitor niri and Discord logged-in chat remain unverified, explicitly excluded as completion gates by the user.",
+    "Wine XIM learning/observation/cloud remain disabled because password hints are unavailable. Reversible per-app overthespot configuration is needed for reliable caret tracking.",
+    "Unknown-purpose Wayland fields fail closed to literal input without learning until purpose arrives. Surrounding-text recovery and retained-result confirmation are limited by protocol capabilities.",
+    "Local small model is a statistical character bigram model, not a neural model. External production cloud provider is optional, unconfigured and untested; cloud remains disabled.",
+    "Tests and p95 measurements prove their sampled coverage, not arbitrary application sequences, system load, physical power failures or every monitor layout."
+  ],
+  "current_runtime": "startup-service-results.json",
+  "startup_persistence": {
+    "results": "startup-service-results.json",
+    "tests": "ctest-startup-final.log",
+    "ctest_passed": 3,
+    "ctest_total": 3,
+    "installation_cases": 11,
+    "manager_environment": "startup-manager-before.json",
+    "install_preview": "startup-install-preview.log",
+    "install_log": "startup-install.log",
+    "systemd_unit_verify": true,
+    "module_hashes_equal_previous_tested": true,
+    "runtime_selected": "pinyin",
+    "runtime_note": "TiPE remains loaded and selectable; previous active pinyin selection was restored after verification."
+  },
+  "icon_and_status": {
+    "evidence": "icon-and-status-results.json"
+  },
+  "support_payments": {
+    "results": "support-payments-results.json",
+    "tests": "ctest-payment-codes.log",
+    "passed": 4,
+    "total": 4
+  }
+}

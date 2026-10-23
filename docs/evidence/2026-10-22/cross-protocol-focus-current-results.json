@@ -1,0 +1,98 @@
+[
+  {
+    "client": "browser",
+    "check": "focus-loss-and-return",
+    "before": "nihao",
+    "actual": "nihao",
+    "expected": "nihao",
+    "passed": true
+  },
+  {
+    "client": "browser",
+    "check": "first-popup-after-return",
+    "selection": [
+      434,
+      592
+    ],
+    "passed": true
+  },
+  {
+    "client": "browser",
+    "check": "english-roundtrip",
+    "actual": "nihaogongzuoxuexiabcmingtian",
+    "expected": "nihaogongzuoxuexiabcmingtian",
+    "passed": true
+  },
+  {
+    "client": "foot",
+    "check": "focus-loss-and-return",
+    "before": "",
+    "actual": "shijie",
+    "expected": "shijie",
+    "passed": true
+  },
+  {
+    "client": "foot",
+    "check": "first-popup-after-return",
+    "selection": [
+      1828,
+      540
+    ],
+    "passed": true
+  },
+  {
+    "client": "foot",
+    "check": "english-roundtrip",
+    "actual": "shijiegongzuoxuexiabcmingtian",
+    "expected": "shijiegongzuoxuexiabcmingtian",
+    "passed": true
+  },
+  {
+    "client": "wine",
+    "check": "focus-loss-and-return",
+    "before": "tianqi",
+    "actual": "tianqi",
+    "expected": "tianqi",
+    "passed": true
+  },
+  {
+    "client": "wine",
+    "check": "first-popup-after-return",
+    "selection": [
+      938,
+      1445
+    ],
+    "passed": true
+  },
+  {
+    "client": "wine",
+    "check": "english-roundtrip",
+    "actual": "tianqigongzuoxuexiabcmingtian",
+    "expected": "tianqigongzuoxuexiabcmingtian",
+    "passed": true
+  },
+  {
+    "client": "browser",
+    "check": "second-focus-cycle",
+    "before": "nihaogongzuoxuexiabcmingtianzhongwen",
+    "actual": "nihaogongzuoxuexiabcmingtianzhongwen",
+    "expected": "nihaogongzuoxuexiabcmingtianzhongwen",
+    "passed": true
+  },
+  {
+    "client": "foot",
+    "check": "second-focus-cycle",
+    "before": "shijiegongzuoxuexiabcmingtian",
+    "actual": "shijiegongzuoxuexiabcmingtianzhongwen",
+    "expected": "shijiegongzuoxuexiabcmingtianzhongwen",
+    "passed": true
+  },
+  {
+    "client": "wine",
+    "check": "second-focus-cycle",
+    "before": "tianqigongzuoxuexiabcmingtian",
+    "actual": "tianqigongzuoxuexiabcmingtianzhongwen",
+    "expected": "tianqigongzuoxuexiabcmingtianzhongwen",
+    "passed": true
+  }
+]

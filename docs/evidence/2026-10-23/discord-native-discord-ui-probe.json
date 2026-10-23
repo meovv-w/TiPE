@@ -1,0 +1,233 @@
+{
+  "scope": "Unmodified Discord UI, empty isolated profile, no input or messages",
+  "app": "/home/lin/.config/discord/app-1.0.162/Discord",
+  "observed": [
+    {
+      "elapsed_seconds": 0,
+      "launcher_alive": true,
+      "pages": []
+    },
+    {
+      "elapsed_seconds": 5,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 10,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 15,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 20,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 25,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 30,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 35,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 40,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 45,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 50,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 55,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 60,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 65,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 70,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 75,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 80,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 85,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    }
+  ],
+  "real_ui_ready": false
+}

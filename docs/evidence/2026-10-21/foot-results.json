@@ -1,0 +1,15 @@
+{
+  "actual": [
+    "nihao",
+    "你好",
+    "你好",
+    "github"
+  ],
+  "expected": [
+    "nihao",
+    "你好",
+    "你好",
+    "github"
+  ],
+  "passed": true
+}

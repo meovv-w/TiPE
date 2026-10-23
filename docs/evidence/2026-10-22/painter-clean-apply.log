@@ -1,0 +1,9 @@
+checking file src/ui/classic/CMakeLists.txt
+checking file src/ui/classic/classicui.cpp
+checking file src/ui/classic/classicui.h
+checking file src/ui/classic/inputwindow.cpp
+checking file src/ui/classic/inputwindow.h
+checking file src/ui/classic/xcbinputwindow.cpp
+checking file src/ui/classic/xcbinputwindow.h
+checking file src/ui/classic/xcbui.cpp
+checking file src/ui/classic/xcbui.h

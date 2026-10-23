@@ -1,0 +1,19 @@
+Test project /home/lin/Documents/ChatGPT/tipe/build
+    Start 28: tipe-fcitx-tests
+1/7 Test #28: tipe-fcitx-tests ........................   Passed    0.55 sec
+    Start 29: tipe-fcitx-lifecycle-tests
+2/7 Test #29: tipe-fcitx-lifecycle-tests ..............   Passed    0.88 sec
+    Start 30: tipe-ui-x11-smoke
+3/7 Test #30: tipe-ui-x11-smoke .......................   Passed    0.62 sec
+    Start 31: tipe-ui-headless-fallback
+4/7 Test #31: tipe-ui-headless-fallback ...............   Passed    0.55 sec
+    Start 32: tipe-ui-page-offset-smoke
+5/7 Test #32: tipe-ui-page-offset-smoke ...............   Passed    0.60 sec
+    Start 33: tipe-ui-wayland-capability-diagnostic
+6/7 Test #33: tipe-ui-wayland-capability-diagnostic ...   Passed    0.61 sec
+    Start 34: tipe-protocol-tests
+7/7 Test #34: tipe-protocol-tests .....................   Passed    0.12 sec
+
+100% tests passed, 0 tests failed out of 7
+
+Total Test time (real) =   3.93 sec

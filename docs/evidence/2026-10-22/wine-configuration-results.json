@@ -1,0 +1,22 @@
+[
+  {
+    "case": "absent original, preview, apply, repeat and restore",
+    "passed": true
+  },
+  {
+    "case": "preserve exact original including whitespace",
+    "passed": true
+  },
+  {
+    "case": "preserve later user edit",
+    "passed": true
+  },
+  {
+    "case": "recover prepared journal after registry write",
+    "passed": true
+  },
+  {
+    "case": "global Wine InputStyle unchanged throughout",
+    "passed": true
+  }
+]

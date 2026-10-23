@@ -1,0 +1,1658 @@
+[
+  {
+    "frontend": "wine",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          741,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          741.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          244,
+          246,
+          1440,
+          326
+        ],
+        "logical": [
+          2042.0,
+          123.0,
+          2640.0,
+          163.0
+        ],
+        "selection": [
+          281,
+          286
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          200,
+          246,
+          1396,
+          562
+        ],
+        "logical": [
+          2020.0,
+          123.0,
+          2618.0,
+          281.0
+        ],
+        "selection": [
+          237,
+          342
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          122,
+          719,
+          282
+        ],
+        "logical": [
+          119.0,
+          122.0,
+          719.0,
+          282.0
+        ],
+        "selection": [
+          138,
+          171
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "mouse",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          741,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          741.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          244,
+          246,
+          1440,
+          326
+        ],
+        "logical": [
+          2042.0,
+          123.0,
+          2640.0,
+          163.0
+        ],
+        "selection": [
+          281,
+          286
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          200,
+          246,
+          1396,
+          562
+        ],
+        "logical": [
+          2020.0,
+          123.0,
+          2618.0,
+          281.0
+        ],
+        "selection": [
+          237,
+          342
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          122,
+          719,
+          282
+        ],
+        "logical": [
+          119.0,
+          122.0,
+          719.0,
+          282.0
+        ],
+        "selection": [
+          138,
+          171
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          725,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          725.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          244,
+          246,
+          1408,
+          326
+        ],
+        "logical": [
+          2042.0,
+          123.0,
+          2624.0,
+          163.0
+        ],
+        "selection": [
+          281,
+          286
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          200,
+          200,
+          1364,
+          792
+        ],
+        "logical": [
+          2020.0,
+          100.0,
+          2602.0,
+          396.0
+        ],
+        "selection": [
+          237,
+          296
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          99,
+          703,
+          397
+        ],
+        "logical": [
+          119.0,
+          99.0,
+          703.0,
+          397.0
+        ],
+        "selection": [
+          138,
+          148
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          725,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          725.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          244,
+          246,
+          1408,
+          326
+        ],
+        "logical": [
+          2042.0,
+          123.0,
+          2624.0,
+          163.0
+        ],
+        "selection": [
+          281,
+          286
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          200,
+          200,
+          1364,
+          792
+        ],
+        "logical": [
+          2020.0,
+          100.0,
+          2602.0,
+          396.0
+        ],
+        "selection": [
+          237,
+          296
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          99,
+          703,
+          397
+        ],
+        "logical": [
+          119.0,
+          99.0,
+          703.0,
+          397.0
+        ],
+        "selection": [
+          138,
+          148
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          741,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          741.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          152,
+          153,
+          900,
+          204
+        ],
+        "logical": [
+          2041.6,
+          122.4,
+          2640.0,
+          163.2
+        ],
+        "selection": [
+          176,
+          179
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          125,
+          153,
+          873,
+          352
+        ],
+        "logical": [
+          2020.0,
+          122.4,
+          2618.4,
+          281.6
+        ],
+        "selection": [
+          148,
+          214
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          122,
+          719,
+          282
+        ],
+        "logical": [
+          119.0,
+          122.0,
+          719.0,
+          282.0
+        ],
+        "selection": [
+          138,
+          171
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "mouse",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          741,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          741.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          152,
+          153,
+          900,
+          204
+        ],
+        "logical": [
+          2041.6,
+          122.4,
+          2640.0,
+          163.2
+        ],
+        "selection": [
+          176,
+          179
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          125,
+          153,
+          873,
+          352
+        ],
+        "logical": [
+          2020.0,
+          122.4,
+          2618.4,
+          281.6
+        ],
+        "selection": [
+          148,
+          214
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          122,
+          719,
+          282
+        ],
+        "logical": [
+          119.0,
+          122.0,
+          719.0,
+          282.0
+        ],
+        "selection": [
+          138,
+          171
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          725,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          725.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          152,
+          153,
+          880,
+          204
+        ],
+        "logical": [
+          2041.6,
+          122.4,
+          2624.0,
+          163.2
+        ],
+        "selection": [
+          176,
+          179
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          125,
+          125,
+          853,
+          495
+        ],
+        "logical": [
+          2020.0,
+          100.0,
+          2602.4,
+          396.0
+        ],
+        "selection": [
+          148,
+          185
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          99,
+          703,
+          397
+        ],
+        "logical": [
+          119.0,
+          99.0,
+          703.0,
+          397.0
+        ],
+        "selection": [
+          138,
+          148
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          725,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          725.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          152,
+          153,
+          880,
+          204
+        ],
+        "logical": [
+          2041.6,
+          122.4,
+          2624.0,
+          163.2
+        ],
+        "selection": [
+          176,
+          179
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          125,
+          125,
+          853,
+          495
+        ],
+        "logical": [
+          2020.0,
+          100.0,
+          2602.4,
+          396.0
+        ],
+        "selection": [
+          148,
+          185
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          99,
+          703,
+          397
+        ],
+        "logical": [
+          119.0,
+          99.0,
+          703.0,
+          397.0
+        ],
+        "selection": [
+          138,
+          148
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          741,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          741.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          183,
+          184,
+          1080,
+          245
+        ],
+        "logical": [
+          2042.0,
+          122.66666666666667,
+          2640.0,
+          163.33333333333334
+        ],
+        "selection": [
+          210,
+          214
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          150,
+          184,
+          1047,
+          422
+        ],
+        "logical": [
+          2020.0,
+          122.66666666666667,
+          2618.0,
+          281.3333333333333
+        ],
+        "selection": [
+          177,
+          256
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          122,
+          719,
+          282
+        ],
+        "logical": [
+          119.0,
+          122.0,
+          719.0,
+          282.0
+        ],
+        "selection": [
+          138,
+          171
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "mouse",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          741,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          741.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          183,
+          184,
+          1080,
+          245
+        ],
+        "logical": [
+          2042.0,
+          122.66666666666667,
+          2640.0,
+          163.33333333333334
+        ],
+        "selection": [
+          210,
+          214
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          150,
+          184,
+          1047,
+          422
+        ],
+        "logical": [
+          2020.0,
+          122.66666666666667,
+          2618.0,
+          281.3333333333333
+        ],
+        "selection": [
+          177,
+          256
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          122,
+          719,
+          282
+        ],
+        "logical": [
+          119.0,
+          122.0,
+          719.0,
+          282.0
+        ],
+        "selection": [
+          138,
+          171
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          725,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          725.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          183,
+          184,
+          1056,
+          245
+        ],
+        "logical": [
+          2042.0,
+          122.66666666666667,
+          2624.0,
+          163.33333333333334
+        ],
+        "selection": [
+          211,
+          214
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          150,
+          150,
+          1023,
+          594
+        ],
+        "logical": [
+          2020.0,
+          100.0,
+          2602.0,
+          396.0
+        ],
+        "selection": [
+          178,
+          222
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          99,
+          703,
+          397
+        ],
+        "logical": [
+          119.0,
+          99.0,
+          703.0,
+          397.0
+        ],
+        "selection": [
+          138,
+          148
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "wine",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          141,
+          122,
+          725,
+          164
+        ],
+        "logical": [
+          141.0,
+          122.0,
+          725.0,
+          164.0
+        ],
+        "selection": [
+          160,
+          143
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          183,
+          184,
+          1056,
+          245
+        ],
+        "logical": [
+          2042.0,
+          122.66666666666667,
+          2624.0,
+          163.33333333333334
+        ],
+        "selection": [
+          211,
+          214
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          150,
+          150,
+          1023,
+          594
+        ],
+        "logical": [
+          2020.0,
+          100.0,
+          2602.0,
+          396.0
+        ],
+        "selection": [
+          178,
+          222
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          2042,
+          122,
+          2043,
+          138
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          119,
+          99,
+          703,
+          397
+        ],
+        "logical": [
+          119.0,
+          99.0,
+          703.0,
+          397.0
+        ],
+        "selection": [
+          138,
+          148
+        ],
+        "protocol_rectangle": [
+          22,
+          22,
+          23,
+          38
+        ],
+        "caret": [
+          142,
+          122,
+          143,
+          138
+        ]
+      }
+    ],
+    "passed": true
+  }
+]

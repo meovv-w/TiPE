@@ -1,0 +1,34 @@
+--- a/src/ui/classic/xcbinputwindow.cpp
++++ b/src/ui/classic/xcbinputwindow.cpp
+@@ -340,6 +340,15 @@
+         xcb_unmap_window(ui_->connection(), wid_);
+         xcb_reparent_window(ui_->connection(), wid_, nextParent ? nextParent : ui_->root(), 0, 0);
+         embeddedParent_ = nextParent;
++        if (embeddedParent_) {
++            // Xwayland can replace a client's backing pixmap during an
++            // output move without exposing its still-mapped child. Subscribe
++            // to the actual parent geometry changes and damage our drawable
++            // after that transition, rather than polling or guessing output
++            // coordinates. Preserve any other masks on this connection.
++            addEventMaskToWindow(ui_->connection(), embeddedParent_,
++                                 XCB_EVENT_MASK_STRUCTURE_NOTIFY);
++        }
+         oldVisible = false;
+         if (embeddedParent_ && !embeddedFallbackLogged_) {
+             embeddedFallbackLogged_ = true;
+@@ -375,6 +384,15 @@
+         if (expose->window == wid_) {
+             repaint();
+             return true;
++        }
++        break;
++    }
++    case XCB_CONFIGURE_NOTIFY: {
++        auto *configure = reinterpret_cast<xcb_configure_notify_event_t *>(event);
++        if (embeddedParent_ && configure->window == embeddedParent_ && visible()) {
++            repaint();
++            // This is another client's window; leave the notification
++            // available to the XIM frontend and other registered filters.
+         }
+         break;
+     }

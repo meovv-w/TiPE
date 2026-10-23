@@ -1,0 +1,56 @@
+[
+  {
+    "toolkit": "gtk",
+    "before": {
+      "committed": "nihao",
+      "preedit": ""
+    },
+    "expected": "nihao",
+    "actual": "nihao",
+    "selection": null,
+    "passed": true
+  },
+  {
+    "toolkit": "gtk",
+    "check": "popup-after-focus",
+    "selection": [
+      293,
+      688
+    ],
+    "passed": true
+  },
+  {
+    "toolkit": "gtk",
+    "check": "english-switch-roundtrip",
+    "actual": "nihaonihaonihaoabcshijie",
+    "expected": "nihaonihaonihaoabcshijie",
+    "passed": true
+  },
+  {
+    "toolkit": "qt",
+    "before": {
+      "committed": "shijie",
+      "preedit": ""
+    },
+    "expected": "shijie",
+    "actual": "shijie",
+    "selection": null,
+    "passed": true
+  },
+  {
+    "toolkit": "qt",
+    "check": "popup-after-focus",
+    "selection": [
+      1793,
+      786
+    ],
+    "passed": true
+  },
+  {
+    "toolkit": "qt",
+    "check": "english-switch-roundtrip",
+    "actual": "shijienihaonihaoabcshijie",
+    "expected": "shijienihaonihaoabcshijie",
+    "passed": true
+  }
+]

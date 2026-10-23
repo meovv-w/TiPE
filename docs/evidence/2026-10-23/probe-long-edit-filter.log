@@ -1,0 +1,12 @@
+beam=20 frame=40 distance=1 minpath=-3.40282e+38
+p95=3.86347 max=10.5326
+p95=6.43833 max=6.5159
+beam=32 frame=40 distance=1 minpath=-3.40282e+38
+p95=3.56248 max=4.74717
+p95=7.73435 max=7.76913
+beam=16 frame=40 distance=1 minpath=-3.40282e+38
+p95=3.96768 max=5.88584
+p95=6.42977 max=6.45682
+beam=8 frame=40 distance=1 minpath=-3.40282e+38
+p95=3.62467 max=7.93091
+p95=5.19019 max=5.39725

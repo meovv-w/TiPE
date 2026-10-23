@@ -1,0 +1,49 @@
+{
+  "pid": 1231974,
+  "selected": "tipe",
+  "files": [
+    {
+      "name": "libtipe.so",
+      "path": "/home/lin/.config/fcitx5/addon/libtipe.so",
+      "sha256": "23f11f7b4766efcd5f62ecbeb609e4a68dfcf2835703fda269c38653f30fc431",
+      "matches_build": true,
+      "inode": 14707871
+    },
+    {
+      "name": "libclassicui.so",
+      "path": "/home/lin/.config/fcitx5/addon/libclassicui.so",
+      "sha256": "45e8a4bd7ba0b92752becff6397be515bccc0275d0e7c011d9cf28aba548f1dd",
+      "matches_build": true,
+      "inode": 14707876
+    },
+    {
+      "name": "libwaylandim.so",
+      "path": "/home/lin/.config/fcitx5/addon/libwaylandim.so",
+      "sha256": "7b16b852a206cbf71d9a96e5d7089e2b828788cc783d84446fb82088eb0e0249",
+      "matches_build": true,
+      "inode": 14713827
+    },
+    {
+      "name": "tipe-control",
+      "path": "/home/lin/.local/bin/tipe-control",
+      "sha256": "3b7f2802dfa35e84174d0f5ebb4da42577434f38b73e6773d390911de496d3a9",
+      "matches_build": true,
+      "inode": 14707857
+    },
+    {
+      "name": "libim-fcitx5.so",
+      "path": "/home/lin/.local/share/tipe/gtk/lib/gtk-4.0/4.0.0/immodules/libim-fcitx5.so",
+      "sha256": "fb151f8d90f4298410b1b871328a7f1279f5df2e873582752317523a761ffcd2",
+      "matches_build": true,
+      "inode": 14717213
+    },
+    {
+      "name": "libfcitx5platforminputcontextplugin.so",
+      "path": "/home/lin/.local/share/tipe/qt/lib/qt6/plugins/platforminputcontexts/libfcitx5platforminputcontextplugin.so",
+      "sha256": "1d4759f1d8115a2ab6554d7143df9e941282acf667d044ee3afe75b73dfef492",
+      "matches_build": true,
+      "inode": 14717214
+    }
+  ],
+  "mapped_modules_verified": true
+}

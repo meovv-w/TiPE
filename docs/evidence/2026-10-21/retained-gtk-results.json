@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Immediately deleted commits do not train",
+    "before": 0,
+    "after": 0,
+    "passed": true
+  },
+  {
+    "name": "Retained commits reach automatic published model",
+    "before": 0,
+    "after": 3,
+    "passed": true
+  }
+]

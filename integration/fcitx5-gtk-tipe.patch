@@ -1,0 +1,233 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 7fe457e..663f676 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -36,6 +36,22 @@ set(CMAKE_C_VISIBILITY_PRESET default)
+ 
+ include(cmake/CompilerSettings.cmake)
+ 
++# Optional TiPE painter; statically linked into each toolkit module so no
++# process-wide library path or daemon capability override is needed.
++set(TIPE_SOURCE_DIR "" CACHE PATH "TiPE source tree for its client-side painter")
++if (TIPE_SOURCE_DIR)
++    pkg_check_modules(TipePango REQUIRED IMPORTED_TARGET pangocairo)
++    add_library(TipeClientSidePainter STATIC
++        "${TIPE_SOURCE_DIR}/src/candidate_grid.cpp"
++        "${TIPE_SOURCE_DIR}/src/candidate_painter.cpp"
++        "${TIPE_SOURCE_DIR}/src/client_side_candidate_adapter.cpp")
++    target_include_directories(TipeClientSidePainter PUBLIC "${TIPE_SOURCE_DIR}/include")
++    target_compile_features(TipeClientSidePainter PUBLIC cxx_std_20)
++    target_compile_definitions(TipeClientSidePainter PUBLIC TIPE_CLIENT_SIDE_PAINTER=1)
++    target_link_libraries(TipeClientSidePainter PUBLIC PkgConfig::TipePango)
++    set_target_properties(TipeClientSidePainter PROPERTIES POSITION_INDEPENDENT_CODE ON)
++endif()
++
+ if (BUILD_ONLY_PLUGIN)
+     set(GCLIENT_LIBRARY_TYPE STATIC)
+ else()
+@@ -94,4 +110,29 @@ if (ENABLE_GTK4_IM_MODULE)
+ add_subdirectory(gtk4)
+ endif()
+ 
++option(TIPE_BUILD_TESTS "Build headless TiPE InputWindow integration checks" OFF)
++if (TIPE_BUILD_TESTS AND TARGET TipeClientSidePainter)
++    if (ENABLE_GTK4_IM_MODULE)
++        set(TIPE_TEST_GTK PkgConfig::Gtk4)
++        set(TIPE_TEST_DIR gtk4)
++    elseif (ENABLE_GTK3_IM_MODULE)
++        set(TIPE_TEST_GTK PkgConfig::Gtk3)
++        set(TIPE_TEST_DIR gtk3)
++    else()
++        message(FATAL_ERROR "TiPE integration checks need GTK3 or GTK4")
++    endif()
++    add_executable(tipe-gtk-candidate-smoke
++        "${TIPE_SOURCE_DIR}/integration/gtk-candidate-smoke.cpp"
++        "${TIPE_TEST_DIR}/inputwindow.cpp"
++        "${TIPE_TEST_DIR}/fcitxtheme.cpp"
++        "${TIPE_TEST_DIR}/utils.cpp")
++    target_include_directories(tipe-gtk-candidate-smoke PRIVATE "${TIPE_TEST_DIR}")
++    target_link_libraries(tipe-gtk-candidate-smoke PRIVATE
++        TipeClientSidePainter Fcitx5::GClient ${TIPE_TEST_GTK} PkgConfig::GioUnix2)
++    set_property(TARGET tipe-gtk-candidate-smoke APPEND_STRING PROPERTY LINK_FLAGS
++        " -Wl,--wrap=fcitx_g_client_select_candidate")
++    enable_testing()
++    add_test(NAME tipe-gtk-candidate-smoke COMMAND tipe-gtk-candidate-smoke)
++endif()
++
+ feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+diff --git a/gtk3/CMakeLists.txt b/gtk3/CMakeLists.txt
+index da9ba6f..6df451d 100644
+--- a/gtk3/CMakeLists.txt
++++ b/gtk3/CMakeLists.txt
+@@ -20,6 +20,10 @@ if (TARGET PkgConfig::Gdk3X11)
+ target_link_libraries(im-fcitx5-gtk3 PkgConfig::Gdk3X11 X11Import)
+ endif()
+ 
++if (TARGET TipeClientSidePainter)
++    target_link_libraries(im-fcitx5-gtk3 TipeClientSidePainter)
++endif()
++
+ install(TARGETS im-fcitx5-gtk3 DESTINATION "${GTK3_IM_MODULEDIR}")
+ 
+ 
+diff --git a/gtk3/inputwindow.cpp b/gtk3/inputwindow.cpp
+index aeee2b9..0f53c7b 100644
+--- a/gtk3/inputwindow.cpp
++++ b/gtk3/inputwindow.cpp
+@@ -105,10 +105,20 @@ InputWindow::InputWindow(ClassicUIConfig *config, FcitxGClient *client)
+                            highlight, layoutHint, hasPrev, hasNext);
+         };
+ 
+-    auto update_im_callback = [](FcitxGClient *, gchar *, gchar *,
++    auto update_im_callback = [](FcitxGClient *, gchar *, gchar *uniqueName,
+                                  gchar *langCode, void *user_data) {
+         auto that = static_cast<InputWindow *>(user_data);
+         that->updateLanguage(langCode);
++#ifdef TIPE_CLIENT_SIDE_PAINTER
++        const bool tipe = g_strcmp0(uniqueName, "tipe") == 0;
++        if (that->tipeInputMethod_ != tipe) {
++            that->tipeInputMethod_ = tipe;
++            that->hoverIndex_ = -1;
++            that->update();
++        }
++#else
++        (void)uniqueName;
++#endif
+     };
+ 
+     g_signal_connect(client_.get(), "update-client-side-ui",
+@@ -348,9 +358,27 @@ void InputWindow::updateUI(GPtrArray *preedit, int cursor_pos, GPtrArray *auxUp,
+     resizeCandidates(candidates->len);
+ 
+     candidateIndex_ = highlight;
++#ifdef TIPE_CLIENT_SIDE_PAINTER
++    tipeUpdate_ = {};
++    for (guint i = 0; i < preedit->len; ++i) {
++        auto *item = static_cast<FcitxGPreeditItem *>(g_ptr_array_index(preedit, i));
++        tipeUpdate_.preedit += item->string;
++    }
++    tipeUpdate_.candidate_cursor = highlight;
++    tipeUpdate_.layout_hint = layoutHint;
++    tipeUpdate_.has_previous = hasPrev;
++    tipeUpdate_.has_next = hasNext;
++    tipeUpdate_.candidates.reserve(candidates->len);
++    if (tipeInputMethod_) {
++        hoverIndex_ = -1;
++    }
++#endif
+     for (int i = 0, e = candidates->len; i < e; i++) {
+         auto *candidate = static_cast<FcitxGCandidateItem *>(
+             g_ptr_array_index(candidates, i));
++#ifdef TIPE_CLIENT_SIDE_PAINTER
++        tipeUpdate_.candidates.emplace_back(candidate->candidate);
++#endif
+         setTextToMultilineLayout(labelLayouts_[i], candidate->label);
+         setTextToMultilineLayout(candidateLayouts_[i], candidate->candidate);
+     }
+@@ -385,6 +413,13 @@ void InputWindow::updateLanguage(const char *language) {
+ }
+ 
+ std::pair<unsigned int, unsigned int> InputWindow::sizeHint() {
++#ifdef TIPE_CLIENT_SIDE_PAINTER
++    if (tipeInputMethod_) {
++        tipeFrame_ = tipe::client_side::adapt(tipeUpdate_);
++        candidateIndex_ = tipeFrame_.selected;
++        return {tipeFrame_.width, tipeFrame_.height};
++    }
++#endif
+     auto *fontDesc = pango_font_description_from_string(config_->font_.data());
+     pango_context_set_font_description(context_.get(), fontDesc);
+     pango_font_description_free(fontDesc);
+@@ -476,6 +511,19 @@ std::pair<unsigned int, unsigned int> InputWindow::sizeHint() {
+ }
+ 
+ void InputWindow::paint(cairo_t *cr, unsigned int width, unsigned int height) {
++#ifdef TIPE_CLIENT_SIDE_PAINTER
++    if (tipeInputMethod_) {
++        cairo_save(cr);
++        cairo_set_operator(cr, CAIRO_OPERATOR_SOURCE);
++        cairo_set_source_rgba(cr, 0, 0, 0, 0);
++        cairo_paint(cr);
++        cairo_set_operator(cr, CAIRO_OPERATOR_OVER);
++        tipeFrame_.selected = highlight();
++        tipe::painter::paint(cr, tipeFrame_);
++        cairo_restore(cr);
++        return;
++    }
++#endif
+     cairo_set_operator(cr, CAIRO_OPERATOR_SOURCE);
+     config_->theme_.paint(cr, config_->theme_.background, width, height);
+     const auto &margin = config_->theme_.contentMargin;
+@@ -692,6 +740,14 @@ void InputWindow::paint(cairo_t *cr, unsigned int width, unsigned int height) {
+ }
+ 
+ void InputWindow::click(int x, int y) {
++#ifdef TIPE_CLIENT_SIDE_PAINTER
++    if (tipeInputMethod_) {
++        if (auto index = tipe::grid::hit_test(tipeFrame_.layout, x, y)) {
++            selectCandidate(static_cast<int>(*index));
++        }
++        return;
++    }
++#endif
+     if (hasPrev_ && rectContains(prevRegion_, x, y)) {
+         prev();
+         return;
+@@ -732,6 +788,14 @@ int InputWindow::highlight() const {
+ }
+ 
+ bool InputWindow::hover(int x, int y) {
++#ifdef TIPE_CLIENT_SIDE_PAINTER
++    if (tipeInputMethod_) {
++        const int oldHighlight = highlight();
++        const auto index = tipe::grid::hit_test(tipeFrame_.layout, x, y);
++        hoverIndex_ = index ? static_cast<int>(*index) : -1;
++        return oldHighlight != highlight();
++    }
++#endif
+     bool needRepaint = false;
+ 
+     bool prevHovered = false;
+diff --git a/gtk3/inputwindow.h b/gtk3/inputwindow.h
+index 5c31023..0ce7868 100644
+--- a/gtk3/inputwindow.h
++++ b/gtk3/inputwindow.h
+@@ -10,6 +10,9 @@
+ #include "fcitx-gclient/fcitxgclient.h"
+ #include "fcitxflags.h"
+ #include "utils.h"
++#ifdef TIPE_CLIENT_SIDE_PAINTER
++#include "tipe/client_side_candidate_adapter.hpp"
++#endif
+ #include <cairo.h>
+ #include <pango/pango.h>
+ #include <string>
+@@ -117,6 +120,13 @@ protected:
+     FcitxCandidateLayoutHint layoutHint_ = FcitxCandidateLayoutHint::NotSet;
+     size_t candidatesHeight_ = 0;
+     int hoverIndex_ = -1;
++#ifdef TIPE_CLIENT_SIDE_PAINTER
++    // GTK owns popup placement and device scaling. This frame uses logical
++    // coordinates for both drawing and pointer events.
++    bool tipeInputMethod_ = false;
++    tipe::client_side::Update tipeUpdate_;
++    tipe::painter::Frame tipeFrame_;
++#endif
+ };
+ } // namespace fcitx::gtk
+ 
+diff --git a/gtk4/CMakeLists.txt b/gtk4/CMakeLists.txt
+index 76d538b..47b33c4 100644
+--- a/gtk4/CMakeLists.txt
++++ b/gtk4/CMakeLists.txt
+@@ -19,6 +19,10 @@ target_link_libraries(im-fcitx5-gtk4 Fcitx5::GClient XKBCommon::XKBCommon PkgCon
+ if (TARGET PkgConfig::Gtk4X11)
+     target_link_libraries(im-fcitx5-gtk4 PkgConfig::Gtk4X11 X11Import)
+ endif()
++if (TARGET TipeClientSidePainter)
++    target_link_libraries(im-fcitx5-gtk4 TipeClientSidePainter)
++endif()
++
+ install(TARGETS im-fcitx5-gtk4 DESTINATION "${GTK4_IM_MODULEDIR}")
+ 
+ if (NOT BUILD_ONLY_PLUGIN)

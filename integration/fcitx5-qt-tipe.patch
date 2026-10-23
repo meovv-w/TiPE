@@ -1,0 +1,284 @@
+diff --git a/qt5/platforminputcontext/fcitxcandidatewindow.cpp b/qt5/platforminputcontext/fcitxcandidatewindow.cpp
+index 20f54e6..41eb83a 100644
+--- a/qt5/platforminputcontext/fcitxcandidatewindow.cpp
++++ b/qt5/platforminputcontext/fcitxcandidatewindow.cpp
+@@ -5,6 +5,10 @@
+  *
+  */
+ #include "fcitxcandidatewindow.h"
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++#include "tipe/client_side_candidate_adapter.hpp"
++#include <QImage>
++#endif
+ #include "fcitxflags.h"
+ #include "fcitxtheme.h"
+ #include "qfcitxplatforminputcontext.h"
+@@ -169,6 +173,20 @@ FcitxCandidateWindow::FcitxCandidateWindow(QWindow *window,
+ 
+ FcitxCandidateWindow::~FcitxCandidateWindow() {}
+ 
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++void FcitxCandidateWindow::setTipe(bool enabled) {
++    if (tipe_ == enabled) {
++        return;
++    }
++    tipe_ = enabled;
++    tipeFrame_ = {};
++    candidateRegions_.clear();
++    hoverIndex_ = -1;
++    // An IM switch must not briefly reuse the previous engine's geometry.
++    hide();
++}
++#endif
++
+ bool FcitxCandidateWindow::event(QEvent *event) {
+     if (event->type() == QEvent::Leave) {
+         auto oldHighlight = highlight();
+@@ -181,6 +199,31 @@ bool FcitxCandidateWindow::event(QEvent *event) {
+ }
+ 
+ void FcitxCandidateWindow::render(QPainter *painter) {
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++    if (tipe_) {
++        const qreal scale = devicePixelRatio();
++        QImage image(qCeil(tipeFrame_.width * scale),
++                     qCeil(tipeFrame_.height * scale),
++                     QImage::Format_ARGB32_Premultiplied);
++        image.fill(Qt::transparent);
++        auto *surface = cairo_image_surface_create_for_data(
++            image.bits(), CAIRO_FORMAT_ARGB32, image.width(), image.height(),
++            image.bytesPerLine());
++        auto *cr = cairo_create(surface);
++        tipeFrame_.scale_factor = scale;
++        tipeFrame_.selected = highlight();
++        tipe::painter::paint(cr, tipeFrame_);
++        cairo_destroy(cr);
++        cairo_surface_flush(surface);
++        cairo_surface_destroy(surface);
++        image.setDevicePixelRatio(scale);
++        painter->save();
++        painter->setCompositionMode(QPainter::CompositionMode_Source);
++        painter->drawImage(QPoint(0, 0), image);
++        painter->restore();
++        return;
++    }
++#endif
+     theme_->paint(painter, theme_->background(),
+                   QRect(QPoint(0, 0), actualSize_));
+     auto contentMargin = theme_->contentMargin();
+@@ -442,6 +485,54 @@ void FcitxCandidateWindow::updateClientSideUI(
+         return;
+     }
+ 
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++    if (tipe_) {
++        tipe::client_side::Update update;
++        for (const auto &part : auxUp) {
++            update.preedit += part.string().toUtf8().toStdString();
++        }
++        for (const auto &part : preedit) {
++            update.preedit += part.string().toUtf8().toStdString();
++        }
++        for (const auto &candidate : candidates) {
++            update.candidates.push_back(candidate.value().toUtf8().toStdString());
++        }
++        update.candidate_cursor = candidateIndex;
++        update.layout_hint = layoutHint;
++        update.has_previous = hasPrev;
++        update.has_next = hasNext;
++        update.scale_factor = devicePixelRatio();
++        tipe::client_side::Options options;
++        if (window->screen()) {
++            options.width = std::min(options.width,
++                                     window->screen()->availableGeometry().width());
++            options.height = std::min(options.height,
++                                      window->screen()->availableGeometry().height());
++        }
++        tipeFrame_ = tipe::client_side::adapt(update, options);
++        highlight_ = tipeFrame_.selected;
++        hoverIndex_ = -1;
++        hasPrev_ = hasPrev;
++        hasNext_ = hasNext;
++        prevRegion_ = nextRegion_ = QRect();
++        candidateRegions_.assign(candidates.size(), QRect());
++        for (const auto &cell : tipeFrame_.layout.cells) {
++            const auto &rect = cell.rect;
++            if (cell.candidate_index < candidateRegions_.size()) {
++                candidateRegions_[cell.candidate_index] =
++                    QRect(rect.x, rect.y, rect.width, rect.height);
++            }
++        }
++        actualSize_ = sizeHint();
++        if (size() != actualSize_) {
++            resize(actualSize_);
++        }
++        updatePosition();
++        this->update();
++        return;
++    }
++
++#endif
+     UpdateLayout(upperLayout_, *theme_, {auxUp, preedit});
+     if (cursorpos >= 0) {
+         int auxUpLength = 0;
+@@ -618,6 +709,11 @@ void FcitxCandidateWindow::updatePosition() {
+         actualSize_ -
+         QSize(theme_->shadowMargin().left() + theme_->shadowMargin().right(),
+               theme_->shadowMargin().top() + theme_->shadowMargin().bottom());
++#endif
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++    if (tipe_) {
++        sizeWithoutShadow = actualSize_;
++    }
+ #endif
+     if (sizeWithoutShadow.width() < 0) {
+         sizeWithoutShadow.setWidth(0);
+@@ -650,8 +746,13 @@ void FcitxCandidateWindow::updatePosition() {
+     }
+ 
+     QPoint newPosition(x, y);
+-    newPosition -=
+-        QPoint(theme_->shadowMargin().left(), theme_->shadowMargin().top());
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++    if (!tipe_)
++#endif
++    {
++        newPosition -= QPoint(theme_->shadowMargin().left(),
++                              theme_->shadowMargin().top());
++    }
+     if (newPosition != position()) {
+         if (isWayland_ && isVisible()) {
+             hide();
+@@ -718,6 +819,11 @@ void FcitxCandidateWindow::mouseReleaseEvent(QMouseEvent *event) {
+ }
+ 
+ QSize FcitxCandidateWindow::sizeHint() {
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++    if (tipe_) {
++        return {tipeFrame_.width, tipeFrame_.height};
++    }
++#endif
+     auto minH =
+         theme_->fontMetrics().ascent() + theme_->fontMetrics().descent();
+ 
+diff --git a/qt5/platforminputcontext/fcitxcandidatewindow.h b/qt5/platforminputcontext/fcitxcandidatewindow.h
+index 8101467..d306cc4 100644
+--- a/qt5/platforminputcontext/fcitxcandidatewindow.h
++++ b/qt5/platforminputcontext/fcitxcandidatewindow.h
+@@ -9,6 +9,9 @@
+ #define _PLATFORMINPUTCONTEXT_FCITXCANDIDATEWINDOW_H_
+ 
+ #include "fcitxflags.h"
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++#include "tipe/candidate_painter.hpp"
++#endif
+ #include "fcitxqtdbustypes.h"
+ #include <QGuiApplication>
+ #include <QPainter>
+@@ -38,6 +41,9 @@ public:
+     ~FcitxCandidateWindow();
+ 
+     void render(QPainter *painter);
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++    void setTipe(bool enabled);
++#endif
+ 
+ public Q_SLOTS:
+     void updateClientSideUI(const FcitxQtFormattedPreeditList &preedit,
+@@ -70,6 +76,10 @@ protected:
+     }
+ 
+ private:
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++    bool tipe_ = false;
++    tipe::painter::Frame tipeFrame_;
++#endif
+     const bool isWayland_ =
+         QGuiApplication::platformName().startsWith("wayland");
+     uint32_t repositionToken_ = 0;
+diff --git a/qt5/platforminputcontext/qfcitxplatforminputcontext.cpp b/qt5/platforminputcontext/qfcitxplatforminputcontext.cpp
+index a3acddf..6938f42 100644
+--- a/qt5/platforminputcontext/qfcitxplatforminputcontext.cpp
++++ b/qt5/platforminputcontext/qfcitxplatforminputcontext.cpp
+@@ -783,6 +783,10 @@ void QFcitxPlatformInputContext::updateClientSideUI(
+     auto *w = data->window();
+     auto *window = focusWindowWrapper();
+     if (window && w == window) {
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++        data->candidateWindow(/*create=*/true)->setTipe(
++            data->currentIM == QLatin1String("tipe"));
++#endif
+         data->candidateWindow(/*create=*/true)
+             ->updateClientSideUI(preedit, cursorpos, auxUp, auxDown, candidates,
+                                  candidateIndex, layoutHint, hasPrev, hasNext);
+@@ -873,6 +877,18 @@ void QFcitxPlatformInputContext::updateCurrentIM(const QString &name,
+                                                  const QString &langCode) {
+     Q_UNUSED(name);
+     Q_UNUSED(uniqueName);
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++    if (auto *proxy = qobject_cast<HybridInputContext *>(sender())) {
++        auto *data = static_cast<FcitxQtICData *>(
++            proxy->property("icData").value<void *>());
++        if (data) {
++            data->currentIM = uniqueName;
++            if (auto *popup = data->candidateWindow(/*create=*/false)) {
++                popup->setTipe(uniqueName == QLatin1String("tipe"));
++            }
++        }
++    }
++#endif
+     QLocale newLocale(langCode);
+     if (locale_ != newLocale) {
+         locale_ = newLocale;
+diff --git a/qt5/platforminputcontext/qfcitxplatforminputcontext.h b/qt5/platforminputcontext/qfcitxplatforminputcontext.h
+index 975185b..24eda8e 100644
+--- a/qt5/platforminputcontext/qfcitxplatforminputcontext.h
++++ b/qt5/platforminputcontext/qfcitxplatforminputcontext.h
+@@ -41,6 +41,9 @@ public:
+ 
+     void resetCandidateWindow();
+ 
++#ifdef FCITX_ENABLE_TIPE_CANDIDATES
++    QString currentIM;
++#endif
+     quint64 capability = 0;
+     HybridInputContext *proxy;
+     QRect rect;
+diff --git a/qt6/platforminputcontext/CMakeLists.txt b/qt6/platforminputcontext/CMakeLists.txt
+index a42f93f..9b3458b 100644
+--- a/qt6/platforminputcontext/CMakeLists.txt
++++ b/qt6/platforminputcontext/CMakeLists.txt
+@@ -1,3 +1,10 @@
++set(TIPE_SOURCE_DIR "" CACHE PATH "TiPE source containing the shared candidate painter")
++if(NOT EXISTS "${TIPE_SOURCE_DIR}/src/candidate_painter.cpp")
++    message(FATAL_ERROR "Set TIPE_SOURCE_DIR to the TiPE project checkout")
++endif()
++find_package(PkgConfig REQUIRED)
++pkg_check_modules(TIPE_PANGO REQUIRED IMPORTED_TARGET pangocairo)
++
+ set(FCITX5_QT_EXTRA_PLUGIN_NAME "")
+ if (WITH_FCITX_PLUGIN_NAME)
+     set(FCITX5_QT_EXTRA_PLUGIN_NAME "\"fcitx\",")
+@@ -17,6 +24,9 @@ set(plugin_SRCS
+     font.cpp
+     qtkey.cpp
+     main.cpp
++    ${TIPE_SOURCE_DIR}/src/candidate_painter.cpp
++    ${TIPE_SOURCE_DIR}/src/candidate_grid.cpp
++    ${TIPE_SOURCE_DIR}/src/client_side_candidate_adapter.cpp
+ )
+ 
+ if (BUILD_ONLY_PLUGIN AND BUILD_STATIC_PLUGIN)
+@@ -28,7 +38,11 @@ set_target_properties(fcitx5platforminputcontextplugin-qt6 PROPERTIES
+                          OUTPUT_NAME fcitx5platforminputcontextplugin
+                          AUTOMOC TRUE
+                         )
+-target_include_directories(fcitx5platforminputcontextplugin-qt6 PRIVATE "${PROJECT_SOURCE_DIR}/common")
++target_include_directories(fcitx5platforminputcontextplugin-qt6 PRIVATE
++    "${PROJECT_SOURCE_DIR}/common" "${TIPE_SOURCE_DIR}/include")
++target_compile_features(fcitx5platforminputcontextplugin-qt6 PRIVATE cxx_std_20)
++target_compile_definitions(fcitx5platforminputcontextplugin-qt6 PRIVATE FCITX_ENABLE_TIPE_CANDIDATES)
++target_link_libraries(fcitx5platforminputcontextplugin-qt6 PkgConfig::TIPE_PANGO)
+ if (BUILD_ONLY_PLUGIN AND BUILD_STATIC_PLUGIN)
+ target_compile_definitions(fcitx5platforminputcontextplugin-qt6 PRIVATE "-DQT_STATICPLUGIN")
+ endif()

@@ -1,0 +1,98 @@
+ninja: warning: premature end of file; recovering
+[1/79] Building CXX object CMakeFiles/tipe_core.dir/src/cloud_transport.cpp.o
+[2/79] Building CXX object CMakeFiles/tipe_core.dir/src/model.cpp.o
+[3/79] Building CXX object CMakeFiles/tipe_core.dir/src/cloud_worker.cpp.o
+[4/79] Building CXX object CMakeFiles/tipe_core.dir/src/candidate_grid.cpp.o
+[5/79] Building CXX object CMakeFiles/tipe_core.dir/src/learning.cpp.o
+[6/79] Building CXX object CMakeFiles/tipe_core.dir/src/local_language_model.cpp.o
+[7/79] Building CXX object CMakeFiles/tipe_core.dir/src/correction.cpp.o
+[8/79] Building CXX object CMakeFiles/tipe_core.dir/src/tipe_core.cpp.o
+[9/79] Building CXX object CMakeFiles/tipe_core.dir/src/cloud_candidates.cpp.o
+[10/79] Linking CXX static library libtipe_core.a
+[11/79] Building CXX object CMakeFiles/tipe_painter.dir/src/candidate_painter.cpp.o
+[12/79] Linking CXX static library libtipe_painter.a
+[13/79] Building CXX object CMakeFiles/tipe_client_side_adapter.dir/src/client_side_candidate_adapter.cpp.o
+[14/79] Building CXX object CMakeFiles/tipe_control_ui.dir/src/support_page.cpp.o
+[15/79] Building CXX object CMakeFiles/tipe.dir/src/tipe_fcitx.cpp.o
+[16/79] Building CXX object CMakeFiles/tipe-demo.dir/src/tipe_demo.cpp.o
+[17/79] Building CXX object CMakeFiles/tipe_control_ui.dir/src/control_window.cpp.o
+[18/79] Building CXX object CMakeFiles/tipe-trainer.dir/src/tipe_trainer.cpp.o
+[19/79] Building CXX object CMakeFiles/tipe_ui.dir/src/tipe_ui.cpp.o
+[20/79] Building CXX object CMakeFiles/tipe-diagnose.dir/src/tipe_diagnose.cpp.o
+[21/79] Building CXX object CMakeFiles/tipe-libime-probe.dir/src/libime_probe.cpp.o
+[22/79] Linking CXX shared module libtipe.so
+[23/79] Linking CXX static library libtipe_control_ui.a
+[24/79] Building CXX object CMakeFiles/tipe-correction-flow-tests.dir/tests/test_correction_flow.cpp.o
+[25/79] Building CXX object CMakeFiles/tipe-quality-tests.dir/tests/test_quality.cpp.o
+[26/79] Building CXX object CMakeFiles/tipe-quality-isolation-tests.dir/tests/test_quality_isolation.cpp.o
+[27/79] Building CXX object CMakeFiles/tipe-gtk-harness.dir/tests/real_gtk_harness.cpp.o
+[28/79] Building CXX object CMakeFiles/tipe-control.dir/src/tipe_control.cpp.o
+[29/79] Building CXX object CMakeFiles/tipe-grid-tests.dir/tests/test_candidate_grid.cpp.o
+[30/79] Building CXX object CMakeFiles/tipe-support-tests.dir/tests/test_support_page.cpp.o
+[31/79] Building CXX object CMakeFiles/tipe-qt-harness.dir/tests/real_qt_harness.cpp.o
+[32/79] Linking CXX static library libtipe_client_side_adapter.a
+[33/79] Linking CXX shared module libtipe-ui.so
+[34/79] Building CXX object CMakeFiles/tipe-painter-tests.dir/tests/test_candidate_painter.cpp.o
+[35/79] Building CXX object CMakeFiles/tipe-client-side-adapter-tests.dir/tests/test_client_side_adapter.cpp.o
+[36/79] Building CXX object CMakeFiles/tipe-correction-tests.dir/tests/test_correction.cpp.o
+[37/79] Building CXX object CMakeFiles/tipe-control-window-tests.dir/tests/test_control_window.cpp.o
+[38/79] Building CXX object CMakeFiles/tipe-libime-fallback-tests.dir/tests/test_libime_fallback.cpp.o
+[39/79] Building CXX object CMakeFiles/tipe-english-corpus-tests.dir/tests/test_english_corpus.cpp.o
+[40/79] Building CXX object CMakeFiles/tipe-model-tests.dir/tests/test_model.cpp.o
+[41/79] Building CXX object CMakeFiles/tipe-resource-stress-tests.dir/tests/test_resource_stress.cpp.o
+[42/79] Building CXX object CMakeFiles/tipe-tests.dir/tests/test_core.cpp.o
+[43/79] Building CXX object CMakeFiles/tipe-cloud-candidate-tests.dir/tests/test_cloud_candidates.cpp.o
+[44/79] Building CXX object CMakeFiles/tipe-learning-tests.dir/tests/test_learning.cpp.o
+[45/79] Building CXX object CMakeFiles/tipe-cloud-worker-tests.dir/tests/test_cloud_worker.cpp.o
+[46/79] Building CXX object CMakeFiles/tipe-cloud-transport-tests.dir/tests/test_cloud_transport.cpp.o
+[47/79] Building CXX object CMakeFiles/tipe-local-small-tests.dir/tests/test_local_small.cpp.o
+[48/79] Linking CXX executable tipe-demo
+[49/79] Linking CXX executable tipe-diagnose
+[50/79] Linking CXX executable tipe-trainer
+[51/79] Building CXX object CMakeFiles/tipe-protocol-tests.dir/tests/test_protocols.cpp.o
+[52/79] Linking CXX executable tipe-libime-probe
+[53/79] Linking CXX executable tipe-quality-tests
+[54/79] Linking CXX executable tipe-quality-isolation-tests
+[55/79] Linking CXX executable tipe-correction-flow-tests
+[56/79] Linking CXX executable tipe-gtk-harness
+[57/79] Building CXX object CMakeFiles/tipe-fcitx-lifecycle-tests.dir/tests/test_fcitx_lifecycle.cpp.o
+[58/79] Linking CXX executable tipe-control
+[59/79] Linking CXX executable tipe-qt-harness
+[60/79] Linking CXX executable tipe-support-tests
+[61/79] Linking CXX executable tipe-grid-tests
+[62/79] Linking CXX executable tipe-control-window-tests
+[63/79] Linking CXX executable tipe-painter-tests
+[64/79] Linking CXX executable tipe-client-side-adapter-tests
+[65/79] Linking CXX executable tipe-correction-tests
+[66/79] Linking CXX executable tipe-tests
+[67/79] Building CXX object CMakeFiles/tipe-fcitx-tests.dir/tests/test_fcitx.cpp.o
+[68/79] Linking CXX executable tipe-english-corpus-tests
+[69/79] Linking CXX executable tipe-libime-fallback-tests
+[70/79] Linking CXX executable tipe-learning-tests
+[71/79] Linking CXX executable tipe-resource-stress-tests
+[72/79] Linking CXX executable tipe-model-tests
+[73/79] Linking CXX executable tipe-cloud-transport-tests
+[74/79] Linking CXX executable tipe-cloud-worker-tests
+[75/79] Linking CXX executable tipe-cloud-candidate-tests
+[76/79] Linking CXX executable tipe-local-small-tests
+[77/79] Linking CXX executable tipe-fcitx-lifecycle-tests
+[78/79] Linking CXX executable tipe-protocol-tests
+[79/79] Linking CXX executable tipe-fcitx-tests
+-- Install configuration: "Release"
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/bin/tipe-demo
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/bin/tipe-diagnose
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/bin/tipe-trainer
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/lib/fcitx5/libtipe.so
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/lib/fcitx5/libtipe-ui.so
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/bin/tipe-control
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/share/applications/tipe.desktop
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/share/fcitx5/inputmethod/tipe.conf
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/share/fcitx5/addon/tipe.conf
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/share/fcitx5/addon/tipe-ui.conf
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/share/icons/hicolor/scalable/apps/tipe.svg
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/share/fcitx5/themes/MacOS-Dark
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/share/fcitx5/themes/MacOS-Dark/theme.conf
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/share/fcitx5/themes/MacOS-Dark/panel.svg
+-- Installing: /tmp/tipe-install-stage-z28j_n43/usr/share/fcitx5/themes/MacOS-Dark/highlight.svg
+TiPE 已原子安装；安装清单和原文件备份已保存。未修改 profile，未重启桌面程序。
+启用/重启：scripts/activate-user.sh；卸载：scripts/uninstall-user.sh（默认保留学习数据）。

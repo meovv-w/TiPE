@@ -1,0 +1,34 @@
+{
+  "installed": [
+    {
+      "name": "libtipe.so",
+      "sha256": "2ceb1ba92634d2ae6c6c8694614d4d55a25d82f04aa069f41046237c36bd86d4",
+      "matches_build": true
+    },
+    {
+      "name": "libclassicui.so",
+      "sha256": "8c4056a16d853f3fece6404a627c8cb372502b0b87fda7bba225ed667a380c18",
+      "matches_build": true
+    },
+    {
+      "name": "tipe-control",
+      "sha256": "3b7f2802dfa35e84174d0f5ebb4da42577434f38b73e6773d390911de496d3a9",
+      "matches_build": true
+    }
+  ],
+  "mapped": [
+    {
+      "name": "libtipe.so",
+      "pid": 1115649,
+      "inode": 14659238,
+      "matches_installed": true
+    },
+    {
+      "name": "libclassicui.so",
+      "pid": 1115649,
+      "inode": 14657621,
+      "matches_installed": true
+    }
+  ],
+  "selected": "tipe"
+}

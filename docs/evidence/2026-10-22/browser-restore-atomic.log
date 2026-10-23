@@ -1,0 +1,2 @@
+browser: Restore prefix after deleting all suffix pinyin: PASS
+{"passed": 1, "results": "/home/lin/Documents/ChatGPT/tipe/build/segmented-browser-restore-atomic/results.json"}

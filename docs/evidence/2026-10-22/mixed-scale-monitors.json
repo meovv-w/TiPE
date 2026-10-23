@@ -1,0 +1,125 @@
+[
+  2,
+  [
+    [
+      [
+        "Meta-0",
+        "MetaVendor",
+        "MetaVirtualMonitor",
+        "0x00"
+      ],
+      [
+        [
+          "1920x1440@60.000",
+          1920,
+          1440,
+          60.0,
+          1.0,
+          [
+            1.0,
+            1.25,
+            1.3333333730697632,
+            1.5,
+            1.6666666269302368,
+            2.0,
+            2.5,
+            2.6666667461395264
+          ],
+          {
+            "is-current": true,
+            "is-preferred": true
+          }
+        ]
+      ],
+      {
+        "is-builtin": false,
+        "display-name": "MetaVendor",
+        "is-for-lease": false,
+        "color-mode": 0,
+        "supported-color-modes": [
+          0
+        ],
+        "rgb-range": 1
+      }
+    ],
+    [
+      [
+        "Meta-1",
+        "MetaVendor",
+        "MetaVirtualMonitor",
+        "0x01"
+      ],
+      [
+        [
+          "2400x1500@60.000",
+          2400,
+          1500,
+          60.0,
+          1.5,
+          [
+            1.0,
+            1.25,
+            1.3333333730697632,
+            1.5,
+            1.6666666269302368,
+            2.0,
+            2.5,
+            3.0
+          ],
+          {
+            "is-current": true,
+            "is-preferred": true
+          }
+        ]
+      ],
+      {
+        "is-builtin": false,
+        "display-name": "MetaVendor",
+        "is-for-lease": false,
+        "color-mode": 0,
+        "supported-color-modes": [
+          0
+        ],
+        "rgb-range": 1
+      }
+    ]
+  ],
+  [
+    [
+      0,
+      0,
+      1.0,
+      0,
+      true,
+      [
+        [
+          "Meta-0",
+          "MetaVendor",
+          "MetaVirtualMonitor",
+          "0x00"
+        ]
+      ],
+      {}
+    ],
+    [
+      1920,
+      0,
+      1.5,
+      0,
+      false,
+      [
+        [
+          "Meta-1",
+          "MetaVendor",
+          "MetaVirtualMonitor",
+          "0x01"
+        ]
+      ],
+      {}
+    ]
+  ],
+  {
+    "layout-mode": 1,
+    "supports-changing-layout-mode": true
+  }
+]

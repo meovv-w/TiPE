@@ -1,0 +1,28 @@
+{
+  "pid": 1391305,
+  "files": [
+    {
+      "name": "libtipe.so",
+      "path": "/home/lin/.config/fcitx5/addon/libtipe.so",
+      "sha256": "c404cf447dfbd332e6842277f177f8b5015825928b385b5b59cdb24361df73c5",
+      "inode": 14798136,
+      "matches_build": true
+    },
+    {
+      "name": "libclassicui.so",
+      "path": "/home/lin/.config/fcitx5/addon/libclassicui.so",
+      "sha256": "56f14b78bed672a277c7377c3fc53d97ecb3bb63bb5dd74a0dec94e74fae7ef1",
+      "inode": 14798141,
+      "matches_build": true
+    },
+    {
+      "name": "libwaylandim.so",
+      "path": "/home/lin/.config/fcitx5/addon/libwaylandim.so",
+      "sha256": "d28983c4114178011f678f500efef23ca880b0bf9a9fbf73681f1df08aa35d51",
+      "inode": 14798144,
+      "matches_build": true
+    }
+  ],
+  "mapped_modules_verified": true,
+  "selected": "tipe"
+}

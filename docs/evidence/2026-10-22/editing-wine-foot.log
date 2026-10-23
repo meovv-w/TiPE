@@ -1,0 +1,36 @@
+wine: Enter preserves pinyin: PASS
+wine: Space selects Chinese: PASS
+wine: Escape cancels without committing: PASS
+wine: Insert inside preedit: PASS
+wine: Delete at preedit beginning: PASS
+wine: Backspace at preedit end: PASS
+wine: Backspace inside preedit: PASS
+wine: Delete at preedit end is harmless: PASS
+wine: Shift roundtrip retains insertion position: PASS
+wine: Shift roundtrip keeps Chinese selection: PASS
+wine: Tab expansion collapses to editable pinyin: PASS
+wine: Expanded arrows do not change Enter spelling: PASS
+wine: Pagination does not change Enter spelling: PASS
+wine: Numeric first candidate selection: PASS
+wine: Long spelling survives expand and collapse: PASS
+wine: Chinese inserts at client caret: PASS
+wine: Moved client caret invalidates restoration: PASS
+wine: New composition after cancellation: PASS
+wine: XIM unavailable surrounding text uses client deletion: PASS
+foot: Enter preserves pinyin: PASS
+foot: Space selects Chinese: PASS
+foot: Escape cancels without committing: PASS
+foot: Insert inside preedit: PASS
+foot: Delete at preedit beginning: PASS
+foot: Backspace at preedit end: PASS
+foot: Backspace inside preedit: PASS
+foot: Delete at preedit end is harmless: PASS
+foot: Shift roundtrip retains insertion position: PASS
+foot: Shift roundtrip keeps Chinese selection: PASS
+foot: Tab expansion collapses to editable pinyin: PASS
+foot: Expanded arrows do not change Enter spelling: PASS
+foot: Pagination does not change Enter spelling: PASS
+foot: Numeric first candidate selection: PASS
+foot: Long spelling survives expand and collapse: PASS
+foot: New composition after cancellation: PASS
+{"passed": 35, "results": "/home/lin/Documents/ChatGPT/tipe/build/editing-protocol-regression/results.json"}

@@ -1,0 +1,9 @@
+gtk: Partial selection retains suffix: PASS
+gtk: Numeric prefix after first ten candidates: PASS
+gtk: Long phrase preserves remaining syllables: PASS
+gtk: Edit remaining pinyin after partial choice: PASS
+gtk: Cancel remaining pinyin keeps selected prefix: PASS
+gtk: Abbreviation selection chain woc: PASS
+gtk: Three successive phrase segments: PASS
+gtk: Restore prefix after deleting all suffix pinyin: PASS
+{"passed": 8, "results": "/home/lin/Documents/ChatGPT/tipe/build/segmented-gtk-repeat/results.json"}

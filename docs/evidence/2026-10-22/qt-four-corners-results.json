@@ -1,0 +1,282 @@
+[
+  {
+    "name": "bottom-right",
+    "expected": "尼好",
+    "actual": "尼好",
+    "selection_bounds": [
+      1920,
+      1792,
+      2023,
+      1847
+    ],
+    "target": [
+      972,
+      910
+    ],
+    "hover_bounds": [
+      1920,
+      1792,
+      2023,
+      1847
+    ],
+    "compact_geometry": [
+      54,
+      96,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      54,
+      6,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "top-left",
+    "expected": "石碣",
+    "actual": "石碣",
+    "selection_bounds": [
+      978,
+      466,
+      1081,
+      521
+    ],
+    "target": [
+      501,
+      247
+    ],
+    "hover_bounds": [
+      978,
+      466,
+      1081,
+      521
+    ],
+    "compact_geometry": [
+      463,
+      153,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      463,
+      153,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "bottom-left",
+    "expected": "天期",
+    "actual": "天期",
+    "selection_bounds": [
+      982,
+      1792,
+      1085,
+      1847
+    ],
+    "target": [
+      505,
+      910
+    ],
+    "hover_bounds": [
+      982,
+      1792,
+      1085,
+      1847
+    ],
+    "compact_geometry": [
+      465,
+      96,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      465,
+      6,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "top-right",
+    "expected": "薛小",
+    "actual": "薛小",
+    "selection_bounds": [
+      1920,
+      466,
+      2023,
+      521
+    ],
+    "target": [
+      972,
+      247
+    ],
+    "hover_bounds": [
+      1920,
+      466,
+      2023,
+      521
+    ],
+    "compact_geometry": [
+      54,
+      153,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      54,
+      153,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "bottom-right-long",
+    "expected": "中花人民共和国",
+    "actual": "中花人民共和国",
+    "selection_bounds": [
+      1680,
+      1552,
+      1878,
+      1607
+    ],
+    "target": [
+      889,
+      790
+    ],
+    "hover_bounds": [
+      1680,
+      1552,
+      1878,
+      1607
+    ],
+    "compact_geometry": [
+      -66,
+      96,
+      718,
+      40
+    ],
+    "expanded_geometry": [
+      -66,
+      -114,
+      718,
+      250
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "top-left-long",
+    "expected": "我想指导为什么",
+    "actual": "我想指导为什么",
+    "selection_bounds": [
+      1212,
+      466,
+      1341,
+      521
+    ],
+    "target": [
+      620,
+      247
+    ],
+    "hover_bounds": [
+      1212,
+      466,
+      1341,
+      521
+    ],
+    "compact_geometry": [
+      580,
+      153,
+      718,
+      40
+    ],
+    "expanded_geometry": [
+      580,
+      153,
+      718,
+      250
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "bottom-left-long",
+    "expected": "倍镜大学计算机学院",
+    "actual": "倍镜大学计算机学院",
+    "selection_bounds": [
+      1263,
+      1456,
+      1463,
+      1511
+    ],
+    "target": [
+      681,
+      742
+    ],
+    "hover_bounds": [
+      1263,
+      1456,
+      1463,
+      1511
+    ],
+    "compact_geometry": [
+      591,
+      96,
+      710,
+      40
+    ],
+    "expanded_geometry": [
+      591,
+      -162,
+      710,
+      298
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "top-right-long",
+    "expected": "今天天气镇不错",
+    "actual": "今天天气镇不错",
+    "selection_bounds": [
+      1680,
+      466,
+      1876,
+      521
+    ],
+    "target": [
+      888,
+      247
+    ],
+    "hover_bounds": [
+      1680,
+      466,
+      1876,
+      521
+    ],
+    "compact_geometry": [
+      -66,
+      153,
+      718,
+      40
+    ],
+    "expanded_geometry": [
+      -66,
+      153,
+      718,
+      250
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  }
+]

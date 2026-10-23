@@ -1,0 +1,41 @@
+[
+  {
+    "toolkit": "browser",
+    "name": "Restore prefix after deleting all suffix pinyin",
+    "expected": "ni",
+    "actual": "你ni",
+    "passed": false,
+    "navigation": [
+      {
+        "raw": "nihao",
+        "text": "你",
+        "consumed": 2,
+        "index": 31,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected_value": "你hao",
+        "actual_value": "你hao",
+        "expected_preedit": "hao",
+        "actual_preedit": "hao",
+        "passed": true
+      },
+      {
+        "expected_value": "你",
+        "actual_value": "你",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "ni",
+        "actual_value": "你ni",
+        "expected_preedit": "ni",
+        "actual_preedit": "ni",
+        "passed": false
+      }
+    ]
+  }
+]

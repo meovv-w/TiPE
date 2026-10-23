@@ -1,0 +1,2 @@
+TiPE sustained resource stress
+rounds=2400 events=307200 max_queue=2048 max_model=4096 max_disk=228461 final_disk=228407 max_sampled_rss_kb=20640 process_peak_rss_kb=19332 cpu_ms=34414.9 worker_cpu_ms=32673.4 worker_throttled_ms=32846.5 wall_ms=120991 publishes=37 dropped=48896

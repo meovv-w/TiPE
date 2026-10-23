@@ -1,0 +1,14 @@
+{
+  "libtipe.so": {
+    "path": "/home/lin/.config/fcitx5/addon/libtipe.so",
+    "inode": 14740494
+  },
+  "libclassicui.so": {
+    "path": "/home/lin/.cache/tipe/fcitx5-classicui/build/bin/libclassicui.so",
+    "inode": 14795019
+  },
+  "libwaylandim.so": {
+    "path": "/home/lin/.config/fcitx5/addon/libwaylandim.so",
+    "inode": 14754113
+  }
+}

@@ -1,0 +1,327 @@
+{
+  "scope": "Discord bootstrap Electron renderer; local contenteditable; no chat",
+  "results": [
+    {
+      "name": "Enter literal",
+      "expected": "nihao",
+      "actual": "nihao",
+      "passed": true,
+      "events": [
+        {
+          "type": "compositionstart",
+          "data": "",
+          "value": ""
+        },
+        {
+          "type": "compositionupdate",
+          "data": "n",
+          "value": ""
+        },
+        {
+          "type": "input",
+          "data": "n",
+          "value": "n"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "ni",
+          "value": "n"
+        },
+        {
+          "type": "input",
+          "data": "ni",
+          "value": "ni"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "nih",
+          "value": "ni"
+        },
+        {
+          "type": "input",
+          "data": "nih",
+          "value": "nih"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "niha",
+          "value": "nih"
+        },
+        {
+          "type": "input",
+          "data": "niha",
+          "value": "niha"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "nihao",
+          "value": "niha"
+        },
+        {
+          "type": "input",
+          "data": "nihao",
+          "value": "nihao"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "nihao",
+          "value": "nihao"
+        },
+        {
+          "type": "input",
+          "data": "nihao",
+          "value": "nihao"
+        },
+        {
+          "type": "compositionend",
+          "data": "nihao",
+          "value": "nihao"
+        }
+      ]
+    },
+    {
+      "name": "Chinese commit",
+      "expected": "你好",
+      "actual": "你好",
+      "passed": true,
+      "events": [
+        {
+          "type": "compositionstart",
+          "data": "",
+          "value": "\n"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "n",
+          "value": "\n"
+        },
+        {
+          "type": "input",
+          "data": "n",
+          "value": "n"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "ni",
+          "value": "n"
+        },
+        {
+          "type": "input",
+          "data": "ni",
+          "value": "ni"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "nih",
+          "value": "ni"
+        },
+        {
+          "type": "input",
+          "data": "nih",
+          "value": "nih"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "niha",
+          "value": "nih"
+        },
+        {
+          "type": "input",
+          "data": "niha",
+          "value": "niha"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "nihao",
+          "value": "niha"
+        },
+        {
+          "type": "input",
+          "data": "nihao",
+          "value": "nihao"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "你好",
+          "value": "nihao"
+        },
+        {
+          "type": "input",
+          "data": "你好",
+          "value": "你好"
+        },
+        {
+          "type": "compositionend",
+          "data": "你好",
+          "value": "你好"
+        }
+      ]
+    },
+    {
+      "name": "Mode roundtrip",
+      "expected": "你好",
+      "actual": "你好",
+      "passed": true,
+      "events": [
+        {
+          "type": "compositionstart",
+          "data": "",
+          "value": "\n"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "n",
+          "value": "\n"
+        },
+        {
+          "type": "input",
+          "data": "n",
+          "value": "n"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "ni",
+          "value": "n"
+        },
+        {
+          "type": "input",
+          "data": "ni",
+          "value": "ni"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "nih",
+          "value": "ni"
+        },
+        {
+          "type": "input",
+          "data": "nih",
+          "value": "nih"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "niha",
+          "value": "nih"
+        },
+        {
+          "type": "input",
+          "data": "niha",
+          "value": "niha"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "nihao",
+          "value": "niha"
+        },
+        {
+          "type": "input",
+          "data": "nihao",
+          "value": "nihao"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "你好",
+          "value": "nihao"
+        },
+        {
+          "type": "input",
+          "data": "你好",
+          "value": "你好"
+        },
+        {
+          "type": "compositionend",
+          "data": "你好",
+          "value": "你好"
+        }
+      ]
+    },
+    {
+      "name": "English literal",
+      "expected": "github",
+      "actual": "github",
+      "passed": true,
+      "events": [
+        {
+          "type": "compositionstart",
+          "data": "",
+          "value": "\n"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "g",
+          "value": "\n"
+        },
+        {
+          "type": "input",
+          "data": "g",
+          "value": "g"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "gi",
+          "value": "g"
+        },
+        {
+          "type": "input",
+          "data": "gi",
+          "value": "gi"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "git",
+          "value": "gi"
+        },
+        {
+          "type": "input",
+          "data": "git",
+          "value": "git"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "gith",
+          "value": "git"
+        },
+        {
+          "type": "input",
+          "data": "gith",
+          "value": "gith"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "githu",
+          "value": "gith"
+        },
+        {
+          "type": "input",
+          "data": "githu",
+          "value": "githu"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "github",
+          "value": "githu"
+        },
+        {
+          "type": "input",
+          "data": "github",
+          "value": "github"
+        },
+        {
+          "type": "compositionupdate",
+          "data": "github",
+          "value": "github"
+        },
+        {
+          "type": "input",
+          "data": "github",
+          "value": "github"
+        },
+        {
+          "type": "compositionend",
+          "data": "github",
+          "value": "github"
+        }
+      ]
+    }
+  ]
+}

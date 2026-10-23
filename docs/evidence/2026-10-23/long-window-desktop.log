@@ -1,0 +1,6 @@
+gtk: Long composition crosses decoder window without losing suffix: PASS
+qt: Long composition crosses decoder window without losing suffix: PASS
+browser: Long composition crosses decoder window without losing suffix: PASS
+wine: Long composition crosses decoder window without losing suffix: PASS
+foot: Long composition crosses decoder window without losing suffix: PASS
+{"passed": 5, "results": "/home/lin/Documents/ChatGPT/tipe/build/long-window-desktop/results.json"}

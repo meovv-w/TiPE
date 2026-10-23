@@ -1,0 +1,13 @@
+Test project /home/lin/Documents/ChatGPT/tipe/build
+    Start  6: tipe-control-single-instance
+1/4 Test  #6: tipe-control-single-instance .....   Passed    0.43 sec
+    Start 11: tipe-support-tests
+2/4 Test #11: tipe-support-tests ...............   Passed    0.18 sec
+    Start 12: tipe-control-window-tests
+3/4 Test #12: tipe-control-window-tests ........   Passed    1.58 sec
+    Start 13: tipe-support-hidpi-tests
+4/4 Test #13: tipe-support-hidpi-tests .........   Passed    0.20 sec
+
+100% tests passed, 0 tests failed out of 4
+
+Total Test time (real) =   2.39 sec

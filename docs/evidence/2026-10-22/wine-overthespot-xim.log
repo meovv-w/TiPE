@@ -1,0 +1,87 @@
+00f8:fixme:winediag:loader_init wine-staging 11.0 is a testing version containing experimental patches.
+00f8:fixme:winediag:loader_init Please mention your exact version when filing bug reports on winehq.org.
+0100:trace:xim:xim_init requesting L"overthespot" style 0x404 preedit position, status nothing
+0100:trace:xim:xim_thread_attach created XFontSet 0x7d7d0f7a3040, list 0x7d7d0f7ac190, count 15
+0100:trace:xim:xim_thread_attach   0: ISO8859-2
+0100:trace:xim:xim_thread_attach   1: ISO8859-3
+0100:trace:xim:xim_thread_attach   2: ISO8859-4
+0100:trace:xim:xim_thread_attach   3: ISO8859-5
+0100:trace:xim:xim_thread_attach   4: KOI8-R
+0100:trace:xim:xim_thread_attach   5: ISO8859-7
+0100:trace:xim:xim_thread_attach   6: ISO8859-9
+0100:trace:xim:xim_thread_attach   7: ISO8859-13
+0100:trace:xim:xim_thread_attach   8: ISO8859-14
+0100:trace:xim:xim_thread_attach   9: ISO8859-15
+0100:trace:xim:xim_thread_attach   10: JISX0208.1983-0
+0100:trace:xim:xim_thread_attach   11: KSC5601.1987-0
+0100:trace:xim:xim_thread_attach   12: GB2312.1980-0
+0100:trace:xim:xim_thread_attach   13: JISX0201.1976-0
+0100:trace:xim:xim_thread_attach   14: ISO10646-1
+0100:trace:xim:xim_create xim 0x7d7d0f7a2b90, XDisplayOfIM 0x7d7d0f7c8520, XLocaleOfIM "C.UTF-8"
+0100:trace:xim:xim_create input styles count 6
+0100:trace:xim:xim_create   0: 0x404 preedit position, status nothing
+0100:trace:xim:xim_create   1: 0x402 preedit callbacks, status nothing
+0100:trace:xim:xim_create   2: 0x408 preedit nothing, status nothing
+0100:trace:xim:xim_create   3: 0x204 preedit position, status callbacks
+0100:trace:xim:xim_create   4: 0x202 preedit callbacks, status callbacks
+0100:trace:xim:xim_create   5: 0x208 preedit nothing, status callbacks
+0100:trace:xim:xim_create selected style 0x404 preedit position, status nothing
+0104:trace:xim:xim_thread_attach created XFontSet 0x7f3770013b40, list 0x7f37700159d0, count 15
+0104:trace:xim:xim_thread_attach   0: ISO8859-2
+0104:trace:xim:xim_thread_attach   1: ISO8859-3
+0104:trace:xim:xim_thread_attach   2: ISO8859-4
+0104:trace:xim:xim_thread_attach   3: ISO8859-5
+0104:trace:xim:xim_thread_attach   4: KOI8-R
+0104:trace:xim:xim_thread_attach   5: ISO8859-7
+0104:trace:xim:xim_thread_attach   6: ISO8859-9
+0104:trace:xim:xim_thread_attach   7: ISO8859-13
+0104:trace:xim:xim_thread_attach   8: ISO8859-14
+0104:trace:xim:xim_thread_attach   9: ISO8859-15
+0104:trace:xim:xim_thread_attach   10: JISX0208.1983-0
+0104:trace:xim:xim_thread_attach   11: KSC5601.1987-0
+0104:trace:xim:xim_thread_attach   12: GB2312.1980-0
+0104:trace:xim:xim_thread_attach   13: JISX0201.1976-0
+0104:trace:xim:xim_thread_attach   14: ISO10646-1
+0104:trace:xim:xim_create xim 0x7f3770015b10, XDisplayOfIM 0x7f3770001640, XLocaleOfIM "C.UTF-8"
+0104:trace:xim:xim_create input styles count 6
+0104:trace:xim:xim_create   0: 0x404 preedit position, status nothing
+0104:trace:xim:xim_create   1: 0x402 preedit callbacks, status nothing
+0104:trace:xim:xim_create   2: 0x408 preedit nothing, status nothing
+0104:trace:xim:xim_create   3: 0x204 preedit position, status callbacks
+0104:trace:xim:xim_create   4: 0x202 preedit callbacks, status callbacks
+0104:trace:xim:xim_create   5: 0x208 preedit nothing, status callbacks
+0104:trace:xim:xim_create selected style 0x404 preedit position, status nothing
+00f8:trace:xim:xim_init requesting L"overthespot" style 0x404 preedit position, status nothing
+00f8:trace:xim:xim_thread_attach created XFontSet 0x7d7d00f01a30, list 0x7d7d00f04550, count 15
+00f8:trace:xim:xim_thread_attach   0: ISO8859-2
+00f8:trace:xim:xim_thread_attach   1: ISO8859-3
+00f8:trace:xim:xim_thread_attach   2: ISO8859-4
+00f8:trace:xim:xim_thread_attach   3: ISO8859-5
+00f8:trace:xim:xim_thread_attach   4: KOI8-R
+00f8:trace:xim:xim_thread_attach   5: ISO8859-7
+00f8:trace:xim:xim_thread_attach   6: ISO8859-9
+00f8:trace:xim:xim_thread_attach   7: ISO8859-13
+00f8:trace:xim:xim_thread_attach   8: ISO8859-14
+00f8:trace:xim:xim_thread_attach   9: ISO8859-15
+00f8:trace:xim:xim_thread_attach   10: JISX0208.1983-0
+00f8:trace:xim:xim_thread_attach   11: KSC5601.1987-0
+00f8:trace:xim:xim_thread_attach   12: GB2312.1980-0
+00f8:trace:xim:xim_thread_attach   13: JISX0201.1976-0
+00f8:trace:xim:xim_thread_attach   14: ISO10646-1
+00f8:trace:xim:xim_create xim 0x7d7d00de5aa0, XDisplayOfIM 0x7d7d00ef06e0, XLocaleOfIM "C.UTF-8"
+00f8:trace:xim:xim_create input styles count 6
+00f8:trace:xim:xim_create   0: 0x404 preedit position, status nothing
+00f8:trace:xim:xim_create   1: 0x402 preedit callbacks, status nothing
+00f8:trace:xim:xim_create   2: 0x408 preedit nothing, status nothing
+00f8:trace:xim:xim_create   3: 0x204 preedit position, status callbacks
+00f8:trace:xim:xim_create   4: 0x202 preedit callbacks, status callbacks
+00f8:trace:xim:xim_create   5: 0x208 preedit nothing, status callbacks
+00f8:trace:xim:xim_create selected style 0x404 preedit position, status nothing
+00f8:trace:xim:xic_create xim 0x7d7d00de5aa0, hwnd 0x10052/2200003
+00f8:trace:xim:xic_create created XIC 0x7d7d00e02a30
+00f8:trace:xim:xim_set_result_string hwnd 0x10052, string "nihao"
+00f8:trace:xim:xim_set_result_string hwnd 0x10052, string "\xe4\xbd\xa0\xe5\xa5\xbd"
+00f8:trace:xim:xim_set_result_string hwnd 0x10052, string "\xe4\xbd\xa0\xe5\xa5\xbd"
+00f8:trace:xim:xim_set_result_string hwnd 0x10052, string "github"
+00f8:trace:xim:xim_set_result_string hwnd 0x10052, string "\xe7\x9f\xb3\xe7\xa2\xa3"
+00f8:trace:xim:xim_set_result_string hwnd 0x10052, string "\xe7\x9f\xb3\xe7\xa2\xa3"

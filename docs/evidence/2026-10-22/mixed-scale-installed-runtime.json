@@ -1,0 +1,18 @@
+{
+  "compositor": "Mutter 50.1 headless",
+  "private_bus": true,
+  "physical_input": false,
+  "client_modules": {
+    "gtk": {
+      "path": "/home/lin/.local/share/tipe/gtk/lib/gtk-4.0/4.0.0/immodules/libim-fcitx5.so",
+      "inode": 14769221,
+      "sha256": "59c9326f1352c728f56d618844d96a8649d30f7dcb20f3516b387efd622e6169"
+    },
+    "qt": {
+      "path": "/home/lin/.local/share/tipe/qt/lib/qt6/plugins/platforminputcontexts/libfcitx5platforminputcontextplugin.so",
+      "inode": 14717214,
+      "sha256": "1d4759f1d8115a2ab6554d7143df9e941282acf667d044ee3afe75b73dfef492"
+    }
+  },
+  "complete": true
+}

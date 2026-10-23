@@ -1,0 +1,113 @@
+[
+  {
+    "name": "origin",
+    "input_style": "overthespot",
+    "caret": {
+      "valid": true,
+      "client_rect": [
+        22,
+        22,
+        23,
+        38
+      ]
+    },
+    "owner": {
+      "id": "0x2200003",
+      "depth": 1,
+      "title": "TiPE Wine isolated regression",
+      "x": 0,
+      "y": 0,
+      "width": 1536,
+      "height": 2000,
+      "map_state": 2,
+      "override_redirect": 0
+    },
+    "popup": {
+      "id": "0x400002",
+      "depth": 2,
+      "title": "Fcitx5 Input Window",
+      "x": 22,
+      "y": 23,
+      "width": 1196,
+      "height": 80,
+      "map_state": 2,
+      "override_redirect": 1
+    },
+    "input_style_scope": "AppDefaults/input.exe; prefix-global value absent",
+    "passed": true
+  },
+  {
+    "name": "after-text",
+    "input_style": "overthespot",
+    "caret": {
+      "valid": true,
+      "client_rect": [
+        65,
+        22,
+        66,
+        38
+      ]
+    },
+    "owner": {
+      "id": "0x2200003",
+      "depth": 1,
+      "title": "TiPE Wine isolated regression",
+      "x": 0,
+      "y": 0,
+      "width": 1536,
+      "height": 2000,
+      "map_state": 2,
+      "override_redirect": 0
+    },
+    "popup": {
+      "id": "0x400002",
+      "depth": 2,
+      "title": "Fcitx5 Input Window",
+      "x": 65,
+      "y": 23,
+      "width": 1196,
+      "height": 80,
+      "map_state": 2,
+      "override_redirect": 1
+    },
+    "input_style_scope": "AppDefaults/input.exe; prefix-global value absent",
+    "passed": true
+  },
+  {
+    "name": "new-line",
+    "input_style": "overthespot",
+    "caret": {
+      "valid": true,
+      "client_rect": [
+        22,
+        38,
+        23,
+        54
+      ]
+    },
+    "owner": {
+      "id": "0x2200003",
+      "depth": 1,
+      "title": "TiPE Wine isolated regression",
+      "x": 0,
+      "y": 0,
+      "width": 1536,
+      "height": 2000,
+      "map_state": 2,
+      "override_redirect": 0
+    },
+    "popup": {
+      "id": "0x400002",
+      "depth": 2,
+      "title": "Fcitx5 Input Window",
+      "x": 22,
+      "y": 39,
+      "width": 1196,
+      "height": 80,
+      "map_state": 2,
+      "override_redirect": 1
+    },
+    "input_style_scope": "AppDefaults/input.exe; prefix-global value absent",
+    "passed": true
+  }
+]

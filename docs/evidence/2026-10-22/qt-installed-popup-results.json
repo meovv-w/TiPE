@@ -1,0 +1,72 @@
+[
+  {
+    "name": "bottom-right",
+    "expected": "尼好",
+    "actual": "尼好",
+    "selection_bounds": [
+      1920,
+      1792,
+      2023,
+      1847
+    ],
+    "target": [
+      972,
+      910
+    ],
+    "hover_bounds": [
+      1920,
+      1792,
+      2023,
+      1847
+    ],
+    "compact_geometry": [
+      54,
+      96,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      54,
+      6,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "top-left",
+    "expected": "石碣",
+    "actual": "石碣",
+    "selection_bounds": [
+      978,
+      466,
+      1081,
+      521
+    ],
+    "target": [
+      501,
+      247
+    ],
+    "hover_bounds": [
+      978,
+      466,
+      1081,
+      521
+    ],
+    "compact_geometry": [
+      463,
+      153,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      463,
+      153,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  }
+]

@@ -1,0 +1,231 @@
+{
+  "automatic_tests": {
+    "passed": 36,
+    "total": 36,
+    "log": "../2026-10-23/ctest-prefix-linear-final.log",
+    "seconds": 82.36
+  },
+  "installation_cases": {
+    "passed": 10,
+    "total": 10,
+    "log": "user-installation-tests.log",
+    "note": "Offline profile snapshot addition and fsync deletion also passed the final targeted installation run."
+  },
+  "password_fields": "password-all-installed-results.json",
+  "focus_gtk_qt": "focus-installed-results.json",
+  "cross_protocol_focus": "cross-protocol-focus-current-results.json",
+  "qt_edge_mouse": "qt-installed-popup-results.json",
+  "runtime": "../2026-10-23/installed-runtime-decoder-navigation.json",
+  "performance": "../2026-10-23/representative-performance.json",
+  "goal_complete": false,
+  "remaining": [
+    "GTK/Qt, foot native input-popup and Wine/XIM isolated mixed-scale dual-output checks pass. Physical multi-monitor niri layouts remain unverified.",
+    "Wine app-specific overthespot caret and editing pass; XIM learning/cloud remain disabled because password hints are unavailable.",
+    "Discord scope is isolated launcher renderer; logged-in chat is unverified.",
+    "No external production cloud provider is configured."
+  ],
+  "editing_matrix": {
+    "passed": 98,
+    "by_frontend": {
+      "gtk": 21,
+      "qt": 21,
+      "browser": 21,
+      "wine": 19,
+      "foot": 16
+    },
+    "results": [
+      "editing-gtk-qt-browser-results.json",
+      "editing-wine-foot-results.json"
+    ],
+    "scope": "Owned real controls; installed GTK/Qt inode checks; physical keys. Excludes arbitrary segmented chains, exhaustive edges, and multi-output."
+  },
+  "segmented_matrix": {
+    "passed": 38,
+    "by_frontend": {
+      "gtk": 8,
+      "qt": 8,
+      "browser": 8,
+      "wine": 7,
+      "foot": 7
+    },
+    "results": [
+      "segmented-gtk-results.json",
+      "segmented-qt-results.json",
+      "segmented-browser-results.json",
+      "segmented-wine-foot-results.json"
+    ],
+    "scope": "Actual client text and remaining preedit in GTK/Qt/browser; Wine committed text; foot final lines. Browser also rejects protocol-error logs."
+  },
+  "chain_learning": {
+    "passed": 2,
+    "results": "segmented-learning-results.json",
+    "scope": "GTK/Qt each complete three retained abbreviation chains; canonical and raw evidence published, next woc+Space yields learned phrase without restart."
+  },
+  "four_corner_popup": {
+    "passed": 16,
+    "results": [
+      "gtk-four-corners-results.json",
+      "qt-four-corners-results.json"
+    ],
+    "scope": "Each toolkit: four corners, ordinary and distinct long phrases, fixed expand width, bottom flip, real mouse/keyboard comparison at 2x."
+  },
+  "post_fix_native_editing": {
+    "passed": 37,
+    "by_frontend": {
+      "browser": 21,
+      "foot": 16
+    },
+    "results": "editing-native-segmented-results.json"
+  },
+  "post_fix_browser_privacy": "password-composition-browser-results.json",
+  "post_fix_cross_protocol_focus": "cross-protocol-segmented-results.json",
+  "fixes": [
+    "Use LibIME candidate graph endpoints instead of enumeration cursor positions for prefix consumption.",
+    "Synchronize text-input-v3 preedit replacement with a zero-length surrounding transaction; wait for fresh surrounding text after a document commit.",
+    "Recreate GTK4 popup on authoritative parent-surface monitor/scale notifications, preserving active composition and selecting new output constraints.",
+    "Damage embedded XIM candidate child on authoritative parent ConfigureNotify; Xwayland may replace backing pixmaps during output moves without exposing the child.",
+    "Preserve complete long raw composition; decode a bounded 70-byte window and clip candidates only at true word endpoints within 64 bytes.",
+    "Apply changed decoder range preserving identical suffix during preedit edits.",
+    "Share immutable LibIME base per thread with file identity checks; prewarm at Fcitx addon load, keep each context lattice independent."
+  ],
+  "native_four_corner_popup": {
+    "passed": 16,
+    "by_frontend": {
+      "browser": 8,
+      "foot": 8
+    },
+    "results": "native-popup-results.json",
+    "scope": "Single real display, 2x scale: four corners, ordinary and long spelling, compact/expanded width, complete visible bounds, client protocol caret rectangle and actual keyboard/mouse selection. Browser protocol rejection logs absent."
+  },
+  "mixed_scale_popup": {
+    "passed": 24,
+    "by_frontend": {
+      "gtk": 12,
+      "qt": 12
+    },
+    "scales": [
+      1.25,
+      1.5,
+      2.0
+    ],
+    "results": "mixed-scale-installed-results.json",
+    "runtime": "mixed-scale-installed-runtime.json",
+    "log": "mixed-scale-installed.log",
+    "scope": "Real installed modules on private Mutter 50.1 headless dual outputs; active compact and expanded preedit migrates both directions, actual framebuffer, protocol anchor, logical width and keyboard/mouse commit. Does not verify physical niri outputs or XIM multi-output scaling."
+  },
+  "post_multiscale_fix_regression": {
+    "passed": 14,
+    "focus": "focus-after-multiscale-results.json",
+    "gtk_four_corners": "gtk-popup-after-multiscale-results.json"
+  },
+  "wine_position_style": {
+    "caret_cases": 3,
+    "input_cases": 6,
+    "editing_cases": 19,
+    "configuration_transactions": 5,
+    "results": [
+      "wine-app-overthespot-caret-results.json",
+      "wine-app-overthespot-input-results.json",
+      "editing-wine-overthespot-results.json",
+      "wine-configuration-results.json"
+    ],
+    "scope": "Wine 11.0 Staging, owned standard Win32 EDIT; app-specific overthespot with absent prefix-global InputStyle, exact horizontal/newline caret and original-value restore. XIM observation/learning/cloud remain disabled; no Xwayland multi-output claim."
+  },
+  "native_mixed_scale_popup": {
+    "passed": 12,
+    "scales": [
+      1.25,
+      1.5,
+      2.0
+    ],
+    "results": "native-mixed-scale-results.json",
+    "runtime": "native-mixed-scale-runtime.json",
+    "log": "native-mixed-scale.log",
+    "scope": "Real installed core/classicui/waylandim on private Sway 1.11 headless dual outputs, foot native input-method-v2/text-input-v3. Active compact and expanded composition migrates both directions; output framebuffer bounds, protocol caret, logical width and keyboard/mouse commit checked. Not physical niri monitors or Chromium on Sway."
+  },
+  "xim_mixed_scale_popup": {
+    "passed": 12,
+    "scales": [
+      1.25,
+      1.5,
+      2.0
+    ],
+    "results": "xim-mixed-scale-installed-results.json",
+    "runtime": "xim-mixed-scale-installed-runtime.json",
+    "log": "xim-mixed-scale-installed.log",
+    "scope": "Installed modules on private Sway/Xwayland dual outputs, Wine 11 standard EDIT with overthespot. Active compact/expanded composition moves both directions; output framebuffer, Win32 caret, fixed logical width and keyboard/mouse commit. Does not prove physical niri multi-monitor layouts."
+  },
+  "post_xim_parent_protocol_regression": {
+    "passed": 7,
+    "log": "ctest-xim-parent.log"
+  },
+  "post_xim_parent_focus_regression": {
+    "passed": 12,
+    "results": "focus-after-xim-parent-results.json",
+    "log": "focus-after-xim-parent.log"
+  },
+  "long_composition": {
+    "core_lengths": [
+      65,
+      70,
+      100,
+      260
+    ],
+    "desktop_cases": 5,
+    "results": "../2026-10-23/long-window-desktop-results.json",
+    "scope": "Installed core; 68-byte composition in GTK, Qt, Chromium, Wine overthespot and foot. True 60-byte prefix, exact suffix and Shift roundtrip; no dropped final Chinese."
+  },
+  "shared_decoder": {
+    "results": "../2026-10-23/decoder-resource-tests.log",
+    "before": "../2026-10-23/context-cost-before.log",
+    "after": "../2026-10-23/context-cost-after.log",
+    "scope": "12 independent contexts; one thread-local immutable base, independent lattices/learners. File replacement/missing/corrupt recovery checked; warm at addon load."
+  },
+  "post_long_fix_editing": {
+    "passed": 98,
+    "by_frontend": {
+      "gtk": 21,
+      "qt": 21,
+      "browser": 21,
+      "wine": 19,
+      "foot": 16
+    },
+    "results": "../2026-10-23/editing-long-shared-results.json"
+  },
+  "post_shared_decoder_focus": {
+    "passed": 18,
+    "results": [
+      "../2026-10-23/focus-gtk-qt-results.json",
+      "../2026-10-23/focus-native-results.json"
+    ]
+  },
+  "decoder_equivalence": {
+    "spellings": 70,
+    "exact_float_edge_scores": 35664,
+    "log": "../2026-10-23/ctest-prefix-linear-final.log",
+    "scope": "All native candidates, pinyin and consumed ranges match; exact-score native ties may permute. No reduction of nbest/window/beam/frame."
+  },
+  "post_decoder_navigation_segmented": {
+    "passed": 43,
+    "by_frontend": {
+      "gtk": 9,
+      "qt": 9,
+      "browser": 9,
+      "wine": 8,
+      "foot": 8
+    },
+    "results": "../2026-10-23/segmented-decoder-navigation-results.json"
+  },
+  "performance_limit": "Nine workloads sampled including 20 distinct long spellings. Trained local and unchanged TiP repeat each have all sampled operation p95 <5ms; first TiP run includes transient overall slowdown and is fully retained. No arbitrary-load latency guarantee.",
+  "post_decoder_navigation_learning": {
+    "passed": 2,
+    "results": "../2026-10-23/learning-decoder-navigation-results.json"
+  },
+  "post_decoder_navigation_focus": {
+    "passed": 18,
+    "results": [
+      "../2026-10-23/focus-decoder-navigation-gtk-qt-results.json",
+      "../2026-10-23/focus-decoder-navigation-native-results.json"
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "scope": "Direct existing systemd service restart, without manager-imported TiPE variables; no physical keys injected",
+  "pid": 125071,
+  "manager_before": "startup-manager-before.json",
+  "dropin": "/home/lin/.config/systemd/user/fcitx5.service.d/60-tipe.conf",
+  "mapped_modules_verified": true,
+  "files": [
+    {
+      "path": "/home/lin/.config/fcitx5/addon/libtipe.so",
+      "sha256": "1c8b2556a3b4e5ca7038af6cdd460d27508fce8a2b39699105ad85859743f20b",
+      "matches_previous_tested": true,
+      "inode": 15101408
+    },
+    {
+      "path": "/home/lin/.config/fcitx5/addon/libclassicui.so",
+      "sha256": "56f14b78bed672a277c7377c3fc53d97ecb3bb63bb5dd74a0dec94e74fae7ef1",
+      "matches_previous_tested": true,
+      "inode": 14843471
+    },
+    {
+      "path": "/home/lin/.config/fcitx5/addon/libwaylandim.so",
+      "sha256": "d28983c4114178011f678f500efef23ca880b0bf9a9fbf73681f1df08aa35d51",
+      "matches_previous_tested": true,
+      "inode": 14843474
+    }
+  ],
+  "tipe_selection_verified": true,
+  "initial_profile_had_tipe": false,
+  "online_enable_with_backup": true,
+  "restored_input_method": "pinyin",
+  "restored_state": "2",
+  "niri_changed": false
+}

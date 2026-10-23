@@ -1,0 +1,173 @@
+[
+  {
+    "toolkit": "wine",
+    "name": "Enter preserves pinyin",
+    "expected": "nihao",
+    "actual": "nihao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Space selects Chinese",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Escape cancels without committing",
+    "expected": "",
+    "actual": "",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Insert inside preedit",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Delete at preedit beginning",
+    "expected": "ihao",
+    "actual": "ihao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Backspace at preedit end",
+    "expected": "niha",
+    "actual": "niha",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Backspace inside preedit",
+    "expected": "ihao",
+    "actual": "ihao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Delete at preedit end is harmless",
+    "expected": "nihao",
+    "actual": "nihao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Shift roundtrip retains insertion position",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Shift roundtrip keeps Chinese selection",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Tab expansion collapses to editable pinyin",
+    "expected": "ihao",
+    "actual": "ihao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Expanded arrows do not change Enter spelling",
+    "expected": "nihao",
+    "actual": "nihao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Pagination does not change Enter spelling",
+    "expected": "nihao",
+    "actual": "nihao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Numeric first candidate selection",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Long spelling survives expand and collapse",
+    "expected": "zhonghuarenmingongheguo",
+    "actual": "zhonghuarenmingongheguo",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Chinese inserts at client caret",
+    "expected": "ni世界hao",
+    "actual": "ni世界hao",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "Moved client caret invalidates restoration",
+    "expected": "好",
+    "actual": "好",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "New composition after cancellation",
+    "expected": "世界",
+    "actual": "世界",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  },
+  {
+    "toolkit": "wine",
+    "name": "XIM unavailable surrounding text uses client deletion",
+    "expected": "你",
+    "actual": "你",
+    "passed": true,
+    "events": [],
+    "input_style": "overthespot"
+  }
+]

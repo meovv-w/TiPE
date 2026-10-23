@@ -1,0 +1,11 @@
+解码后端: libime: /usr/share/libime/sc.dict, /usr/lib64/libime/zh_CN.lm
+TiPE 诊断
+热路径样本（每次 nihao）：p50=1.64797 ms p95=2.08833 ms p99=5.02496 ms
+目标: p95 < 5 ms
+逐键样本（5000 次）：p50=0.267706 ms p95=0.716145 ms p99=1.54717 ms
+进程资源：CPU=2139.95 ms 峰值RSS=46540 KB
+学习计数：观察=5002 已学=1 队列深度=0 丢弃=0 发布=1 写入估计=118 bytes
+学习线程：CPU=10.918 ms 主动让出=222.554 ms
+候选协议: 标准 InputPanel（由 fcitx5 负责 text-rectangle 锚定）
+Wayland popup: 公共 WaylandModule 仅提供连接生命周期；原生 popup 不可由 UI addon 创建，回退标准 InputPanel
+学习队列: 有界 2048，后台低优先级，每批按 CPU 时间等长让出，默认本地

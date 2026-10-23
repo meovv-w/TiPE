@@ -1,0 +1,7 @@
+TiPE sustained resource stress
+date=2026-10-21T08:36:29Z
+rounds=12000 events_per_round=128 pause_ms=50
+host=fedora
+5.1.21
+TiPE sustained resource stress
+rounds=12000 events=1536000 max_queue=2048 max_model=4096 max_disk=228463 final_disk=228408 max_sampled_rss_kb=21416 process_peak_rss_kb=20204 cpu_ms=281272 worker_cpu_ms=255613 worker_throttled_ms=255830 wall_ms=618268 publishes=29 dropped=514688

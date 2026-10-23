@@ -1,0 +1,99 @@
+gtk: Enter preserves pinyin: PASS
+gtk: Space selects Chinese: PASS
+gtk: Escape cancels without committing: PASS
+gtk: Insert inside preedit: PASS
+gtk: Delete at preedit beginning: PASS
+gtk: Backspace at preedit end: PASS
+gtk: Backspace inside preedit: PASS
+gtk: Delete at preedit end is harmless: PASS
+gtk: Shift roundtrip retains insertion position: PASS
+gtk: Shift roundtrip keeps Chinese selection: PASS
+gtk: Tab expansion collapses to editable pinyin: PASS
+gtk: Expanded arrows do not change Enter spelling: PASS
+gtk: Pagination does not change Enter spelling: PASS
+gtk: Numeric first candidate selection: PASS
+gtk: Long spelling survives expand and collapse: PASS
+gtk: Selected client text replaced by Chinese: PASS
+gtk: Chinese inserts at client caret: PASS
+gtk: Moved client caret invalidates restoration: PASS
+gtk: Committed text restores to editable pinyin: PASS
+gtk: Consecutive Chinese chunks restore only last: PASS
+gtk: New composition after cancellation: PASS
+qt: Enter preserves pinyin: PASS
+qt: Space selects Chinese: PASS
+qt: Escape cancels without committing: PASS
+qt: Insert inside preedit: PASS
+qt: Delete at preedit beginning: PASS
+qt: Backspace at preedit end: PASS
+qt: Backspace inside preedit: PASS
+qt: Delete at preedit end is harmless: PASS
+qt: Shift roundtrip retains insertion position: PASS
+qt: Shift roundtrip keeps Chinese selection: PASS
+qt: Tab expansion collapses to editable pinyin: PASS
+qt: Expanded arrows do not change Enter spelling: PASS
+qt: Pagination does not change Enter spelling: PASS
+qt: Numeric first candidate selection: PASS
+qt: Long spelling survives expand and collapse: PASS
+qt: Selected client text replaced by Chinese: PASS
+qt: Chinese inserts at client caret: PASS
+qt: Moved client caret invalidates restoration: PASS
+qt: Committed text restores to editable pinyin: PASS
+qt: Consecutive Chinese chunks restore only last: PASS
+qt: New composition after cancellation: PASS
+browser: Enter preserves pinyin: PASS
+browser: Space selects Chinese: PASS
+browser: Escape cancels without committing: PASS
+browser: Insert inside preedit: PASS
+browser: Delete at preedit beginning: PASS
+browser: Backspace at preedit end: PASS
+browser: Backspace inside preedit: PASS
+browser: Delete at preedit end is harmless: PASS
+browser: Shift roundtrip retains insertion position: PASS
+browser: Shift roundtrip keeps Chinese selection: PASS
+browser: Tab expansion collapses to editable pinyin: PASS
+browser: Expanded arrows do not change Enter spelling: PASS
+browser: Pagination does not change Enter spelling: PASS
+browser: Numeric first candidate selection: PASS
+browser: Long spelling survives expand and collapse: PASS
+browser: Selected client text replaced by Chinese: PASS
+browser: Chinese inserts at client caret: PASS
+browser: Moved client caret invalidates restoration: PASS
+browser: Committed text restores to editable pinyin: PASS
+browser: Consecutive Chinese chunks restore only last: PASS
+browser: New composition after cancellation: PASS
+wine: Enter preserves pinyin: PASS
+wine: Space selects Chinese: PASS
+wine: Escape cancels without committing: PASS
+wine: Insert inside preedit: PASS
+wine: Delete at preedit beginning: PASS
+wine: Backspace at preedit end: PASS
+wine: Backspace inside preedit: PASS
+wine: Delete at preedit end is harmless: PASS
+wine: Shift roundtrip retains insertion position: PASS
+wine: Shift roundtrip keeps Chinese selection: PASS
+wine: Tab expansion collapses to editable pinyin: PASS
+wine: Expanded arrows do not change Enter spelling: PASS
+wine: Pagination does not change Enter spelling: PASS
+wine: Numeric first candidate selection: PASS
+wine: Long spelling survives expand and collapse: PASS
+wine: Chinese inserts at client caret: PASS
+wine: Moved client caret invalidates restoration: PASS
+wine: New composition after cancellation: PASS
+wine: XIM unavailable surrounding text uses client deletion: PASS
+foot: Enter preserves pinyin: PASS
+foot: Space selects Chinese: PASS
+foot: Escape cancels without committing: PASS
+foot: Insert inside preedit: PASS
+foot: Delete at preedit beginning: PASS
+foot: Backspace at preedit end: PASS
+foot: Backspace inside preedit: PASS
+foot: Delete at preedit end is harmless: PASS
+foot: Shift roundtrip retains insertion position: PASS
+foot: Shift roundtrip keeps Chinese selection: PASS
+foot: Tab expansion collapses to editable pinyin: PASS
+foot: Expanded arrows do not change Enter spelling: PASS
+foot: Pagination does not change Enter spelling: PASS
+foot: Numeric first candidate selection: PASS
+foot: Long spelling survives expand and collapse: PASS
+foot: New composition after cancellation: PASS
+{"passed": 98, "results": "/home/lin/Documents/ChatGPT/tipe/build/editing-long-shared/results.json"}

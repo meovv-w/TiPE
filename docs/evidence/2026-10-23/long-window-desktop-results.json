@@ -1,0 +1,155 @@
+[
+  {
+    "toolkit": "gtk",
+    "name": "Long composition crosses decoder window without losing suffix",
+    "expected": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "actual": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaozhongguo",
+        "text": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "consumed": 60,
+        "index": 0,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected_value": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "actual_value": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "expected_preedit": "zhongguo",
+        "actual_preedit": "zhongguo",
+        "passed": true
+      },
+      {
+        "expected_value": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "actual_value": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "expected_preedit": "zhongguo",
+        "actual_preedit": "zhongguo",
+        "passed": true
+      }
+    ]
+  },
+  {
+    "toolkit": "qt",
+    "name": "Long composition crosses decoder window without losing suffix",
+    "expected": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "actual": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaozhongguo",
+        "text": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "consumed": 60,
+        "index": 0,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected_value": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "actual_value": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "expected_preedit": "zhongguo",
+        "actual_preedit": "zhongguo",
+        "passed": true
+      },
+      {
+        "expected_value": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "actual_value": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "expected_preedit": "zhongguo",
+        "actual_preedit": "zhongguo",
+        "passed": true
+      }
+    ]
+  },
+  {
+    "toolkit": "browser",
+    "name": "Long composition crosses decoder window without losing suffix",
+    "expected": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "actual": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaozhongguo",
+        "text": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "consumed": 60,
+        "index": 0,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected_value": "你好你好你好你好你好你好你好你好你好你好你好你好zhongguo",
+        "actual_value": "你好你好你好你好你好你好你好你好你好你好你好你好zhongguo",
+        "expected_preedit": "zhongguo",
+        "actual_preedit": "zhongguo",
+        "passed": true
+      },
+      {
+        "expected_value": "你好你好你好你好你好你好你好你好你好你好你好你好zhongguo",
+        "actual_value": "你好你好你好你好你好你好你好你好你好你好你好你好zhongguo",
+        "expected_preedit": "zhongguo",
+        "actual_preedit": "zhongguo",
+        "passed": true
+      }
+    ],
+    "protocol_errors": []
+  },
+  {
+    "toolkit": "wine",
+    "name": "Long composition crosses decoder window without losing suffix",
+    "expected": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "actual": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaozhongguo",
+        "text": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "consumed": 60,
+        "index": 0,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "actual": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "passed": true,
+        "scope": "client-committed-only"
+      },
+      {
+        "expected": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "actual": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "passed": true,
+        "scope": "client-committed-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "foot",
+    "name": "Long composition crosses decoder window without losing suffix",
+    "expected": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "actual": "你好你好你好你好你好你好你好你好你好你好你好你好中国",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaonihaozhongguo",
+        "text": "你好你好你好你好你好你好你好你好你好你好你好你好",
+        "consumed": 60,
+        "index": 0,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      },
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      }
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+.......TiPE GTK/Qt 模块已安装。新应用可通过 /tmp/tipe-install-tests-1nrjwbgj/.local/bin/tipe-run command 启动。
+TiPE GTK/Qt 模块已安装。新应用可通过 /tmp/tipe-install-tests-1nrjwbgj/.local/bin/tipe-run command 启动。
+移除：/tmp/tipe-install-tests-1nrjwbgj/.local/bin/tipe-run
+移除：/tmp/tipe-install-tests-1nrjwbgj/config/environment.d/tipe-client-ui.conf
+移除：/tmp/tipe-install-tests-1nrjwbgj/data/tipe/qt/lib/qt6/plugins/platforminputcontexts/libfcitx5platforminputcontextplugin.so
+移除：/tmp/tipe-install-tests-1nrjwbgj/.local/bin/tipe-run
+...
+----------------------------------------------------------------------
+Ran 10 tests in 0.858s
+
+OK
+移除：/tmp/tipe-install-tests-qm9u6k4g/a
+恢复：/tmp/tipe-install-tests-w6jauvtg/a
+已从当前用户 fcitx5 profile 移除 TiPE。
+已加入当前用户 fcitx5 profile。备份：/tmp/tipe-install-tests-x2rdfeqg/profile.tipe-backup.20261022191152
+请重新加载 fcitx5 后选择 TiPE；脚本未修改 niri 配置。
+已从当前用户 fcitx5 profile 移除 TiPE。
+保留已被修改的文件及原备份：/tmp/tipe-install-tests-xqi8sgrj/b
+恢复：/tmp/tipe-install-tests-xqi8sgrj/a
+移除：/tmp/tipe-install-tests-xqi8sgrj/b
+已从运行中的 Fcitx5 移除 TiPE，其他输入法仍可使用。

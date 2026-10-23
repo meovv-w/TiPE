@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "name": "wechat",
+      "source_sha256": "7dffb42738e97d7cc3e7babc1bc70d9761ed2f4e4f35e5a2fcb88b1c390bc47f",
+      "bundled_sha256": "7dffb42738e97d7cc3e7babc1bc70d9761ed2f4e4f35e5a2fcb88b1c390bc47f"
+    },
+    {
+      "name": "alipay",
+      "source_sha256": "d365c5f8bbd3b37e929ed813c0cdaf5c33fe138c6b7b81689264c8072eb9327b",
+      "bundled_sha256": "d365c5f8bbd3b37e929ed813c0cdaf5c33fe138c6b7b81689264c8072eb9327b"
+    }
+  ],
+  "original_bytes_preserved": true,
+  "embedded_resources": true,
+  "offline": true,
+  "view_full_image": true,
+  "tests": "ctest-payment-codes.log",
+  "passed": 4,
+  "total": 4,
+  "installed_control_sha256": "5cbec2bc6f3880c662ff888526f023d4ef22c924a41b68c665f271d8f7f62eda",
+  "matches_build": true,
+  "input_daemon_restarted": false
+}

@@ -1,0 +1,212 @@
+[
+  {
+    "name": "bottom-right",
+    "expected": "尼好",
+    "actual": "尼好",
+    "selection_bounds": [
+      1920,
+      1778,
+      2023,
+      1833
+    ],
+    "target": [
+      972,
+      903
+    ],
+    "hover_bounds": [
+      1920,
+      1778,
+      2023,
+      1833
+    ],
+    "compact_geometry": [
+      54,
+      89,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      54,
+      -1,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "top-left",
+    "expected": "石碣",
+    "actual": "石碣",
+    "selection_bounds": [
+      1012,
+      456,
+      1115,
+      511
+    ],
+    "target": [
+      518,
+      242
+    ],
+    "hover_bounds": [
+      1012,
+      456,
+      1115,
+      511
+    ],
+    "compact_geometry": [
+      480,
+      148,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      480,
+      148,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "bottom-left",
+    "expected": "天期",
+    "actual": "天期",
+    "selection_bounds": [
+      1018,
+      1778,
+      1121,
+      1833
+    ],
+    "target": [
+      523,
+      903
+    ],
+    "hover_bounds": [
+      1018,
+      1778,
+      1121,
+      1833
+    ],
+    "compact_geometry": [
+      483,
+      89,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      483,
+      -1,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "top-right",
+    "expected": "薛小",
+    "actual": "薛小",
+    "selection_bounds": [
+      1920,
+      456,
+      2023,
+      511
+    ],
+    "target": [
+      972,
+      242
+    ],
+    "hover_bounds": [
+      1920,
+      456,
+      2023,
+      511
+    ],
+    "compact_geometry": [
+      54,
+      148,
+      598,
+      40
+    ],
+    "expanded_geometry": [
+      54,
+      148,
+      598,
+      130
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "bottom-right-long",
+    "expected": "中花人民共和国",
+    "actual": "中花人民共和国",
+    "selection_bounds": [
+      1680,
+      1538,
+      1878,
+      1593
+    ],
+    "target": [
+      889,
+      783
+    ],
+    "hover_bounds": [
+      1680,
+      1538,
+      1878,
+      1593
+    ],
+    "compact_geometry": [
+      -66,
+      89,
+      718,
+      40
+    ],
+    "expanded_geometry": [
+      -66,
+      -121,
+      718,
+      250
+    ],
+    "pointer_matches_keyboard": true,
+    "passed": true
+  },
+  {
+    "name": "top-left-long",
+    "expected": "中花人民共和国",
+    "actual": "种话人民共和国",
+    "selection_bounds": [
+      1264,
+      456,
+      1460,
+      511
+    ],
+    "target": [
+      680,
+      242
+    ],
+    "hover_bounds": [
+      1264,
+      456,
+      1460,
+      511
+    ],
+    "compact_geometry": [
+      606,
+      148,
+      718,
+      40
+    ],
+    "expanded_geometry": [
+      606,
+      148,
+      718,
+      250
+    ],
+    "pointer_matches_keyboard": false,
+    "passed": false
+  }
+]

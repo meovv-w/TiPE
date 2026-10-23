@@ -1,0 +1,136 @@
+diff --git a/src/frontend/waylandim/waylandimserverv2.cpp b/src/frontend/waylandim/waylandimserverv2.cpp
+index 27158347..34679f85 100644
+--- a/src/frontend/waylandim/waylandimserverv2.cpp
++++ b/src/frontend/waylandim/waylandimserverv2.cpp
+@@ -160,6 +160,10 @@ WaylandIMInputContextV2::WaylandIMInputContextV2(
+     ic_->activate().connect([this]() {
+         WAYLANDIM_DEBUG() << "ACTIVATE";
+         pendingActivate_ = true;
++        contentTypeKnown_ = false;
++        preeditSent_ = false;
++        sentPreedit_.clear();
++        awaitingCommitSurrounding_ = false;
+     });
+     ic_->deactivate().connect([this]() {
+         WAYLANDIM_DEBUG() << "DEACTIVATE";
+@@ -239,10 +243,34 @@ WaylandIMInputContextV2::WaylandIMInputContextV2(
+                     [this](int32_t rate, int32_t delay) {
+                         repeatInfoCallback(rate, delay);
+                     });
++                // Capabilities from the previous widget are not evidence
++                // about this field. Until fresh content-purpose metadata
++                // arrives, pass keys through the sensitive-field path.
++                // This protects the first password key without replaying
++                // preedit into a field of unknown purpose.
++                if (!contentTypeKnown_) {
++                    setCapabilityFlagsWrapper(baseFlags | CapabilityFlag::Sensitive |
++                                              CapabilityFlag::Disable);
++                    if (!privacyFallbackLogged_) {
++                        privacyFallbackLogged_ = true;
++                        FCITX_INFO() << "Wayland input purpose not yet declared; "
++                                        "raw input and no learning until metadata arrives.";
++                    }
++                }
+                 focusInWrapper();
+                 updateSurroundingTextWrapper();
+             }
+         }
++        // text-input-v3 clients may wait for done before publishing content
++        // purpose, surrounding text and cursor rectangle. Acknowledge each
++        // state transaction without waiting for a key, including changes
++        // immediately following activation. This carries no input event.
++        if (realFocus()) {
++            // A bare commit resets the compositor's pending preedit. Repeat
++            // the current composition when present so acknowledging client
++            // state cannot erase active spelling or commit it twice.
++            updatePreeditDelegate(delegatedInputContext());
++        }
+     });
+     ic_->contentType().connect([this](uint32_t hint, uint32_t purpose) {
+         WAYLANDIM_DEBUG() << "contentTypeCallback:" << hint << purpose;
+@@ -299,6 +327,7 @@ void WaylandIMInputContextV2::repeat() {
+ void WaylandIMInputContextV2::surroundingTextCallback(const char *text,
+                                                       uint32_t cursor,
+                                                       uint32_t anchor) {
++    awaitingCommitSurrounding_ = false;
+     std::string str(text);
+     surroundingText().invalidate();
+     do {
+@@ -328,6 +357,7 @@ void WaylandIMInputContextV2::resetCallback() {
+ }
+ void WaylandIMInputContextV2::contentTypeCallback(uint32_t hint,
+                                                   uint32_t purpose) {
++    contentTypeKnown_ = true;
+     CapabilityFlags flags = baseFlags;
+ 
+     if (hint & ZWP_TEXT_INPUT_V3_CONTENT_HINT_COMPLETION) {
+@@ -682,14 +712,36 @@ void WaylandIMInputContextV2::updatePreeditDelegate(InputContext *ic) const {
+         }
+     }
+ 
++    // Keep the cached protocol state bounded even if a client/engine exposes
++    // an oversized composition which cannot fit a Wayland string message.
++    const bool hasPreedit = preedit.textLength() > 0 &&
++        preedit.textLength() < WaylandIMServerBase::safeStringLimit;
++    const auto text = hasPreedit ? preedit.toString() : std::string{};
++    if (text != sentPreedit_ && surroundingText().isValid() &&
++        !awaitingCommitSurrounding_) {
++        // Make replacement of an existing preedit explicit in the same
++        // transaction as its new text. No surrounding document bytes are
++        // deleted. Clients which cache the preedit range alongside unchanged
++        // surrounding text must advance that range when spelling shrinks.
++        ic_->deleteSurroundingText(0, 0);
++    }
+     // Validate not empty and within wayland limit.
+-    if (preedit.textLength() > 0 &&
+-        preedit.textLength() < WaylandIMServerBase::safeStringLimit) {
++    if (hasPreedit) {
+         if (cursorStart < 0) {
+             cursorStart = cursorEnd = preedit.textLength();
+         }
+-        ic_->setPreeditString(preedit.toString().data(), cursorStart,
+-                              cursorEnd);
++        ic_->setPreeditString(text.data(), cursorStart, cursorEnd);
++        preeditSent_ = true;
++        sentPreedit_ = text;
++    } else if (preeditSent_) {
++        // Publish the transition to empty once. Together with the zero
++        // surrounding deletion above this ends both the client composition
++        // and its cached deletion range before later restoration.
++        // Do not emit empty preedit on every client acknowledgement: that
++        // would create unnecessary state traffic and possible feedback.
++        ic_->setPreeditString("", 0, 0);
++        preeditSent_ = false;
++        sentPreedit_.clear();
+     }
+     ic_->commit(serial_);
+ }
+diff --git a/src/frontend/waylandim/waylandimserverv2.h b/src/frontend/waylandim/waylandimserverv2.h
+index 6378b8a8..af3ab175 100644
+--- a/src/frontend/waylandim/waylandimserverv2.h
++++ b/src/frontend/waylandim/waylandimserverv2.h
+@@ -107,6 +107,12 @@ protected:
+         WaylandIMServerBase::commitStringWrapper(text, [this](const char *str) {
+             ic_->commitString(str);
+             ic_->commit(serial_);
++            preeditSent_ = false;
++            sentPreedit_.clear();
++            // Commit changes document coordinates. Until the client sends a
++            // fresh surrounding snapshot, do not apply a preedit replacement
++            // against the preceding composition's cached range.
++            awaitingCommitSurrounding_ = true;
+         });
+     }
+     void deleteSurroundingTextDelegate(InputContext *ic, int offset,
+@@ -145,6 +151,11 @@ private:
+     std::unique_ptr<VirtualInputContextManager> virtualICManager_;
+ 
+     bool pendingActivate_ = false;
++    bool contentTypeKnown_ = false;
++    bool privacyFallbackLogged_ = false;
++    mutable bool preeditSent_ = false;
++    mutable std::string sentPreedit_;
++    mutable bool awaitingCommitSurrounding_ = false;
+     bool pendingDeactivate_ = false;
+     bool vkReady_ = false;
+ 

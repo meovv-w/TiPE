@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Expanded candidate visible on desktop",
+    "blue_pixels": 4677,
+    "passed": true
+  },
+  {
+    "name": "Enter literal",
+    "expected": "nihao",
+    "actual": "nihao",
+    "passed": true
+  },
+  {
+    "name": "Chinese commit",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "name": "Mode roundtrip",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "name": "English literal",
+    "expected": "github",
+    "actual": "github",
+    "passed": true
+  },
+  {
+    "name": "Mouse choice equals keyboard choice",
+    "expected": "薛小",
+    "actual": "薛小",
+    "passed": true
+  }
+]

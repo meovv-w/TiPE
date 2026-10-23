@@ -1,0 +1,11 @@
+[ 25%] Built target Fcitx5Utils
+[ 30%] Built target Fcitx5Config
+[ 47%] Built target Fcitx5WaylandCore
+[ 60%] Built target Fcitx5WaylandWLRForeignToplevelManagement
+[ 62%] Built target Fcitx5WaylandInputMethod
+[ 65%] Built target Fcitx5WaylandInputMethodV2
+[ 85%] Built target Fcitx5Core
+[ 90%] Built target Fcitx5WaylandPlasmaWindowManagement
+[ 90%] Building CXX object src/frontend/waylandim/CMakeFiles/waylandim.dir/waylandimserverv2.cpp.o
+[ 90%] Linking CXX shared module ../../../bin/libwaylandim.so
+[100%] Built target waylandim

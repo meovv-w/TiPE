@@ -1,0 +1,1658 @@
+[
+  {
+    "frontend": "foot",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          157
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          157.0
+        ],
+        "selection": [
+          168,
+          136
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          264,
+          230,
+          1460,
+          310
+        ],
+        "logical": [
+          2052.0,
+          115.0,
+          2650.0,
+          155.0
+        ],
+        "selection": [
+          300,
+          270
+        ],
+        "protocol_rectangle": [
+          32,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2052,
+          100,
+          2052,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          264,
+          230,
+          1460,
+          546
+        ],
+        "logical": [
+          2052.0,
+          115.0,
+          2650.0,
+          273.0
+        ],
+        "selection": [
+          300,
+          326
+        ],
+        "protocol_rectangle": [
+          32,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2052,
+          100,
+          2052,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          275
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          275.0
+        ],
+        "selection": [
+          168,
+          164
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "mouse",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          157
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          157.0
+        ],
+        "selection": [
+          168,
+          136
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          264,
+          230,
+          1460,
+          310
+        ],
+        "logical": [
+          2052.0,
+          115.0,
+          2650.0,
+          155.0
+        ],
+        "selection": [
+          300,
+          270
+        ],
+        "protocol_rectangle": [
+          32,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2052,
+          100,
+          2052,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          264,
+          230,
+          1460,
+          546
+        ],
+        "logical": [
+          2052.0,
+          115.0,
+          2650.0,
+          273.0
+        ],
+        "selection": [
+          300,
+          326
+        ],
+        "protocol_rectangle": [
+          32,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2052,
+          100,
+          2052,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          275
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          275.0
+        ],
+        "selection": [
+          168,
+          164
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          157
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          157.0
+        ],
+        "selection": [
+          276,
+          136
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          498,
+          230,
+          1934,
+          310
+        ],
+        "logical": [
+          2169.0,
+          115.0,
+          2887.0,
+          155.0
+        ],
+        "selection": [
+          535,
+          270
+        ],
+        "protocol_rectangle": [
+          149,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2169,
+          100,
+          2169,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          498,
+          230,
+          1934,
+          786
+        ],
+        "logical": [
+          2169.0,
+          115.0,
+          2887.0,
+          393.0
+        ],
+        "selection": [
+          535,
+          326
+        ],
+        "protocol_rectangle": [
+          149,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2169,
+          100,
+          2169,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          395
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          395.0
+        ],
+        "selection": [
+          276,
+          164
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          157
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          157.0
+        ],
+        "selection": [
+          276,
+          136
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          498,
+          230,
+          1934,
+          310
+        ],
+        "logical": [
+          2169.0,
+          115.0,
+          2887.0,
+          155.0
+        ],
+        "selection": [
+          535,
+          270
+        ],
+        "protocol_rectangle": [
+          149,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2169,
+          100,
+          2169,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 2.0,
+        "bounds": [
+          498,
+          230,
+          1934,
+          786
+        ],
+        "logical": [
+          2169.0,
+          115.0,
+          2887.0,
+          393.0
+        ],
+        "selection": [
+          535,
+          326
+        ],
+        "protocol_rectangle": [
+          149,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2169,
+          100,
+          2169,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          395
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          395.0
+        ],
+        "selection": [
+          276,
+          164
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          157
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          157.0
+        ],
+        "selection": [
+          168,
+          136
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          165,
+          144,
+          913,
+          194
+        ],
+        "logical": [
+          2052.0,
+          115.2,
+          2650.4,
+          155.2
+        ],
+        "selection": [
+          188,
+          169
+        ],
+        "protocol_rectangle": [
+          32,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2052,
+          100,
+          2052,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          165,
+          144,
+          913,
+          341
+        ],
+        "logical": [
+          2052.0,
+          115.2,
+          2650.4,
+          272.8
+        ],
+        "selection": [
+          188,
+          203
+        ],
+        "protocol_rectangle": [
+          32,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2052,
+          100,
+          2052,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          275
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          275.0
+        ],
+        "selection": [
+          168,
+          164
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "mouse",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          157
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          157.0
+        ],
+        "selection": [
+          168,
+          136
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          165,
+          144,
+          913,
+          194
+        ],
+        "logical": [
+          2052.0,
+          115.2,
+          2650.4,
+          155.2
+        ],
+        "selection": [
+          188,
+          169
+        ],
+        "protocol_rectangle": [
+          32,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2052,
+          100,
+          2052,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          165,
+          144,
+          913,
+          341
+        ],
+        "logical": [
+          2052.0,
+          115.2,
+          2650.4,
+          272.8
+        ],
+        "selection": [
+          188,
+          203
+        ],
+        "protocol_rectangle": [
+          32,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2052,
+          100,
+          2052,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          275
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          275.0
+        ],
+        "selection": [
+          168,
+          164
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          157
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          157.0
+        ],
+        "selection": [
+          276,
+          136
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          309,
+          144,
+          1206,
+          194
+        ],
+        "logical": [
+          2167.2,
+          115.2,
+          2884.8,
+          155.2
+        ],
+        "selection": [
+          332,
+          169
+        ],
+        "protocol_rectangle": [
+          147,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2167,
+          100,
+          2167,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          309,
+          144,
+          1206,
+          491
+        ],
+        "logical": [
+          2167.2,
+          115.2,
+          2884.8,
+          392.8
+        ],
+        "selection": [
+          332,
+          203
+        ],
+        "protocol_rectangle": [
+          147,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2167,
+          100,
+          2167,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          395
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          395.0
+        ],
+        "selection": [
+          276,
+          164
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          157
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          157.0
+        ],
+        "selection": [
+          276,
+          136
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          309,
+          144,
+          1206,
+          194
+        ],
+        "logical": [
+          2167.2,
+          115.2,
+          2884.8,
+          155.2
+        ],
+        "selection": [
+          332,
+          169
+        ],
+        "protocol_rectangle": [
+          147,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2167,
+          100,
+          2167,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.25,
+        "bounds": [
+          309,
+          144,
+          1206,
+          491
+        ],
+        "logical": [
+          2167.2,
+          115.2,
+          2884.8,
+          392.8
+        ],
+        "selection": [
+          332,
+          203
+        ],
+        "protocol_rectangle": [
+          147,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2167,
+          100,
+          2167,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          395
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          395.0
+        ],
+        "selection": [
+          276,
+          164
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          157
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          157.0
+        ],
+        "selection": [
+          168,
+          136
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          200,
+          173,
+          1097,
+          233
+        ],
+        "logical": [
+          2053.3333333333335,
+          115.33333333333333,
+          2651.3333333333335,
+          155.33333333333334
+        ],
+        "selection": [
+          227,
+          203
+        ],
+        "protocol_rectangle": [
+          33,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2053,
+          100,
+          2053,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          200,
+          173,
+          1097,
+          410
+        ],
+        "logical": [
+          2053.3333333333335,
+          115.33333333333333,
+          2651.3333333333335,
+          273.3333333333333
+        ],
+        "selection": [
+          227,
+          245
+        ],
+        "protocol_rectangle": [
+          33,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2053,
+          100,
+          2053,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          275
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          275.0
+        ],
+        "selection": [
+          168,
+          164
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "mouse",
+    "actual": "你好",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          157
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          157.0
+        ],
+        "selection": [
+          168,
+          136
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          200,
+          173,
+          1097,
+          233
+        ],
+        "logical": [
+          2053.3333333333335,
+          115.33333333333333,
+          2651.3333333333335,
+          155.33333333333334
+        ],
+        "selection": [
+          227,
+          203
+        ],
+        "protocol_rectangle": [
+          33,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2053,
+          100,
+          2053,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          200,
+          173,
+          1097,
+          410
+        ],
+        "logical": [
+          2053.3333333333335,
+          115.33333333333333,
+          2651.3333333333335,
+          273.3333333333333
+        ],
+        "selection": [
+          227,
+          245
+        ],
+        "protocol_rectangle": [
+          33,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2053,
+          100,
+          2053,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          149,
+          115,
+          749,
+          275
+        ],
+        "logical": [
+          149.0,
+          115.0,
+          749.0,
+          275.0
+        ],
+        "selection": [
+          168,
+          164
+        ],
+        "protocol_rectangle": [
+          30,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          150,
+          100,
+          151,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          157
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          157.0
+        ],
+        "selection": [
+          276,
+          136
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          380,
+          173,
+          1457,
+          233
+        ],
+        "logical": [
+          2173.3333333333335,
+          115.33333333333333,
+          2891.3333333333335,
+          155.33333333333334
+        ],
+        "selection": [
+          408,
+          203
+        ],
+        "protocol_rectangle": [
+          153,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2173,
+          100,
+          2173,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          380,
+          173,
+          1457,
+          590
+        ],
+        "logical": [
+          2173.3333333333335,
+          115.33333333333333,
+          2891.3333333333335,
+          393.3333333333333
+        ],
+        "selection": [
+          408,
+          245
+        ],
+        "protocol_rectangle": [
+          153,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2173,
+          100,
+          2173,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          395
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          395.0
+        ],
+        "selection": [
+          276,
+          164
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "actual": "中华人民共和国",
+    "observations": [
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          157
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          157.0
+        ],
+        "selection": [
+          276,
+          136
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          380,
+          173,
+          1457,
+          233
+        ],
+        "logical": [
+          2173.3333333333335,
+          115.33333333333333,
+          2891.3333333333335,
+          155.33333333333334
+        ],
+        "selection": [
+          408,
+          203
+        ],
+        "protocol_rectangle": [
+          153,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2173,
+          100,
+          2173,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-2",
+        "scale": 1.5,
+        "bounds": [
+          380,
+          173,
+          1457,
+          590
+        ],
+        "logical": [
+          2173.3333333333335,
+          115.33333333333333,
+          2891.3333333333335,
+          393.3333333333333
+        ],
+        "selection": [
+          408,
+          245
+        ],
+        "protocol_rectangle": [
+          153,
+          0,
+          0,
+          15
+        ],
+        "caret": [
+          2173,
+          100,
+          2173,
+          115
+        ]
+      },
+      {
+        "output": "HEADLESS-1",
+        "scale": 1.0,
+        "bounds": [
+          257,
+          115,
+          977,
+          395
+        ],
+        "logical": [
+          257.0,
+          115.0,
+          977.0,
+          395.0
+        ],
+        "selection": [
+          276,
+          164
+        ],
+        "protocol_rectangle": [
+          138,
+          0,
+          1,
+          16
+        ],
+        "caret": [
+          258,
+          100,
+          259,
+          116
+        ]
+      }
+    ],
+    "passed": true
+  }
+]

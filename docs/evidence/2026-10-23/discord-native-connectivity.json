@@ -1,0 +1,15 @@
+{
+  "command": [
+    "curl",
+    "-4",
+    "-fsSL",
+    "--connect-timeout",
+    "4",
+    "--max-time",
+    "12",
+    "https://discord.com/api/updates/stable?platform=linux&version=1.0.162"
+  ],
+  "exit_code": 7,
+  "stderr": "curl: (7) Failed to connect to discord.com port 443 after 9 ms: Could not connect to server\n",
+  "response_received": false
+}

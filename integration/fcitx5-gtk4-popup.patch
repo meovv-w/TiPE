@@ -1,0 +1,145 @@
+diff --git a/gtk4/gtk4inputwindow.cpp b/gtk4/gtk4inputwindow.cpp
+index 8e52e26..303ed61 100644
+--- a/gtk4/gtk4inputwindow.cpp
++++ b/gtk4/gtk4inputwindow.cpp
+@@ -7,6 +7,8 @@
+ #include "gtk4inputwindow.h"
+ #include "inputwindow.h"
+ #include <cairo.h>
++#include <algorithm>
++#include <cmath>
+ #include <gdk/gdk.h>
+ #include <glib-object.h>
+ #include <glib.h>
+@@ -220,6 +222,11 @@ Gtk4InputWindow::Gtk4InputWindow(ClassicUIConfig *config, FcitxGClient *client)
+ }
+ 
+ Gtk4InputWindow::~Gtk4InputWindow() {
++    if (surfaceChangeSource_) {
++        g_source_remove(surfaceChangeSource_);
++        surfaceChangeSource_ = 0;
++    }
++    watchSurface(nullptr);
+     setParent(nullptr);
+ 
+     if (!window_) {
+@@ -246,6 +253,7 @@ void Gtk4InputWindow::setParent(GtkWidget *parent) {
+     if (parent_ == parent) {
+         return;
+     }
++    watchSurface(nullptr);
+     if (parent_) {
+         g_object_remove_weak_pointer(G_OBJECT(parent_),
+                                      reinterpret_cast<gpointer *>(&parent_));
+@@ -266,6 +274,28 @@ void Gtk4InputWindow::setCursorRect(GdkRectangle rect) {
+         return;
+     }
+ 
++#if GTK_CHECK_VERSION(4, 4, 0)
++    if (GTK_IS_TEXT(parent_)) {
++        // GtkText reports its entire allocation as the IM cursor rectangle's
++        // height. In a tall entry this anchors the popup below/above the whole
++        // field, where the compositor may shrink it below its minimum size and
++        // GtkPopover then closes it. Use the actual glyph line in the same
++        // widget coordinate space instead.
++        graphene_rect_t cursor;
++        gtk_text_compute_cursor_extents(
++            GTK_TEXT(parent_),
++            std::max(0, gtk_editable_get_position(GTK_EDITABLE(parent_))),
++            &cursor, nullptr);
++        if (cursor.size.height > 0 &&
++            rect.height > static_cast<int>(std::ceil(cursor.size.height))) {
++            rect.y = static_cast<int>(std::floor(cursor.origin.y));
++            rect.height = static_cast<int>(std::ceil(cursor.size.height));
++        }
++        // Keep the client-supplied x: it includes the active preedit cursor,
++        // bidirectional text and horizontal scrolling. GtkEditable's position
++        // is a committed-text position, not an offset within the preedit.
++    }
++#endif
+     rect_ = rect;
+     reposition();
+ }
+@@ -286,6 +316,9 @@ void Gtk4InputWindow::update() {
+         if (!reposition()) {
+             break;
+         }
++        // Moving the selection or replacing equal-width candidates may leave
++        // the geometry unchanged; it still requires a fresh snapshot.
++        gtk_widget_queue_draw(window_.get());
+         return;
+     } while (false);
+     if (window_) {
+@@ -316,6 +349,7 @@ bool Gtk4InputWindow::reposition() {
+         return false;
+     }
+ 
++    watchSurface(surface);
+     fcitx_client_side_popup_set_parent(FCITX_CLIENT_SIDE_POPUP(window_.get()),
+                                        parent_);
+     gtk_widget_set_size_request(window_.get(), width_, height_);
+@@ -324,6 +358,49 @@ bool Gtk4InputWindow::reposition() {
+     return true;
+ }
+ 
++// A reactive xdg_popup may remain constrained to its previous output when
++// its parent crosses monitors. Recreate only the popup on authoritative GDK
++// monitor/scale notifications; the composition and parent stay intact.
++void Gtk4InputWindow::watchSurface(GdkSurface *surface) {
++    if (parentSurface_.get() == surface) return;
++    if (parentSurface_) {
++        g_signal_handlers_disconnect_by_data(parentSurface_.get(), this);
++    }
++    parentSurface_.reset(surface ? GDK_SURFACE(g_object_ref(surface)) : nullptr);
++    if (!surface) return;
++    auto monitorChanged = +[](GdkSurface *, GdkMonitor *, gpointer data) {
++        static_cast<Gtk4InputWindow *>(data)->scheduleSurfaceChange();
++    };
++    g_signal_connect(surface, "enter-monitor", G_CALLBACK(monitorChanged), this);
++    g_signal_connect(surface, "leave-monitor", G_CALLBACK(monitorChanged), this);
++    g_signal_connect(surface, "notify::scale",
++        G_CALLBACK(+[](GObject *, GParamSpec *, gpointer data) {
++            static_cast<Gtk4InputWindow *>(data)->scheduleSurfaceChange();
++        }), this);
++    g_signal_connect(surface, "notify::scale-factor",
++        G_CALLBACK(+[](GObject *, GParamSpec *, gpointer data) {
++            static_cast<Gtk4InputWindow *>(data)->scheduleSurfaceChange();
++        }), this);
++}
++
++void Gtk4InputWindow::scheduleSurfaceChange() {
++    if (surfaceChangeSource_ || !window_ || !visible()) return;
++    gtk_widget_set_visible(window_.get(), FALSE);
++    surfaceChangeSource_ = g_idle_add_full(G_PRIORITY_DEFAULT_IDLE,
++        +[](gpointer data) -> gboolean {
++            auto *self = static_cast<Gtk4InputWindow *>(data);
++            self->surfaceChangeSource_ = 0;
++            if (!self->window_ || !self->visible()) return G_SOURCE_REMOVE;
++            auto *popup = FCITX_CLIENT_SIDE_POPUP(self->window_.get());
++            popup->inputWindow = nullptr;
++            gtk_widget_set_visible(self->window_.get(), FALSE);
++            fcitx_client_side_popup_set_parent(popup, nullptr);
++            self->window_.reset();
++            self->update();
++            return G_SOURCE_REMOVE;
++        }, this, nullptr);
++}
++
+ void Gtk4InputWindow::syncFontOptions() {
+     auto *context = gtk_widget_get_pango_context(window_.get());
+     if (!context) {
+diff --git a/gtk4/gtk4inputwindow.h b/gtk4/gtk4inputwindow.h
+index 6f0cad9..0dfa16a 100644
+--- a/gtk4/gtk4inputwindow.h
++++ b/gtk4/gtk4inputwindow.h
+@@ -30,6 +30,10 @@ private:
+     void init();
+     bool reposition();
+     void syncFontOptions();
++    void watchSurface(GdkSurface *surface);
++    void scheduleSurfaceChange();
++    GObjectUniquePtr<GdkSurface> parentSurface_;
++    guint surfaceChangeSource_ = 0;
+ 
+     bool supportAlpha = false;
+     // Dummy widget to track font options.

@@ -1,0 +1,15 @@
+wine: Partial selection retains suffix: PASS
+wine: Numeric prefix after first ten candidates: PASS
+wine: Long phrase preserves remaining syllables: PASS
+wine: Edit remaining pinyin after partial choice: PASS
+wine: Cancel remaining pinyin keeps selected prefix: PASS
+wine: Abbreviation selection chain woc: PASS
+wine: Three successive phrase segments: PASS
+foot: Partial selection retains suffix: PASS
+foot: Numeric prefix after first ten candidates: PASS
+foot: Long phrase preserves remaining syllables: PASS
+foot: Edit remaining pinyin after partial choice: PASS
+foot: Cancel remaining pinyin keeps selected prefix: PASS
+foot: Abbreviation selection chain woc: PASS
+foot: Three successive phrase segments: PASS
+{"passed": 14, "results": "/home/lin/Documents/ChatGPT/tipe/build/segmented-protocol-current/results.json"}

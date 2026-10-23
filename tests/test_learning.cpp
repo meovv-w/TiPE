@@ -7,6 +7,7 @@
 #include <atomic>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <signal.h>
 #include <unistd.h>
 
 using namespace std::chrono_literals;
@@ -110,6 +111,21 @@ int main() {
     secret.committed="秘密"; secret.sensitive=true; l.push(secret);
     assert(l.wait_until_idle(2s)); assert(l.preference("秘密")==0);
     const std::string out=dir+"/export.tsv"; assert(l.export_data(out));
+    // A pre-cancelled export must preserve the previous complete destination.
+    const auto original_export=std::filesystem::file_size(out);
+    std::stop_source cancelled_export;cancelled_export.request_stop();
+    assert(!l.export_data(out,cancelled_export.get_token()));
+    assert(std::filesystem::file_size(out)==original_export);
+    // Independent exports use separate temporaries, so concurrent invocations
+    // cannot truncate or rename each other's in-progress file.
+    bool first_ok=false,second_ok=false;
+    std::thread first_export([&]{first_ok=l.export_data(out);});
+    std::thread second_export([&]{second_ok=l.export_data(out);});
+    first_export.join();second_export.join();
+    assert(first_ok && second_ok);
+    assert(std::filesystem::file_size(out)==original_export);
+    for(const auto &file:std::filesystem::directory_iterator(dir))
+      assert(file.path().filename().string().find("export.tsv.tmp.")!=0);
     assert(l.clear()); assert(l.model()->entries.empty()); assert(l.preference("你好")==0);
     // Exports are private user data and are published atomically.
     struct stat export_stat{};
@@ -621,4 +637,58 @@ int main() {
     reader.clear();
     assert(reader.correction_candidates("izai", "editor").empty());
   }
+#ifdef TIPE_TEST_CRASH_INJECTION
+  // Exercise every model/state publication boundary in a child process. A
+  // SIGKILL cannot run destructors or repair files, so the parent proves that
+  // the next writer accepts either the old or new complete generation and
+  // removes only stale temporary files. This is deliberately compile-time
+  // gated and is never active in a normal production build.
+  {
+    const char *points[] = {
+      "model-before-temp-fsync", "model-after-temp-fsync",
+      "model-before-previous-fsync", "model-after-previous-fsync",
+      "model-before-previous-rename", "model-after-previous-rename",
+      "model-after-previous-dir-fsync", "model-before-current-rename",
+      "model-after-current-rename", "model-after-current-fsync",
+      "model-after-current-dir-fsync", "state-before-temp-fsync",
+      "state-after-temp-fsync", "state-before-rename", "state-after-rename",
+      "state-after-dir-fsync"
+    };
+    for (const char *point : points) {
+      const std::string cdir = std::string("/tmp/tipe-learning-crash-") + point;
+      std::filesystem::remove_all(cdir);
+      {
+        tipe::Learner seed(cdir);
+        Event e; e.type = EventType::Commit; e.pinyin = "seed"; e.committed = "种";
+        seed.push(e); assert(seed.wait_until_idle(2s));
+      }
+      const pid_t child = ::fork();
+      assert(child >= 0);
+      if (child == 0) {
+        ::setenv("TIPE_LEARNER_TEST_CRASH_POINT", point, 1);
+        tipe::Learner dying(cdir);
+        Event e; e.type = EventType::Commit; e.pinyin = "crash"; e.committed = "崩";
+        dying.push(e);
+        std::this_thread::sleep_for(1200ms);
+        ::_exit(3); // The requested injection point must have killed us first.
+      }
+      int status = 0;
+      assert(::waitpid(child, &status, 0) == child);
+      assert(WIFSIGNALED(status) && WTERMSIG(status) == SIGKILL);
+      ::unsetenv("TIPE_LEARNER_TEST_CRASH_POINT");
+      {
+        tipe::Learner recovered(cdir);
+        assert(recovered.preference("种") == 1);
+        Event after; after.type = EventType::Commit;
+        after.pinyin = "after"; after.committed = "后";
+        recovered.push(after); assert(recovered.wait_until_idle(4s));
+        assert(recovered.preference("后") == 1);
+        for (const char *name : {"model.current.tmp", "model.previous.tmp",
+                                 "state.current.tmp", "control.current.tmp"})
+          assert(!std::filesystem::exists(cdir + "/" + name));
+      }
+      std::filesystem::remove_all(cdir);
+    }
+  }
+#endif
 }

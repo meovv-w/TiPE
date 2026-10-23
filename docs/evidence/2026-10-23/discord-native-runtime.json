@@ -1,0 +1,26 @@
+{
+  "compositor": "niri 26.04",
+  "private_session": true,
+  "physical_input": false,
+  "multioutput": false,
+  "complete": false,
+  "modules": {
+    "libtipe.so": {
+      "path": "/home/lin/.config/fcitx5/addon/libtipe.so",
+      "inode": 14843466,
+      "sha256": "1c8b2556a3b4e5ca7038af6cdd460d27508fce8a2b39699105ad85859743f20b"
+    },
+    "libclassicui.so": {
+      "path": "/home/lin/.config/fcitx5/addon/libclassicui.so",
+      "inode": 14843471,
+      "sha256": "56f14b78bed672a277c7377c3fc53d97ecb3bb63bb5dd74a0dec94e74fae7ef1"
+    },
+    "libwaylandim.so": {
+      "path": "/home/lin/.config/fcitx5/addon/libwaylandim.so",
+      "inode": 14843474,
+      "sha256": "d28983c4114178011f678f500efef23ca880b0bf9a9fbf73681f1df08aa35d51"
+    }
+  },
+  "probe_complete": true,
+  "discord_real_ui_ready": false
+}

@@ -1,0 +1,507 @@
+diff --git a/src/ui/classic/CMakeLists.txt b/src/ui/classic/CMakeLists.txt
+index 808a5092..e2fa081e 100644
+--- a/src/ui/classic/CMakeLists.txt
++++ b/src/ui/classic/CMakeLists.txt
+@@ -48,6 +48,22 @@ target_link_libraries(classicui
+     ${CLASSICUI_LIBS}
+    )
+ 
++# TiPE uses the same measured frame as the GTK/Qt application-owned popup.
++# Link it statically to keep the module independent of process library paths.
++set(TIPE_SOURCE_DIR "" CACHE PATH "TiPE source tree for its candidate painter")
++if (TIPE_SOURCE_DIR)
++    add_library(TipeClassicPainter STATIC
++        "${TIPE_SOURCE_DIR}/src/candidate_grid.cpp"
++        "${TIPE_SOURCE_DIR}/src/candidate_painter.cpp"
++        "${TIPE_SOURCE_DIR}/src/client_side_candidate_adapter.cpp")
++    target_include_directories(TipeClassicPainter PUBLIC "${TIPE_SOURCE_DIR}/include")
++    target_compile_features(TipeClassicPainter PUBLIC cxx_std_20)
++    target_compile_definitions(TipeClassicPainter PUBLIC TIPE_CLASSIC_PAINTER=1)
++    target_link_libraries(TipeClassicPainter PUBLIC PkgConfig::Pango PkgConfig::Cairo)
++    set_target_properties(TipeClassicPainter PROPERTIES POSITION_INDEPENDENT_CODE ON)
++    target_link_libraries(classicui TipeClassicPainter)
++endif()
++
+ install(TARGETS classicui DESTINATION "${FCITX_INSTALL_ADDONDIR}")
+ configure_file(classicui.conf.in.in classicui.conf.in @ONLY)
+ fcitx5_translate_desktop_file(${CMAKE_CURRENT_BINARY_DIR}/classicui.conf.in classicui.conf)
+diff --git a/src/ui/classic/classicui.cpp b/src/ui/classic/classicui.cpp
+index 10703c1a..5f19a89a 100644
+--- a/src/ui/classic/classicui.cpp
++++ b/src/ui/classic/classicui.cpp
+@@ -65,6 +65,25 @@ FCITX_DEFINE_LOG_CATEGORY(classicui_logcategory, "classicui");
+ 
+ using AccentColorDBusType = FCITX_STRING_TO_DBUS_TYPE("(ddd)");
+ 
++double ClassicUI::xwaylandPixelScale(int rootWidth, int rootHeight) const {
++#ifdef WAYLAND_FOUND
++    const wayland::OutputInfomation *only = nullptr;
++    for (const auto &[name, ui] : uis_) {
++        auto *wl = dynamic_cast<WaylandUI *>(ui.get());
++        if (!wl) continue;
++        for (const auto &output : wl->display()->getGlobals<wayland::WlOutput>()) {
++            const auto *info = wl->display()->outputInformation(output.get());
++            if (!info || only) return 0;
++            only = info;
++        }
++    }
++    if (only && only->width() == rootWidth && only->height() == rootHeight &&
++        only->scale() >= 1 && only->scale() <= 8)
++        return only->scale();
++#endif
++    return 0;
++}
++
+ ClassicUI::ClassicUI(Instance *instance) : instance_(instance) {
+ #ifdef ENABLE_DBUS
+     if (auto *dbusAddon = dbus()) {
+@@ -394,8 +413,16 @@ void ClassicUI::resume() {
+     eventHandlers_.emplace_back(instance_->watchEvent(
+         EventType::InputContextFocusIn, EventWatcherPhase::Default,
+         [this](Event &event) {
++            auto &icEvent = static_cast<InputContextEvent &>(event);
++#ifdef ENABLE_X11
++            if (icEvent.inputContext()->display().starts_with("wayland:")) {
++                for (auto &[name, candidate] : uis_) {
++                    if (auto *xcbUI = dynamic_cast<XCBUI *>(candidate.get()))
++                        xcbUI->hideEmbeddedInputWindow();
++                }
++            }
++#endif
+             if (auto *ui = uiForEvent(event)) {
+-                auto &icEvent = static_cast<InputContextEvent &>(event);
+                 ui->updateCursor(icEvent.inputContext());
+                 ui->updateCurrentInputMethod(icEvent.inputContext());
+             }
+diff --git a/src/ui/classic/classicui.h b/src/ui/classic/classicui.h
+index 5c374527..61dc8e95 100644
+--- a/src/ui/classic/classicui.h
++++ b/src/ui/classic/classicui.h
+@@ -233,6 +233,9 @@ public:
+                                          unsigned int size);
+     bool preferTextIcon() const;
+     bool showLayoutNameInIcon() const;
++    // A scale is usable only if one Wayland output's physical mode exactly
++    // matches the X11 root. Logical-coordinate Xwayland must not be doubled.
++    double xwaylandPixelScale(int rootWidth, int rootHeight) const;
+ 
+ private:
+     FCITX_ADDON_DEPENDENCY_LOADER(notificationitem, instance_->addonManager());
+diff --git a/src/ui/classic/inputwindow.cpp b/src/ui/classic/inputwindow.cpp
+index 75275560..4b3394e5 100644
+--- a/src/ui/classic/inputwindow.cpp
++++ b/src/ui/classic/inputwindow.cpp
+@@ -358,9 +358,21 @@ std::pair<int, int> InputWindow::update(InputContext *inputContext) {
+     auto *instance = parent_->instance();
+     auto &inputPanel = inputContext->inputPanel();
+     inputContext_ = inputContext->watch();
++#ifdef TIPE_CLASSIC_PAINTER
++    const auto *entry = instance->inputMethodEntry(inputContext);
++    tipeInputMethod_ = entry && entry->uniqueName() == "tipe";
++    tipeUpdate_ = {};
++    // XCB uses the detected monitor DPI here. Wayland retains its separate
++    // surface-buffer scale in paint(), just like the upstream renderer.
++    tipeUpdate_.scale_factor = pango_cairo_font_map_get_resolution(
++        PANGO_CAIRO_FONT_MAP(fontMap_.get())) / 96.0;
++#endif
+ 
+     cursor_ = -1;
+     auto preedit = instance->outputFilter(inputContext, inputPanel.preedit());
++#ifdef TIPE_CLASSIC_PAINTER
++    tipeUpdate_.preedit = preedit.toString();
++#endif
+     auto auxUp = instance->outputFilter(inputContext, inputPanel.auxUp());
+     pango_layout_set_single_paragraph_mode(upperLayout_.get(), true);
+     setTextToLayout(inputContext, upperLayout_.get(), nullptr, nullptr,
+@@ -410,6 +422,9 @@ std::pair<int, int> InputWindow::update(InputContext *inputContext) {
+                                      labelText, TextType::Label);
+             auto candidateText =
+                 instance->outputFilter(inputContext, candidate.text());
++#ifdef TIPE_CLASSIC_PAINTER
++            tipeUpdate_.candidates.push_back(candidateText.toString());
++#endif
+             setTextToMultilineLayout(inputContext,
+                                      candidateLayouts_[localIndex].text,
+                                      candidateText, TextType::Regular);
+@@ -445,6 +460,13 @@ std::pair<int, int> InputWindow::update(InputContext *inputContext) {
+         hasNext_ = false;
+     }
+ 
++#ifdef TIPE_CLASSIC_PAINTER
++    tipeUpdate_.candidate_cursor = candidateIndex_;
++    tipeUpdate_.layout_hint = static_cast<int>(layoutHint_);
++    tipeUpdate_.has_previous = hasPrev_;
++    tipeUpdate_.has_next = hasNext_;
++#endif
++
+     visible_ = nCandidates_ ||
+                pango_layout_get_character_count(upperLayout_.get()) ||
+                pango_layout_get_character_count(lowerLayout_.get());
+@@ -461,6 +483,33 @@ std::pair<int, int> InputWindow::update(InputContext *inputContext) {
+ }
+ 
+ std::pair<unsigned int, unsigned int> InputWindow::sizeHint() {
++#ifdef TIPE_CLASSIC_PAINTER
++    if (tipeInputMethod_) {
++        tipeFrame_ = tipe::client_side::adapt(tipeUpdate_, tipeOptions_);
++        candidateIndex_ = tipeFrame_.selected;
++        // Retain upstream click/hover behavior, including placeholder
++        // filtering, but use exactly the rectangles drawn by the painter.
++        const Rect emptyRegion(0, 0, -1, -1);
++        candidateRegions_.assign(nCandidates_, emptyRegion);
++        const double scale = tipeFrame_.scale_factor;
++        for (const auto &cell : tipeFrame_.layout.cells) {
++            if (cell.candidate_index >= candidateRegions_.size()) {
++                continue;
++            }
++            // Fcitx Rect stores inclusive endpoints, while the shared grid
++            // uses half-open rectangles. Match hit_test even at 1.25x DPI.
++            const int left = std::ceil(cell.rect.x * scale);
++            const int top = std::ceil(cell.rect.y * scale);
++            const int right = std::ceil((cell.rect.x + cell.rect.width) * scale) - 1;
++            const int bottom = std::ceil((cell.rect.y + cell.rect.height) * scale) - 1;
++            candidateRegions_[cell.candidate_index] = Rect(left, top, right, bottom);
++        }
++        prevRegion_ = nextRegion_ = emptyRegion;
++        prevHovered_ = nextHovered_ = false;
++        return {static_cast<unsigned int>(std::ceil(tipeFrame_.width * scale)),
++                static_cast<unsigned int>(std::ceil(tipeFrame_.height * scale))};
++    }
++#endif
+     auto &theme = parent_->theme();
+     auto *fontDesc =
+         pango_font_description_from_string(parent_->config().font->c_str());
+@@ -506,6 +555,20 @@ std::pair<unsigned int, unsigned int> InputWindow::sizeHint() {
+ 
+ void InputWindow::paint(cairo_t *cr, unsigned int width, unsigned int height,
+                         double scale) {
++#ifdef TIPE_CLASSIC_PAINTER
++    if (tipeInputMethod_) {
++        cairo_save(cr);
++        cairo_set_operator(cr, CAIRO_OPERATOR_SOURCE);
++        cairo_set_source_rgba(cr, 0, 0, 0, 0);
++        cairo_paint(cr);
++        cairo_set_operator(cr, CAIRO_OPERATOR_OVER);
++        cairo_scale(cr, scale, scale);
++        tipeFrame_.selected = highlight();
++        tipe::painter::paint(cr, tipeFrame_);
++        cairo_restore(cr);
++        return;
++    }
++#endif
+     cairo_scale(cr, scale, scale);
+     auto &theme = parent_->theme();
+     cairo_set_operator(cr, CAIRO_OPERATOR_SOURCE);
+diff --git a/src/ui/classic/inputwindow.h b/src/ui/classic/inputwindow.h
+index 23d54511..c2cb1a02 100644
+--- a/src/ui/classic/inputwindow.h
++++ b/src/ui/classic/inputwindow.h
+@@ -32,6 +32,9 @@
+ #include "fcitx/inputcontext.h"
+ #include "fcitx/text.h"
+ #include "common.h"
++#ifdef TIPE_CLASSIC_PAINTER
++#include "tipe/client_side_candidate_adapter.hpp"
++#endif
+ 
+ namespace fcitx::classicui {
+ 
+@@ -159,10 +162,18 @@ protected:
+     int candidateIndex_ = -1;
+     CandidateLayoutHint layoutHint_ = CandidateLayoutHint::NotSet;
+     int hoverIndex_ = -1;
++#ifdef TIPE_CLASSIC_PAINTER
++    bool tipeInputMethod_ = false;
++    tipe::client_side::Options tipeOptions_;
++    tipe::client_side::Update tipeUpdate_;
++    tipe::painter::Frame tipeFrame_;
++#endif
+ 
+-private:
++protected:
+     std::pair<unsigned int, unsigned int> sizeHint();
+ 
++private:
++
+     using YGNodePtr = fcitx::UniqueCPtr<YGNode, YGNodeFree>;
+     YGNodePtr rootNode_;
+     YGNodePtr mainNode_;
+diff --git a/src/ui/classic/xcbinputwindow.cpp b/src/ui/classic/xcbinputwindow.cpp
+index 6923916b..67353fee 100644
+--- a/src/ui/classic/xcbinputwindow.cpp
++++ b/src/ui/classic/xcbinputwindow.cpp
+@@ -10,6 +10,8 @@
+ #include <algorithm>
+ #include <climits>
+ #include <cstdint>
++#include <cstdlib>
++#include <string_view>
+ #include <vector>
+ #include <cairo.h>
+ #include <xcb/xcb.h>
+@@ -19,6 +21,7 @@
+ #include <xcb/xproto.h>
+ #include "fcitx-utils/rect.h"
+ #include "fcitx/inputcontext.h"
++#include "fcitx/instance.h"
+ #include "inputwindow.h"
+ #include "theme.h"
+ #include "xcb_public.h"
+@@ -52,7 +55,7 @@ void XCBInputWindow::postCreateWindow() {
+         ui_->connection(), wid_,
+         XCB_EVENT_MASK_BUTTON_PRESS | XCB_EVENT_MASK_BUTTON_RELEASE |
+             XCB_EVENT_MASK_POINTER_MOTION | XCB_EVENT_MASK_EXPOSURE |
+-            XCB_EVENT_MASK_LEAVE_WINDOW);
++            XCB_EVENT_MASK_LEAVE_WINDOW | XCB_EVENT_MASK_STRUCTURE_NOTIFY);
+ }
+ 
+ const Rect *XCBInputWindow::getClosestScreen(const Rect &cursorRect) const {
+@@ -150,6 +153,29 @@ void XCBInputWindow::updatePosition(InputContext *inputContext) {
+     }
+ 
+     const Rect &cursorRect = inputContext->cursorRect();
++    if (embeddedParent_) {
++        // XIM gives a root-relative text rectangle. Translate it using X11,
++        // then constrain the child to its actual client drawable. No desktop
++        // window coordinates or compositor IPC are involved.
++        auto root = xcb_aux_get_screen(ui_->connection(), ui_->defaultScreen())->root;
++        auto translated = makeUniqueCPtr(xcb_translate_coordinates_reply(
++            ui_->connection(), xcb_translate_coordinates(ui_->connection(), root,
++                embeddedParent_, cursorRect.left(), cursorRect.top()), nullptr));
++        auto geometry = makeUniqueCPtr(xcb_get_geometry_reply(ui_->connection(),
++            xcb_get_geometry(ui_->connection(), embeddedParent_), nullptr));
++        if (!translated || !geometry) return;
++        const int pw = geometry->width, ph = geometry->height;
++        int x = std::clamp<int>(translated->dst_x, 0, std::max(0, pw - static_cast<int>(width())));
++        int y = translated->dst_y + std::max(1, cursorRect.height());
++        if (y + static_cast<int>(height()) > ph)
++            y = translated->dst_y - static_cast<int>(height());
++        y = std::clamp(y, 0, std::max(0, ph - static_cast<int>(height())));
++        xcb_params_configure_window_t wc{};
++        wc.x = x; wc.y = y; wc.stack_mode = XCB_STACK_MODE_ABOVE;
++        xcb_aux_configure_window(ui_->connection(), wid_,
++            XCB_CONFIG_WINDOW_X | XCB_CONFIG_WINDOW_Y | XCB_CONFIG_WINDOW_STACK_MODE, &wc);
++        return;
++    }
+     const Rect *closestScreen = getClosestScreen(cursorRect);
+     xcb_params_configure_window_t wc;
+     wc.x = calculatePositionX(cursorRect, closestScreen);
+@@ -164,15 +190,43 @@ void XCBInputWindow::updatePosition(InputContext *inputContext) {
+ void XCBInputWindow::updateDPI(InputContext *inputContext) {
+     dpi_ = ui_->dpiByPosition(inputContext->cursorRect().left(),
+                               inputContext->cursorRect().top());
+-
++#ifdef TIPE_CLASSIC_PAINTER
++    const auto *entry = parent_->instance()->inputMethodEntry(inputContext);
++    if (entry && entry->uniqueName() == "tipe" && dpi_ <= 96 &&
++        ui_->parent()->xcb()->call<IXCBModule::isXWayland>(ui_->displayName())) {
++        // Some bridges expose a physical-pixel X11 root but omit Xft.dpi.
++        // Read the already subscribed wl_output metadata, with no new
++        // connection, polling, compositor IPC or guessed screen coordinates.
++        const auto *screen = xcb_aux_get_screen(ui_->connection(),ui_->defaultScreen());
++        const auto scale = parent_->xwaylandPixelScale(
++            screen->width_in_pixels,screen->height_in_pixels);
++        if (scale > 1) dpi_ = static_cast<int>(96 * scale);
++    }
++#endif
+     setFontDPI(dpi_);
+ }
+ 
+ void XCBInputWindow::update(InputContext *inputContext) {
++    if (inputContext && !visible() && embeddedFallbackLogged_ && wid_) {
++        // A bridge can destroy an embedded child between focus-out and our
++        // attempted reparent. Check once when a new composition starts, so a
++        // delayed/missed DestroyNotify cannot leave a stale drawable forever.
++        auto attributes = makeUniqueCPtr(xcb_get_window_attributes_reply(
++            ui_->connection(),xcb_get_window_attributes(ui_->connection(),wid_),nullptr));
++        if (!attributes) {
++            embeddedParent_ = XCB_WINDOW_NONE;
++            wid_ = XCB_WINDOW_NONE;
++        }
++    }
++    bool recreated = false;
+     if (!wid_) {
+-        return;
++        // Rebuild outside the event-filter callback: replacing its handler
++        // while that same handler is executing would invalidate the callback.
++        createWindow(ui_->visualId());
++        if (!wid_) return;
++        recreated = true;
+     }
+-    auto oldVisible = visible();
++    auto oldVisible = visible() && !recreated;
+     if (inputContext) {
+         updateDPI(inputContext);
+     }
+@@ -180,6 +234,10 @@ void XCBInputWindow::update(InputContext *inputContext) {
+     if (!visible()) {
+         if (oldVisible) {
+             xcb_unmap_window(ui_->connection(), wid_);
++            if (embeddedParent_) {
++                xcb_reparent_window(ui_->connection(), wid_, ui_->root(), 0, 0);
++                embeddedParent_ = XCB_WINDOW_NONE;
++            }
+             hoverIndex_ = -1;
+         }
+         return;
+@@ -222,6 +280,74 @@ void XCBInputWindow::update(InputContext *inputContext) {
+         }
+     }
+ 
++    // Prefer an ordinary X11 popup. Some Xwayland bridges do not advertise
++    // EWMH window types and assign override-redirect popups to the last
++    // hovered window, ignoring WM_TRANSIENT_FOR. Their keyboard-only focus
++    // path needs a child drawable in the actual XIM owner instead.
++    xcb_window_t owner = XCB_WINDOW_NONE;
++    bool tipeMethod = false;
++#ifdef TIPE_CLASSIC_PAINTER
++    tipeMethod = tipeInputMethod_;
++#endif
++    if (tipeMethod && inputContext && inputContext->frontendName() == "xim") {
++        auto cookie = xcb_get_input_focus(ui_->connection());
++        auto focus = makeUniqueCPtr(xcb_get_input_focus_reply(ui_->connection(),cookie,nullptr));
++        owner = focus ? focus->focus : static_cast<xcb_window_t>(XCB_WINDOW_NONE);
++        const auto root = xcb_aux_get_screen(ui_->connection(),ui_->defaultScreen())->root;
++        for (int depth=0; owner && owner!=root && owner!=XCB_INPUT_FOCUS_POINTER_ROOT && depth<16; ++depth) {
++            auto query=xcb_query_tree(ui_->connection(),owner);
++            auto tree=makeUniqueCPtr(xcb_query_tree_reply(ui_->connection(),query,nullptr));
++            if(!tree || !tree->parent || tree->parent==root) break;
++            owner=tree->parent;
++        }
++        if(owner && owner!=root && owner!=XCB_INPUT_FOCUS_POINTER_ROOT && owner!=wid_)
++            xcb_icccm_set_wm_transient_for(ui_->connection(),wid_,owner);
++    }
++    bool embed = false;
++    if (owner && owner != ui_->root() && owner != XCB_INPUT_FOCUS_POINTER_ROOT &&
++        ui_->parent()->xcb()->call<IXCBModule::isXWayland>(ui_->displayName())) {
++        xcb_ewmh_get_atoms_reply_t supported{};
++        const auto cookie = xcb_ewmh_get_supported(ui_->ewmh(), ui_->defaultScreen());
++        if (xcb_ewmh_get_supported_reply(ui_->ewmh(), cookie, &supported, nullptr)) {
++            embed = std::find(supported.atoms, supported.atoms + supported.atoms_len,
++                ui_->ewmh()->_NET_WM_WINDOW_TYPE) == supported.atoms + supported.atoms_len;
++            xcb_ewmh_get_atoms_reply_wipe(&supported);
++        }
++        if (const char *mode = std::getenv("TIPE_XIM_EMBED_POPUP"))
++            embed = std::string_view(mode) == "1";
++    }
++    const xcb_window_t nextParent = embed ? owner : static_cast<xcb_window_t>(XCB_WINDOW_NONE);
++#ifdef TIPE_CLASSIC_PAINTER
++    tipeOptions_ = {};
++    if (nextParent && tipeInputMethod_) {
++        auto geometry = makeUniqueCPtr(xcb_get_geometry_reply(ui_->connection(),
++            xcb_get_geometry(ui_->connection(), nextParent), nullptr));
++        if (geometry) {
++            const auto scale = std::max(0.5, tipeUpdate_.scale_factor);
++            tipeOptions_.width = std::min(tipeOptions_.width,
++                std::max(1, static_cast<int>(geometry->width / scale)));
++            tipeOptions_.height = std::min(tipeOptions_.height,
++                std::max(1, static_cast<int>(geometry->height / scale)));
++        }
++    }
++    if (tipeInputMethod_) {
++        const auto size = sizeHint();
++        width = size.first; height = size.second;
++        if (width != this->width() || height != this->height()) resize(width, height);
++    }
++#endif
++    if (nextParent != embeddedParent_) {
++        xcb_unmap_window(ui_->connection(), wid_);
++        xcb_reparent_window(ui_->connection(), wid_, nextParent ? nextParent : ui_->root(), 0, 0);
++        embeddedParent_ = nextParent;
++        oldVisible = false;
++        if (embeddedParent_ && !embeddedFallbackLogged_) {
++            embeddedFallbackLogged_ = true;
++            CLASSICUI_INFO() << "XIM popup fallback: embedded client child; "
++                               "Xwayland bridge lacks EWMH popup ownership. "
++                               "Anchor uses XIM rectangle; clipped to client bounds.";
++        }
++    }
+     cairo_t *c = cairo_create(prerender());
+     updatePosition(inputContext);
+     if (!oldVisible) {
+@@ -232,6 +358,14 @@ void XCBInputWindow::update(InputContext *inputContext) {
+     render();
+ }
+ 
++void XCBInputWindow::hideEmbedded() {
++    // Xwayland may retain X11 focus while a native Wayland client receives
++    // keyboard focus. An embedded child has no compositor popup role to
++    // dismiss it, so hide it on the authoritative native focus-in event.
++    // Keep the XIM context's composition available when its owner returns.
++    if (embeddedParent_) update(nullptr);
++}
++
+ bool XCBInputWindow::filterEvent(xcb_generic_event_t *event) {
+     uint8_t response_type = event->response_type & ~0x80;
+     switch (response_type) {
+@@ -244,6 +378,19 @@ bool XCBInputWindow::filterEvent(xcb_generic_event_t *event) {
+         }
+         break;
+     }
++    case XCB_DESTROY_NOTIFY: {
++        // A client may disappear without allowing focus-out cleanup first.
++        // Its children disappear with it; recreate our own drawable on root.
++        auto *destroy = reinterpret_cast<xcb_destroy_notify_event_t *>(event);
++        if (destroy->window == wid_) {
++            // Focus-out can clear embeddedParent_ before the server delivers
++            // destruction of the child. The window id is authoritative.
++            embeddedParent_ = XCB_WINDOW_NONE;
++            wid_ = XCB_WINDOW_NONE;
++            return true;
++        }
++        break;
++    }
+     case XCB_BUTTON_PRESS: {
+         auto *buttonPress = reinterpret_cast<xcb_button_press_event_t *>(event);
+         if (buttonPress->event != wid_) {
+diff --git a/src/ui/classic/xcbinputwindow.h b/src/ui/classic/xcbinputwindow.h
+index 4f89d3f8..0cfa9256 100644
+--- a/src/ui/classic/xcbinputwindow.h
++++ b/src/ui/classic/xcbinputwindow.h
+@@ -28,6 +28,7 @@ public:
+     bool filterEvent(xcb_generic_event_t *event) override;
+ 
+     void updateDPI(InputContext *inputContext);
++    void hideEmbedded();
+ 
+ private:
+     void repaint();
+@@ -38,6 +39,10 @@ private:
+                            const Rect *closestScreen) const;
+ 
+     xcb_atom_t atomBlur_;
++    // Embedded X11 child fallback for bridges without EWMH popup support.
++    // Coordinates stay in the XIM client's coordinate space.
++    xcb_window_t embeddedParent_ = XCB_WINDOW_NONE;
++    bool embeddedFallbackLogged_ = false;
+     int dpi_ = -1;
+ };
+ 
+diff --git a/src/ui/classic/xcbui.cpp b/src/ui/classic/xcbui.cpp
+index 51c03f6c..33e07e69 100644
+--- a/src/ui/classic/xcbui.cpp
++++ b/src/ui/classic/xcbui.cpp
+@@ -710,6 +710,11 @@ void XCBUI::updateCursor(InputContext *inputContext) {
+     inputWindow_->updatePosition(inputContext);
+ }
+ 
++void XCBUI::hideEmbeddedInputWindow() {
++    if (parent_->xcb()->call<IXCBModule::isXWayland>(displayName_))
++        inputWindow_->hideEmbedded();
++}
++
+ void XCBUI::updateCurrentInputMethod(InputContext *inputContext) {
+     FCITX_UNUSED(inputContext);
+     trayWindow_->update();
+diff --git a/src/ui/classic/xcbui.h b/src/ui/classic/xcbui.h
+index b78c414d..8969cf32 100644
+--- a/src/ui/classic/xcbui.h
++++ b/src/ui/classic/xcbui.h
+@@ -64,6 +64,7 @@ public:
+     void update(UserInterfaceComponent component,
+                 InputContext *inputContext) override;
+     void updateCursor(InputContext *inputContext) override;
++    void hideEmbeddedInputWindow();
+     void updateCurrentInputMethod(InputContext *inputContext) override;
+     void suspend() override;
+     void resume() override;

@@ -1,0 +1,387 @@
+I2026-10-22 21:24:22.395041 instance.cpp:1440] Override Enabled Addons: {}
+I2026-10-22 21:24:22.398195 instance.cpp:1441] Override Disabled Addons: {notificationitem}
+I2026-10-22 21:24:22.400548 xcbconnection.cpp:198] Connecting to X11 display, display name::1.
+I2026-10-22 21:24:22.400570 xcbconnection.cpp:203] X11 display: :1 is xwayland.
+I2026-10-22 21:24:22.400624 addonmanager.cpp:204] Loaded addon xcb
+I2026-10-22 21:24:22.400735 addonmanager.cpp:204] Loaded addon imselector
+I2026-10-22 21:24:22.404333 addonmanager.cpp:204] Loaded addon tipe
+I2026-10-22 21:24:22.405092 addonmanager.cpp:204] Loaded addon quickphrase
+I2026-10-22 21:24:22.405160 addonmanager.cpp:204] Loaded addon testfrontend
+[3357695.246] {Default Queue}  -> wl_display#1.get_registry(new id wl_registry#2)
+I2026-10-22 21:24:22.405430 addonmanager.cpp:204] Loaded addon wayland
+I2026-10-22 21:24:22.405562 addonmanager.cpp:204] Loaded addon waylandim
+I2026-10-22 21:24:22.405916 keyboard.cpp:229] Attempting to load keyboard from: ["/usr/share/xkeyboard-config-2"] Rule: evdev
+I2026-10-22 21:24:22.408038 addonmanager.cpp:204] Loaded addon keyboard
+I2026-10-22 21:24:22.408312 addonmanager.cpp:204] Loaded addon clipboard
+I2026-10-22 21:24:22.408434 addonmanager.cpp:204] Loaded addon pinyinhelper
+I2026-10-22 21:24:22.408713 addonmanager.cpp:204] Loaded addon luaaddonloader
+I2026-10-22 21:24:22.409571 addonmanager.cpp:204] Loaded addon dbus
+I2026-10-22 21:24:22.410286 addonmanager.cpp:204] Loaded addon ibusfrontend
+I2026-10-22 21:24:22.410951 addonmanager.cpp:204] Loaded addon imeapi
+I2026-10-22 21:24:22.411145 addonmanager.cpp:204] Loaded addon unicode
+I2026-10-22 21:24:22.411590 addonmanager.cpp:204] Loaded addon dbusfrontend
+I2026-10-22 21:24:22.412629 addonmanager.cpp:204] Loaded addon fcitx4frontend
+I2026-10-22 21:24:22.413254 addonmanager.cpp:204] Loaded addon xim
+I2026-10-22 21:24:22.413776 inputmethodmanager.cpp:210] Found 1 input method(s) in addon tipe
+I2026-10-22 21:24:22.427346 inputmethodmanager.cpp:210] Found 749 input method(s) in addon keyboard
+I2026-10-22 21:24:22.441141 addonmanager.cpp:204] Loaded addon kimpanel
+I2026-10-22 21:24:22.441608 addonmanager.cpp:204] Loaded addon virtualkeyboard
+I2026-10-22 21:24:22.451195 classicui.cpp:108] Created classicui for x11 display::1
+I2026-10-22 21:24:22.451241 classicui.cpp:129] Created classicui for wayland display:
+I2026-10-22 21:24:22.451250 addonmanager.cpp:204] Loaded addon classicui
+I2026-10-22 21:24:22.451547 addonmanager.cpp:204] Loaded addon notifications
+[3357742.849] {Default Queue} wl_registry#2.global(1, "wl_shm", 2)
+[3357742.864] {Default Queue}  -> wl_registry#2.bind(1, "wl_shm", 2, new id [unknown]#3)
+[3357742.881] {Default Queue} wl_registry#2.global(2, "wl_compositor", 6)
+[3357742.884] {Default Queue}  -> wl_registry#2.bind(2, "wl_compositor", 6, new id [unknown]#4)
+[3357743.250] {Default Queue}  -> wl_compositor#4.create_surface(new id wl_surface#5)
+[3357743.278] {Default Queue} wl_registry#2.global(3, "wl_subcompositor", 1)
+[3357743.285] {Default Queue} wl_registry#2.global(4, "wl_data_device_manager", 3)
+[3357743.290] {Default Queue} wl_registry#2.global(5, "zwlr_gamma_control_manager_v1", 1)
+[3357743.293] {Default Queue} wl_registry#2.global(6, "zxdg_output_manager_v1", 3)
+[3357743.297] {Default Queue} wl_registry#2.global(7, "ext_idle_notifier_v1", 2)
+[3357743.300] {Default Queue} wl_registry#2.global(8, "zwp_idle_inhibit_manager_v1", 1)
+[3357743.303] {Default Queue} wl_registry#2.global(9, "zwlr_layer_shell_v1", 4)
+[3357743.307] {Default Queue} wl_registry#2.global(10, "xdg_wm_base", 5)
+[3357743.310] {Default Queue} wl_registry#2.global(11, "zwp_tablet_manager_v2", 1)
+[3357743.313] {Default Queue} wl_registry#2.global(12, "org_kde_kwin_server_decoration_manager", 1)
+[3357743.317] {Default Queue} wl_registry#2.global(13, "zxdg_decoration_manager_v1", 1)
+[3357743.320] {Default Queue} wl_registry#2.global(14, "zwp_relative_pointer_manager_v1", 1)
+[3357743.325] {Default Queue} wl_registry#2.global(15, "zwp_pointer_constraints_v1", 1)
+[3357743.328] {Default Queue} wl_registry#2.global(16, "wp_presentation", 2)
+[3357743.339] {Default Queue} wl_registry#2.global(17, "wp_alpha_modifier_v1", 1)
+[3357743.352] {Default Queue} wl_registry#2.global(18, "zwlr_output_manager_v1", 4)
+[3357743.356] {Default Queue} wl_registry#2.global(19, "zwlr_output_power_manager_v1", 1)
+[3357743.360] {Default Queue} wl_registry#2.global(20, "zwp_input_method_manager_v2", 1)
+[3357743.367] {Default Queue}  -> wl_registry#2.bind(20, "zwp_input_method_manager_v2", 1, new id [unknown]#6)
+[3357743.385] {Default Queue} wl_registry#2.global(21, "zwp_text_input_manager_v3", 1)
+[3357743.390] {Default Queue} wl_registry#2.global(22, "ext_foreign_toplevel_list_v1", 1)
+[3357743.393] {Default Queue} wl_registry#2.global(23, "zwlr_foreign_toplevel_manager_v1", 3)
+[3357743.398] {Default Queue}  -> wl_registry#2.bind(23, "zwlr_foreign_toplevel_manager_v1", 3, new id [unknown]#7)
+[3357743.405] {Default Queue} wl_registry#2.global(24, "ext_session_lock_manager_v1", 1)
+[3357743.409] {Default Queue} wl_registry#2.global(25, "zwlr_export_dmabuf_manager_v1", 1)
+[3357743.413] {Default Queue} wl_registry#2.global(26, "zwlr_screencopy_manager_v1", 3)
+[3357743.417] {Default Queue} wl_registry#2.global(27, "ext_image_copy_capture_manager_v1", 1)
+[3357743.420] {Default Queue} wl_registry#2.global(28, "ext_output_image_capture_source_manager_v1", 1)
+[3357743.424] {Default Queue} wl_registry#2.global(29, "zwlr_data_control_manager_v1", 2)
+[3357743.428] {Default Queue}  -> wl_registry#2.bind(29, "zwlr_data_control_manager_v1", 2, new id [unknown]#8)
+[3357743.438] {Default Queue} wl_registry#2.global(30, "ext_data_control_manager_v1", 1)
+[3357743.443] {Default Queue}  -> wl_registry#2.bind(30, "ext_data_control_manager_v1", 1, new id [unknown]#9)
+[3357743.449] {Default Queue} wl_registry#2.global(31, "wp_security_context_manager_v1", 1)
+[3357743.454] {Default Queue} wl_registry#2.global(32, "wp_viewporter", 1)
+[3357743.458] {Default Queue}  -> wl_registry#2.bind(32, "wp_viewporter", 1, new id [unknown]#10)
+[3357743.464] {Default Queue} wl_registry#2.global(33, "wp_single_pixel_buffer_manager_v1", 1)
+[3357743.468] {Default Queue} wl_registry#2.global(34, "wp_content_type_manager_v1", 1)
+[3357743.471] {Default Queue} wl_registry#2.global(35, "wp_fractional_scale_manager_v1", 1)
+[3357743.475] {Default Queue}  -> wl_registry#2.bind(35, "wp_fractional_scale_manager_v1", 1, new id [unknown]#11)
+[3357743.481] {Default Queue}  -> wp_viewporter#10.get_viewport(new id wp_viewport#12, wl_surface#5)
+[3357743.485] {Default Queue}  -> wp_fractional_scale_manager_v1#11.get_fractional_scale(new id wp_fractional_scale_v1#13, wl_surface#5)
+[3357743.491] {Default Queue} wl_registry#2.global(36, "wp_tearing_control_manager_v1", 1)
+[3357743.494] {Default Queue} wl_registry#2.global(37, "zxdg_exporter_v1", 1)
+[3357743.498] {Default Queue} wl_registry#2.global(38, "zxdg_importer_v1", 1)
+[3357743.501] {Default Queue} wl_registry#2.global(39, "zxdg_exporter_v2", 1)
+[3357743.504] {Default Queue} wl_registry#2.global(40, "zxdg_importer_v2", 1)
+[3357743.508] {Default Queue} wl_registry#2.global(41, "xdg_activation_v1", 1)
+[3357743.511] {Default Queue} wl_registry#2.global(42, "wp_cursor_shape_manager_v1", 1)
+[3357743.514] {Default Queue} wl_registry#2.global(43, "zwp_virtual_keyboard_manager_v1", 1)
+[3357743.518] {Default Queue}  -> wl_registry#2.bind(43, "zwp_virtual_keyboard_manager_v1", 1, new id [unknown]#14)
+[3357743.524] {Default Queue} wl_registry#2.global(44, "zwlr_virtual_pointer_manager_v1", 2)
+[3357743.528] {Default Queue} wl_registry#2.global(45, "zwp_keyboard_shortcuts_inhibit_manager_v1", 1)
+[3357743.532] {Default Queue} wl_registry#2.global(46, "zwp_pointer_gestures_v1", 3)
+[3357743.535] {Default Queue} wl_registry#2.global(47, "ext_transient_seat_manager_v1", 1)
+[3357743.539] {Default Queue} wl_registry#2.global(48, "wl_seat", 9)
+[3357743.542] {Default Queue}  -> wl_registry#2.bind(48, "wl_seat", 9, new id [unknown]#15)
+[3357743.582] {Default Queue}  -> zwp_input_method_manager_v2#6.get_input_method(wl_seat#15, new id zwp_input_method_v2#16)
+[3357743.609] {Default Queue} wl_registry#2.global(50, "zwp_primary_selection_device_manager_v1", 1)
+[3357743.619] {Default Queue} wl_registry#2.global(51, "wl_output", 4)
+[3357743.626] {Default Queue}  -> wl_registry#2.bind(51, "wl_output", 4, new id [unknown]#17)
+[3357743.633] {Default Queue} wl_registry#2.global(52, "wl_output", 4)
+[3357743.637] {Default Queue}  -> wl_registry#2.bind(52, "wl_output", 4, new id [unknown]#18)
+[3357743.885] {Default Queue}  -> ext_data_control_manager_v1#9.get_data_device(new id ext_data_control_device_v1#19, wl_seat#15)
+[3357743.952] {Default Queue} wl_shm#3.format(0)
+[3357743.959] {Default Queue} wl_shm#3.format(875709016)
+[3357743.963] {Default Queue} wl_shm#3.format(1)
+[3357743.966] {Default Queue} wl_shm#3.format(875708993)
+[3357743.968] {Default Queue} wl_shm#3.format(875708754)
+[3357743.971] {Default Queue} wl_shm#3.format(875714642)
+[3357743.974] {Default Queue} wl_shm#3.format(875708738)
+[3357743.976] {Default Queue} wl_shm#3.format(875714626)
+[3357743.979] {Default Queue} wl_shm#3.format(909199186)
+[3357743.981] {Default Queue} wl_shm#3.format(909199170)
+[3357743.984] {Default Queue} wl_shm#3.format(808669761)
+[3357743.986] {Default Queue} wl_shm#3.format(808669784)
+[3357743.989] {Default Queue} wl_shm#3.format(808665665)
+[3357743.991] {Default Queue} wl_shm#3.format(808665688)
+[3357743.994] {Default Queue} wl_seat#15.name("seat0")
+[3357743.997] {Default Queue} wl_seat#15.capabilities(2)
+[3357744.001] {Default Queue}  -> wl_seat#15.get_keyboard(new id wl_keyboard#20)
+[3357744.007] {Default Queue} wl_output#17.geometry(0, 0, 0, 0, 0, "Unknown", "Unknown", 0)
+[3357744.013] {Default Queue} wl_output#17.mode(1, 2400, 1500, 0)
+[3357744.017] {Default Queue} wl_output#17.scale(2)
+[3357744.021] {Default Queue} wl_output#17.name("HEADLESS-2")
+[3357744.024] {Default Queue} wl_output#17.description("Headless output 1")
+[3357744.027] {Default Queue} wl_output#17.done()
+[3357744.030] {Default Queue} wl_output#18.geometry(0, 0, 0, 0, 0, "Unknown", "Unknown", 0)
+[3357744.035] {Default Queue} wl_output#18.mode(1, 1920, 1440, 0)
+[3357744.038] {Default Queue} wl_output#18.scale(1)
+[3357744.041] {Default Queue} wl_output#18.name("HEADLESS-1")
+[3357744.044] {Default Queue} wl_output#18.description("Headless output 2")
+[3357744.047] {Default Queue} wl_output#18.done()
+[3357744.127] {Default Queue} ext_data_control_device_v1#19.selection(nil)
+[3357744.140] {Default Queue} ext_data_control_device_v1#19.primary_selection(nil)
+[3357744.147] {Default Queue} wl_keyboard#20.keymap(1, fd 31, 1442)
+[3357744.156] {Default Queue} wl_keyboard#20.repeat_info(25, 600)
+I2026-10-22 21:24:22.454877 dbusmodule.cpp:845] Service name change: org.fcitx.Fcitx5  :1.1
+I2026-10-22 21:24:22.455146 kimpanel.cpp:138] Kimpanel new owner: 
+I2026-10-22 21:24:22.455178 virtualkeyboard.cpp:230] VirtualKeyboard new owner: 
+[3358227.680] {Default Queue} zwlr_foreign_toplevel_manager_v1#7.toplevel(new id zwlr_foreign_toplevel_handle_v1#4278190080)
+[3358227.720] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.title("TiPE Wine isolated regression")
+[3358227.725] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.state(array[4])
+[3358227.736] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.app_id("input.exe")
+[3358227.759] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3358249.713] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3358249.734] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3358285.090] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3358285.117] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3358285.121] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3358285.126] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3358285.128] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3358589.082] {Default Queue} wl_output#17.geometry(0, 0, 0, 0, 0, "Unknown", "Unknown", 0)
+[3358589.118] {Default Queue} wl_output#17.scale(2)
+[3358589.137] {Default Queue} wl_output#18.geometry(0, 0, 0, 0, 0, "Unknown", "Unknown", 0)
+[3358589.159] {Default Queue} wl_output#18.scale(1)
+[3358589.165] {Default Queue} wl_output#17.done()
+[3358589.170] {Default Queue} wl_output#18.done()
+[3359239.941] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3359239.963] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3359239.968] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+I2026-10-22 21:24:24.659920 tipe_fcitx.cpp:95] TiPE learning fallback: XIM cannot report sensitive fields; keyboard observation and personal learning disabled for XIM. Input and candidates remain available.
+I2026-10-22 21:24:24.672719 xcbinputwindow.cpp:355] XIM popup fallback: embedded client child; Xwayland bridge lacks EWMH popup ownership. Anchor uses XIM rectangle; clipped to client bounds.
+[3360384.570] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3360496.165] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3360496.195] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3360496.203] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3360936.729] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3361443.389] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3361894.994] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3361895.021] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3361895.026] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3362333.620] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3364078.308] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3364176.735] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3364176.773] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3364176.777] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3364612.008] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3365106.662] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3365563.408] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3365563.430] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3365563.434] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3365994.948] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3366172.422] {Default Queue} wl_seat#15.capabilities(3)
+[3366172.454] {Default Queue}  -> wl_seat#15.get_pointer(new id wl_pointer#21)
+[3366248.020] {Default Queue} wl_seat#15.capabilities(2)
+[3366248.053] {Default Queue}  -> wl_pointer#21.release()
+I2026-10-22 21:24:32.465692 waylandmodule.cpp:665] Wayland self diagnose information
+I2026-10-22 21:24:32.465741 waylandmodule.cpp:666] Using Wayland native input method protocol: 1
+I2026-10-22 21:24:32.465748 waylandmodule.cpp:668] Toolkit specific environment variable detected by process:
+I2026-10-22 21:24:32.465752 waylandmodule.cpp:670] GTK_IM_MODULE=
+I2026-10-22 21:24:32.465756 waylandmodule.cpp:671] QT_IM_MODULE=
+I2026-10-22 21:24:32.465760 waylandmodule.cpp:672] QT_IM_MODULES=
+[3368714.733] {Display Queue} wl_display#1.delete_id(21)
+[3368714.749] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3368811.492] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3368811.523] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3368811.530] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3369246.715] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3369723.414] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3370478.054] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3370478.078] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3370478.088] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3370914.821] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3373534.912] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3373632.232] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3373632.251] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3373632.254] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3374070.568] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3374561.526] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3375272.185] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3375272.210] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3375272.215] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3375702.556] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3375920.776] {Default Queue} wl_seat#15.capabilities(3)
+[3375920.807] {Default Queue}  -> wl_seat#15.get_pointer(new id wl_pointer#21)
+[3375996.511] {Default Queue} wl_seat#15.capabilities(2)
+[3375996.538] {Default Queue}  -> wl_pointer#21.release()
+[3376339.593] {Display Queue} wl_display#1.delete_id(21)
+[3376339.607] {Default Queue} wl_output#17.scale(2)
+[3376339.612] {Default Queue} wl_output#17.geometry(0, 0, 0, 0, 0, "Unknown", "Unknown", 0)
+[3376339.616] {Default Queue} wl_output#17.scale(2)
+[3376339.618] {Default Queue} wl_output#18.geometry(0, 0, 0, 0, 0, "Unknown", "Unknown", 0)
+[3376339.622] {Default Queue} wl_output#18.scale(1)
+[3376339.624] {Default Queue} wl_output#17.done()
+[3376339.627] {Default Queue} wl_output#18.done()
+[3378090.145] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3378193.191] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3378193.211] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3378193.214] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3378628.120] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3379075.420] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3379315.293] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3379315.313] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3379315.316] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3379751.626] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3381502.342] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3381600.370] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3381600.397] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3381600.403] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3382038.686] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3382486.798] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3382715.143] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3382715.165] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3382715.168] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3383155.124] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3383330.188] {Default Queue} wl_seat#15.capabilities(3)
+[3383330.208] {Default Queue}  -> wl_seat#15.get_pointer(new id wl_pointer#21)
+[3383405.522] {Default Queue} wl_seat#15.capabilities(2)
+[3383405.556] {Default Queue}  -> wl_pointer#21.release()
+[3385806.478] {Display Queue} wl_display#1.delete_id(21)
+[3385806.488] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3385901.947] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3385901.987] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3385902.006] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3386339.354] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3386784.657] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3387116.947] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3387116.976] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3387116.982] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3387550.675] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3390125.038] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3390222.440] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3390222.469] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3390222.475] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3390654.638] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3391098.608] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3391422.603] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3391422.630] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3391422.635] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3391855.439] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3392085.582] {Default Queue} wl_seat#15.capabilities(3)
+[3392085.615] {Default Queue}  -> wl_seat#15.get_pointer(new id wl_pointer#21)
+[3392161.194] {Default Queue} wl_seat#15.capabilities(2)
+[3392161.223] {Default Queue}  -> wl_pointer#21.release()
+[3392505.071] {Display Queue} wl_display#1.delete_id(21)
+[3392505.092] {Default Queue} wl_output#17.scale(2)
+[3392505.099] {Default Queue} wl_output#17.geometry(0, 0, 0, 0, 0, "Unknown", "Unknown", 0)
+[3392505.105] {Default Queue} wl_output#17.scale(2)
+[3392505.107] {Default Queue} wl_output#18.geometry(0, 0, 0, 0, 0, "Unknown", "Unknown", 0)
+[3392505.112] {Default Queue} wl_output#18.scale(1)
+[3392505.115] {Default Queue} wl_output#17.done()
+[3392505.119] {Default Queue} wl_output#18.done()
+[3394301.836] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3394400.969] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3394400.994] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3394401.000] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3394833.467] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3395283.863] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3395578.493] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3395578.515] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3395578.517] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3396019.420] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3397813.758] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3397909.870] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3397909.901] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3397909.908] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3398345.630] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3398810.777] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3399109.351] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3399109.373] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3399109.379] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3399542.050] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3399741.538] {Default Queue} wl_seat#15.capabilities(3)
+[3399741.588] {Default Queue}  -> wl_seat#15.get_pointer(new id wl_pointer#21)
+[3399817.032] {Default Queue} wl_seat#15.capabilities(2)
+[3399817.054] {Default Queue}  -> wl_pointer#21.release()
+[3402211.226] {Display Queue} wl_display#1.delete_id(21)
+[3402211.237] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3402302.919] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3402302.945] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3402302.951] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3402739.868] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3403190.142] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3403598.545] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3403598.574] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3403598.580] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3404028.178] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3406631.052] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3406726.372] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#18)
+[3406726.396] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#17)
+[3406726.401] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3407162.414] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3407625.469] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3408068.966] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_enter(wl_output#18)
+[3408068.991] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.output_leave(wl_output#17)
+[3408068.996] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3408503.626] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.done()
+[3408763.478] {Default Queue} wl_seat#15.capabilities(3)
+[3408763.508] {Default Queue}  -> wl_seat#15.get_pointer(new id wl_pointer#21)
+[3408838.821] {Default Queue} wl_seat#15.capabilities(2)
+[3408838.844] {Default Queue}  -> wl_pointer#21.release()
+[3409182.863] {Display Queue} wl_display#1.delete_id(21)
+[3409182.891] {Default Queue} zwlr_foreign_toplevel_handle_v1#4278190080.closed()
+[3409182.906] {Default Queue}  -> zwlr_foreign_toplevel_handle_v1#4278190080.destroy()
+=========================
+Fcitx 5.1.21 -- Get Signal No.: 15
+Date: try "date -d @1792675514" if you are using GNU date ***
+ProcessID: 1391755
+fcitx5(+0xf387) [0x55c3ee113387]
+/lib64/libc.so.6(+0x1a0b0) [0x7f1d2aadd0b0]
+/lib64/libc.so.6(+0x7b412) [0x7f1d2ab3e412]
+/lib64/libc.so.6(+0x6f62c) [0x7f1d2ab3262c]
+/lib64/libc.so.6(+0x6f674) [0x7f1d2ab32674]
+/lib64/libc.so.6(epoll_wait+0x25) [0x7f1d2abb9935]
+/lib64/libsystemd.so.0(sd_event_wait+0x1d4) [0x7f1d2a9b6514]
+/lib64/libsystemd.so.0(sd_event_run+0x20b) [0x7f1d2a9b7c3b]
+/lib64/libsystemd.so.0(sd_event_loop+0x8f) [0x7f1d2a9b7dcf]
+/lib64/libFcitx5Utils.so.2(_ZN5fcitx9EventLoop4execEv+0x2b) [0x7f1d2b1a964b]
+/lib64/libFcitx5Core.so.7(_ZN5fcitx8Instance4execEv+0x5b) [0x7f1d2b261a5b]
+fcitx5(+0xd1ef) [0x55c3ee1111ef]
+/lib64/libc.so.6(+0x3681) [0x7f1d2aac6681]
+/lib64/libc.so.6(__libc_start_main+0x88) [0x7f1d2aac6798]
+fcitx5(+0xe6d5) [0x55c3ee1126d5]
+[3409944.344] {Default Queue}  -> zwp_input_method_v2#16.destroy()
+I2026-10-22 21:25:14.654530 addonmanager.cpp:306] Unloading addon notifications
+I2026-10-22 21:25:14.654597 addonmanager.cpp:306] Unloading addon classicui
+[3409944.995] {Default Queue}  -> wp_fractional_scale_v1#13.destroy()
+[3409945.010] {Default Queue}  -> wp_viewport#12.destroy()
+[3409945.026] {Default Queue}  -> wl_surface#5.destroy()
+I2026-10-22 21:25:14.655747 addonmanager.cpp:306] Unloading addon virtualkeyboard
+I2026-10-22 21:25:14.655814 addonmanager.cpp:306] Unloading addon kimpanel
+I2026-10-22 21:25:14.655843 addonmanager.cpp:306] Unloading addon xim
+I2026-10-22 21:25:14.656277 addonmanager.cpp:306] Unloading addon fcitx4frontend
+I2026-10-22 21:25:14.656414 addonmanager.cpp:306] Unloading addon dbusfrontend
+I2026-10-22 21:25:14.656455 addonmanager.cpp:306] Unloading addon unicode
+I2026-10-22 21:25:14.656475 addonmanager.cpp:306] Unloading addon imeapi
+I2026-10-22 21:25:14.656562 addonmanager.cpp:306] Unloading addon ibusfrontend
+I2026-10-22 21:25:14.656729 addonmanager.cpp:306] Unloading addon dbus
+I2026-10-22 21:25:14.656780 addonmanager.cpp:306] Unloading addon luaaddonloader
+I2026-10-22 21:25:14.656799 addonmanager.cpp:306] Unloading addon pinyinhelper
+I2026-10-22 21:25:14.656821 addonmanager.cpp:306] Unloading addon clipboard
+[3409946.947] {Default Queue}  -> ext_data_control_device_v1#19.destroy()
+I2026-10-22 21:25:14.657143 addonmanager.cpp:306] Unloading addon keyboard
+I2026-10-22 21:25:14.657353 addonmanager.cpp:306] Unloading addon waylandim
+I2026-10-22 21:25:14.657414 addonmanager.cpp:306] Unloading addon wayland
+[3409947.299] {Default Queue}  -> wl_keyboard#20.release()
+[3409947.376] {Default Queue}  -> wl_output#18.release()
+[3409947.383] {Default Queue}  -> wl_output#17.release()
+[3409947.387] {Default Queue}  -> wl_seat#15.release()
+[3409947.397] {Default Queue}  -> wp_fractional_scale_manager_v1#11.destroy()
+[3409947.402] {Default Queue}  -> wp_viewporter#10.destroy()
+[3409947.406] {Default Queue}  -> ext_data_control_manager_v1#9.destroy()
+[3409947.416] {Default Queue}  -> wl_shm#3.release()
+[3409947.421] {Default Queue}  -> zwp_input_method_manager_v2#6.destroy()
+[3409947.427] {Default Queue}  -> zwlr_data_control_manager_v1#8.destroy()
+I2026-10-22 21:25:14.657602 addonmanager.cpp:306] Unloading addon testfrontend
+I2026-10-22 21:25:14.657618 addonmanager.cpp:306] Unloading addon quickphrase
+I2026-10-22 21:25:14.657834 addonmanager.cpp:306] Unloading addon tipe
+I2026-10-22 21:25:14.657847 addonmanager.cpp:306] Unloading addon imselector
+I2026-10-22 21:25:14.657863 addonmanager.cpp:306] Unloading addon xcb

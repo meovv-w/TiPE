@@ -1,0 +1,9 @@
+browser top-left nihao PASS
+browser top-left zhonghuarenmingongheguo PASS
+browser top-right nihao PASS
+browser top-right zhonghuarenmingongheguo PASS
+browser bottom-left nihao PASS
+browser bottom-left zhonghuarenmingongheguo PASS
+browser bottom-right nihao PASS
+browser bottom-right zhonghuarenmingongheguo PASS
+PASS native popup corner cases: 8

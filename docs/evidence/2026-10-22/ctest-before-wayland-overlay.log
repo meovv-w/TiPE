@@ -1,0 +1,75 @@
+Test project /home/lin/Documents/ChatGPT/tipe/build
+      Start  1: tipe-trainer-tests
+ 1/35 Test  #1: tipe-trainer-tests ......................   Passed    0.12 sec
+      Start  2: tipe-quality-tests
+ 2/35 Test  #2: tipe-quality-tests ......................   Passed    0.52 sec
+      Start  3: tipe-quality-isolation-tests
+ 3/35 Test  #3: tipe-quality-isolation-tests ............   Passed    1.85 sec
+      Start  4: tipe-correction-flow-tests
+ 4/35 Test  #4: tipe-correction-flow-tests ..............   Passed    1.90 sec
+      Start  5: tipe-control-single-instance
+ 5/35 Test  #5: tipe-control-single-instance ............   Passed    0.21 sec
+      Start  6: tipe-daemon-mapping
+ 6/35 Test  #6: tipe-daemon-mapping .....................   Passed    0.06 sec
+      Start  7: tipe-user-installation
+ 7/35 Test  #7: tipe-user-installation ..................   Passed    1.11 sec
+      Start  8: tipe-activation-readiness
+ 8/35 Test  #8: tipe-activation-readiness ...............   Passed    1.11 sec
+      Start  9: tipe-qt-surrounding-fallback
+ 9/35 Test  #9: tipe-qt-surrounding-fallback ............   Passed   38.99 sec
+      Start 10: tipe-support-tests
+10/35 Test #10: tipe-support-tests ......................   Passed    0.05 sec
+      Start 11: tipe-control-window-tests
+11/35 Test #11: tipe-control-window-tests ...............   Passed    1.49 sec
+      Start 12: tipe-support-hidpi-tests
+12/35 Test #12: tipe-support-hidpi-tests ................   Passed    0.06 sec
+      Start 13: tipe-grid-tests
+13/35 Test #13: tipe-grid-tests .........................   Passed    0.01 sec
+      Start 14: tipe-painter-tests
+14/35 Test #14: tipe-painter-tests ......................   Passed    0.04 sec
+      Start 15: tipe-client-side-adapter-tests
+15/35 Test #15: tipe-client-side-adapter-tests ..........   Passed    0.02 sec
+      Start 16: tipe-correction-tests
+16/35 Test #16: tipe-correction-tests ...................   Passed    0.01 sec
+      Start 17: tipe-tests
+17/35 Test #17: tipe-tests ..............................   Passed    2.79 sec
+      Start 18: tipe-english-corpus-tests
+18/35 Test #18: tipe-english-corpus-tests ...............   Passed    3.60 sec
+      Start 19: tipe-libime-fallback-tests
+19/35 Test #19: tipe-libime-fallback-tests ..............   Passed    0.05 sec
+      Start 20: tipe-learning-tests
+20/35 Test #20: tipe-learning-tests .....................   Passed    8.76 sec
+      Start 21: tipe-resource-stress-tests
+21/35 Test #21: tipe-resource-stress-tests ..............   Passed    1.48 sec
+      Start 22: tipe-trained-resource-stress-tests
+22/35 Test #22: tipe-trained-resource-stress-tests ......   Passed    1.26 sec
+      Start 23: tipe-model-tests
+23/35 Test #23: tipe-model-tests ........................   Passed    0.01 sec
+      Start 24: tipe-cloud-transport-tests
+24/35 Test #24: tipe-cloud-transport-tests ..............   Passed    0.58 sec
+      Start 25: tipe-cloud-worker-tests
+25/35 Test #25: tipe-cloud-worker-tests .................   Passed    1.47 sec
+      Start 26: tipe-cloud-candidate-tests
+26/35 Test #26: tipe-cloud-candidate-tests ..............   Passed    0.03 sec
+      Start 27: tipe-local-small-tests
+27/35 Test #27: tipe-local-small-tests ..................   Passed    0.23 sec
+      Start 28: tipe-fcitx-tests
+28/35 Test #28: tipe-fcitx-tests ........................   Passed    0.56 sec
+      Start 29: tipe-fcitx-lifecycle-tests
+29/35 Test #29: tipe-fcitx-lifecycle-tests ..............   Passed    0.88 sec
+      Start 30: tipe-ui-x11-smoke
+30/35 Test #30: tipe-ui-x11-smoke .......................   Passed    0.61 sec
+      Start 31: tipe-ui-headless-fallback
+31/35 Test #31: tipe-ui-headless-fallback ...............   Passed    0.57 sec
+      Start 32: tipe-ui-page-offset-smoke
+32/35 Test #32: tipe-ui-page-offset-smoke ...............   Passed    0.62 sec
+      Start 33: tipe-ui-wayland-capability-diagnostic
+33/35 Test #33: tipe-ui-wayland-capability-diagnostic ...   Passed    0.62 sec
+      Start 34: tipe-protocol-tests
+34/35 Test #34: tipe-protocol-tests .....................   Passed    0.08 sec
+      Start 35: tipe-wayland-capability-probe
+35/35 Test #35: tipe-wayland-capability-probe ...........   Passed    0.03 sec
+
+100% tests passed, 0 tests failed out of 35
+
+Total Test time (real) =  71.75 sec

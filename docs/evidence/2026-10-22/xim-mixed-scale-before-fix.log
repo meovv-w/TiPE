@@ -1,0 +1,21 @@
+2-5-keyboard PASS
+2-5-mouse PASS
+2-23-keyboard PASS
+2-23-mouse PASS
+1.25-5-keyboard PASS
+1.25-5-mouse PASS
+1.25-23-keyboard PASS
+1.25-23-mouse PASS
+Traceback (most recent call last):
+  File "/home/lin/Documents/ChatGPT/tipe/scripts/check-native-multioutput.py", line 322, in <module>
+    if __name__=='__main__': sys.exit(main())
+                                      ~~~~^^
+  File "/home/lin/Documents/ChatGPT/tipe/scripts/check-native-multioutput.py", line 284, in main
+    compact2=shot(tag+'-compact2','HEADLESS-2')
+  File "/home/lin/Documents/ChatGPT/tipe/scripts/check-native-multioutput.py", line 230, in shot
+    bounds, selected = native.popup(filename,capture)
+                       ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/home/lin/Documents/ChatGPT/tipe/scripts/check-native-popup-desktop.py", line 45, in popup
+    assert len(ys) >= 10, 'No visible candidate selection'
+           ^^^^^^^^^^^^^
+AssertionError: No visible candidate selection

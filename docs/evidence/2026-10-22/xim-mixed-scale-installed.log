@@ -1,0 +1,13 @@
+2-5-keyboard PASS
+2-5-mouse PASS
+2-23-keyboard PASS
+2-23-mouse PASS
+1.25-5-keyboard PASS
+1.25-5-mouse PASS
+1.25-23-keyboard PASS
+1.25-23-mouse PASS
+1.5-5-keyboard PASS
+1.5-5-mouse PASS
+1.5-23-keyboard PASS
+1.5-23-mouse PASS
+PASS wine mixed-scale migrations: 12

@@ -1,0 +1,9 @@
+browser: Partial selection retains suffix: PASS
+browser: Numeric prefix after first ten candidates: PASS
+browser: Long phrase preserves remaining syllables: PASS
+browser: Edit remaining pinyin after partial choice: PASS
+browser: Cancel remaining pinyin keeps selected prefix: PASS
+browser: Abbreviation selection chain woc: PASS
+browser: Three successive phrase segments: PASS
+browser: Restore prefix after deleting all suffix pinyin: PASS
+{"passed": 8, "results": "/home/lin/Documents/ChatGPT/tipe/build/segmented-browser-verified/results.json"}

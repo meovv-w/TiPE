@@ -1,0 +1,78 @@
+I2026-10-23 08:05:12.391013 instance.cpp:1440] Override Enabled Addons: {}
+I2026-10-23 08:05:12.392945 instance.cpp:1441] Override Disabled Addons: {notificationitem}
+I2026-10-23 08:05:12.394560 addonmanager.cpp:204] Loaded addon xcb
+I2026-10-23 08:05:12.394641 addonmanager.cpp:204] Loaded addon imselector
+I2026-10-23 08:05:12.411597 addonmanager.cpp:204] Loaded addon tipe
+I2026-10-23 08:05:12.412374 addonmanager.cpp:204] Loaded addon quickphrase
+I2026-10-23 08:05:12.412442 addonmanager.cpp:204] Loaded addon testfrontend
+I2026-10-23 08:05:12.412751 addonmanager.cpp:204] Loaded addon wayland
+I2026-10-23 08:05:12.412884 addonmanager.cpp:204] Loaded addon waylandim
+I2026-10-23 08:05:12.413223 keyboard.cpp:229] Attempting to load keyboard from: ["/usr/share/xkeyboard-config-2"] Rule: evdev
+I2026-10-23 08:05:12.415297 addonmanager.cpp:204] Loaded addon keyboard
+I2026-10-23 08:05:12.415428 addonmanager.cpp:204] Loaded addon clipboard
+I2026-10-23 08:05:12.415521 addonmanager.cpp:204] Loaded addon pinyinhelper
+I2026-10-23 08:05:12.415805 addonmanager.cpp:204] Loaded addon luaaddonloader
+I2026-10-23 08:05:12.418767 addonmanager.cpp:204] Loaded addon dbus
+I2026-10-23 08:05:12.420701 addonmanager.cpp:204] Loaded addon ibusfrontend
+I2026-10-23 08:05:12.421711 addonmanager.cpp:204] Loaded addon imeapi
+I2026-10-23 08:05:12.421988 addonmanager.cpp:204] Loaded addon unicode
+I2026-10-23 08:05:12.422985 addonmanager.cpp:204] Loaded addon dbusfrontend
+I2026-10-23 08:05:12.423682 addonmanager.cpp:204] Loaded addon fcitx4frontend
+I2026-10-23 08:05:12.424090 addonmanager.cpp:204] Loaded addon xim
+I2026-10-23 08:05:12.424752 inputmethodmanager.cpp:210] Found 1 input method(s) in addon tipe
+I2026-10-23 08:05:12.437512 inputmethodmanager.cpp:210] Found 749 input method(s) in addon keyboard
+I2026-10-23 08:05:12.437834 addonmanager.cpp:204] Loaded addon kimpanel
+I2026-10-23 08:05:12.438083 addonmanager.cpp:204] Loaded addon virtualkeyboard
+I2026-10-23 08:05:12.445303 classicui.cpp:129] Created classicui for wayland display:
+I2026-10-23 08:05:12.445320 addonmanager.cpp:204] Loaded addon classicui
+I2026-10-23 08:05:12.445638 addonmanager.cpp:204] Loaded addon notifications
+I2026-10-23 08:05:12.446818 dbusmodule.cpp:845] Service name change: org.fcitx.Fcitx5  :1.0
+I2026-10-23 08:05:12.446857 kimpanel.cpp:138] Kimpanel new owner: 
+I2026-10-23 08:05:12.446868 virtualkeyboard.cpp:230] VirtualKeyboard new owner: 
+I2026-10-23 08:05:22.692582 waylandmodule.cpp:665] Wayland self diagnose information
+I2026-10-23 08:05:22.692638 waylandmodule.cpp:666] Using Wayland native input method protocol: 1
+I2026-10-23 08:05:22.692644 waylandmodule.cpp:668] Toolkit specific environment variable detected by process:
+I2026-10-23 08:05:22.692648 waylandmodule.cpp:670] GTK_IM_MODULE=
+I2026-10-23 08:05:22.692652 waylandmodule.cpp:671] QT_IM_MODULE=
+I2026-10-23 08:05:22.692655 waylandmodule.cpp:672] QT_IM_MODULES=
+=========================
+Fcitx 5.1.21 -- Get Signal No.: 15
+Date: try "date -d @1792714006" if you are using GNU date ***
+ProcessID: 1516147
+fcitx5(+0xf387) [0x55ca1c2de387]
+/lib64/libc.so.6(+0x1a0b0) [0x7f620c70a0b0]
+/lib64/libc.so.6(+0x7b412) [0x7f620c76b412]
+/lib64/libc.so.6(+0x6f62c) [0x7f620c75f62c]
+/lib64/libc.so.6(+0x6f674) [0x7f620c75f674]
+/lib64/libc.so.6(epoll_wait+0x25) [0x7f620c7e6935]
+/lib64/libsystemd.so.0(sd_event_wait+0x1d4) [0x7f620c5e3514]
+/lib64/libsystemd.so.0(sd_event_run+0x20b) [0x7f620c5e4c3b]
+/lib64/libsystemd.so.0(sd_event_loop+0x8f) [0x7f620c5e4dcf]
+/lib64/libFcitx5Utils.so.2(_ZN5fcitx9EventLoop4execEv+0x2b) [0x7f620cdd664b]
+/lib64/libFcitx5Core.so.7(_ZN5fcitx8Instance4execEv+0x5b) [0x7f620ce8ea5b]
+fcitx5(+0xd1ef) [0x55ca1c2dc1ef]
+/lib64/libc.so.6(+0x3681) [0x7f620c6f3681]
+/lib64/libc.so.6(__libc_start_main+0x88) [0x7f620c6f3798]
+fcitx5(+0xe6d5) [0x55ca1c2dd6d5]
+I2026-10-23 08:06:46.981744 addonmanager.cpp:306] Unloading addon notifications
+I2026-10-23 08:06:46.982035 addonmanager.cpp:306] Unloading addon classicui
+I2026-10-23 08:06:46.985521 addonmanager.cpp:306] Unloading addon virtualkeyboard
+I2026-10-23 08:06:46.985833 addonmanager.cpp:306] Unloading addon kimpanel
+I2026-10-23 08:06:46.986029 addonmanager.cpp:306] Unloading addon xim
+I2026-10-23 08:06:46.986226 addonmanager.cpp:306] Unloading addon fcitx4frontend
+I2026-10-23 08:06:46.986541 addonmanager.cpp:306] Unloading addon dbusfrontend
+I2026-10-23 08:06:46.986752 addonmanager.cpp:306] Unloading addon unicode
+I2026-10-23 08:06:46.986887 addonmanager.cpp:306] Unloading addon imeapi
+I2026-10-23 08:06:46.987494 addonmanager.cpp:306] Unloading addon ibusfrontend
+I2026-10-23 08:06:46.988664 addonmanager.cpp:306] Unloading addon dbus
+I2026-10-23 08:06:46.989009 addonmanager.cpp:306] Unloading addon luaaddonloader
+I2026-10-23 08:06:46.989118 addonmanager.cpp:306] Unloading addon pinyinhelper
+I2026-10-23 08:06:46.989282 addonmanager.cpp:306] Unloading addon clipboard
+I2026-10-23 08:06:46.989868 addonmanager.cpp:306] Unloading addon keyboard
+I2026-10-23 08:06:46.990901 addonmanager.cpp:306] Unloading addon waylandim
+I2026-10-23 08:06:46.991197 addonmanager.cpp:306] Unloading addon wayland
+I2026-10-23 08:06:46.992119 addonmanager.cpp:306] Unloading addon testfrontend
+I2026-10-23 08:06:46.992362 addonmanager.cpp:306] Unloading addon quickphrase
+I2026-10-23 08:06:46.993890 addonmanager.cpp:306] Unloading addon tipe
+I2026-10-23 08:06:46.994068 addonmanager.cpp:306] Unloading addon imselector
+I2026-10-23 08:06:46.994182 addonmanager.cpp:306] Unloading addon xcb

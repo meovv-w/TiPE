@@ -1,0 +1,31 @@
+name: 输入或界面问题
+description: 提供可重复的输入步骤，帮助定位状态机或协议问题。
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: 请勿提供密码、API Key、私人学习记录或无关周围文本。
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境
+      description: 发行版、Fcitx、应用版本、合成器、Wayland/X11/Wine、缩放比例。
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 最小复现步骤
+      description: 输入了什么拼音、选哪个候选、按哪些键、是否切窗。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期与实际结果
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 脱敏截图或诊断（可选）

@@ -1,0 +1,416 @@
+[
+  {
+    "toolkit": "wine",
+    "name": "Partial selection retains suffix",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihao",
+        "text": "你",
+        "consumed": 2,
+        "index": 31,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected": "你",
+        "actual": "你",
+        "passed": true,
+        "scope": "client-committed-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "wine",
+    "name": "Numeric prefix after first ten candidates",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihao",
+        "text": "你",
+        "consumed": 2,
+        "index": 31,
+        "numeric": true
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected": "你",
+        "actual": "你",
+        "passed": true,
+        "scope": "client-committed-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "wine",
+    "name": "Long phrase preserves remaining syllables",
+    "expected": "你好世界",
+    "actual": "你好世界",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihaoshijie",
+        "text": "你好",
+        "consumed": 5,
+        "index": 31,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected": "你好",
+        "actual": "你好",
+        "passed": true,
+        "scope": "client-committed-only"
+      },
+      {
+        "expected": "你好",
+        "actual": "你好",
+        "passed": true,
+        "scope": "client-committed-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "wine",
+    "name": "Edit remaining pinyin after partial choice",
+    "expected": "你ao",
+    "actual": "你ao",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihao",
+        "text": "你",
+        "consumed": 2,
+        "index": 31,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected": "你",
+        "actual": "你",
+        "passed": true,
+        "scope": "client-committed-only"
+      },
+      {
+        "expected": "你",
+        "actual": "你",
+        "passed": true,
+        "scope": "client-committed-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "wine",
+    "name": "Cancel remaining pinyin keeps selected prefix",
+    "expected": "你",
+    "actual": "你",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihao",
+        "text": "你",
+        "consumed": 2,
+        "index": 31,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected": "你",
+        "actual": "你",
+        "passed": true,
+        "scope": "client-committed-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "wine",
+    "name": "Abbreviation selection chain woc",
+    "expected": "我操",
+    "actual": "我操",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "woc",
+        "text": "我",
+        "consumed": 2,
+        "index": 46,
+        "numeric": false
+      },
+      {
+        "raw": "c",
+        "text": "操",
+        "consumed": 1,
+        "index": 100,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected": "我",
+        "actual": "我",
+        "passed": true,
+        "scope": "client-committed-only"
+      },
+      {
+        "expected": "我操",
+        "actual": "我操",
+        "passed": true,
+        "scope": "client-committed-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "wine",
+    "name": "Three successive phrase segments",
+    "expected": "中华人民共和国",
+    "actual": "中华人民共和国",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "zhonghuarenmingongheguo",
+        "text": "中华",
+        "consumed": 8,
+        "index": 32,
+        "numeric": false
+      },
+      {
+        "raw": "renmingongheguo",
+        "text": "人民",
+        "consumed": 6,
+        "index": 31,
+        "numeric": false
+      },
+      {
+        "raw": "gongheguo",
+        "text": "共和国",
+        "consumed": 9,
+        "index": 0,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "expected": "中华",
+        "actual": "中华",
+        "passed": true,
+        "scope": "client-committed-only"
+      },
+      {
+        "expected": "中华人民",
+        "actual": "中华人民",
+        "passed": true,
+        "scope": "client-committed-only"
+      },
+      {
+        "expected": "中华人民共和国",
+        "actual": "中华人民共和国",
+        "passed": true,
+        "scope": "client-committed-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "foot",
+    "name": "Partial selection retains suffix",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihao",
+        "text": "你",
+        "consumed": 2,
+        "index": 31,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "foot",
+    "name": "Numeric prefix after first ten candidates",
+    "expected": "你好",
+    "actual": "你好",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihao",
+        "text": "你",
+        "consumed": 2,
+        "index": 31,
+        "numeric": true
+      }
+    ],
+    "checkpoints": [
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "foot",
+    "name": "Long phrase preserves remaining syllables",
+    "expected": "你好世界",
+    "actual": "你好世界",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihaoshijie",
+        "text": "你好",
+        "consumed": 5,
+        "index": 31,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      },
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "foot",
+    "name": "Edit remaining pinyin after partial choice",
+    "expected": "你ao",
+    "actual": "你ao",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihao",
+        "text": "你",
+        "consumed": 2,
+        "index": 31,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      },
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "foot",
+    "name": "Cancel remaining pinyin keeps selected prefix",
+    "expected": "你",
+    "actual": "你",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "nihao",
+        "text": "你",
+        "consumed": 2,
+        "index": 31,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "foot",
+    "name": "Abbreviation selection chain woc",
+    "expected": "我操",
+    "actual": "我操",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "woc",
+        "text": "我",
+        "consumed": 2,
+        "index": 46,
+        "numeric": false
+      },
+      {
+        "raw": "c",
+        "text": "操",
+        "consumed": 1,
+        "index": 100,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      },
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      }
+    ]
+  },
+  {
+    "toolkit": "foot",
+    "name": "Three successive phrase segments",
+    "expected": "中华人民共和国",
+    "actual": "中华人民共和国",
+    "passed": true,
+    "navigation": [
+      {
+        "raw": "zhonghuarenmingongheguo",
+        "text": "中华",
+        "consumed": 8,
+        "index": 32,
+        "numeric": false
+      },
+      {
+        "raw": "renmingongheguo",
+        "text": "人民",
+        "consumed": 6,
+        "index": 31,
+        "numeric": false
+      },
+      {
+        "raw": "gongheguo",
+        "text": "共和国",
+        "consumed": 9,
+        "index": 0,
+        "numeric": false
+      }
+    ],
+    "checkpoints": [
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      },
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      },
+      {
+        "passed": true,
+        "scope": "final-line-only"
+      }
+    ]
+  }
+]

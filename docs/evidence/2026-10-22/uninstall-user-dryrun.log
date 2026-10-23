@@ -1,0 +1,31 @@
+从输入法组移除 TiPE：Default
+移除：/home/lin/.local/share/fcitx5/addon/waylandim.conf
+移除：/home/lin/.config/fcitx5/addon/waylandim.conf
+移除：/home/lin/.config/fcitx5/addon/libwaylandim.so
+恢复：/home/lin/.local/share/fcitx5/addon/classicui.conf
+恢复：/home/lin/.config/fcitx5/addon/classicui.conf
+移除：/home/lin/.config/fcitx5/inputmethod/tipe.conf
+移除：/home/lin/.config/fcitx5/addon/tipe-ui.conf
+移除：/home/lin/.config/fcitx5/addon/tipe.conf
+移除：/home/lin/.local/share/icons/hicolor/scalable/apps/tipe.svg
+恢复：/home/lin/.local/share/fcitx5/themes/MacOS-Dark/theme.conf
+恢复：/home/lin/.local/share/fcitx5/themes/MacOS-Dark/panel.svg
+恢复：/home/lin/.local/share/fcitx5/themes/MacOS-Dark/highlight.svg
+移除：/home/lin/.local/share/fcitx5/inputmethod/tipe.conf
+移除：/home/lin/.local/share/fcitx5/addon/tipe.conf
+移除：/home/lin/.local/share/fcitx5/addon/tipe-ui.conf
+移除：/home/lin/.local/share/applications/tipe.desktop
+移除：/home/lin/.local/lib/fcitx5/libtipe-ui.so
+移除：/home/lin/.local/lib/fcitx5/libtipe.so
+移除：/home/lin/.config/fcitx5/addon/libclassicui.so
+移除：/home/lin/.config/fcitx5/addon/libtipe-ui.so
+移除：/home/lin/.config/fcitx5/addon/libtipe.so
+移除：/home/lin/.local/bin/tipe-control
+移除：/home/lin/.local/bin/tipe-trainer
+移除：/home/lin/.local/bin/tipe-diagnose
+移除：/home/lin/.local/bin/tipe-demo
+检查后恢复/移除 client UI：/home/lin/.local/share/tipe/gtk/lib/gtk-4.0/4.0.0/immodules/libim-fcitx5.so
+检查后恢复/移除 client UI：/home/lin/.local/share/tipe/qt/lib/qt6/plugins/platforminputcontexts/libfcitx5platforminputcontextplugin.so
+检查后恢复/移除 client UI：/home/lin/.config/environment.d/tipe-client-ui.conf
+检查后恢复/移除 client UI：/home/lin/.local/bin/tipe-run
+保留：学习模型、导出文件和 profile 备份。

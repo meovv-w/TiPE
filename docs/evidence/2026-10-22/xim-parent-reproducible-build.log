@@ -1,0 +1,91 @@
+CMake Warning (dev) at /usr/share/ECM/modules/ECMFindModuleHelpers.cmake:113 (message):
+  Your project should require at least CMake 3.16.0 to use FindXCB.cmake
+Call Stack (most recent call first):
+  /usr/share/ECM/find-modules/FindXCB.cmake:69 (ecm_find_package_version_check)
+  CMakeLists.txt:140 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- XCB: XFIXES requires XCB;RENDER;SHAPE
+-- XCB: XFIXES requires XCB;RENDER;SHAPE
+CMake Warning (dev) at /usr/share/ECM/modules/ECMFindModuleHelpers.cmake:113 (message):
+  Your project should require at least CMake 3.16.0 to use
+  FindXKBCommon.cmake
+Call Stack (most recent call first):
+  cmake/FindXKBCommon.cmake:4 (ecm_find_package_version_check)
+  CMakeLists.txt:151 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /usr/share/ECM/modules/ECMFindModuleHelpers.cmake:113 (message):
+  Your project should require at least CMake 3.16.0 to use FindWayland.cmake
+Call Stack (most recent call first):
+  /usr/share/ECM/find-modules/FindWayland.cmake:63 (ecm_find_package_version_check)
+  CMakeLists.txt:179 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+CMake Warning (dev) at /usr/share/ECM/modules/ECMFindModuleHelpers.cmake:113 (message):
+  Your project should require at least CMake 3.16.0 to use
+  FindWaylandScanner.cmake
+Call Stack (most recent call first):
+  /usr/share/ECM/find-modules/FindWaylandScanner.cmake:82 (ecm_find_package_version_check)
+  CMakeLists.txt:180 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- The following OPTIONAL packages have been found:
+
+ * Systemd, A system and service manager for Linux, <http://www.freedesktop.org/wiki/Software/systemd>
+ * Execinfo
+
+-- The following REQUIRED packages have been found:
+
+ * ECM
+ * ZLIB
+ * DL
+ * LibIntl
+ * LibUUID, uuid library in util-linux, <http://www.kernel.org/pub/linux/utils/util-linux/>
+ * Pthread
+ * Gettext
+ * XCB, X protocol C-language Binding, <https://xcb.freedesktop.org/>
+ * XCBImdkit (required version >= 1.0.3)
+ * Expat
+ * XKBCommon, Keyboard handling library using XKB data, <http://xkbcommon.org>
+ * IsoCodes
+ * XKeyboardConfig
+ * nlohmann_json
+ * Wayland (required version >= 1.22), C library implementation of the Wayland protocol: a protocol for a compositor to talk to its clients, <https://wayland.freedesktop.org/>
+ * WaylandScanner, Executable that converts XML protocol files to C code, <https://wayland.freedesktop.org/>
+ * PkgConfig
+ * WaylandProtocols (required version >= 1.46)
+ * PlasmaWaylandProtocols (required version >= 1.20)
+
+-- Configuring done (0.7s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/lin/.cache/tipe/fcitx5-classicui/build
+[  3%] Built target TipeClassicPainter
+[ 14%] Built target yogacore
+[ 31%] Built target Fcitx5Utils
+[ 35%] Built target Fcitx5Config
+[ 47%] Built target Fcitx5WaylandCore
+[ 50%] Built target Fcitx5WaylandInputMethod
+[ 59%] Built target Fcitx5WaylandExtBackgroundEffect
+[ 61%] Built target Fcitx5WaylandInputMethodV2
+[ 75%] Built target Fcitx5Core
+[ 82%] Built target Fcitx5WaylandViewporter
+[ 82%] Built target Fcitx5WaylandFractionalScale
+[ 89%] Built target Fcitx5WaylandTablet
+[ 91%] Built target Fcitx5WaylandCursorShape
+[ 92%] Building CXX object src/ui/classic/CMakeFiles/classicui.dir/xcbinputwindow.cpp.o
+[ 92%] Linking CXX shared module ../../../bin/libclassicui.so
+[100%] Built target classicui
+[ 25%] Built target Fcitx5Utils
+[ 30%] Built target Fcitx5Config
+[ 47%] Built target Fcitx5WaylandCore
+[ 57%] Built target Fcitx5WaylandInputMethodV2
+[ 65%] Built target Fcitx5WaylandWLRForeignToplevelManagement
+[ 65%] Built target Fcitx5WaylandInputMethod
+[ 85%] Built target Fcitx5Core
+[ 90%] Built target Fcitx5WaylandPlasmaWindowManagement
+[100%] Built target waylandim
+classicui 已构建：/home/lin/.cache/tipe/fcitx5-classicui/build/bin/libclassicui.so
+Wayland 激活事务修复已构建：/home/lin/.cache/tipe/fcitx5-classicui/build/bin/libwaylandim.so
+安装时运行：TIPE_CLASSICUI_SO=/home/lin/.cache/tipe/fcitx5-classicui/build/bin/libclassicui.so /home/lin/Documents/ChatGPT/tipe/scripts/install-user.sh build
+此脚本只构建，不安装或重启用户输入法。

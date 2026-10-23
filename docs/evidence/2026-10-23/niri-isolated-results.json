@@ -1,0 +1,5506 @@
+[
+  {
+    "frontend": "gtk",
+    "scale": 1,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        147,
+        118,
+        747,
+        250
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 132.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        147,
+        118,
+        747,
+        250
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 132.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        370
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 252.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        370
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 252.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        279,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        216,
+        168,
+        1412,
+        248
+      ],
+      "selection": [
+        477,
+        208
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        108.0,
+        66.0,
+        109.0,
+        84.0
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        216,
+        168,
+        1412,
+        428
+      ],
+      "selection": [
+        252,
+        208
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        108.0,
+        66.0,
+        109.0,
+        84.0
+      ],
+      "width": 598.0,
+      "height": 130.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        279,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        216,
+        168,
+        1412,
+        248
+      ],
+      "selection": [
+        477,
+        208
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        108.0,
+        66.0,
+        109.0,
+        84.0
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        216,
+        168,
+        1412,
+        428
+      ],
+      "selection": [
+        252,
+        208
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        108.0,
+        66.0,
+        109.0,
+        84.0
+      ],
+      "width": 598.0,
+      "height": 130.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        468,
+        168,
+        1904,
+        248
+      ],
+      "selection": [
+        505,
+        208
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        254.0,
+        66.0,
+        255.0,
+        84.0
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        468,
+        168,
+        1904,
+        668
+      ],
+      "selection": [
+        505,
+        208
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        254.0,
+        66.0,
+        255.0,
+        84.0
+      ],
+      "width": 718.0,
+      "height": 250.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        468,
+        168,
+        1904,
+        248
+      ],
+      "selection": [
+        505,
+        208
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        254.0,
+        66.0,
+        255.0,
+        84.0
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        468,
+        168,
+        1904,
+        668
+      ],
+      "selection": [
+        505,
+        208
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        254.0,
+        66.0,
+        255.0,
+        84.0
+      ],
+      "width": 718.0,
+      "height": 250.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        165,
+        131,
+        913,
+        181
+      ],
+      "selection": [
+        188,
+        156
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        132.0,
+        87.0,
+        133.0,
+        105.0
+      ],
+      "width": 598.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        165,
+        131,
+        913,
+        294
+      ],
+      "selection": [
+        188,
+        156
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        132.0,
+        87.0,
+        133.0,
+        105.0
+      ],
+      "width": 598.4,
+      "height": 130.4
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        165,
+        131,
+        913,
+        181
+      ],
+      "selection": [
+        188,
+        156
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        132.0,
+        87.0,
+        133.0,
+        105.0
+      ],
+      "width": 598.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        165,
+        131,
+        913,
+        294
+      ],
+      "selection": [
+        188,
+        156
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        132.0,
+        87.0,
+        133.0,
+        105.0
+      ],
+      "width": 598.4,
+      "height": 130.4
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        348,
+        131,
+        1246,
+        181
+      ],
+      "selection": [
+        371,
+        156
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        278.0,
+        87.0,
+        279.0,
+        105.0
+      ],
+      "width": 718.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        348,
+        131,
+        1246,
+        444
+      ],
+      "selection": [
+        371,
+        156
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        278.0,
+        87.0,
+        279.0,
+        105.0
+      ],
+      "width": 718.4,
+      "height": 250.4
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        348,
+        131,
+        1246,
+        181
+      ],
+      "selection": [
+        371,
+        156
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        278.0,
+        87.0,
+        279.0,
+        105.0
+      ],
+      "width": 718.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        348,
+        131,
+        1246,
+        444
+      ],
+      "selection": [
+        371,
+        156
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        278.0,
+        87.0,
+        279.0,
+        105.0
+      ],
+      "width": 718.4,
+      "height": 250.4
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        182,
+        144,
+        1079,
+        204
+      ],
+      "selection": [
+        209,
+        174
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        121.33333333333334,
+        77.66666666666666,
+        122.33333333333334,
+        95.66666666666666
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        182,
+        144,
+        1079,
+        339
+      ],
+      "selection": [
+        209,
+        174
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        121.33333333333334,
+        77.66666666666666,
+        122.33333333333334,
+        95.66666666666666
+      ],
+      "width": 598.0,
+      "height": 130.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        147,
+        118,
+        747,
+        160
+      ],
+      "selection": [
+        166,
+        139
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        148.0,
+        101.0,
+        149.0,
+        119.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        182,
+        144,
+        1079,
+        204
+      ],
+      "selection": [
+        209,
+        174
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        121.33333333333334,
+        77.66666666666666,
+        122.33333333333334,
+        95.66666666666666
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        182,
+        144,
+        1079,
+        339
+      ],
+      "selection": [
+        209,
+        174
+      ],
+      "protocol_rectangle": [
+        68,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        121.33333333333334,
+        77.66666666666666,
+        122.33333333333334,
+        95.66666666666666
+      ],
+      "width": 598.0,
+      "height": 130.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        401,
+        144,
+        1478,
+        204
+      ],
+      "selection": [
+        429,
+        174
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        267.3333333333333,
+        77.66666666666666,
+        268.3333333333333,
+        95.66666666666666
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        401,
+        144,
+        1478,
+        519
+      ],
+      "selection": [
+        429,
+        174
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        267.3333333333333,
+        77.66666666666666,
+        268.3333333333333,
+        95.66666666666666
+      ],
+      "width": 718.0,
+      "height": 250.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        401,
+        144,
+        1478,
+        204
+      ],
+      "selection": [
+        429,
+        174
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        267.3333333333333,
+        77.66666666666666,
+        268.3333333333333,
+        95.66666666666666
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        401,
+        144,
+        1478,
+        519
+      ],
+      "selection": [
+        429,
+        174
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        267.3333333333333,
+        77.66666666666666,
+        268.3333333333333,
+        95.66666666666666
+      ],
+      "width": 718.0,
+      "height": 250.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        149,
+        264,
+        749,
+        396
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 132.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        149,
+        264,
+        749,
+        396
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 132.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        516
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 252.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        516
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 252.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        180,
+        425,
+        1376,
+        505
+      ],
+      "selection": [
+        216,
+        465
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        90.0,
+        194.5,
+        100.0,
+        212.5
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        180,
+        425,
+        1376,
+        685
+      ],
+      "selection": [
+        216,
+        465
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        90.0,
+        194.5,
+        100.0,
+        212.5
+      ],
+      "width": 598.0,
+      "height": 130.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        180,
+        425,
+        1376,
+        505
+      ],
+      "selection": [
+        216,
+        465
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        90.0,
+        194.5,
+        100.0,
+        212.5
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        180,
+        425,
+        1376,
+        685
+      ],
+      "selection": [
+        216,
+        465
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        90.0,
+        194.5,
+        100.0,
+        212.5
+      ],
+      "width": 598.0,
+      "height": 130.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        442,
+        425,
+        1878,
+        505
+      ],
+      "selection": [
+        479,
+        465
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        221.0,
+        194.5,
+        231.0,
+        212.5
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        442,
+        425,
+        1878,
+        925
+      ],
+      "selection": [
+        479,
+        465
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        221.0,
+        194.5,
+        231.0,
+        212.5
+      ],
+      "width": 718.0,
+      "height": 250.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        442,
+        425,
+        1878,
+        505
+      ],
+      "selection": [
+        479,
+        465
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        221.0,
+        194.5,
+        231.0,
+        212.5
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        442,
+        425,
+        1878,
+        925
+      ],
+      "selection": [
+        479,
+        465
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        221.0,
+        194.5,
+        231.0,
+        212.5
+      ],
+      "width": 718.0,
+      "height": 250.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        158,
+        305,
+        906,
+        355
+      ],
+      "selection": [
+        181,
+        330
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        126.0,
+        226.0,
+        136.0,
+        244.0
+      ],
+      "width": 598.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        158,
+        305,
+        906,
+        468
+      ],
+      "selection": [
+        181,
+        330
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        126.0,
+        226.0,
+        136.0,
+        244.0
+      ],
+      "width": 598.4,
+      "height": 130.4
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        158,
+        305,
+        906,
+        355
+      ],
+      "selection": [
+        181,
+        330
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        126.0,
+        226.0,
+        136.0,
+        244.0
+      ],
+      "width": 598.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        158,
+        305,
+        906,
+        468
+      ],
+      "selection": [
+        181,
+        330
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        126.0,
+        226.0,
+        136.0,
+        244.0
+      ],
+      "width": 598.4,
+      "height": 130.4
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        321,
+        305,
+        1219,
+        355
+      ],
+      "selection": [
+        344,
+        330
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        257.0,
+        226.0,
+        267.0,
+        244.0
+      ],
+      "width": 718.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        321,
+        305,
+        1219,
+        618
+      ],
+      "selection": [
+        344,
+        330
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        257.0,
+        226.0,
+        267.0,
+        244.0
+      ],
+      "width": 718.4,
+      "height": 250.4
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        321,
+        305,
+        1219,
+        355
+      ],
+      "selection": [
+        344,
+        330
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        257.0,
+        226.0,
+        267.0,
+        244.0
+      ],
+      "width": 718.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        321,
+        305,
+        1219,
+        618
+      ],
+      "selection": [
+        344,
+        330
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        257.0,
+        226.0,
+        267.0,
+        244.0
+      ],
+      "width": 718.4,
+      "height": 250.4
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        165,
+        345,
+        1062,
+        405
+      ],
+      "selection": [
+        192,
+        375
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        110.0,
+        212.0,
+        120.0,
+        230.0
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        165,
+        345,
+        1062,
+        540
+      ],
+      "selection": [
+        192,
+        375
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        110.0,
+        212.0,
+        120.0,
+        230.0
+      ],
+      "width": 598.0,
+      "height": 130.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        149,
+        264,
+        749,
+        306
+      ],
+      "selection": [
+        168,
+        285
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        150.0,
+        247.0,
+        160.0,
+        265.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        165,
+        345,
+        1062,
+        405
+      ],
+      "selection": [
+        192,
+        375
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        110.0,
+        212.0,
+        120.0,
+        230.0
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        165,
+        345,
+        1062,
+        540
+      ],
+      "selection": [
+        192,
+        375
+      ],
+      "protocol_rectangle": [
+        30,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        110.0,
+        212.0,
+        120.0,
+        230.0
+      ],
+      "width": 598.0,
+      "height": 130.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        362,
+        345,
+        1439,
+        405
+      ],
+      "selection": [
+        390,
+        375
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        241.0,
+        212.0,
+        251.0,
+        230.0
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        362,
+        345,
+        1439,
+        720
+      ],
+      "selection": [
+        390,
+        375
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        241.0,
+        212.0,
+        251.0,
+        230.0
+      ],
+      "width": 718.0,
+      "height": 250.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        280,
+        264,
+        1000,
+        306
+      ],
+      "selection": [
+        299,
+        285
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        281.0,
+        247.0,
+        291.0,
+        265.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        362,
+        345,
+        1439,
+        405
+      ],
+      "selection": [
+        390,
+        375
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        241.0,
+        212.0,
+        251.0,
+        230.0
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        362,
+        345,
+        1439,
+        720
+      ],
+      "selection": [
+        390,
+        375
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        241.0,
+        212.0,
+        251.0,
+        230.0
+      ],
+      "width": 718.0,
+      "height": 250.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        168,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        168,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        149,
+        120,
+        749,
+        280
+      ],
+      "selection": [
+        168,
+        169
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 160.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        168,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        168,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        149,
+        120,
+        749,
+        280
+      ],
+      "selection": [
+        168,
+        169
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 160.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        257,
+        120,
+        977,
+        400
+      ],
+      "selection": [
+        276,
+        169
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 280.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        257,
+        120,
+        977,
+        400
+      ],
+      "selection": [
+        276,
+        169
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 280.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        168,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        184,
+        135,
+        1380,
+        215
+      ],
+      "selection": [
+        220,
+        175
+      ],
+      "protocol_rectangle": [
+        32,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        92.0,
+        52.5,
+        92.0,
+        67.5
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        184,
+        135,
+        1380,
+        451
+      ],
+      "selection": [
+        220,
+        231
+      ],
+      "protocol_rectangle": [
+        32,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        92.0,
+        52.5,
+        92.0,
+        67.5
+      ],
+      "width": 598.0,
+      "height": 158.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        168,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        184,
+        135,
+        1380,
+        215
+      ],
+      "selection": [
+        220,
+        175
+      ],
+      "protocol_rectangle": [
+        32,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        92.0,
+        52.5,
+        92.0,
+        67.5
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        184,
+        135,
+        1380,
+        451
+      ],
+      "selection": [
+        220,
+        231
+      ],
+      "protocol_rectangle": [
+        32,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        92.0,
+        52.5,
+        92.0,
+        67.5
+      ],
+      "width": 598.0,
+      "height": 158.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        418,
+        135,
+        1854,
+        215
+      ],
+      "selection": [
+        455,
+        175
+      ],
+      "protocol_rectangle": [
+        149,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        209.0,
+        52.5,
+        209.0,
+        67.5
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        418,
+        135,
+        1854,
+        691
+      ],
+      "selection": [
+        455,
+        231
+      ],
+      "protocol_rectangle": [
+        149,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        209.0,
+        52.5,
+        209.0,
+        67.5
+      ],
+      "width": 718.0,
+      "height": 278.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        418,
+        135,
+        1854,
+        215
+      ],
+      "selection": [
+        455,
+        175
+      ],
+      "protocol_rectangle": [
+        149,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        209.0,
+        52.5,
+        209.0,
+        67.5
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        418,
+        135,
+        1854,
+        691
+      ],
+      "selection": [
+        455,
+        231
+      ],
+      "protocol_rectangle": [
+        149,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        209.0,
+        52.5,
+        209.0,
+        67.5
+      ],
+      "width": 718.0,
+      "height": 278.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        168,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        160,
+        124,
+        908,
+        174
+      ],
+      "selection": [
+        183,
+        149
+      ],
+      "protocol_rectangle": [
+        32,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        128.0,
+        84.0,
+        128.0,
+        99.0
+      ],
+      "width": 598.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        160,
+        124,
+        908,
+        322
+      ],
+      "selection": [
+        183,
+        184
+      ],
+      "protocol_rectangle": [
+        32,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        128.0,
+        84.0,
+        128.0,
+        99.0
+      ],
+      "width": 598.4,
+      "height": 158.4
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        168,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        160,
+        124,
+        908,
+        174
+      ],
+      "selection": [
+        254,
+        149
+      ],
+      "protocol_rectangle": [
+        32,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        128.0,
+        84.0,
+        128.0,
+        99.0
+      ],
+      "width": 598.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        160,
+        124,
+        908,
+        322
+      ],
+      "selection": [
+        183,
+        184
+      ],
+      "protocol_rectangle": [
+        32,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        128.0,
+        84.0,
+        128.0,
+        99.0
+      ],
+      "width": 598.4,
+      "height": 158.4
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        304,
+        124,
+        1202,
+        174
+      ],
+      "selection": [
+        327,
+        149
+      ],
+      "protocol_rectangle": [
+        147,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        243.0,
+        84.0,
+        243.0,
+        99.0
+      ],
+      "width": 718.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        304,
+        124,
+        1202,
+        472
+      ],
+      "selection": [
+        327,
+        184
+      ],
+      "protocol_rectangle": [
+        147,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        243.0,
+        84.0,
+        243.0,
+        99.0
+      ],
+      "width": 718.4,
+      "height": 278.4
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        304,
+        124,
+        1202,
+        174
+      ],
+      "selection": [
+        327,
+        149
+      ],
+      "protocol_rectangle": [
+        147,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        243.0,
+        84.0,
+        243.0,
+        99.0
+      ],
+      "width": 718.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        304,
+        124,
+        1202,
+        472
+      ],
+      "selection": [
+        327,
+        184
+      ],
+      "protocol_rectangle": [
+        147,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        243.0,
+        84.0,
+        243.0,
+        99.0
+      ],
+      "width": 718.4,
+      "height": 278.4
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        224,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        170,
+        128,
+        1067,
+        188
+      ],
+      "selection": [
+        197,
+        158
+      ],
+      "protocol_rectangle": [
+        33,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        113.0,
+        70.0,
+        113.0,
+        85.0
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        170,
+        128,
+        1067,
+        365
+      ],
+      "selection": [
+        197,
+        200
+      ],
+      "protocol_rectangle": [
+        33,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        113.0,
+        70.0,
+        113.0,
+        85.0
+      ],
+      "width": 598.0,
+      "height": 158.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        149,
+        120,
+        749,
+        162
+      ],
+      "selection": [
+        224,
+        141
+      ],
+      "protocol_rectangle": [
+        30,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        150.0,
+        105.0,
+        151.0,
+        121.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        170,
+        128,
+        1067,
+        188
+      ],
+      "selection": [
+        197,
+        158
+      ],
+      "protocol_rectangle": [
+        33,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        113.0,
+        70.0,
+        113.0,
+        85.0
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        170,
+        128,
+        1067,
+        365
+      ],
+      "selection": [
+        197,
+        200
+      ],
+      "protocol_rectangle": [
+        33,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        113.0,
+        70.0,
+        113.0,
+        85.0
+      ],
+      "width": 598.0,
+      "height": 158.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        350,
+        128,
+        1427,
+        188
+      ],
+      "selection": [
+        378,
+        158
+      ],
+      "protocol_rectangle": [
+        153,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        233.0,
+        70.0,
+        233.0,
+        85.0
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        350,
+        128,
+        1427,
+        545
+      ],
+      "selection": [
+        378,
+        200
+      ],
+      "protocol_rectangle": [
+        153,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        233.0,
+        70.0,
+        233.0,
+        85.0
+      ],
+      "width": 718.0,
+      "height": 278.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "foot",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        257,
+        120,
+        977,
+        162
+      ],
+      "selection": [
+        276,
+        141
+      ],
+      "protocol_rectangle": [
+        138,
+        0,
+        1,
+        16
+      ],
+      "caret": [
+        258.0,
+        105.0,
+        259.0,
+        121.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        350,
+        128,
+        1427,
+        188
+      ],
+      "selection": [
+        378,
+        158
+      ],
+      "protocol_rectangle": [
+        153,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        233.0,
+        70.0,
+        233.0,
+        85.0
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        350,
+        128,
+        1427,
+        545
+      ],
+      "selection": [
+        378,
+        200
+      ],
+      "protocol_rectangle": [
+        153,
+        0,
+        0,
+        15
+      ],
+      "caret": [
+        233.0,
+        70.0,
+        233.0,
+        85.0
+      ],
+      "width": 718.0,
+      "height": 278.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        208,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        208,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        189,
+        142,
+        789,
+        302
+      ],
+      "selection": [
+        208,
+        191
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 160.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        208,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        208,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        189,
+        142,
+        789,
+        302
+      ],
+      "selection": [
+        208,
+        191
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 160.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        422
+      ],
+      "selection": [
+        448,
+        191
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 280.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        422
+      ],
+      "selection": [
+        448,
+        191
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 280.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        208,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        260,
+        181,
+        1456,
+        261
+      ],
+      "selection": [
+        296,
+        221
+      ],
+      "protocol_rectangle": [
+        70,
+        12,
+        0,
+        26
+      ],
+      "caret": [
+        130.0,
+        64.5,
+        130.0,
+        90.5
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        260,
+        181,
+        1456,
+        497
+      ],
+      "selection": [
+        296,
+        277
+      ],
+      "protocol_rectangle": [
+        70,
+        12,
+        0,
+        26
+      ],
+      "caret": [
+        130.0,
+        64.5,
+        130.0,
+        90.5
+      ],
+      "width": 598.0,
+      "height": 158.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 2,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        208,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        260,
+        181,
+        1456,
+        261
+      ],
+      "selection": [
+        296,
+        221
+      ],
+      "protocol_rectangle": [
+        70,
+        12,
+        0,
+        26
+      ],
+      "caret": [
+        130.0,
+        64.5,
+        130.0,
+        90.5
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        260,
+        181,
+        1456,
+        497
+      ],
+      "selection": [
+        296,
+        277
+      ],
+      "protocol_rectangle": [
+        70,
+        12,
+        0,
+        26
+      ],
+      "caret": [
+        130.0,
+        64.5,
+        130.0,
+        90.5
+      ],
+      "width": 598.0,
+      "height": 158.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        484,
+        181,
+        1920,
+        261
+      ],
+      "selection": [
+        521,
+        221
+      ],
+      "protocol_rectangle": [
+        311,
+        12,
+        0,
+        26
+      ],
+      "caret": [
+        371.0,
+        64.5,
+        371.0,
+        90.5
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        484,
+        181,
+        1920,
+        737
+      ],
+      "selection": [
+        521,
+        277
+      ],
+      "protocol_rectangle": [
+        311,
+        12,
+        0,
+        26
+      ],
+      "caret": [
+        371.0,
+        64.5,
+        371.0,
+        90.5
+      ],
+      "width": 718.0,
+      "height": 278.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 2,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        484,
+        181,
+        1920,
+        261
+      ],
+      "selection": [
+        521,
+        221
+      ],
+      "protocol_rectangle": [
+        311,
+        12,
+        0,
+        26
+      ],
+      "caret": [
+        371.0,
+        64.5,
+        371.0,
+        90.5
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        484,
+        181,
+        1920,
+        737
+      ],
+      "selection": [
+        521,
+        277
+      ],
+      "protocol_rectangle": [
+        311,
+        12,
+        0,
+        26
+      ],
+      "caret": [
+        371.0,
+        64.5,
+        371.0,
+        90.5
+      ],
+      "width": 718.0,
+      "height": 278.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        208,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        208,
+        151,
+        956,
+        201
+      ],
+      "selection": [
+        302,
+        176
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        26
+      ],
+      "caret": [
+        166.0,
+        95.0,
+        166.0,
+        121.0
+      ],
+      "width": 598.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        208,
+        151,
+        956,
+        349
+      ],
+      "selection": [
+        231,
+        211
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        26
+      ],
+      "caret": [
+        166.0,
+        95.0,
+        166.0,
+        121.0
+      ],
+      "width": 598.4,
+      "height": 158.4
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1.25,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        208,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        208,
+        151,
+        956,
+        201
+      ],
+      "selection": [
+        302,
+        176
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        26
+      ],
+      "caret": [
+        166.0,
+        95.0,
+        166.0,
+        121.0
+      ],
+      "width": 598.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        208,
+        151,
+        956,
+        349
+      ],
+      "selection": [
+        231,
+        211
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        26
+      ],
+      "caret": [
+        166.0,
+        95.0,
+        166.0,
+        121.0
+      ],
+      "width": 598.4,
+      "height": 158.4
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        508,
+        151,
+        1406,
+        201
+      ],
+      "selection": [
+        531,
+        176
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        26
+      ],
+      "caret": [
+        406.0,
+        95.0,
+        406.0,
+        121.0
+      ],
+      "width": 718.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        508,
+        151,
+        1406,
+        499
+      ],
+      "selection": [
+        531,
+        211
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        26
+      ],
+      "caret": [
+        406.0,
+        95.0,
+        406.0,
+        121.0
+      ],
+      "width": 718.4,
+      "height": 278.4
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1.25,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        508,
+        151,
+        1406,
+        201
+      ],
+      "selection": [
+        531,
+        176
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        26
+      ],
+      "caret": [
+        406.0,
+        95.0,
+        406.0,
+        121.0
+      ],
+      "width": 718.4,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        508,
+        151,
+        1406,
+        499
+      ],
+      "selection": [
+        531,
+        211
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        26
+      ],
+      "caret": [
+        406.0,
+        95.0,
+        406.0,
+        121.0
+      ],
+      "width": 718.4,
+      "height": 278.4
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        435,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        225,
+        162,
+        1122,
+        222
+      ],
+      "selection": [
+        252,
+        192
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        150.0,
+        81.0,
+        150.0,
+        108.0
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        225,
+        162,
+        1122,
+        399
+      ],
+      "selection": [
+        252,
+        234
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        150.0,
+        81.0,
+        150.0,
+        108.0
+      ],
+      "width": 598.0,
+      "height": 158.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1.5,
+    "spelling": "nihao",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        189,
+        142,
+        789,
+        184
+      ],
+      "selection": [
+        435,
+        163
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        190.0,
+        116.0,
+        190.0,
+        143.0
+      ],
+      "width": 600.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        225,
+        162,
+        1122,
+        222
+      ],
+      "selection": [
+        252,
+        192
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        150.0,
+        81.0,
+        150.0,
+        108.0
+      ],
+      "width": 598.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        225,
+        162,
+        1122,
+        399
+      ],
+      "selection": [
+        252,
+        234
+      ],
+      "protocol_rectangle": [
+        70,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        150.0,
+        81.0,
+        150.0,
+        108.0
+      ],
+      "width": 598.0,
+      "height": 158.0
+    },
+    "actual": "你好",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "keyboard",
+    "initial": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        587,
+        162,
+        1664,
+        222
+      ],
+      "selection": [
+        615,
+        192
+      ],
+      "protocol_rectangle": [
+        311,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        391.0,
+        81.0,
+        391.0,
+        108.0
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        587,
+        162,
+        1664,
+        579
+      ],
+      "selection": [
+        615,
+        234
+      ],
+      "protocol_rectangle": [
+        311,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        391.0,
+        81.0,
+        391.0,
+        108.0
+      ],
+      "width": 718.0,
+      "height": 278.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "scale": 1.5,
+    "spelling": "zhonghuarenmingongheguo",
+    "method": "mouse",
+    "initial": {
+      "bounds": [
+        429,
+        142,
+        1149,
+        184
+      ],
+      "selection": [
+        448,
+        163
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        430.0,
+        116.0,
+        430.0,
+        143.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "compact": {
+      "bounds": [
+        587,
+        162,
+        1664,
+        222
+      ],
+      "selection": [
+        615,
+        192
+      ],
+      "protocol_rectangle": [
+        311,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        391.0,
+        81.0,
+        391.0,
+        108.0
+      ],
+      "width": 718.0,
+      "height": 40.0
+    },
+    "expanded": {
+      "bounds": [
+        587,
+        162,
+        1664,
+        579
+      ],
+      "selection": [
+        615,
+        234
+      ],
+      "protocol_rectangle": [
+        311,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        391.0,
+        81.0,
+        391.0,
+        108.0
+      ],
+      "width": 718.0,
+      "height": 278.0
+    },
+    "actual": "中华人民共和国",
+    "passed": true
+  }
+]

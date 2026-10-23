@@ -1,0 +1,63 @@
+libmutter-Message: 20:27:34.179: Running TiPE isolated multioutput regression (using mutter 50.1) as a Wayland display server
+libmutter-Message: 20:27:34.210: Added device '/dev/dri/renderD128' (i915) using no mode setting.
+libmutter-Message: 20:27:34.212: Created gbm renderer for '/dev/dri/renderD128'
+libmutter-Message: 20:27:34.212: Boot VGA GPU /dev/dri/renderD128 selected as primary
+** Message: 20:27:34.214: Obtained a high priority EGL context
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Activating service name='org.gtk.vfs.Daemon' requested by ':1.0' (uid=1000 pid=1335437 comm="/usr/bin/python3 /home/lin/Documents/ChatGPT/tipe/" label="unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023")
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Successfully activated service 'org.gtk.vfs.Daemon'
+libmutter-Message: 20:27:34.236: Added virtual monitor Meta-0
+libmutter-Message: 20:27:34.236: Added virtual monitor Meta-1
+fusermount3: mount failed: Operation not permitted
+libmutter-Message: 20:27:34.246: Using public X11 display :1, (using unix:/tmp/.X11-unix/X2 for managed services)
+libmutter-Message: 20:27:34.246: Using Wayland display name 'tipe-multioutput'
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Activating service name='org.freedesktop.portal.Desktop' requested by ':1.2' (uid=1000 pid=1335467 comm="fcitx5 --disable notificationitem" label="unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023")
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Activating service name='org.freedesktop.impl.portal.PermissionStore' requested by ':1.6' (uid=1000 pid=1335473 comm="/usr/libexec/xdg-desktop-portal" label="unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023")
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Successfully activated service 'org.freedesktop.impl.portal.PermissionStore'
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Activating service name='org.freedesktop.portal.Documents' requested by ':1.6' (uid=1000 pid=1335473 comm="/usr/libexec/xdg-desktop-portal" label="unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023")
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Successfully activated service 'org.freedesktop.portal.Documents'
+fusermount3: mount failed: Operation not permitted
+error: fuse init failed: Can't mount path /tmp/tipe-multioutput-h3qam6ur/runtime/doc
+
+(/usr/libexec/xdg-desktop-portal:1335473): xdg-desktop-portal-WARNING **: 20:27:34.367: Document portal fuse mount point unknown: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name :1.8 was not provided by any .service files
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Activating service name='org.freedesktop.impl.portal.desktop.gnome' requested by ':1.6' (uid=1000 pid=1335473 comm="/usr/libexec/xdg-desktop-portal" label="unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023")
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Activating service name='org.gnome.Settings.GlobalShortcutsProvider' requested by ':1.9' (uid=1000 pid=1335495 comm="/usr/libexec/xdg-desktop-portal-gnome" label="unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023")
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Successfully activated service 'org.gnome.Settings.GlobalShortcutsProvider'
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Successfully activated service 'org.freedesktop.impl.portal.desktop.gnome'
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Activating service name='org.freedesktop.impl.portal.desktop.gtk' requested by ':1.6' (uid=1000 pid=1335473 comm="/usr/libexec/xdg-desktop-portal" label="unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023")
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Successfully activated service 'org.freedesktop.impl.portal.desktop.gtk'
+
+(/usr/libexec/xdg-desktop-portal:1335473): xdg-desktop-portal-WARNING **: 20:27:34.567: Failed to connect to PipeWire: Couldn't connect to PipeWire
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Activating service name='org.freedesktop.secrets' requested by ':1.6' (uid=1000 pid=1335473 comm="/usr/libexec/xdg-desktop-portal" label="unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023")
+** Message: 20:27:34.575: couldn't access control socket: /tmp/tipe-multioutput-h3qam6ur/runtime/keyring/control: No such file or directory
+discover_other_daemon: 0dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Successfully activated service 'org.freedesktop.secrets'
+dbus-daemon[1335436]: [session uid=1000 pid=1335436 pidfd=5] Successfully activated service 'org.freedesktop.portal.Desktop'
+gtk-2.0-5-keyboard PASS
+gtk-2.0-5-mouse PASS
+gtk-2.0-23-keyboard PASS
+gtk-2.0-23-mouse PASS
+gtk-1.25-5-keyboard PASS
+gtk-1.25-5-mouse PASS
+gtk-1.25-23-keyboard PASS
+gtk-1.25-23-mouse PASS
+gtk-1.5-5-keyboard PASS
+gtk-1.5-5-mouse PASS
+gtk-1.5-23-keyboard PASS
+gtk-1.5-23-mouse PASS
+qt-2.0-5-keyboard PASS
+qt-2.0-5-mouse PASS
+qt-2.0-23-keyboard PASS
+qt-2.0-23-mouse PASS
+qt-1.25-5-keyboard PASS
+qt-1.25-5-mouse PASS
+qt-1.25-23-keyboard PASS
+qt-1.25-23-mouse PASS
+qt-1.5-5-keyboard PASS
+qt-1.5-5-mouse PASS
+qt-1.5-23-keyboard PASS
+qt-1.5-23-mouse PASS
+PASS isolated mixed-scale popup migrations: 24
+Gdk-Message: 20:31:19.201: Lost connection to Wayland compositor.
+Gdk-Message: 20:31:19.201: Error reading events from display: Broken pipe
+libmutter-Message: 20:31:19.210: Removed virtual monitor Meta-0
+libmutter-Message: 20:31:19.211: Removed virtual monitor Meta-1
+A connection to the bus can't be made

@@ -1,0 +1,38 @@
+{
+  "scope": "Unmodified Discord UI, empty isolated profile, no input or messages",
+  "app": "/home/lin/.config/discord/app-1.0.162/Discord",
+  "observed": [
+    {
+      "elapsed_seconds": 0.0,
+      "launcher_alive": true,
+      "pages": []
+    },
+    {
+      "elapsed_seconds": 5.001,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    },
+    {
+      "elapsed_seconds": 10.065,
+      "launcher_alive": true,
+      "pages": [
+        {
+          "title": "Discord Updater",
+          "ready": "complete",
+          "text": "Checking for updates…\n ",
+          "fields": [],
+          "url": "file:///home/lin/.config/discord/app-1.0.162/resources/app.asar/splash/index.html"
+        }
+      ]
+    }
+  ],
+  "real_ui_ready": false
+}

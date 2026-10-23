@@ -1,0 +1,41 @@
+-- Install configuration: "Release"
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/bin/tipe-demo
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/bin/tipe-diagnose
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/bin/tipe-trainer
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/lib/fcitx5/libtipe.so
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/lib/fcitx5/libtipe-ui.so
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/bin/tipe-control
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/share/applications/tipe.desktop
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/share/fcitx5/inputmethod/tipe.conf
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/share/fcitx5/addon/tipe.conf
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/share/fcitx5/addon/tipe-ui.conf
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/share/icons/hicolor/scalable/apps/tipe.svg
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/share/fcitx5/themes/MacOS-Dark
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/share/fcitx5/themes/MacOS-Dark/theme.conf
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/share/fcitx5/themes/MacOS-Dark/panel.svg
+-- Installing: /tmp/tipe-install-stage-yisxqnrw/usr/share/fcitx5/themes/MacOS-Dark/highlight.svg
+安装：/home/lin/.local/bin/tipe-control (637336 bytes, 755)
+安装：/home/lin/.local/bin/tipe-demo (728120 bytes, 755)
+安装：/home/lin/.local/bin/tipe-diagnose (750088 bytes, 755)
+安装：/home/lin/.local/bin/tipe-trainer (546224 bytes, 755)
+安装：/home/lin/.local/lib/fcitx5/libtipe-ui.so (139136 bytes, 755)
+安装：/home/lin/.local/lib/fcitx5/libtipe.so (845304 bytes, 755)
+安装：/home/lin/.local/share/applications/tipe.desktop (104 bytes, 644)
+安装：/home/lin/.local/share/fcitx5/addon/tipe-ui.conf (319 bytes, 644)
+安装：/home/lin/.local/share/fcitx5/addon/tipe.conf (171 bytes, 644)
+安装：/home/lin/.local/share/fcitx5/inputmethod/tipe.conf (86 bytes, 644)
+安装：/home/lin/.local/share/fcitx5/themes/MacOS-Dark/highlight.svg (202 bytes, 644)
+安装：/home/lin/.local/share/fcitx5/themes/MacOS-Dark/panel.svg (257 bytes, 644)
+安装：/home/lin/.local/share/fcitx5/themes/MacOS-Dark/theme.conf (867 bytes, 644)
+安装：/home/lin/.local/share/icons/hicolor/scalable/apps/tipe.svg (342 bytes, 644)
+安装：/home/lin/.config/fcitx5/addon/libtipe.so (845304 bytes, 755)
+安装：/home/lin/.config/fcitx5/addon/libtipe-ui.so (139136 bytes, 755)
+安装：/home/lin/.config/fcitx5/addon/tipe.conf (171 bytes, 644)
+安装：/home/lin/.config/fcitx5/addon/tipe-ui.conf (319 bytes, 644)
+安装：/home/lin/.config/fcitx5/inputmethod/tipe.conf (86 bytes, 644)
+安装：/home/lin/.config/fcitx5/addon/libclassicui.so (1649504 bytes, 755)
+安装：/home/lin/.config/fcitx5/addon/classicui.conf (233 bytes, 644)
+安装：/home/lin/.local/share/fcitx5/addon/classicui.conf (233 bytes, 644)
+安装：/home/lin/.config/fcitx5/addon/libwaylandim.so (946664 bytes, 755)
+安装：/home/lin/.config/fcitx5/addon/waylandim.conf (551 bytes, 644)
+安装：/home/lin/.local/share/fcitx5/addon/waylandim.conf (551 bytes, 644)

@@ -1,0 +1,15 @@
+{
+  "source": "packaging/tipe.svg",
+  "installed": "/home/lin/.local/share/icons/hicolor/scalable/apps/tipe.svg",
+  "sha256": "99f46d22ffe0e488aad5132ab3fc97c0eee4000d02ac76f41a8ee17389c98419",
+  "identical": true,
+  "visual_review": "Rounded blue-purple square, white T; SVG rendered and inspected",
+  "fcitx_status_source": "src/tipe_fcitx.cpp",
+  "label": "T",
+  "submodes": [
+    "中文",
+    "英文"
+  ],
+  "icon_name": "tipe",
+  "desktop_entry": "packaging/tipe.desktop"
+}

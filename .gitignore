@@ -1,0 +1,15 @@
+build/
+build-agent-*/
+build-switch/
+build-recovery/
+.tipe/
+*.user
+*.swp
+__pycache__/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.core
+core

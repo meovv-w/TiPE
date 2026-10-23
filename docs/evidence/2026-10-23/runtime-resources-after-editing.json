@@ -1,0 +1,9 @@
+{
+  "pid": 1433353,
+  "after_desktop_cases": 103,
+  "fields": {
+    "VmHWM": "87292 kB",
+    "VmRSS": "87292 kB",
+    "Threads": "9"
+  }
+}

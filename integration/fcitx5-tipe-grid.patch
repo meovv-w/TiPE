@@ -1,0 +1,150 @@
+diff --git a/src/ui/classic/inputwindow.cpp b/src/ui/classic/inputwindow.cpp
+index d316da3..c652d4f 100644
+--- a/src/ui/classic/inputwindow.cpp
++++ b/src/ui/classic/inputwindow.cpp
+@@ -9,11 +9,13 @@
+ #include <cmath>
+ #include <cstddef>
+ #include <cstdint>
++#include <cstdlib>
+ #include <functional>
+ #include <initializer_list>
+ #include <limits>
+ #include <memory>
+ #include <string>
++#include <string_view>
+ #include <tuple>
+ #include <utility>
+ #include <cairo.h>
+@@ -108,6 +110,16 @@ void renderLayout(cairo_t *cr, PangoLayout *layout, int x, int y) {
+     cairo_restore(cr);
+ }
+ 
++// TiPE opts into a compact multi-column candidate grid for classicui.  This
++// is deliberately environment gated so the patch remains a drop-in change
++// for other input methods and can be rolled back by unsetting one variable.
++bool tipeGridEnabled() {
++    const char *value = std::getenv("TIPE_CLASSIC_GRID");
++    if (!value) return false;
++    std::string_view v(value);
++    return v == "1" || v == "true" || v == "yes";
++}
++
+ } // namespace
+ 
+ int MultilineLayout::width() const {
+@@ -370,8 +382,6 @@ std::pair<int, int> InputWindow::update(InputContext *inputContext) {
+         auxUp = instance->outputFilter(inputContext, inputPanel.auxUp());
+         auxDown = instance->outputFilter(inputContext, inputPanel.auxDown());
+         candidateList = inputPanel.candidateList();
+-    } else if (!inputPanel.overlayMessage().empty()) {
+-        auxUp = inputPanel.overlayMessage();
+     }
+     pango_layout_set_single_paragraph_mode(upperLayout_.get(), true);
+     setTextToLayout(inputContext, upperLayout_.get(), nullptr, nullptr,
+@@ -602,7 +612,18 @@ void InputWindow::paint(cairo_t *cr, unsigned int width, unsigned int height) {
+             vertical = false;
+         }
+ 
+-        if (*theme.inputPanel->fullWidthHighlight && vertical) {
++        // In TiPE's wrapped grid each cell keeps its own highlight and hit
++        // region.  The stock vertical list uses a full-width highlight, but
++        // applying that rule here would make every selected grid cell span
++        // the entire popup and overlap neighboring cells.
++        bool tipeGrid = tipeGridEnabled() &&
++                        layoutHint_ == CandidateLayoutHint::Vertical;
++        if (tipeGrid && inputContext_.get()) {
++            const auto *entry = parent_->instance()->inputMethodEntry(
++                inputContext_.get());
++            tipeGrid = entry && entry->uniqueName() == "tipe";
++        }
++        if (*theme.inputPanel->fullWidthHighlight && vertical && !tipeGrid) {
+             // Last candidate, fill.
+             highlightWidth = width - *margin.marginLeft - *margin.marginRight -
+                              *textMargin.marginRight - *textMargin.marginLeft;
+@@ -942,12 +963,46 @@ void InputWindow::updateYogaLayout() {
+             vertical = false;
+         }
+ 
+-        YGNodeStyleSetFlexDirection(lowerNode_.get(),
+-                                    vertical ? YGFlexDirectionColumn
+-                                             : YGFlexDirectionRow);
++        bool tipeGrid = tipeGridEnabled() &&
++                        layoutHint_ == CandidateLayoutHint::Vertical;
++        // Limit the opt-in to TiPE's input method.  A user's environment may
++        // contain several classicui clients and must not reshape their lists.
++        if (tipeGrid && inputContext_.get()) {
++            const auto *entry = parent_->instance()->inputMethodEntry(
++                inputContext_.get());
++            tipeGrid = entry && entry->uniqueName() == "tipe";
++        }
++        // A TiPE grid is a real wrapped Yoga layout: three compact columns,
++        // then additional rows.  Unlike the stock vertical hint this keeps
++        // the popup bounded and lets the existing hit-test use the actual
++        // node rectangles.  The environment gate makes this opt-in.
++        YGNodeStyleSetFlexDirection(
++            lowerNode_.get(), tipeGrid ? YGFlexDirectionColumn
++                                       : (vertical ? YGFlexDirectionColumn
++                                                    : YGFlexDirectionRow));
+         YGNodeStyleSetFlexDirection(candidatesNode_.get(),
+-                                    vertical ? YGFlexDirectionColumn
+-                                             : YGFlexDirectionRow);
++                                    tipeGrid ? YGFlexDirectionRow
++                                             : (vertical ? YGFlexDirectionColumn
++                                                          : YGFlexDirectionRow));
++        int tipeGridCellWidth = 88;
++        if (tipeGrid) {
++            // The expanded panel is the same candidate strip opened
++            // vertically. Measure the compact page first, then divide that
++            // width across the three navigation columns. This prevents the
++            // old 3 x 88px square from appearing under a much wider compact
++            // strip and gives long phrases the same horizontal room.
++            int compactWidth = 0;
++            for (size_t i = 0; i < nCandidates_; ++i) {
++                int natural = candidateLayouts_[i].label.width() +
++                              candidateLayouts_[i].text.width() +
++                              candidateLayouts_[i].comment.width() + 34;
++                compactWidth += natural;
++            }
++            if (nCandidates_ > 1)
++                compactWidth += static_cast<int>((nCandidates_ - 1) * 4);
++            compactWidth = std::max(compactWidth, 88 * 3);
++            tipeGridCellWidth = std::max(
++                tipeGridCellWidth,
++                (compactWidth + 2) / 3);
++            YGNodeStyleSetFlexWrap(candidatesNode_.get(), YGWrapWrap);
++            YGNodeStyleSetWidth(candidatesNode_.get(), tipeGridCellWidth * 3.0f);
++        } else {
++            YGNodeStyleSetFlexWrap(candidatesNode_.get(), YGWrapNoWrap);
++            YGNodeStyleSetWidth(candidatesNode_.get(), YGUndefined);
++        }
+ 
+         // Configure individual candidate nodes
+         for (size_t i = 0; i < nCandidates_; i++) {
+@@ -983,6 +1038,26 @@ void InputWindow::updateYogaLayout() {
+             commentH = commentFontHeight *
+                        std::max(1, candidateLayouts_[i].comment.size());
+             auto &candidate = candidateNodes_[i];
++            if (tipeGrid) {
++                // Keep each cell in a predictable column while preserving
++                // enough room for labels, CJK text, and a short comment.
++                // Values are logical pixels (HiDPI compositors scale them).
++                const int kCellWidth = tipeGridCellWidth;
++                constexpr int kCellHeight = 32;
++                const int contentWidth = std::max(24, kCellWidth - 10);
++                labelW = std::min(labelW, 20);
++                commentW = std::min(commentW, 28);
++                candidateW = std::min(candidateW,
++                                      std::max(24, contentWidth - labelW - commentW));
++                labelH = std::min(labelH, kCellHeight);
++                candidateH = std::min(candidateH, kCellHeight);
++                commentH = std::min(commentH, kCellHeight);
++                YGNodeStyleSetWidth(candidate.self.get(), kCellWidth);
++                YGNodeStyleSetHeight(candidate.self.get(), kCellHeight);
++            } else {
++                YGNodeStyleSetWidth(candidate.self.get(), YGUndefined);
++                YGNodeStyleSetHeight(candidate.self.get(), YGUndefined);
++            }
+ 
+             YGNodeStyleSetFlexDirection(candidate.inner.get(),
+                                         YGFlexDirectionRow);

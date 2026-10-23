@@ -1,0 +1,156 @@
+[
+  {
+    "toolkit": "gtk",
+    "name": "Retained abbreviation chain publishes and loads automatically",
+    "expected": "我操",
+    "actual": "我操",
+    "published": {
+      "abbreviation": 3,
+      "canonical": 3,
+      "context": "tipe-editing-gtk-120645082774637"
+    },
+    "passed": true,
+    "checkpoints": [
+      {
+        "expected_value": "我",
+        "actual_value": "我",
+        "expected_preedit": "c",
+        "actual_preedit": "c",
+        "passed": true
+      },
+      {
+        "expected_value": "我操",
+        "actual_value": "我操",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我操 ",
+        "actual_value": "我操 ",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我",
+        "actual_value": "我",
+        "expected_preedit": "c",
+        "actual_preedit": "c",
+        "passed": true
+      },
+      {
+        "expected_value": "我操",
+        "actual_value": "我操",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我操 ",
+        "actual_value": "我操 ",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我",
+        "actual_value": "我",
+        "expected_preedit": "c",
+        "actual_preedit": "c",
+        "passed": true
+      },
+      {
+        "expected_value": "我操",
+        "actual_value": "我操",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我操 ",
+        "actual_value": "我操 ",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      }
+    ]
+  },
+  {
+    "toolkit": "qt",
+    "name": "Retained abbreviation chain publishes and loads automatically",
+    "expected": "我操",
+    "actual": "我操",
+    "published": {
+      "abbreviation": 3,
+      "canonical": 3,
+      "context": "tipe-editing-qt-120659984271329"
+    },
+    "passed": true,
+    "checkpoints": [
+      {
+        "expected_value": "我",
+        "actual_value": "我",
+        "expected_preedit": "c",
+        "actual_preedit": "c",
+        "passed": true
+      },
+      {
+        "expected_value": "我操",
+        "actual_value": "我操",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我操 ",
+        "actual_value": "我操 ",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我",
+        "actual_value": "我",
+        "expected_preedit": "c",
+        "actual_preedit": "c",
+        "passed": true
+      },
+      {
+        "expected_value": "我操",
+        "actual_value": "我操",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我操 ",
+        "actual_value": "我操 ",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我",
+        "actual_value": "我",
+        "expected_preedit": "c",
+        "actual_preedit": "c",
+        "passed": true
+      },
+      {
+        "expected_value": "我操",
+        "actual_value": "我操",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      },
+      {
+        "expected_value": "我操 ",
+        "actual_value": "我操 ",
+        "expected_preedit": "",
+        "actual_preedit": "",
+        "passed": true
+      }
+    ]
+  }
+]
