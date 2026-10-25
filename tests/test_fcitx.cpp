@@ -147,6 +147,31 @@ int main() {
   if (ic->inputPanel().preedit().toString() != "i" ||
       ic->inputPanel().preedit().cursor() != 0) return 20;
   key("Escape");
+  // The user's one-letter compact strip must respond to Right, preserve
+  // the spelling caret, and commit the highlighted item even if collapsed.
+  key("s");
+  auto compact = ic->inputPanel().candidateList();
+  auto *compact_list = compact ? dynamic_cast<CommonCandidateList *>(compact.get()) : nullptr;
+  assert(compact_list && compact_list->size() > 1);
+  const auto compact_second = compact_list->candidate(1).text().toString();
+  assert(compact_list->layoutHint() == CandidateLayoutHint::Horizontal);
+  key_accepted("Right", true, false);
+  compact = ic->inputPanel().candidateList();
+  compact_list = dynamic_cast<CommonCandidateList *>(compact.get());
+  assert(compact_list && compact_list->globalCursorIndex() == 1);
+  assert(compact_list->layoutHint() == CandidateLayoutHint::Vertical);
+  assert(ic->inputPanel().preedit().toString() == "s" && ic->inputPanel().preedit().cursor() == 1);
+  key("Left");
+  compact = ic->inputPanel().candidateList();
+  compact_list = dynamic_cast<CommonCandidateList *>(compact.get());
+  assert(compact_list && compact_list->globalCursorIndex() == 0);
+  key("Right"); key("Shift+Tab");
+  compact = ic->inputPanel().candidateList();
+  compact_list = dynamic_cast<CommonCandidateList *>(compact.get());
+  assert(compact_list && compact_list->globalCursorIndex() == 1);
+  assert(compact_list->layoutHint() == CandidateLayoutHint::Horizontal);
+  frontend->call<ITestFrontend::pushCommitExpectation>(compact_second);
+  key("space"); key("Escape");
   // Re-establish an active composition before checking that Backspace is
   // consumed by TiPE once and then passes through after it becomes empty.
   key("n");

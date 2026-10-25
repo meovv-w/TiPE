@@ -1,0 +1,17 @@
+Test project /home/lin/Documents/ChatGPT/tipe/build
+    Start  2: tipe-quality-tests
+1/6 Test  #2: tipe-quality-tests ...............   Passed    4.02 sec
+    Start 18: tipe-tests
+2/6 Test #18: tipe-tests .......................   Passed    8.01 sec
+    Start 19: tipe-english-corpus-tests
+3/6 Test #19: tipe-english-corpus-tests ........   Passed    6.19 sec
+    Start 20: tipe-libime-fallback-tests
+4/6 Test #20: tipe-libime-fallback-tests .......   Passed    0.02 sec
+    Start 29: tipe-fcitx-tests
+5/6 Test #29: tipe-fcitx-tests .................   Passed    0.64 sec
+    Start 30: tipe-fcitx-lifecycle-tests
+6/6 Test #30: tipe-fcitx-lifecycle-tests .......   Passed    0.79 sec
+
+100% tests passed, 0 tests failed out of 6
+
+Total Test time (real) =  19.68 sec

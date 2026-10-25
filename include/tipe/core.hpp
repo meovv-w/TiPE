@@ -147,6 +147,9 @@ class Engine {
   std::string decoder_status_{"builtin fallback"};
   std::string prefix_cache_input_;
   std::vector<Candidate> prefix_cache_base_,prefix_cache_expanded_;
+  // Collapsing the grid keeps candidate focus; Home/End or Left at its
+  // first item explicitly return focus to the independent spelling cursor.
+  bool editing_preedit_{};
 #ifdef TIPE_HAS_LIBIME
   std::shared_ptr<libime::PinyinIME> libime_ime_; std::unique_ptr<libime::PinyinContext> libime_ctx_;
 #endif

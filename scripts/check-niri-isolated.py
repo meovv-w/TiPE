@@ -50,6 +50,7 @@ def main():
     parser.add_argument('--frontends', nargs='+', choices=['gtk', 'qt', 'foot', 'browser'],
                         default=['gtk', 'qt', 'foot', 'browser'])
     parser.add_argument('--scales', nargs='+', type=float, default=[1, 2, 1.25, 1.5])
+    parser.add_argument('--matrix', choices=['candidates', 'arrows'], default='candidates')
     parser.add_argument('--probe-discord', action='store_true',
                         help='Observe the unmodified Discord UI with an empty profile; do not type')
     parser.add_argument('--discord-probe-samples', type=int, default=18,
@@ -79,7 +80,8 @@ def main():
     assert sway and swaymsg
     pointer = prepare_pointer()
     keyboard_binary = prepare_keyboard()
-    out = ROOT/('build/discord-native-probe' if args.probe_discord else 'build/niri-isolated-regression')
+    out = ROOT/('build/discord-native-probe' if args.probe_discord else
+                'build/niri-isolated-arrows' if args.matrix == 'arrows' else 'build/niri-isolated-regression')
     out.mkdir(parents=True, exist_ok=True)
     results, processes, files = [], [], []
     runtime = dict(compositor=subprocess.check_output(['niri', '--version'], text=True).strip(),
@@ -190,8 +192,20 @@ def main():
                        GTK_PATH=str(real_home/'.local/share/tipe/gtk/lib/gtk-4.0'),
                        QT_PLUGIN_PATH=str(real_home/'.local/share/tipe/qt/lib/qt6/plugins'),
                        GDK_BACKEND='wayland', QT_QPA_PLATFORM='wayland', TIPE_HARNESS_TIMEOUT_MS='600000')
+            if args.matrix == 'arrows':
+                # These assertions use the base dictionary order. Repeated
+                # selections must not train the private fixture mid-matrix.
+                env['TIPE_LEARNER_READ_ONLY'] = '1'
             daemon = launch(['fcitx5', '--disable', 'notificationitem'], 'fcitx.log')
-            wait_for(lambda: 'Loaded addon tipe' in (out/'fcitx.log').read_text(), daemon, 'Fcitx')
+            # The engine loads before the frontend/UI. Wait for all three
+            # installed modules before inspecting mappings or sending keys.
+            def modules_ready():
+                maps = Path(f'/proc/{daemon.pid}/maps').read_text()
+                return all(any(len(parts := line.split(maxsplit=5)) == 6 and
+                               int(parts[4]) == (installed/name).stat().st_ino
+                               for line in maps.splitlines())
+                           for name in ['libtipe.so', 'libclassicui.so', 'libwaylandim.so'])
+            wait_for(modules_ready, daemon, 'Fcitx modules')
             maps = Path(f'/proc/{daemon.pid}/maps').read_text()
             for name in ['libtipe.so', 'libclassicui.so', 'libwaylandim.so']:
                 path = installed/name
@@ -344,6 +358,32 @@ def main():
                         assert min(abs(pane[1]-caret[3]), abs(pane[3]-caret[1])) <= 40, ('vertical anchor', pane, caret)
                         return dict(bounds=bounds, selection=selection, protocol_rectangle=rectangle, caret=caret,
                                     width=(bounds[2]-bounds[0])/scale, height=(bounds[3]-bounds[1])/scale)
+
+                    if args.matrix == 'arrows':
+                        from arrow_cases import CASES
+                        for name, sequence, expected in CASES:
+                            clear()
+                            keys(*sequence)
+                            actual = value()
+                            result = dict(frontend=frontend, name=name, expected=expected,
+                                          actual=actual, passed=actual == expected)
+                            results.append(result)
+                            (out/'results.json').write_text(json.dumps(results, ensure_ascii=False, indent=2)+'\n')
+                            assert result['passed'], result
+                            print(frontend, name, 'PASS', flush=True)
+                        clear()
+                        keys('s')
+                        compact = shot(frontend+'-compact', 1)
+                        keys('-k', 'Right')
+                        right = shot(frontend+'-right', 1)
+                        keys('-k', 'Left')
+                        left = shot(frontend+'-left', 1)
+                        assert right['selection'][0] > left['selection'][0], (right, left)
+                        assert abs(right['selection'][1] - left['selection'][1]) <= 2, (right, left)
+                        results.append(dict(frontend=frontend, name='Visible horizontal highlight movement',
+                                            compact=compact, right=right, left=left, passed=True))
+                        (out/'results.json').write_text(json.dumps(results, ensure_ascii=False, indent=2)+'\n')
+                        continue
 
                     for scale in args.scales:
                         for spelling, expected in [('nihao', '你好'), ('zhonghuarenmingongheguo', '中华人民共和国')]:

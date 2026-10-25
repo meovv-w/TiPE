@@ -105,7 +105,43 @@ static void long_composition_regression() {
    engine.key("Delete");compare();engine.key("BackSpace");compare();
  }
 }
-int main(){using namespace tipe; retained_result_regression(); long_composition_regression(); std::filesystem::remove_all("/tmp/tipe-core-test"); Engine e("/tmp/tipe-core-test"); e.learner().clear();
+static void compact_arrow_regression() {
+ using namespace tipe;
+ const std::string dir="/tmp/tipe-compact-arrow-test";
+ std::filesystem::remove_all(dir);
+ Engine engine(dir); engine.setSensitive(true);
+ for (const auto *spelling : {"nihao", "s"}) {
+   engine.reset(); for (char ch : std::string(spelling)) engine.key(std::string(1,ch));
+   const auto initial=engine.view();
+   if (initial.candidates.size()<2) continue; // Small fallback has no 's'.
+   const auto expected=initial.candidates[1];
+   auto view=engine.key("Right");
+   assert(view.expanded && view.cursor==1 && view.preedit==spelling);
+   assert(view.preedit_cursor==std::string(spelling).size());
+   view=engine.key("Right",true); assert(view.cursor==1);
+   view=engine.key("Left"); assert(view.expanded && view.cursor==0);
+   view=engine.key("Left"); assert(!view.expanded && view.cursor==0);
+   // At the first candidate, Left returns to spelling editing. Moving back
+   // to its end must not skip a letter or change the candidate selection.
+   view=engine.key("Left"); assert(view.preedit_cursor==std::string(spelling).size()-1);
+   view=engine.key("Right"); assert(!view.expanded && view.cursor==0);
+   assert(view.preedit_cursor==std::string(spelling).size());
+   view=engine.key("Right"); assert(view.expanded && view.cursor==1);
+   view=engine.key("ShiftTab"); assert(!view.expanded && view.cursor==1);
+   view=engine.key("Space"); assert(view.commit==expected.text);
+   assert(view.preedit==std::string(spelling).substr(expected.consumed));
+   engine.reset(); for (char ch : std::string(spelling)) engine.key(std::string(1,ch));
+   engine.key("Right"); engine.key("ShiftTab");
+   view=engine.key("Home"); assert(view.preedit_cursor==0);
+   view=engine.key("Right"); assert(!view.expanded && view.preedit_cursor==1 && view.cursor==1);
+   engine.key("End"); view=engine.key("Left");
+   assert(!view.expanded && view.preedit_cursor==std::string(spelling).size()-1 && view.cursor==1);
+   engine.reset(); for (char ch : std::string(spelling)) engine.key(std::string(1,ch));
+   engine.key("Right"); view=engine.key("Enter");
+   assert(view.commit==spelling && view.preedit.empty());
+ }
+}
+int main(){using namespace tipe; compact_arrow_regression(); retained_result_regression(); long_composition_regression(); std::filesystem::remove_all("/tmp/tipe-core-test"); Engine e("/tmp/tipe-core-test"); e.learner().clear();
  for(char c:std::string("nihao"))e.key(std::string(1,c)); auto v=e.key("Space"); assert(v.preedit.empty() && v.commit=="你好");
  // Public Engine callers may pass toolkit key names directly. These aliases
  // must preserve the canonical editing behavior rather than becoming text.

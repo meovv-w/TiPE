@@ -1,0 +1,419 @@
+[
+  {
+    "frontend": "gtk",
+    "name": "Compact Right selects second candidate",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Left returns to first candidate",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Collapsed selection survives Space",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Compact Left edits spelling before Right reopens candidates",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Arrow navigation preserves literal Enter",
+    "expected": "s",
+    "actual": "s",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Spelling cursor still inserts in the middle",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Collapsed selection allows Home and spelling edit",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Collapsed Left navigates candidates before spelling",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Visible horizontal highlight movement",
+    "compact": {
+      "bounds": [
+        118,
+        118,
+        558,
+        160
+      ],
+      "selection": [
+        137,
+        139
+      ],
+      "protocol_rectangle": [
+        39,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        119.0,
+        101.0,
+        120.0,
+        119.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "right": {
+      "bounds": [
+        118,
+        118,
+        558,
+        250
+      ],
+      "selection": [
+        180,
+        139
+      ],
+      "protocol_rectangle": [
+        39,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        119.0,
+        101.0,
+        120.0,
+        119.0
+      ],
+      "width": 440.0,
+      "height": 132.0
+    },
+    "left": {
+      "bounds": [
+        118,
+        118,
+        558,
+        250
+      ],
+      "selection": [
+        137,
+        139
+      ],
+      "protocol_rectangle": [
+        39,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        119.0,
+        101.0,
+        120.0,
+        119.0
+      ],
+      "width": 440.0,
+      "height": 132.0
+    },
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Compact Right selects second candidate",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Left returns to first candidate",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Collapsed selection survives Space",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Compact Left edits spelling before Right reopens candidates",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Arrow navigation preserves literal Enter",
+    "expected": "s",
+    "actual": "s",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Spelling cursor still inserts in the middle",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Collapsed selection allows Home and spelling edit",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Collapsed Left navigates candidates before spelling",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Visible horizontal highlight movement",
+    "compact": {
+      "bounds": [
+        83,
+        229,
+        523,
+        271
+      ],
+      "selection": [
+        102,
+        250
+      ],
+      "protocol_rectangle": [
+        4,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        84.0,
+        212.0,
+        94.0,
+        230.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "right": {
+      "bounds": [
+        83,
+        229,
+        523,
+        361
+      ],
+      "selection": [
+        145,
+        250
+      ],
+      "protocol_rectangle": [
+        4,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        84.0,
+        212.0,
+        94.0,
+        230.0
+      ],
+      "width": 440.0,
+      "height": 132.0
+    },
+    "left": {
+      "bounds": [
+        83,
+        229,
+        523,
+        361
+      ],
+      "selection": [
+        102,
+        250
+      ],
+      "protocol_rectangle": [
+        4,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        84.0,
+        212.0,
+        94.0,
+        230.0
+      ],
+      "width": 440.0,
+      "height": 132.0
+    },
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Compact Right selects second candidate",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Left returns to first candidate",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Collapsed selection survives Space",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Compact Left edits spelling before Right reopens candidates",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Arrow navigation preserves literal Enter",
+    "expected": "s",
+    "actual": "s",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Spelling cursor still inserts in the middle",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Collapsed selection allows Home and spelling edit",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Collapsed Left navigates candidates before spelling",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Visible horizontal highlight movement",
+    "compact": {
+      "bounds": [
+        103,
+        107,
+        543,
+        149
+      ],
+      "selection": [
+        122,
+        128
+      ],
+      "protocol_rectangle": [
+        24,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        104.0,
+        81.0,
+        104.0,
+        108.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "right": {
+      "bounds": [
+        103,
+        107,
+        543,
+        267
+      ],
+      "selection": [
+        165,
+        156
+      ],
+      "protocol_rectangle": [
+        24,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        104.0,
+        81.0,
+        104.0,
+        108.0
+      ],
+      "width": 440.0,
+      "height": 160.0
+    },
+    "left": {
+      "bounds": [
+        103,
+        107,
+        543,
+        267
+      ],
+      "selection": [
+        122,
+        156
+      ],
+      "protocol_rectangle": [
+        24,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        104.0,
+        81.0,
+        104.0,
+        108.0
+      ],
+      "width": 440.0,
+      "height": 160.0
+    },
+    "passed": true
+  }
+]

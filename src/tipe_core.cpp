@@ -423,6 +423,7 @@ std::vector<Candidate> Engine::lookup(const std::string& s) const {
 }
 void Engine::update(bool reset_page) {
   candidates_.clear();
+  if (raw_.empty()) editing_preedit_ = false;
   preedit_cursor_ = std::min(preedit_cursor_, raw_.size());
   if (reset_page) cursor_ = 0;
   if (reset_page) page_ = 0;
@@ -596,11 +597,13 @@ void Engine::update(bool reset_page) {
 }
 void Engine::refreshCandidates() {
   std::string selected; size_t selected_consumed = 0;
-  const bool preserve = expanded_;
+  // A collapsed strip may still highlight an item chosen in the grid.
+  // Refreshing it before Space or another arrow must preserve that item.
+  const bool preserve = expanded_ || cursor_ > 0;
   if (preserve && cursor_ < candidates_.size()) { selected = candidates_[cursor_].text; selected_consumed = candidates_[cursor_].consumed; }
   update(false);
-  // Expanded navigation exposes prefix candidates appended by the LibIME
-  // cursor enumeration. Rebuild that same set before restoring the selected
+  // Candidate navigation exposes prefixes appended by the LibIME cursor
+  // enumeration. Rebuild that same set before restoring the selected
   // item; otherwise Space/Enter after navigating onto a prefix would silently
   // commit whichever base candidate happened to occupy the old index.
   if (preserve) addPrefixCandidates();
@@ -833,6 +836,7 @@ View Engine::key(const std::string& k,bool release){
             cursor_, expanded_, mode_, {}, false, preedit_cursor_};
   };
   const auto insert_text = [&](std::string_view text) {
+    if (raw_.empty()) editing_preedit_ = false;
     preedit_cursor_ = std::min(preedit_cursor_, raw_.size());
     raw_.insert(preedit_cursor_, text);
     preedit_cursor_ += text.size();
@@ -870,7 +874,7 @@ View Engine::key(const std::string& k,bool release){
      // Restore the last committed Chinese chunk as editable pinyin.
      auto ch=chunks_.back(); chunks_.pop_back();
      if(committed_.size()>=ch.text.size()) committed_.erase(committed_.size()-ch.text.size());
-     raw_=ch.pinyin; preedit_cursor_=raw_.size(); update();
+     raw_=ch.pinyin; preedit_cursor_=raw_.size(); editing_preedit_=true; update();
    } else if(!committed_.empty()) {
      // English commits have no pinyin; remove one UTF-8 codepoint.
      erase_last_utf8(committed_);
@@ -908,11 +912,12 @@ View Engine::key(const std::string& k,bool release){
    }
    return reset();
  }
- if(k=="Tab"){if(mode_==Mode::English)return suspended_view(); addPrefixCandidates(); expanded_=!raw_.empty() && !candidates_.empty(); page_=cursor_/candidatePageSize(); Event open{EventType::CandidateOpen,k,raw_,{},context_,now_ms()}; open.session=session_; open.sensitive=sensitive_; learner_->push(std::move(open)); return edit_view();}
- if(k=="ShiftTab"){if(mode_==Mode::English)return suspended_view(); expanded_=false; page_=cursor_/candidatePageSize(); Event close{EventType::CandidateClose,k,raw_,{},context_,now_ms()}; close.session=session_; close.sensitive=sensitive_; learner_->push(std::move(close)); return edit_view();}
+ if(k=="Tab"){if(mode_==Mode::English)return suspended_view(); editing_preedit_=false; addPrefixCandidates(); expanded_=!raw_.empty() && !candidates_.empty(); page_=cursor_/candidatePageSize(); Event open{EventType::CandidateOpen,k,raw_,{},context_,now_ms()}; open.session=session_; open.sensitive=sensitive_; learner_->push(std::move(open)); return edit_view();}
+ if(k=="ShiftTab"){if(mode_==Mode::English)return suspended_view(); editing_preedit_=false; expanded_=false; page_=cursor_/candidatePageSize(); Event close{EventType::CandidateClose,k,raw_,{},context_,now_ms()}; close.session=session_; close.sensitive=sensitive_; learner_->push(std::move(close)); return edit_view();}
  if((k=="Home" || k=="End") && mode_==Mode::Chinese &&
     (!expanded_ || candidates_.empty())) {
    preedit_cursor_ = k == "Home" ? 0 : raw_.size();
+   editing_preedit_ = true;
    Event move{EventType::CandidateMove,k,raw_,{},context_,now_ms()};
    move.session=session_; move.sensitive=sensitive_; learner_->push(std::move(move));
    return edit_view();
@@ -932,13 +937,22 @@ View Engine::key(const std::string& k,bool release){
      return edit_view();
    }
    if(mode_ != Mode::Chinese || english_like())return suspended_view();
-   if ((k == "Left" || k == "Right") && (!expanded_ || candidates_.empty())) {
+   // In the compact strip, Right at the end of the spelling enters the
+   // candidate grid. Inside the spelling it still edits the preedit. Left
+   // returns through highlighted candidates first; only the first item can
+   // hand the key to the spelling cursor. Expansion alone is not focus.
+   const bool edit_horizontal = candidates_.empty() ||
+       (!expanded_ && (editing_preedit_ || cursor_ == 0) &&
+        (k == "Left" || preedit_cursor_ < raw_.size()));
+   if ((k == "Left" || k == "Right") && edit_horizontal) {
+     editing_preedit_ = true;
      preedit_cursor_ = k == "Left" ? prev_utf8_boundary(raw_, preedit_cursor_)
                                     : next_utf8_boundary(raw_, preedit_cursor_);
      Event move{EventType::CandidateMove,k,raw_,{},context_,now_ms()};
      move.session=session_; move.sensitive=sensitive_; learner_->push(std::move(move));
      return edit_view();
    }
+   editing_preedit_ = false;
    refreshCandidates();
    // Do not leave a phantom expanded state when navigation is pressed with
    // no composition.  That stale flag would cause the next unrelated token
@@ -980,7 +994,7 @@ View Engine::key(const std::string& k,bool release){
          ++page_;
          cursor_ = page_ * candidatePageSize();
        } else if (movement.action == grid::Action::EditPinyin) {
-         expanded_ = false; page_ = 0;
+         expanded_ = false; page_ = 0; editing_preedit_ = true;
        }
      }
      page_=cursor_/candidatePageSize();
@@ -1085,7 +1099,7 @@ View Engine::acceptCandidate(size_t index,const std::string& trigger) {
   preedit_cursor_ = preedit_cursor_ >= candidate.consumed
                         ? preedit_cursor_ - candidate.consumed : 0;
   if (raw_.empty()) literal_token_ = false;
-  update(); expanded_=false; cursor_=0; page_=0;
+  update(); expanded_=false; cursor_=0; page_=0; editing_preedit_=false;
   Event event;
   event.type=EventType::CandidateSelect;
   event.key=trigger;
@@ -1170,7 +1184,7 @@ View Engine::restoreCommit(const std::string& expected_text) {
   // The chunk stores the exact consumed raw spelling, including user-typed
   // separators and abbreviations, rather than expanded decoder pinyin.
   raw_ = r->pinyin; preedit_cursor_ = raw_.size();
-  update(); expanded_ = false; cursor_ = 0; page_ = 0;
+  update(); expanded_ = false; cursor_ = 0; page_ = 0; editing_preedit_ = true;
   return {raw_, candidates_, cursor_, expanded_, mode_, {}, true, preedit_cursor_};
 }
 void Engine::invalidateCommitHistory() { chunks_.clear(); committed_.clear(); correction_origin_.clear(); }
