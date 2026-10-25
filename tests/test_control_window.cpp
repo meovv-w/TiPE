@@ -11,6 +11,8 @@
 #include <QDir>
 #include <QFont>
 #include <QWidget>
+#include <QScrollArea>
+#include <QScrollBar>
 
 #include <cassert>
 #include <chrono>
@@ -55,24 +57,37 @@ int main(int argc, char **argv) {
   auto *backend = window->findChild<QComboBox *>("model-backend");
   auto *model_status = window->findChild<QLabel *>("model-status");
   assert(status && action && pause && enable && clear && export_button && backend && model_status);
-  assert(status->text().contains("已学词/模式：1"));
-  assert(status->text().contains("TiP（个人学习）"));
+  auto *learned = window->findChild<QLabel *>("learned-count");
+  auto *current_model = window->findChild<QLabel *>("current-model");
+  auto *health = window->findChild<QLabel *>("learning-health");
+  assert(learned && learned->text() == "1");
+  assert(current_model && current_model->text().contains("TiP"));
+  assert(health && health->text() == "运行中");
   assert(backend->count() == 3);
   assert(model_status->text().contains("本地小模型文件："));
   auto *key_path=window->findChild<QLineEdit *>("cloud-key-path");
   auto *save_key=window->findChild<QPushButton *>("save-cloud-key-path");
   assert(key_path && save_key);
+  auto *tabs = window->findChild<QTabWidget *>("control-tabs");
+  tabs->setCurrentIndex(1);
+  auto *settings_toggle = window->findChild<QPushButton *>("model-settings-toggle");
+  assert(settings_toggle);
+  settings_toggle->click(); app.processEvents();
+  assert(key_path->isVisible());
   key_path->setText(QString::fromStdString(dir+"/private-api-key"));
   save_key->click();app.processEvents();
   tipe::ModelSettings saved_settings(dir);
   assert(saved_settings.cloud_api_key_path()==dir+"/private-api-key");
   assert(!saved_settings.cloud_enabled());
 
+  settings_toggle->click(); tabs->setCurrentIndex(0); app.processEvents();
+  assert(!key_path->isVisible());
+
   // Optional reproducible visual artifacts use the actual QWidget tree;
   // they are independent from the running desktop and never move a window.
   if (const char *capture_dir = std::getenv("TIPE_CONTROL_CAPTURE_DIR")) {
     QDir().mkpath(QString::fromLocal8Bit(capture_dir));
-    auto *tabs = window->findChild<QTabWidget *>("control-tabs");
+    window->resize(880, 760); app.processEvents();
     assert(tabs && tabs->count() == 3);
     for (int index = 0; index < tabs->count(); ++index) {
       tabs->setCurrentIndex(index); app.processEvents();
@@ -80,6 +95,28 @@ int main(int argc, char **argv) {
     }
     tabs->setCurrentIndex(0); app.processEvents();
   }
+
+  window->resize(480, 580);
+  for (int index = 0; index < tabs->count(); ++index) {
+    tabs->setCurrentIndex(index); app.processEvents(); app.processEvents();
+    auto *scroll = qobject_cast<QScrollArea *>(tabs->widget(index));
+    assert(scroll && scroll->horizontalScrollBar()->maximum() == 0);
+    assert(scroll->widget()->width() <= scroll->viewport()->width());
+    if (index == 1) {
+      settings_toggle->click(); app.processEvents(); app.processEvents();
+      assert(scroll->horizontalScrollBar()->maximum() == 0);
+      scroll->ensureWidgetVisible(save_key);
+      app.processEvents();
+      assert(scroll->viewport()->rect().contains(QRect(save_key->mapTo(scroll->viewport(), QPoint()), save_key->size())));
+      if (const char *capture_dir = std::getenv("TIPE_CONTROL_CAPTURE_DIR"))
+        assert(window->grab().save(QString::fromLocal8Bit(capture_dir) + "/compact-settings.png"));
+      settings_toggle->click();
+      scroll->verticalScrollBar()->setValue(0);
+    }
+    if (const char *capture_dir = std::getenv("TIPE_CONTROL_CAPTURE_DIR"))
+      assert(window->grab().save(QString::fromLocal8Bit(capture_dir) + "/compact-" + QString::number(index) + ".png"));
+  }
+  tabs->setCurrentIndex(0); app.processEvents();
 
   // A refresh must retain the model items while its popup is being read.
   // Persistent indexes are invalidated by clear()/rebuild even when all
@@ -118,13 +155,13 @@ int main(int argc, char **argv) {
     app.processEvents();
     std::this_thread::sleep_for(std::chrono::milliseconds(20));
   }
-  assert(status->text().contains("已学词/模式：2"));
+  assert(learned->text() == "2");
   assert(original_item.isValid());
 
   pause->click();
   app.processEvents();
   assert(action->text() == "已暂停学习");
-  assert(status->text().contains("已暂停"));
+  assert(health->text() == "已暂停");
   pause->click();
   app.processEvents();
   assert(action->text() == "已恢复学习");
@@ -132,7 +169,7 @@ int main(int argc, char **argv) {
   enable->click();
   app.processEvents();
   assert(action->text() == "已关闭学习");
-  assert(status->text().contains("已关闭"));
+  assert(health->text() == "已关闭");
   enable->click();
   app.processEvents();
   assert(action->text() == "已开启学习");
@@ -171,7 +208,7 @@ int main(int argc, char **argv) {
   clear->click();
   app.processEvents();
   assert(action->text() == "已清空本地学习");
-  assert(status->text().contains("已学词/模式：0"));
+  assert(learned->text() == "0");
   delete window;
   unsetenv("TIPE_CONTROL_EXPORT_PATH");
   return 0;

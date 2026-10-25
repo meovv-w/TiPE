@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """Create README artwork from actual TiPE screenshots (optional: Pillow)."""
 from pathlib import Path
+import argparse
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--control-captures', type=Path, default=ROOT / 'build/control-capture',
+                    help='TIPE_CONTROL_CAPTURE_DIR used with tipe-control-window-tests')
+args = parser.parse_args()
 OUT = ROOT / 'docs/assets'
 OUT.mkdir(parents=True, exist_ok=True)
 FONT = '/usr/share/fonts/google-noto-sans-cjk-fonts/NotoSansCJK-Regular.ttc'
@@ -52,7 +57,8 @@ expanded=Image.open(ROOT/'docs/evidence/2026-10-21/gtk4-expanded.png').convert('
 show.paste(expanded,((1640-expanded.width)//2,464))
 show.save(OUT/'candidates.png',optimize=True)
 # Unmodified screenshots from the real control-window widget tree.
-for source,target in [('page-0.png','control-status.png'),('page-2.png','control-support.png')]:
- image=Image.open(ROOT/'build/payment-control'/source)
+for source,target in [('page-0.png','control-status.png'),('page-1.png','control-models.png'),
+                      ('page-2.png','control-support.png')]:
+ image=Image.open(args.control_captures/source)
  image.save(OUT/target,optimize=True)
 print('Generated hero, actual candidates and control screenshots in docs/assets')

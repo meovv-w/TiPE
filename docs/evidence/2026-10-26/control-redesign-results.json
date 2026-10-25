@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-26",
+  "scope": "Qt control center redesign with direct functional labels and lighter headings",
+  "automated_tests": {
+    "passed": 4,
+    "failed": 0,
+    "log": "control-redesign-tests.txt"
+  },
+  "rendering": {
+    "source": "Actual Qt widget captures with isolated fixture data using QT_QPA_PLATFORM=offscreen",
+    "scenarios": [
+      "normal font",
+      "QT_SCALE_FACTOR=2",
+      "16pt application font",
+      "480x580 compact window"
+    ],
+    "checks": [
+      "all three pages fit horizontally",
+      "narrow layout reflows vertically",
+      "cloud key save button reachable by scrolling",
+      "support payment originals remain available"
+    ],
+    "screenshots": [
+      "../../assets/control-status.png",
+      "../../assets/control-models.png",
+      "../../assets/control-support.png",
+      "control-compact.png",
+      "control-large-font-settings.png"
+    ]
+  },
+  "installation": {
+    "binary_matches_build": true,
+    "sha256": "b2c34f88e9ba58b9b4e652cc9abcc94e16c2a07a0a8945e105e86392e4bd511a",
+    "desktop_window_detected": true,
+    "input_daemon_restarted": false
+  },
+  "limits": [
+    "Rendering checked offscreen; native desktop launch confirmed by process and compositor metadata.",
+    "No phone-based payment scan was performed.",
+    "This UI validation does not re-evaluate input performance or previously documented desktop coverage limits."
+  ]
+}

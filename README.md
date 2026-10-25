@@ -62,9 +62,12 @@ TiPE 从选词、删除重输、编辑和完整选择链中积累证据。例如
 - 云端需要显式配置与同意，发送范围和状态在模型页说明。
 
 <details>
-<summary><b>查看学习状态页</b></summary>
+<summary><b>查看控制中心：学习状态、模型与支持</b></summary>
 <br>
-<img src="docs/assets/control-status.png" alt="TiPE 控制中心学习状态页" width="620">
+<p>统一的深色界面，清晰的学习统计与操作分组。窄窗口自动换行，大字体可滚动查看。</p>
+<img src="docs/assets/control-status.png" alt="TiPE 控制中心学习状态页" width="760">
+<img src="docs/assets/control-models.png" alt="TiPE 控制中心模型页" width="760">
+<img src="docs/assets/control-support.png" alt="TiPE 控制中心支持页" width="760">
 </details>
 
 ## 开始使用

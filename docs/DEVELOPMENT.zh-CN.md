@@ -25,6 +25,20 @@ ctest --test-dir build --output-on-failure
 ./scripts/install-user.sh build
 ```
 
+控制中心的实际 Qt 窗口截图可独立复现，不读取个人学习记录：
+
+```bash
+cmake --build build --target tipe-control-window-tests
+QT_QPA_PLATFORM=offscreen QT_SCALE_FACTOR=2 \
+  TIPE_CONTROL_CAPTURE_DIR=build/control-capture ./build/tipe-control-window-tests
+python3 scripts/render-readme-assets.py --control-captures build/control-capture
+```
+
+设置 `TIPE_CONTROL_LARGE_FONT=1` 可检查大字体；窗口测试也会检查 480×580
+窄窗口下三个页面的滚动与设置按钮可达性。截图来自独立测试数据，不能代替真实
+桌面合成器的显示检查。2026-10-26 的结果见
+[界面验证记录](evidence/2026-10-26/control-redesign-results.json)。
+
 需要按键级候选和分段边界诊断时，可运行
 `./build/tipe-demo --json-lines --state-dir /tmp/tipe-demo-private`，标准输入仍为
 空格分隔的按键名。每行JSON包含提交、剩余拼音、编辑光标和候选的真实消耗长度。

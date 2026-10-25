@@ -1,4 +1,6 @@
 #include "tipe/support_page.hpp"
+#include "tipe/control_style.hpp"
+#include <QPainterPath>
 
 #include <QBoxLayout>
 #include <QFrame>
@@ -26,24 +28,30 @@ class PaymentImage : public QLabel {
  public:
   explicit PaymentImage(const QString &path, QWidget *parent)
       : QLabel(parent), original_(path) {
-    setMinimumSize(180, 300);
-    setFixedHeight(380);
+    setMinimumSize(180, 180);
+    setFixedHeight(244);
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     setProperty("paymentImageLoaded", !original_.isNull());
     setProperty("paymentImageSize", original_.size());
+    // Display the supplied QR with its white quiet zone; preserve the full
+    // original for the enlarged view, including platform and recipient.
+    thumbnail_ = original_.copy(path.contains("wechat") ? QRect(210, 264, 410, 410)
+                                                       : QRect(218, 686, 846, 846));
   }
-  QSize minimumSizeHint() const override { return {180, 300}; }
+  QSize minimumSizeHint() const override { return {180, 180}; }
  protected:
   void paintEvent(QPaintEvent *) override {
     QPainter painter(this);
-    painter.fillRect(rect(), Qt::white);
-    const auto size = original_.size().scaled(contentsRect().size(), Qt::KeepAspectRatio);
+    painter.setRenderHint(QPainter::Antialiasing);
+    QPainterPath background; background.addRoundedRect(rect(), 12, 12);
+    painter.fillPath(background, Qt::white);
+    const auto size = thumbnail_.size().scaled(contentsRect().size() - QSize(20, 20), Qt::KeepAspectRatio);
     const QRect target(QPoint((width()-size.width())/2, (height()-size.height())/2), size);
     painter.setRenderHint(QPainter::SmoothPixmapTransform);
-    painter.drawPixmap(target, original_);
+    painter.drawPixmap(target, thumbnail_);
   }
  private:
-  QPixmap original_;
+  QPixmap original_, thumbnail_;
 };
 
 class SupportPage : public QScrollArea {
@@ -76,14 +84,11 @@ class SupportPage : public QScrollArea {
 
 QFrame *make_payment_card(const QString &name, const QString &name_id,
                                  QWidget *parent) {
-  auto *card = new QFrame(parent);
-  card->setFrameShape(QFrame::StyledPanel);
-  card->setFrameShadow(QFrame::Plain);
+  auto *card = design::card(parent);
   card->setObjectName(name_id + "-card");
-  auto *layout = new QVBoxLayout(card);
-  layout->setContentsMargins(12, 12, 12, 12);
+  auto *layout = design::column(card, 18, 12);
 
-  auto *title = new QLabel(name, card);
+  auto *title = design::label(name, card, nullptr, 1.15, true);
   title->setAlignment(Qt::AlignCenter);
   title->setObjectName(name_id + "-title");
   layout->addWidget(title);
@@ -93,12 +98,14 @@ QFrame *make_payment_card(const QString &name, const QString &name_id,
   image->setObjectName(name_id + "-code");
   image->setAccessibleName(name + "收款码");
   layout->addWidget(image);
-  auto *view = new QPushButton("查看大图", card);
+  auto *view = new QPushButton("查看收款码原图", card);
+  view->setProperty("role", "quiet");
   view->setObjectName(name_id + "-view");
   QObject::connect(view, &QPushButton::clicked, card, [card, name, path] {
     auto *dialog = new QDialog(card);
     dialog->setAttribute(Qt::WA_DeleteOnClose);
     dialog->setWindowTitle(name + "收款码");
+    design::theme(dialog);
     auto *layout = new QVBoxLayout(dialog);
     auto *label = new QLabel(dialog);
     const QPixmap original(path);
@@ -120,35 +127,16 @@ QWidget *make_support_page(QWidget *parent) {
   initialize_support_images();
   auto *scroll = new SupportPage(parent);
   scroll->setObjectName("tipe-support-page");
+  design::theme(scroll);
   auto *page = new QWidget;
   scroll->setWidget(page);
-  auto *layout = new QVBoxLayout(page);
-  layout->setContentsMargins(16, 16, 16, 16);
-  layout->setSpacing(10);
-
-  auto *title = new QLabel("支持 TiPE", page);
+  auto *layout = design::column(page, 2, 16);
+  auto *title = design::label("支持开发", page, nullptr, 1.35, true);
   title->setObjectName("support-title");
-  QFont title_font = title->font();
-  title_font.setBold(true);
-  title_font.setPointSize(title_font.pointSize() + 1);
-  title->setFont(title_font);
   layout->addWidget(title);
-
-  auto *summary = new QLabel(
-      "TiPE 是一个本地优先的中文拼音输入法。它会安静地学习你明确选择的词，"
-      "帮助改进后续候选。感谢你支持 TiPE 的持续开发。",
-      page);
+  auto *summary = design::label("微信和支付宝收款码。", page, "muted");
   summary->setObjectName("support-summary");
-  summary->setWordWrap(true);
   layout->addWidget(summary);
-
-  auto *privacy = new QLabel(
-      "学习数据默认保存在本机，不会因为按键而自动上传内容。"
-      "你可以在“学习状态”页暂停、清空或导出数据。",
-      page);
-  privacy->setObjectName("support-privacy");
-  privacy->setWordWrap(true);
-  layout->addWidget(privacy);
 
   auto *codes = new QBoxLayout(QBoxLayout::LeftToRight);
   codes->setObjectName("payment-codes");
@@ -158,11 +146,12 @@ QWidget *make_support_page(QWidget *parent) {
   codes->addWidget(make_payment_card("支付宝", "alipay", page), 1);
   layout->addLayout(codes);
 
-  auto *note = new QLabel("使用微信或支付宝扫一扫。感谢支持 TiPE 的持续开发。",
-                          page);
+  auto *note = design::label("使用对应应用扫码，可自选金额。", page, "muted", 0.9);
   note->setObjectName("payment-note");
-  note->setWordWrap(true);
   layout->addWidget(note);
+  auto *privacy = design::label("学习数据保存在本机，默认不联网。", page, "muted", 0.9);
+  privacy->setObjectName("support-privacy");
+  layout->addWidget(privacy);
   layout->addStretch();
   return scroll;
 }

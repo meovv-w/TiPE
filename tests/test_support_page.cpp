@@ -42,8 +42,8 @@ int main(int argc, char **argv) {
   const auto *privacy = page->findChild<QLabel *>("support-privacy");
   const auto *wechat = page->findChild<QLabel *>("wechat-code");
   const auto *alipay = page->findChild<QLabel *>("alipay-code");
-  assert(summary && summary->text().contains("本地优先"));
-  assert(privacy && privacy->text().contains("不会因为按键而自动上传"));
+  assert(summary && !summary->text().isEmpty());
+  assert(privacy && privacy->text().contains("保存在本机"));
   assert(wechat && wechat->property("paymentImageLoaded").toBool());
   assert(alipay && alipay->property("paymentImageLoaded").toBool());
   assert(wechat->property("paymentImageSize").toSize() == QSize(828, 1124));

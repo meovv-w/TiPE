@@ -93,6 +93,9 @@ if(Qt6_FOUND)
   qt6_add_resources(tipe_control_ui "support_payments"
     PREFIX "/tipe/support" BASE "packaging/support"
     FILES packaging/support/wechat.jpg packaging/support/alipay.jpg)
+  qt6_add_resources(tipe_control_ui "control_icons"
+    PREFIX "/tipe/ui" BASE "packaging/ui"
+    FILES packaging/ui/chevron-down.png)
   target_include_directories(tipe_control_ui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
   target_link_libraries(tipe_control_ui PUBLIC tipe_core Qt6::Widgets)
   add_executable(tipe-control src/tipe_control.cpp)
