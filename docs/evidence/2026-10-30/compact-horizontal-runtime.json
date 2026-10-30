@@ -1,0 +1,41 @@
+{
+  "compositor": "niri 26.04",
+  "private_session": true,
+  "physical_input": false,
+  "multioutput": false,
+  "complete": true,
+  "modules": {
+    "libtipe.so": {
+      "path": "/home/lin/.config/fcitx5/addon/libtipe.so",
+      "inode": 17915056,
+      "sha256": "96685f8a62c80fe09cf8a146faf17fea9058355f712c6eb0adf1db5e44cd99d3"
+    },
+    "libclassicui.so": {
+      "path": "/home/lin/.config/fcitx5/addon/libclassicui.so",
+      "inode": 17915059,
+      "sha256": "5a054e915a96ff2ae125eee269e3b3ecd589102363c9904a3de9f916d1d6e479"
+    },
+    "libwaylandim.so": {
+      "path": "/home/lin/.config/fcitx5/addon/libwaylandim.so",
+      "inode": 14843474,
+      "sha256": "d28983c4114178011f678f500efef23ca880b0bf9a9fbf73681f1df08aa35d51"
+    },
+    "gtk": {
+      "path": "/home/lin/.local/share/tipe/gtk/lib/gtk-4.0/4.0.0/immodules/libim-fcitx5.so",
+      "sha256": "204a638342e1bcfb8a3bc755f49c8684034a7eae9b2ff00b288019fe3fbab48d"
+    },
+    "qt": {
+      "path": "/home/lin/.local/share/tipe/qt/lib/qt6/plugins/platforminputcontexts/libfcitx5platforminputcontextplugin.so",
+      "sha256": "bbfa368959ea43c2cf3ada6b1c296703a9e34509e80f2cf569301e62c6eac8f6"
+    }
+  },
+  "frontends": [
+    "gtk",
+    "qt",
+    "browser"
+  ],
+  "scales": [
+    1.0
+  ],
+  "passed": 39
+}

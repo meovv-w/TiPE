@@ -51,7 +51,8 @@ struct Cell {
   size_t row{}, column{};
   Rect rect;
   Rect text_rect;
-  // Labels always restart on the current view: 1..9, then 0.
+  // 1..9, then 0. A scrolling strip keeps the numbered page's original
+  // labels even when only part of that page fits on screen.
   char label{'1'};
   bool elide{};
 };
@@ -71,7 +72,8 @@ struct Layout {
 // expanded mode packs variable-width cells into as many rows as fit.
 Layout layout(std::span<const Candidate>, const Options&, size_t begin = 0);
 
-// Compact strip and expanded panel share the first row's exact geometry.
+// Compact strips scroll within a numbered page to keep selected visible.
+// Compact strip and expanded panel share the initial row's exact geometry.
 // Expanded pages expose up to forty candidates; height clipping scrolls whole
 // rows to keep selected visible, without changing column widths.
 Layout strip_layout(std::span<const Candidate>, bool expanded, int width = 768,

@@ -1,0 +1,965 @@
+[
+  {
+    "frontend": "gtk",
+    "name": "Compact Right selects second candidate",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Left returns to first candidate",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Collapsed selection survives Space",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Compact Left edits spelling before Right returns to candidates",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Arrow navigation preserves literal Enter",
+    "expected": "s",
+    "actual": "s",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Spelling cursor still inserts in the middle",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Collapsed selection allows Home and spelling edit",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Collapsed Left navigates candidates before spelling",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Compact Right crosses a numbered page",
+    "expected": "事",
+    "actual": "事",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Compact Left returns to the previous numbered page",
+    "expected": "书",
+    "actual": "书",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Compact numeric label matches the current page",
+    "expected": "事",
+    "actual": "事",
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Horizontal navigation stays compact; Down expands",
+    "compact": {
+      "bounds": [
+        118,
+        118,
+        558,
+        160
+      ],
+      "selection": [
+        137,
+        139
+      ],
+      "protocol_rectangle": [
+        39,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        119.0,
+        101.0,
+        120.0,
+        119.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "right": {
+      "bounds": [
+        118,
+        118,
+        558,
+        160
+      ],
+      "selection": [
+        180,
+        139
+      ],
+      "protocol_rectangle": [
+        39,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        119.0,
+        101.0,
+        120.0,
+        119.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "left": {
+      "bounds": [
+        118,
+        118,
+        558,
+        160
+      ],
+      "selection": [
+        137,
+        139
+      ],
+      "protocol_rectangle": [
+        39,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        119.0,
+        101.0,
+        120.0,
+        119.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "next_page": {
+      "bounds": [
+        118,
+        118,
+        558,
+        160
+      ],
+      "selection": [
+        137,
+        139
+      ],
+      "protocol_rectangle": [
+        39,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        119.0,
+        101.0,
+        120.0,
+        119.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "previous_page": {
+      "bounds": [
+        118,
+        118,
+        558,
+        160
+      ],
+      "selection": [
+        498,
+        139
+      ],
+      "protocol_rectangle": [
+        39,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        119.0,
+        101.0,
+        120.0,
+        119.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        118,
+        118,
+        558,
+        250
+      ],
+      "selection": [
+        498,
+        169
+      ],
+      "protocol_rectangle": [
+        39,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        119.0,
+        101.0,
+        120.0,
+        119.0
+      ],
+      "width": 440.0,
+      "height": 132.0
+    },
+    "passed": true
+  },
+  {
+    "frontend": "gtk",
+    "name": "Long candidates scroll within one row and return",
+    "initial": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "scrolled": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        858,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "returned": {
+      "bounds": [
+        293,
+        118,
+        1013,
+        160
+      ],
+      "selection": [
+        312,
+        139
+      ],
+      "protocol_rectangle": [
+        214,
+        31,
+        1,
+        18
+      ],
+      "caret": [
+        294.0,
+        101.0,
+        295.0,
+        119.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Compact Right selects second candidate",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Left returns to first candidate",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Collapsed selection survives Space",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Compact Left edits spelling before Right returns to candidates",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Arrow navigation preserves literal Enter",
+    "expected": "s",
+    "actual": "s",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Spelling cursor still inserts in the middle",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Collapsed selection allows Home and spelling edit",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Collapsed Left navigates candidates before spelling",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Compact Right crosses a numbered page",
+    "expected": "事",
+    "actual": "事",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Compact Left returns to the previous numbered page",
+    "expected": "书",
+    "actual": "书",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Compact numeric label matches the current page",
+    "expected": "事",
+    "actual": "事",
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Horizontal navigation stays compact; Down expands",
+    "compact": {
+      "bounds": [
+        83,
+        229,
+        523,
+        271
+      ],
+      "selection": [
+        102,
+        250
+      ],
+      "protocol_rectangle": [
+        4,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        84.0,
+        212.0,
+        94.0,
+        230.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "right": {
+      "bounds": [
+        83,
+        229,
+        523,
+        271
+      ],
+      "selection": [
+        145,
+        250
+      ],
+      "protocol_rectangle": [
+        4,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        84.0,
+        212.0,
+        94.0,
+        230.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "left": {
+      "bounds": [
+        83,
+        229,
+        523,
+        271
+      ],
+      "selection": [
+        102,
+        250
+      ],
+      "protocol_rectangle": [
+        4,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        84.0,
+        212.0,
+        94.0,
+        230.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "next_page": {
+      "bounds": [
+        83,
+        229,
+        523,
+        271
+      ],
+      "selection": [
+        102,
+        250
+      ],
+      "protocol_rectangle": [
+        4,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        84.0,
+        212.0,
+        94.0,
+        230.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "previous_page": {
+      "bounds": [
+        83,
+        229,
+        523,
+        271
+      ],
+      "selection": [
+        463,
+        250
+      ],
+      "protocol_rectangle": [
+        4,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        84.0,
+        212.0,
+        94.0,
+        230.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        83,
+        229,
+        523,
+        361
+      ],
+      "selection": [
+        463,
+        280
+      ],
+      "protocol_rectangle": [
+        4,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        84.0,
+        212.0,
+        94.0,
+        230.0
+      ],
+      "width": 440.0,
+      "height": 132.0
+    },
+    "passed": true
+  },
+  {
+    "frontend": "qt",
+    "name": "Long candidates scroll within one row and return",
+    "initial": {
+      "bounds": [
+        240,
+        229,
+        960,
+        271
+      ],
+      "selection": [
+        259,
+        250
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        241.0,
+        212.0,
+        251.0,
+        230.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "scrolled": {
+      "bounds": [
+        240,
+        229,
+        960,
+        271
+      ],
+      "selection": [
+        805,
+        250
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        241.0,
+        212.0,
+        251.0,
+        230.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "returned": {
+      "bounds": [
+        240,
+        229,
+        960,
+        271
+      ],
+      "selection": [
+        259,
+        250
+      ],
+      "protocol_rectangle": [
+        161,
+        142,
+        10,
+        18
+      ],
+      "caret": [
+        241.0,
+        212.0,
+        251.0,
+        230.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Compact Right selects second candidate",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Left returns to first candidate",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Collapsed selection survives Space",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Compact Left edits spelling before Right returns to candidates",
+    "expected": "上",
+    "actual": "上",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Arrow navigation preserves literal Enter",
+    "expected": "s",
+    "actual": "s",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Spelling cursor still inserts in the middle",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Collapsed selection allows Home and spelling edit",
+    "expected": "nxihao",
+    "actual": "nxihao",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Collapsed Left navigates candidates before spelling",
+    "expected": "是",
+    "actual": "是",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Compact Right crosses a numbered page",
+    "expected": "事",
+    "actual": "事",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Compact Left returns to the previous numbered page",
+    "expected": "书",
+    "actual": "书",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Compact numeric label matches the current page",
+    "expected": "事",
+    "actual": "事",
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Horizontal navigation stays compact; Down expands",
+    "compact": {
+      "bounds": [
+        103,
+        107,
+        543,
+        149
+      ],
+      "selection": [
+        122,
+        128
+      ],
+      "protocol_rectangle": [
+        24,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        104.0,
+        81.0,
+        104.0,
+        108.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "right": {
+      "bounds": [
+        103,
+        107,
+        543,
+        149
+      ],
+      "selection": [
+        165,
+        128
+      ],
+      "protocol_rectangle": [
+        24,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        104.0,
+        81.0,
+        104.0,
+        108.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "left": {
+      "bounds": [
+        103,
+        107,
+        543,
+        149
+      ],
+      "selection": [
+        122,
+        128
+      ],
+      "protocol_rectangle": [
+        24,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        104.0,
+        81.0,
+        104.0,
+        108.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "next_page": {
+      "bounds": [
+        103,
+        107,
+        543,
+        149
+      ],
+      "selection": [
+        122,
+        128
+      ],
+      "protocol_rectangle": [
+        24,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        104.0,
+        81.0,
+        104.0,
+        108.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "previous_page": {
+      "bounds": [
+        103,
+        107,
+        543,
+        149
+      ],
+      "selection": [
+        483,
+        128
+      ],
+      "protocol_rectangle": [
+        24,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        104.0,
+        81.0,
+        104.0,
+        108.0
+      ],
+      "width": 440.0,
+      "height": 42.0
+    },
+    "expanded": {
+      "bounds": [
+        103,
+        107,
+        543,
+        267
+      ],
+      "selection": [
+        483,
+        186
+      ],
+      "protocol_rectangle": [
+        24,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        104.0,
+        81.0,
+        104.0,
+        108.0
+      ],
+      "width": 440.0,
+      "height": 160.0
+    },
+    "passed": true
+  },
+  {
+    "frontend": "browser",
+    "name": "Long candidates scroll within one row and return",
+    "initial": {
+      "bounds": [
+        389,
+        107,
+        1109,
+        149
+      ],
+      "selection": [
+        408,
+        128
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        390.0,
+        81.0,
+        390.0,
+        108.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "scrolled": {
+      "bounds": [
+        389,
+        107,
+        1109,
+        149
+      ],
+      "selection": [
+        954,
+        128
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        390.0,
+        81.0,
+        390.0,
+        108.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "returned": {
+      "bounds": [
+        389,
+        107,
+        1109,
+        149
+      ],
+      "selection": [
+        408,
+        128
+      ],
+      "protocol_rectangle": [
+        310,
+        11,
+        0,
+        27
+      ],
+      "caret": [
+        390.0,
+        81.0,
+        390.0,
+        108.0
+      ],
+      "width": 720.0,
+      "height": 42.0
+    },
+    "passed": true
+  }
+]

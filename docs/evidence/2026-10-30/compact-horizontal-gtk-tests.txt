@@ -1,0 +1,7 @@
+Test project /home/lin/.cache/tipe/fcitx5-gtk/build
+    Start 1: tipe-gtk-candidate-smoke
+1/1 Test #1: tipe-gtk-candidate-smoke .........   Passed    0.13 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.13 sec

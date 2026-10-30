@@ -43,8 +43,10 @@ python3 scripts/render-readme-assets.py --control-captures build/control-capture
 `python3 scripts/check-niri-isolated.py --matrix arrows --frontends gtk qt browser --scales 1`。
 它使用安装后的模块、独立输入上下文和临时学习目录，固定基础候选顺序，检查右键
 进入候选、左键返回、收起后空格选词、Enter 原文及组合内编辑，并通过截图核对
-高亮横向移动。2026-10-26 的 [27 项结果](evidence/2026-10-26/compact-arrows-results.json)
-与 [6 项核心及适配测试](evidence/2026-10-26/compact-arrows-tests.txt) 已保存。
+高亮横向移动。2026-10-30 修正了左右键自动展开的问题，增加单行跨页、编号选词、
+长候选滚动及窗口高度检查；[39 项桌面结果](evidence/2026-10-30/compact-horizontal-results.json)、
+[9 项核心及绘制测试](evidence/2026-10-30/compact-horizontal-tests.txt) 和
+[GTK 模块检查](evidence/2026-10-30/compact-horizontal-gtk-tests.txt) 均已通过。
 
 需要按键级候选和分段边界诊断时，可运行
 `./build/tipe-demo --json-lines --state-dir /tmp/tipe-demo-private`，标准输入仍为

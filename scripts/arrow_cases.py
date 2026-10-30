@@ -7,8 +7,8 @@ SHIFT_TAB = ('-M', 'shift', '-k', 'Tab', '-m', 'shift')
 CASES = [
     ('Compact Right selects second candidate', ('s', *key('Right'), *key('space')), '上'),
     ('Left returns to first candidate', ('s', *key('Right'), *key('Left'), *key('space')), '是'),
-    ('Collapsed selection survives Space', ('s', *key('Right'), *SHIFT_TAB, *key('space')), '上'),
-    ('Compact Left edits spelling before Right reopens candidates',
+    ('Collapsed selection survives Space', ('s', *key('Right'), *key('Tab'), *SHIFT_TAB, *key('space')), '上'),
+    ('Compact Left edits spelling before Right returns to candidates',
      ('s', *key('Left'), *key('Right'), *key('Right'), *key('space')), '上'),
     ('Arrow navigation preserves literal Enter', ('s', *key('Right'), *key('Return')), 's'),
     ('Spelling cursor still inserts in the middle',
@@ -17,4 +17,9 @@ CASES = [
      ('nihao', *key('Right'), *SHIFT_TAB, *key('Home'), *key('Right'), 'x', *key('Return')), 'nxihao'),
     ('Collapsed Left navigates candidates before spelling',
      ('s', *key('Right'), *SHIFT_TAB, *key('Left'), *key('space')), '是'),
+    ('Compact Right crosses a numbered page', ('s', *(key('Right') * 10), *key('space')), '事'),
+    ('Compact Left returns to the previous numbered page',
+     ('s', *(key('Right') * 10), *key('Left'), *key('space')), '书'),
+    ('Compact numeric label matches the current page',
+     ('s', *(key('Right') * 10), '1'), '事'),
 ]

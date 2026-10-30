@@ -145,6 +145,26 @@ Layout strip_layout(std::span<const Candidate> candidates, bool expanded,
   o.cell_padding = 4;
   o.row_gap = 2;
   auto compact = layout(candidates, o, begin);
+  if (!expanded && selected >= 0 && static_cast<size_t>(selected) >= compact.end &&
+      static_cast<size_t>(selected) < candidates.size()) {
+    // Fcitx numbers a page in groups of ten, but long candidates may fit
+    // only a few items on screen. Scroll within that logical page, keeping
+    // the original labels and candidate indices for keyboard/mouse input.
+    const size_t group = static_cast<size_t>(selected) / 10;
+    const size_t group_begin = group * 10;
+    const size_t group_end = std::min(candidates.size(), group_begin + 10);
+    size_t visible_begin = std::max(begin, group_begin);
+    do {
+      o.maximum_candidates = group_end - visible_begin;
+      compact = layout(candidates, o, visible_begin);
+      if (compact.cells.empty() || compact.end > static_cast<size_t>(selected)) break;
+      visible_begin = compact.end;
+    } while (visible_begin < group_end);
+    for (auto &cell : compact.cells) {
+      const auto index = cell.candidate_index % 10;
+      cell.label = index == 9 ? '0' : static_cast<char>('1' + index);
+    }
+  }
   if (!expanded || compact.cells.empty() || height < row_height + 12) {
     compact.expanded = expanded;
     compact.bounds.width = std::min(width, compact.bounds.width + control);

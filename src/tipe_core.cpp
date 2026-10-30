@@ -937,8 +937,8 @@ View Engine::key(const std::string& k,bool release){
      return edit_view();
    }
    if(mode_ != Mode::Chinese || english_like())return suspended_view();
-   // In the compact strip, Right at the end of the spelling enters the
-   // candidate grid. Inside the spelling it still edits the preedit. Left
+   // In the compact strip, Right at the end of the spelling moves the
+   // candidate highlight. Inside the spelling it still edits the preedit. Left
    // returns through highlighted candidates first; only the first item can
    // hand the key to the spelling cursor. Expansion alone is not focus.
    const bool edit_horizontal = candidates_.empty() ||
@@ -954,6 +954,18 @@ View Engine::key(const std::string& k,bool release){
    }
    editing_preedit_ = false;
    refreshCandidates();
+   if (!expanded_ && (k == "Left" || k == "Right")) {
+     // Candidate focus and grid expansion are separate. Traverse adjacent
+     // items (and numbered pages) while keeping the single-row presentation.
+     if (!candidates_.empty()) {
+       if (k == "Right" && cursor_ + 1 < candidates_.size()) ++cursor_;
+       else if (k == "Left" && cursor_ > 0) --cursor_;
+     }
+     page_ = cursor_ / candidatePageSize();
+     Event move{EventType::CandidateMove,k,raw_,{},context_,now_ms()};
+     move.session=session_; move.sensitive=sensitive_; learner_->push(std::move(move));
+     return edit_view();
+   }
    // Do not leave a phantom expanded state when navigation is pressed with
    // no composition.  That stale flag would cause the next unrelated token
    // to invoke addPrefixCandidates() during Space/Enter refresh.

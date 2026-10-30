@@ -159,13 +159,13 @@ int main() {
   compact = ic->inputPanel().candidateList();
   compact_list = dynamic_cast<CommonCandidateList *>(compact.get());
   assert(compact_list && compact_list->globalCursorIndex() == 1);
-  assert(compact_list->layoutHint() == CandidateLayoutHint::Vertical);
+  assert(compact_list->layoutHint() == CandidateLayoutHint::Horizontal);
   assert(ic->inputPanel().preedit().toString() == "s" && ic->inputPanel().preedit().cursor() == 1);
   key("Left");
   compact = ic->inputPanel().candidateList();
   compact_list = dynamic_cast<CommonCandidateList *>(compact.get());
   assert(compact_list && compact_list->globalCursorIndex() == 0);
-  key("Right"); key("Shift+Tab");
+  key("Right"); key("Tab"); key("Shift+Tab");
   compact = ic->inputPanel().candidateList();
   compact_list = dynamic_cast<CommonCandidateList *>(compact.get());
   assert(compact_list && compact_list->globalCursorIndex() == 1);

@@ -116,17 +116,17 @@ static void compact_arrow_regression() {
    if (initial.candidates.size()<2) continue; // Small fallback has no 's'.
    const auto expected=initial.candidates[1];
    auto view=engine.key("Right");
-   assert(view.expanded && view.cursor==1 && view.preedit==spelling);
+   assert(!view.expanded && view.cursor==1 && view.preedit==spelling);
    assert(view.preedit_cursor==std::string(spelling).size());
    view=engine.key("Right",true); assert(view.cursor==1);
-   view=engine.key("Left"); assert(view.expanded && view.cursor==0);
    view=engine.key("Left"); assert(!view.expanded && view.cursor==0);
    // At the first candidate, Left returns to spelling editing. Moving back
    // to its end must not skip a letter or change the candidate selection.
    view=engine.key("Left"); assert(view.preedit_cursor==std::string(spelling).size()-1);
    view=engine.key("Right"); assert(!view.expanded && view.cursor==0);
    assert(view.preedit_cursor==std::string(spelling).size());
-   view=engine.key("Right"); assert(view.expanded && view.cursor==1);
+   view=engine.key("Right"); assert(!view.expanded && view.cursor==1);
+   view=engine.key("Tab"); assert(view.expanded && view.cursor==1);
    view=engine.key("ShiftTab"); assert(!view.expanded && view.cursor==1);
    view=engine.key("Space"); assert(view.commit==expected.text);
    assert(view.preedit==std::string(spelling).substr(expected.consumed));
@@ -139,6 +139,21 @@ static void compact_arrow_regression() {
    engine.reset(); for (char ch : std::string(spelling)) engine.key(std::string(1,ch));
    engine.key("Right"); view=engine.key("Enter");
    assert(view.commit==spelling && view.preedit.empty());
+   // Horizontal traversal crosses numbered pages without expanding. Left
+   // reverses those pages before it can reach the spelling cursor.
+   engine.reset(); for (char ch : std::string(spelling)) engine.key(std::string(1,ch));
+   const size_t steps=std::min<size_t>(19,initial.candidates.size()-1);
+   for(size_t i=1;i<=steps;++i) {
+     view=engine.key("Right"); assert(!view.expanded && view.cursor==i);
+     assert(view.preedit_cursor==std::string(spelling).size());
+   }
+   for(size_t i=steps;i>0;--i) {
+     view=engine.key("Left"); assert(!view.expanded && view.cursor==i-1);
+   }
+   view=engine.key("Down"); assert(view.expanded);
+   view=engine.key("ShiftTab"); assert(!view.expanded);
+   const auto selected=view.candidates[view.cursor];
+   view=engine.key("Space"); assert(view.commit==selected.text);
  }
 }
 int main(){using namespace tipe; compact_arrow_regression(); retained_result_regression(); long_composition_regression(); std::filesystem::remove_all("/tmp/tipe-core-test"); Engine e("/tmp/tipe-core-test"); e.learner().clear();

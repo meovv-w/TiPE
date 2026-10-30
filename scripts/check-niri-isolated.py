@@ -380,8 +380,30 @@ def main():
                         left = shot(frontend+'-left', 1)
                         assert right['selection'][0] > left['selection'][0], (right, left)
                         assert abs(right['selection'][1] - left['selection'][1]) <= 2, (right, left)
-                        results.append(dict(frontend=frontend, name='Visible horizontal highlight movement',
-                                            compact=compact, right=right, left=left, passed=True))
+                        assert right['height'] == left['height'] == compact['height'], (compact, right, left)
+                        keys(*('-k', 'Right') * 10)
+                        next_page = shot(frontend+'-next-page', 1)
+                        keys('-k', 'Left')
+                        previous_page = shot(frontend+'-previous-page', 1)
+                        assert next_page['height'] == previous_page['height'] == compact['height']
+                        keys('-k', 'Down')
+                        expanded = shot(frontend+'-expanded', 1)
+                        assert expanded['height'] > compact['height'], (compact, expanded)
+                        results.append(dict(frontend=frontend, name='Horizontal navigation stays compact; Down expands',
+                                            compact=compact, right=right, left=left, next_page=next_page,
+                                            previous_page=previous_page, expanded=expanded, passed=True))
+                        clear()
+                        keys('zhonghuarenmingongheguo')
+                        long_initial = shot(frontend+'-long-initial', 1)
+                        keys(*('-k', 'Right') * 9)
+                        long_scrolled = shot(frontend+'-long-scrolled', 1)
+                        assert long_scrolled['height'] == long_initial['height']
+                        keys(*('-k', 'Left') * 9)
+                        long_returned = shot(frontend+'-long-returned', 1)
+                        assert long_returned['height'] == long_initial['height']
+                        assert long_returned['selection'] == long_initial['selection']
+                        results.append(dict(frontend=frontend, name='Long candidates scroll within one row and return',
+                                            initial=long_initial, scrolled=long_scrolled, returned=long_returned, passed=True))
                         (out/'results.json').write_text(json.dumps(results, ensure_ascii=False, indent=2)+'\n')
                         continue
 
